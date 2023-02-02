@@ -67,7 +67,7 @@
   <!-- The slideshow/carousel -->
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="img/slid1.webp" alt="Los Angeles" class="d-block">
+      <img src="img/slid1.webp" alt="Los Angeles" class="d-block" style="width:100%">
     </div>
     <div class="carousel-item">
       <img src="img/slid2.jpg" alt="Chicago" class="d-block" style="width:100%">
