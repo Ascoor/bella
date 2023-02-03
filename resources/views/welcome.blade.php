@@ -25,7 +25,6 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/carousel/">
 
   </head>
 <body >
@@ -49,69 +48,137 @@
 
 
 <!-- Carousel wrapper -->
-<div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-indicators">
-      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-    </div>
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-         <div class="container">
-          <div class="carousel-caption text-start">
-            <h1>Example headline.</h1>
-            <p>Some representative placeholder content for the first slide of the carousel.</p>
-            <p><a class="btn btn-lg btn-primary" href="#">Sign up today</a></p>
-          </div>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/></svg>
+<div class="container">
 
-        <div class="container">
-          <div class="carousel-caption">
-            <h1>Another example headline.</h1>
-            <p>Some representative placeholder content for the second slide of the carousel.</p>
-            <p><a class="btn btn-lg btn-primary" href="#">Learn more</a></p>
-          </div>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#777"/></svg>
-
-        <div class="container">
-          <div class="carousel-caption text-end">
-            <h1>One more for good measure.</h1>
-            <p>Some representative placeholder content for the third slide of this carousel.</p>
-            <p><a class="btn btn-lg btn-primary" href="#">Browse gallery</a></p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-  </div>
-
-
-
-
-
+        <div class="row py-3">
+            <div class="col">
+                <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="img/slid1.webp" class="d-block w-100" alt="...">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Lamborghini</h5>
+                                <p>Manufacturing magnate Italian Ferruccio Lamborghini founded the company in 1963.</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="img/slid2.jpg" class="d-block w-100" alt="...">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Ford Mustang</h5>
+                                <p> Yes, the Ford Mustang is a very good sports car.</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="img/slid3.jpg"  class="d-block w-100" alt="...">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Cameron</h5>
+                                <p>The Cameron was an automobile manufactured by the Cameron Car Company of Rhode Island from 1902.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+                <div class="container rounded shadow-sm">
+                    <form action="">
+                        <div class="row">
+                            <div class="col-md-2 pe-0 col-sm-12">
+                                <div class="btn radio-btn mb-3"> <label class="radio"> <input type="radio" value="a"
+                                            name="book" checked> Roundtrip <span></span> </label> </div>
+                            </div>
+                            <div class="col-md-2 pe-0 col-sm-12">
+                                <div class="btn radio-btn mb-3"> <label class="radio"> <input type="radio" value="a"
+                                            name="book"> One way <span></span> </label> </div>
+                            </div>
+                            <div class="col-md-2 pe-0 col-sm-12">
+                                <div class="btn radio-btn mb-3"> <label class="radio"> <input type="radio" value="a"
+                                            name="book"> Multi-City <span></span> </label> </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-12 mb-4">
+                                <div class="form-control d-flex flex-column">
+                                    <p class="h-blue">FLYING FROM</p> <input class="inputbox"
+                                        placeholder="City or Airport" type="text">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12 mb-4">
+                                <div class="form-control d-flex flex-column">
+                                    <p class="h-blue">FLYING TO</p> <input class="inputbox"
+                                        placeholder="City or Airport" type="text">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-12 mb-4">
+                                <div class="form-control d-flex flex-column">
+                                    <p class="h-blue">DEPARTING</p> <input class="inputbox textmuted" type="date">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12 mb-4">
+                                <div class="form-control d-flex flex-column">
+                                    <p class="h-blue">RETURNING</p> <input class="inputbox textmuted " type="date">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 mb-4">
+                                <div class="form-control d-flex flex-column">
+                                    <p class="h-blue">ADULTS(18+)</p> <select class="border-0 outline-none">
+                                        <option value="" hidden selected>0</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-4">
+                                <div class="form-control d-flex flex-column">
+                                    <p class="h-blue">CHILDREN(0-17)</p> <select class="border-0 outline-none">
+                                        <option value="" hidden selected>0</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-4">
+                                <div class="form-control d-flex flex-column">
+                                    <p class="h-blue">TRAVEL CLASS</p> <select class="border-0 outline-none">
+                                        <option value="" hidden selected>Class</option>
+                                        <option value="1">Economy</option>
+                                        <option value="2">Premium</option>
+                                        <option value="3">Business</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="btn btn-primary form-control text-center">SHOWN FLIGHTS</div>
+                    </form>
+                </div>
     <!-- ALL JS FILES -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
     <script src="{{ asset('js/app.js')}}"></script>
 
-   </body>
+</body>
 </html>
 <!--
     <body class="antialiased">
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
             @if (Route::has('login'))
-                <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
+            <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
                     @auth
                         <a href="{{ url('/home') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Home</a>
                     @else
