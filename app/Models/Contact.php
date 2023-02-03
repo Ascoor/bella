@@ -1,81 +1,46 @@
 <?php
 
+/**
+ * Created by Reliese Model.
+ */
+
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property int    $id
- * @property int    $PostingDate
- * @property int    $LastupdationDate
- * @property int    $IsRead
- * @property string $fullname
- * @property string $email
- * @property string $message
- * @property string $AdminRemark
+ * Class Contact
+ * 
+ * @property int $id
+ * @property string|null $fullname
+ * @property string|null $email
+ * @property int|null $contactno
+ * @property string|null $message
+ * @property string|null $AdminRemark
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property int|null $IsRead
+ *
+ * @package App\Models
  */
 class Contact extends Model
 {
-    /**
-     * The database table used by the model.
-     *
-     * @var string
-     */
-    protected $table = 'contacts';
+	protected $table = 'contacts';
+	public $incrementing = false;
 
-    /**
-     * The primary key for the model.
-     *
-     * @var string
-     */
-    protected $primaryKey = 'id';
+	protected $casts = [
+		'id' => 'int',
+		'contactno' => 'int',
+		'IsRead' => 'int'
+	];
 
-    /**
-     * Attributes that should be mass-assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'fullname', 'email', 'contactno', 'message', 'PostingDate', 'AdminRemark', 'LastupdationDate', 'IsRead'
-    ];
-
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
-    protected $hidden = [
-
-    ];
-
-    /**
-     * The attributes that should be casted to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'id' => 'int', 'fullname' => 'string', 'email' => 'string', 'message' => 'string', 'PostingDate' => 'timestamp', 'AdminRemark' => 'string', 'LastupdationDate' => 'timestamp', 'IsRead' => 'int'
-    ];
-
-    /**
-     * The attributes that should be mutated to dates.
-     *
-     * @var array
-     */
-    protected $dates = [
-        'PostingDate', 'LastupdationDate'
-    ];
-
-    /**
-     * Indicates if the model should be timestamped.
-     *
-     * @var boolean
-     */
-    public $timestamps = true;
-
-    // Scopes...
-
-    // Functions ...
-
-    // Relations ...
+	protected $fillable = [
+		'fullname',
+		'email',
+		'contactno',
+		'message',
+		'AdminRemark',
+		'IsRead'
+	];
 }

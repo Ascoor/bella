@@ -344,7 +344,7 @@ ALTER TABLE `doctorspecilization`
 
 --
 -- Indexes for table `tblcontactus`
---tbl
+--
 ALTER TABLE `contacts`
   ADD PRIMARY KEY (`id`);
 
