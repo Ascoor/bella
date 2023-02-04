@@ -16,7 +16,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::controller(AppointmentController::class)->group(function () {
 
+    Route::post('store', 'client')->name('clientstore');
+});
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

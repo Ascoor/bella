@@ -14,16 +14,21 @@ class CreateDoctorsTable extends Migration
     public function up()
     {
         Schema::create('doctors', function (Blueprint $table) {
-            $table->integer('id');
-            $table->string('specilization')->nullable();
-            $table->string('doctorName')->nullable();
-            $table->longText('address')->nullable();
-            $table->string('docFees')->nullable();
-            $table->bigInteger('contactno')->nullable();
-            $table->string('docEmail')->nullable();
-            $table->string('password')->nullable();
-            $table->timestamps();
-        });
+
+
+                $table->id();
+                $table->string('name')->nullable();
+                $table->string('email')->nullable();
+                $table->bigInteger('phone')->nullable()->unsigned();
+                $table->text('photo')->nullable()->unsigned();
+        
+                
+                $table->string('specialty');
+        
+        
+                $table->timestamps();
+                });
+    
     }
 
     /**

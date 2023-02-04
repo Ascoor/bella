@@ -5,18 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Doctor extends Model
+class Client extends Model
 {
     use HasFactory;
-    public function client()
-    {
-        return $this->belongsToMany('App\Models\client');
-    }
-    public function service()
+
+    public function invoice()
     {
         return $this->belongsToMany('App\Models\Invoice');
     }
-
+    public function appointment()
+    {
+        return $this->belongsToMany('App\Models\Appointment');
+    }
     protected $fillable =['email','name','phone','details'];
 
 }
+

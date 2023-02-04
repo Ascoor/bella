@@ -638,7 +638,7 @@ progress {
 
 @media (min-width: 576px) {
   .container-sm, .container {
-    max-width: 540px;
+    max-width: 551px;
   }
 }
 @media (min-width: 768px) {
@@ -680,6 +680,7 @@ progress {
 }
 
 .col {
+  background-color: #595a5b;
   flex: 1 0 0%;
 }
 
@@ -779,6 +780,7 @@ progress {
 }
 
 .col-12 {
+  background-color: #595a5b;
   flex: 0 0 auto;
   width: 100%;
 }
@@ -5779,7 +5781,7 @@ textarea.form-control-lg {
 }
 
 .carousel {
-  position: relative;
+  position: initial;
 }
 
 .carousel.pointer-event {
@@ -5804,7 +5806,7 @@ textarea.form-control-lg {
   width: 100%;
   margin-right: -100%;
   -webkit-backface-visibility: hidden;
-          backface-visibility: hidden;
+  backface-visibility: hidden;
   transition: transform 0.6s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {
@@ -6999,7 +7001,7 @@ textarea.form-control-lg {
 }
 
 .d-block {
-  display: block !important;
+  display: ;
 }
 
 .d-grid {
@@ -7324,6 +7326,7 @@ textarea.form-control-lg {
 }
 
 .flex-column {
+  background-color: #c4c4c4;
   flex-direction: column !important;
 }
 
@@ -8151,12 +8154,11 @@ textarea.form-control-lg {
 
 .bg-light {
   --bs-bg-opacity: 1;
-  background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
+  background-color: black;
 }
 
 .bg-dark {
   --bs-bg-opacity: 1;
-  background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
 }
 
 .bg-black {
