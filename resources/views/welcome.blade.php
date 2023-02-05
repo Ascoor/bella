@@ -94,33 +94,33 @@
                 </div>  
                 
                     <div class="row">
-  
+  <div class="card-body">
                             <div class="col-md col-12 mb-6">
                                 <div class="form-control d-flex flex-column">
                                     <p class="h-blue">{{__('Name')}}</p> <input class="inputbox"
                                         placeholder="City or Airport" type="text">
                                 </div>
-                            </div>
+                   
                             <div class="col-md col-12 mb-6">
                                 <div class="form-control d-flex flex-column">
                                     <p class="h-blue">{{__('Phone Number')}}</p> <input class="inputbox"
                                         placeholder="City or Airport" type="text">
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 col-12 mb-4">
+               
+ 
+                   
+                        <div class="col-md-12 col-12 mb-6">
                                 <div class="form-control d-flex flex-column">
                                     <p class="h-blue">{{__('Appointment Date')}}</p> <input class="inputbox textmuted" type="date">
                                 </div>
-               
-                            <div class="col-md-6 col-12 mb-4">
+          
+
                                 <div class="form-control d-flex flex-column">
                                     <p class="h-blue">{{__('Apointment Time')}}</p> <input class="inputbox textmuted " type="time">
             
-                       
-
-                            <div class="col-md-6 mb-4">
+                                </div>
+        
                                 <div class="form-control d-flex flex-column">
                                     <p class="h-blue">{{__('Doctor')}}</p> <select class="border-0 outline-none">
                                         <option value="" hidden selected>0</option>
@@ -129,8 +129,7 @@
                                         <option value="3">3</option>
                                     </select>
                                 </div>
-                            </div>
-   
+                            
                     
                     <div class="row-md-3 col-12 mb-4">
                     

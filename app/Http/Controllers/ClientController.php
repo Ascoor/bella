@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use App\Http\Controllers\Controller;
+use App\Models\Doctor;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
@@ -15,7 +16,8 @@ class ClientController extends Controller
      */
     public function index()
     {
-        //
+        $clients = Client::all();
+        return view('client.index')->with('clients', $clients);
     }
 
     /**
@@ -25,7 +27,9 @@ class ClientController extends Controller
      */
     public function create()
     {
-        //
+        $clients = Client::all();
+        $doctor = Doctor::all();
+        return view('appointment.create')->with('clients', $clients)->with('doctor',$doctor);
     }
 
     /**
