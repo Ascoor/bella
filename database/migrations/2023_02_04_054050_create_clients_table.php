@@ -18,7 +18,7 @@ class CreateClientsTable extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->string('email')->nullable();
-            $table->bigInteger('phone')->nullable()->unsigned();
+            $table->string('phone');
             $table->text('photo')->nullable();
             $table->string('details')->default('take your notes always about client');
 

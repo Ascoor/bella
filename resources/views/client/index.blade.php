@@ -6,7 +6,7 @@
 
 
    <div class="card-body">
-    <h4 class="card-header text-center text-light">Services List</h4>
+    <h4 class="card-header text-center text-light">Clients List</h4>
 
 
     @if($message = Session::get('Done'))
@@ -26,9 +26,9 @@
                                 </div>
                             </div>
                             <div class="container">
-                                <a href="{{route('services.create')}}" class="btn d-inline-flex btn-md~ btn-success mx-1">
+                                <a href="{{route('clients.create')}}" class="btn d-inline-flex btn-md~ btn-success mx-1">
                                     <span class=" pe-2"> <i class="bi bi-plus"></i> </span> <span>Create</span> </a>
-                                    @if($services->count() > 0 )
+                                    @if($clients->count() > 0 )
                                     <div class="row">
                                         <div class="col-md-12">
                         <div class="table-responsive">
@@ -38,22 +38,24 @@
                         <tr   style="color: #fff; background: black;" class="table-active ">
                                         <th>id</th>
                                         <th>Name</th>
-                                        <th>Cost</th>
+                                        <th>Email</th>
+                                        <th>Phone Number</th>
                                         <th>Control</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($services as $item)
+                                    @foreach($clients as $item)
                                     <tr>
                                         <td>{{ $item->id }}</td>
                                         <td>{{ $item->name }}</td>
-                                        <td>{{ $item->cost }}</td>
+                                        <td>{{ $item->email }}</td>
+                                        <td>{{ $item->phone }}</td>
                                         <td>
                                 <span>
 
 
                                     <a class="btn btn-primary"
-                                    href="{{route('services.edit',$item->id)}}">Edit</a>
+                                    href="{{route('clients.edit',$item->id)}}">Edit</a>
 
                                 </span>
                             </td>

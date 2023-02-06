@@ -22,10 +22,10 @@ class Appointment extends Model
     }
     public function client()
     {
-        return $this->hasOne('App\Models\Client', 'phone_number');
+        return $this->hasOne('App\Models\Client', 'client_id');
     }
     public function doctor()
     {
-        return $this->hasOne('App\Models\Doctor', 'doctor_id');
+        return $this->hasOne('App\Models\Doctor', 'doctor_name');
     }
 }

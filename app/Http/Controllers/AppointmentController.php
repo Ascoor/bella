@@ -38,8 +38,8 @@ class AppointmentController extends Controller
     {
          $services = Service::all();
         $clients = Client::all();
-        $doctor = Doctor::all();
-        return view('appointment.create')->with('services', $services)->with('doctor',$doctor);
+        $doctors = Doctor::all();
+        return view('appointment.create')->with('clients', $clients)->with('doctors',$doctors);
     }
 
     /**
@@ -55,10 +55,10 @@ class AppointmentController extends Controller
 
             $appointment = Appointment::create([
                 'apt_number'=>$apt_number,
+                'doctor_name' => $request->doctor_name,
                 'name' => $request->name,
-
                 'user_id' =>Auth::id(),
-                'phone_number' => $request->phone,
+                'phone' => $request->phone,
                 'apt_date' => $request->apt_date,
                 'apt_time' => $request->apt_time
 

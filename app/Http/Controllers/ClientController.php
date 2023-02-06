@@ -30,7 +30,7 @@ class ClientController extends Controller
     {
         $clients = Client::all();
 
-        return view('appointment.create')->with('clients', $clients);
+        return view('client.create')->with('clients', $clients);
     }
 
     /**
@@ -41,7 +41,23 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $client = Client::create([
+
+            'name' => $request->name,
+
+
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'details' => $request->details,
+
+
+
+        ]);
+
+
+
+
+        return redirect()->route('clients.index')->with('تمت', 'تم الإضافة  بنجاح');
     }
 
     /**
@@ -61,9 +77,10 @@ class ClientController extends Controller
      * @param  \App\Models\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function edit(Client $client)
+    public function edit($id)
     {
-        //
+        $client = Client::find($id);
+        return view('client.edit')->with('client', $client);
     }
 
     /**
@@ -75,7 +92,9 @@ class ClientController extends Controller
      */
     public function update(Request $request, Client $client)
     {
-        //
+        $client->update($request->all());
+            return redirect()->route('clients.index')->with('Done', 'Updated Success');
+
     }
 
     /**

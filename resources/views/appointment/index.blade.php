@@ -24,7 +24,7 @@
                             <div class="mx-n1">
                                 </div>
                             </div>
-                            @if($appointments->count() > 0 )
+                          
                             <div class="container">
             <a href="{{route('appointments.create')}}" class="btn d-inline-flex btn-md~ btn-success mx-1">
                <span class=" pe-2"> <i class="bi bi-plus"></i> </span> <span>Create</span> </a>
@@ -54,6 +54,7 @@
 
                         </tr>
                     </thead>
+                    @if($appointments->count() > 0 )
                     <tbody class="text-center">
 
                         @php
@@ -72,7 +73,7 @@
                                 {{ $item->name }}
                             </td>
                             <td>
-                                {{ $item->phone_number }}
+                                {{ $item->phone }}
                             </td>
                             <td>
                                 {{ $item->apt_date }}

@@ -29,9 +29,9 @@ Route::controller(AppointmentController::class)->group(function () {
 
     Route::post('store', 'clientstore')->name('clientstore');
 });
+Auth::routes();
 Route::resource('appointments', AppointmentController::class);
 Route::resource('clients', ClientController::class);
 Route::resource('services', ServiceController::class);
 Route::resource('doctors', DoctorController::class);
-Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

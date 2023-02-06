@@ -17,6 +17,7 @@ class CreateAppointmentsTable extends Migration
 
             $table->bigIncrements('id');
             $table->string('apt_number');
+            $table->integer('client_id')->nullable();
             $table->string('name');
 
             $table->string('doctor_name');
