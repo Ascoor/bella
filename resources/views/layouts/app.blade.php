@@ -24,10 +24,11 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-light shadow-sm">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
         <div class="container">
-        <img src="/img/logo.png" alt=""  width="150" height="80"  class="d-inline-block align-text-top">
-
+        <a class="navbar-brand" href="{{ url('/home') }}">
+        <img src="/img/logo.png" alt="" width="150" height="80"  class="d-inline-block align-text-top">
+        </a>
          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -66,7 +67,7 @@
             <li><a class="dropdown-item" href="#">Something else here</a></li> -->
           </ul>
         </li>
-   
+
                     </ul>
              <!-- Right Side Of Navbar -->
              <ul class="navbar-nav ms-auto">
@@ -76,7 +77,7 @@
           <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
     </li>
-    
+
     @endauth
                         <!-- Authentication Links -->
                         @guest

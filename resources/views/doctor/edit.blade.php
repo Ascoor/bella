@@ -16,8 +16,9 @@
     <input type="text" class="form-control" value="{{ $doctor->specialty }}" name="specialty" >
   </div>
   <div class="form-group">
-    <label for="email">Email</label>
-    <input type="email" class="form-control" value="{{ $doctor->email }}" name="cost" >
+  <div class="form-group">
+    <label for="phone number">Phone Number</label>
+    <input type="tell" class="form-control" value="{{$doctor->phone}}" name="phone" >
   </div>
   <button type="submit" class="btn btn-primary">Store Doctor</button>
 </form>

@@ -130,9 +130,9 @@ class AppointmentController extends Controller
      * @param  \App\Models\appointment  $appointment
      * @return \Illuminate\Http\Response
      */
-    public function edit(appointment $appointment)
+    public function edit($id)
     {
-        $appointment = Appointment::find($appointment);
+        $appointment = Appointment::find($id);
         $doctors = Doctor::all();
         $services = Service::all();
         return view('appointment.edit')->with('appointment', $appointment)

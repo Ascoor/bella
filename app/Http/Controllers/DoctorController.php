@@ -43,7 +43,7 @@ class DoctorController extends Controller
             'name' => $request->name,
 
 
-            'email' => $request->email,
+            'phone' => $request->phone,
             'specialty' => $request->specialty,
 
 

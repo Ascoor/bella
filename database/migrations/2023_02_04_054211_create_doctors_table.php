@@ -18,8 +18,8 @@ class CreateDoctorsTable extends Migration
 
                 $table->increments('id');
                 $table->string('name');
-                $table->string('email');
-                $table->bigInteger('phone')->nullable();
+                $table->string('email')->nullable();
+                $table->string('phone');
                 $table->text('photo')->nullable();
 
 

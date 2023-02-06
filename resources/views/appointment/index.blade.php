@@ -24,7 +24,7 @@
                             <div class="mx-n1">
                                 </div>
                             </div>
-                          
+
                             <div class="container">
             <a href="{{route('appointments.create')}}" class="btn d-inline-flex btn-md~ btn-success mx-1">
                <span class=" pe-2"> <i class="bi bi-plus"></i> </span> <span>Create</span> </a>
@@ -37,14 +37,14 @@
                         <tr   style="color: #fff; background: black;" class="table-active ">
 
                             <th>Id</th>
-                            <th>Apt Number</th>
-                            <th>Customer Name</th>
-                            <th>Mobile</th>
+
+                            <th>Client Name</th>
+                            <th>Phone</th>
                             <th>Apt Date</th>
                             <th>Apt Time</th>
                             <th>Status</th>
 
-                            <th>التحكم</th>
+                            <th>Control</th>
                             <th></th>
 
 
@@ -65,10 +65,10 @@
                             <td>
                                 {{ $item->id }}
                             </td>
-                            <td >
+                            <!-- <td >
                            <a  href="{{route('appointments.show',$item->id)}}">
 
-                               {{ $item->apt_number }}</a> </td>
+                               {{ $item->apt_number }}</a> </td> -->
                             <td>
                                 {{ $item->name }}
                             </td>

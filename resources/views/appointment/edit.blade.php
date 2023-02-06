@@ -19,7 +19,7 @@
 </div>
                         <div class="input-group mb-3">
   <span class="input-group-text" >phone Number</span>
-  <input type="tel" class="form-control"  value="{{ $appointment->phone_number }}"  name="phone_number"aria-label="Phone Number" aria-describedby="basic-addon1">
+  <input type="tel" class="form-control"  value="{{ $appointment->phone }}"  name="phone"aria-label="Phone Number" aria-describedby="basic-addon1">
 </div>
 <div class="form-group">
                 @foreach ($services as $item)

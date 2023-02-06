@@ -38,7 +38,7 @@
                         <tr   style="color: #fff; background: black;" class="table-active ">
                                         <th>id</th>
                                         <th>Name</th>
-                                        <th>email</th>
+                                        <th>Phone Number</th>
                                         <th>Control</th>
                                     </tr>
                                 </thead>
@@ -47,7 +47,7 @@
                                     <tr>
                                         <td>{{ $item->id }}</td>
                                         <td>{{ $item->name }}</td>
-                                        <td>{{ $item->email }}</td>
+                                        <td>{{ $item->phone }}</td>
                                         <td>
                                 <span>
 

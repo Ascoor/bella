@@ -20,8 +20,8 @@
     <input type="text" class="form-control" name="specialty" >
   </div>
   <div class="form-group">
-    <label for="email">Email</label>
-    <input type="email" class="form-control" name="email" >
+    <label for="phone number">Phone Number</label>
+    <input type="tell" class="form-control" name="phone" >
   </div>
   <button type="submit" class="btn btn-primary">Create Doctor</button>
 </form>
