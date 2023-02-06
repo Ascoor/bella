@@ -18,11 +18,11 @@ class CreateClientsTable extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->string('email')->nullable();
-            $table->bigInteger('phone_number')->nullable()->unsigned();
-            $table->text('photo')->nullable()->unsigned();
+            $table->bigInteger('phone')->nullable()->unsigned();
+            $table->text('photo')->nullable();
             $table->string('details')->default('take your notes always about client');
-    
-    
+
+
             $table->timestamps();
             });
     }

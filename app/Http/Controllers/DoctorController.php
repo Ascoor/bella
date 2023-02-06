@@ -26,7 +26,8 @@ class DoctorController extends Controller
      */
     public function create()
     {
-        //
+
+          return view('doctor.create');
     }
 
     /**
@@ -37,7 +38,22 @@ class DoctorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $doctor = Doctor::create([
+
+            'name' => $request->name,
+
+
+            'email' => $request->email,
+            'specialty' => $request->specialty,
+
+
+
+        ]);
+
+
+
+
+        return redirect()->route('doctors.index')->with('تمت', 'تم الإضافة  بنجاح');
     }
 
     /**
@@ -46,9 +62,12 @@ class DoctorController extends Controller
      * @param  \App\Models\Doctor  $doctor
      * @return \Illuminate\Http\Response
      */
-    public function show(Doctor $doctor)
+    public function show($id)
     {
-        //
+        $doctor = Doctor::where('id', $id)->first();
+
+        return view('doctor.show')
+        ->with('doctor', $doctor);
     }
 
     /**
@@ -57,9 +76,11 @@ class DoctorController extends Controller
      * @param  \App\Models\Doctor  $doctor
      * @return \Illuminate\Http\Response
      */
-    public function edit(Doctor $doctor)
+    public function edit($id)
     {
-        //
+        $doctor = Doctor::where('id', $id)->first();
+        return view('doctor.edit')
+        ->with('doctor', $doctor);
     }
 
     /**
@@ -71,7 +92,8 @@ class DoctorController extends Controller
      */
     public function update(Request $request, Doctor $doctor)
     {
-        //
+        $doctor->update($request->all());
+        return redirect()->route('doctors.index')->with('Done', 'Updated Success');
     }
 
     /**

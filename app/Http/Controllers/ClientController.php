@@ -25,11 +25,12 @@ class ClientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+
+        public function create()
     {
         $clients = Client::all();
-        $doctor = Doctor::all();
-        return view('appointment.create')->with('clients', $clients)->with('doctor',$doctor);
+
+        return view('appointment.create')->with('clients', $clients);
     }
 
     /**

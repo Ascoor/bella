@@ -14,11 +14,12 @@ class CreateAppointmentsTable extends Migration
     public function up()
     {
         Schema::create('appointments', function (Blueprint $table) {
-            $table->id();
+
             $table->bigIncrements('id');
             $table->string('apt_number');
             $table->string('name');
-    
+
+            $table->string('doctor_name');
             $table->string('user_id')->nullable();
             $table->string('phone');
             $table->date('apt_date');

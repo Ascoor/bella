@@ -50,8 +50,8 @@
 <!-- Carousel wrapper -->
 <div class="container-fluid">
 
-        <div class="row">
-            <!-- <div class="col">
+<div class="card-body">
+    <div class="container">
                 <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-indicators">
                         <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -93,58 +93,10 @@
                 </div>
                 </div>
 
-                    <div class="row"> -->
-  <div class="card-body">
-    <div class="container">
-    <form action="{{route('clientstore')}}" method="POST"
-            enctype="multipart/form-data">
-            @csrf
-                            <div class="col-md col-12 mb-6">
-                                <div class="form-control d-flex flex-column">
-                                    <p class="h-blue">{{__('Name')}}</p> <input class="inputbox"
-                                        placeholder="Your Name"  name="name"  type="text">
-                                </div>
-
-                            <div class="col-md col-12 mb-6">
-                                <div class="form-control d-flex flex-column">
-                                    <p class="h-blue">{{__('Phone Number')}}</p> <input class="inputbox"
-                                        placeholder="Your Phone Number" name="phone" type="text">
-                                </div>
-                            </div>
-
-
-
-                        <div class="col-md-12 col-12 mb-6">
-                                <div class="form-control d-flex flex-column">
-                                    <p class="h-blue">{{__('Appointment Date')}}</p> <input class="inputbox textmuted" type="date" name="apt_date">
-                                </div>
-
-
-                                <div class="form-control d-flex flex-column">
-                                    <p class="h-blue">{{__('Apointment Time')}}</p> <input class="inputbox textmuted " type="time" name="apt_time">
-
-                                </div>
-
-                                <div class="form-control d-flex flex-column">
-                                    <p class="h-blue">{{__('Doctor')}}</p>
-                                    <select class="border-0 outline-none" name="doctor_name">
-                                         @foreach ($doctors as $item )
-
-                                        <option value="{{ $item->name }}"  >
-                                            {{$item->name}}</option>
-
-                                        @endforeach
-                                    </select>
-                                </div>
 
 
 
 
-                    <div class="row-md-3 col-12 mb-4">
-
-                    <button type="submit" class="btn btn-primary form-control text-center">Appointment</button>
-                </form>
-                </div>
     <!-- ALL JS FILES -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 

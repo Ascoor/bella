@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Appointment extends Model
 {
     use HasFactory;
-    
 
 
-    protected $fillable =['apt_number','status','email','name','user_id','phone','apt_date','apt_time'];
+
+    protected $fillable =['apt_number','doctor_name','status','email','name','user_id','phone','apt_date','apt_time'];
     public function service()
     {
         return $this->belongsToMany('App\Models\Service');
@@ -23,5 +23,9 @@ class Appointment extends Model
     public function client()
     {
         return $this->hasOne('App\Models\Client', 'phone_number');
+    }
+    public function doctor()
+    {
+        return $this->hasOne('App\Models\Doctor', 'doctor_id');
     }
 }

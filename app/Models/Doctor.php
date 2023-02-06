@@ -8,15 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Doctor extends Model
 {
     use HasFactory;
-    public function client()
+
+    protected $fillable =['email','name','specialty'];
+
+
+    public function services()
     {
-        return $this->belongsToMany('App\Models\client');
-    }
-    public function service()
-    {
-        return $this->belongsToMany('App\Models\Invoice');
+        return $this->belongsToMany('App\Models\Service');
     }
 
-    protected $fillable =['email','name','phone','details'];
 
 }

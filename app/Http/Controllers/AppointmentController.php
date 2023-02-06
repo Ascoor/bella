@@ -52,7 +52,7 @@ class AppointmentController extends Controller
     {
 
             $apt_number = Str::random(5);
-    
+
             $appointment = Appointment::create([
                 'apt_number'=>$apt_number,
                 'name' => $request->name,
@@ -61,15 +61,15 @@ class AppointmentController extends Controller
                 'phone_number' => $request->phone,
                 'apt_date' => $request->apt_date,
                 'apt_time' => $request->apt_time
-    
+
             ]);
             $appointment->service()->attach($request->services);
-    
-    
-    
+
+
+
             return redirect()->route('appointments.index')->with('تمت', 'تم الإضافة  بنجاح');
         }
-    
+
     public function clientstore(Request $request)
     {
 
@@ -78,14 +78,14 @@ class AppointmentController extends Controller
     $appointment = Appointment::create([
         'apt_number'=>$apt_number,
         'name' => $request->name,
-
+'doctor_name' => $request->doctor_name,
         'phone' => $request->phone,
         'apt_date' => $request->apt_date,
         'apt_time' => $request->apt_time
     ]);
 
-    $appointment->doctor()->attach($request->doctor);
-    $appointment->service()->attach($request->services);
+
+
 
        // Send the notifications
         // Send the notifications
@@ -98,10 +98,10 @@ class AppointmentController extends Controller
         Client::create([
             'name' => $request->name,
             'email' => $request->email,
-            'phone' => $request->phone_number
+            'phone' => $request->phone
 
         ]);
-        return view('welcome');
+        return view('thanks');
     }
 
     /**
@@ -111,18 +111,18 @@ class AppointmentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    
-        
+
+
         {
             $appointment = Appointment::where('id', $id)->first();
             $services = Service::all();
             $doctors = Doctor::all();
-    
+
             return view('appointment.show')
             ->with('appointment', $appointment)->with('services', $services)->with('doctors', $doctors);
         }
-    
-    
+
+
 
     /**
      * Show the form for editing the specified resource.
@@ -132,7 +132,7 @@ class AppointmentController extends Controller
      */
     public function edit(appointment $appointment)
     {
-        $appointment = Appointment::find($id);
+        $appointment = Appointment::find($appointment);
         $doctors = Doctor::all();
         $services = Service::all();
         return view('appointment.edit')->with('appointment', $appointment)
@@ -155,10 +155,10 @@ class AppointmentController extends Controller
             $appointment->doctor()->sync($request->doctor);
             // Check if the status is accepted
             if ($appointment->status == 'complete') {
-    
+
                 // Create the invoice
                 $invoice = Invoice::create([
-    
+
                     'user_id' => Auth::id(),
                     'client_id' =>$appointment->name,
                     'services' =>$request->service,
@@ -167,10 +167,10 @@ class AppointmentController extends Controller
                     'discount' => $request->discount,
                 ]);
             }
-    
-    
+
+
             return redirect()->route('appointments.index')->with('Done', 'Updated Success');
-    
+
     }
 
     /**

@@ -24,9 +24,9 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-light shadow-sm">
         <div class="container">
-        <img src="/img/logo.png" alt="" width="150" height="80" class="d-inline-block align-text-top">
+        <img src="/img/logo.png" alt=""  width="150" height="80"  class="d-inline-block align-text-top">
 
          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -36,7 +36,7 @@
 @auth
 
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link active" aria-current="page" href="/home">Home</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Link</a>

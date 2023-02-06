@@ -11,7 +11,16 @@
     <label for="name">Name</label>
     <input type="text" class="form-control" name="name" placeholder="Enter Service Name">
   </div>
-  <div class="form-group">
+  <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="">Doctor Services<span class="text-danger">*</label><br>
+                            @foreach($doctors as $doctor)
+                            <input type="checkbox" name="doctor_name" value="{{$doctor->name}}">
+
+                            <label for="">{{$doctor->name}}</label>
+                            @endforeach
+                        </div>
+                            <br> <div class="form-group">
     <label for="cost">Cost</label>
     <input type="text" class="form-control" name="cost" placeholder="Enter Service Cost">
   </div>

@@ -16,19 +16,19 @@ class CreateDoctorsTable extends Migration
         Schema::create('doctors', function (Blueprint $table) {
 
 
-                $table->id();
-                $table->string('name')->nullable();
-                $table->string('email')->nullable();
-                $table->bigInteger('phone')->nullable()->unsigned();
-                $table->text('photo')->nullable()->unsigned();
-        
-                
+                $table->increments('id');
+                $table->string('name');
+                $table->string('email');
+                $table->bigInteger('phone')->nullable();
+                $table->text('photo')->nullable();
+
+
                 $table->string('specialty');
-        
-        
+
+
                 $table->timestamps();
                 });
-    
+
     }
 
     /**
