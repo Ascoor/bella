@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\appointment;
+use App\Models\Appointment;
 use App\Http\Controllers\Controller;
 use App\Models\Client;
 use App\Models\Doctor;
