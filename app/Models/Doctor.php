@@ -16,6 +16,10 @@ class Doctor extends Model
     {
         return $this->belongsToMany('App\Models\Service');
     }
+    public function appointment()
+    {
+        return $this->belongsToMany('App\Models\Service');
+    }
 
 
 }

@@ -35,3 +35,5 @@ Route::resource('clients', ClientController::class);
 Route::resource('services', ServiceController::class);
 Route::resource('doctors', DoctorController::class);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/{page}', [App\Http\Controllers\AdminController::class, 'index'])->name('{page}');
+
