@@ -1,44 +1,40 @@
 @extends('layouts.master')
 @section('css')
-<!--  Owl-carousel css-->
-<link href="{{URL::asset('assets/plugins/owl-carousel/owl.carousel.css')}}" rel="stylesheet" />
-<!-- Maps css -->
-<link href="{{URL::asset('assets/plugins/jqvmap/jqvmap.min.css')}}" rel="stylesheet">
+<!-- Internal Data table css -->
+<link href="{{URL::asset('assets/plugins/datatable/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet" />
+<link href="{{URL::asset('assets/plugins/datatable/css/buttons.bootstrap4.min.css')}}" rel="stylesheet">
+<link href="{{URL::asset('assets/plugins/datatable/css/responsive.bootstrap4.min.css')}}" rel="stylesheet" />
+<link href="{{URL::asset('assets/plugins/datatable/css/jquery.dataTables.min.css')}}" rel="stylesheet">
+<link href="{{URL::asset('assets/plugins/datatable/css/responsive.dataTables.min.css')}}" rel="stylesheet">
+<link href="{{URL::asset('assets/plugins/select2/css/select2.min.css')}}" rel="stylesheet">
 @endsection
 @section('page-header')
-				<!-- breadcrumb -->
-				<div class="breadcrumb-header justify-content-between">
-					<div class="left-content">
-						<div>
-						  <h2 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">Hi, welcome back!</h2>
-						  <p class="mg-b-0">Sales monitoring dashboard template.</p>
-						</div>
-					</div>
-					<div class="main-dashboard-header-right">
-						<div>
-							<label class="tx-13">Customer Ratings</label>
-							<div class="main-star">
-								<i class="typcn typcn-star active"></i> <i class="typcn typcn-star active"></i> <i class="typcn typcn-star active"></i> <i class="typcn typcn-star active"></i> <i class="typcn typcn-star"></i> <span>(14,873)</span>
-							</div>
-						</div>
-						<div>
-							<label class="tx-13">Online Sales</label>
-							<h5>563,275</h5>
-						</div>
-						<div>
-							<label class="tx-13">Offline Sales</label>
-							<h5>783,675</h5>
-						</div>
-					</div>
-				</div>
-				<!-- /breadcrumb -->
+<!-- breadcrumb -->
+<div class="breadcrumb-header justify-content-between">
+    <div class="my-auto">
+        <div class="d-flex">
+            <h4 class="content-title mb-0 my-auto">Tables</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ Data
+                Tables</span>
+        </div>
+    </div>
+
+</div>
+</div>
+<!-- breadcrumb -->
 @endsection
 @section('content')
-   <div class="card-body">
-    <h4 class="card-header text-center text-light">Appointment List</h4>
+<!-- row opened -->
+
+<div class="col-xl-12">
+    <div class="card">
+        <div class="card-header pb-0">
+            <div class="d-flex justify-content-between">
+                <h4 class="card-title mg-b-0">قائمة الحجوزات</h4>
+                <i class="mdi mdi-dots-horizontal text-gray"></i>
+            </div>
 
 
-    @if($message = Session::get('Done'))
+            @if($message = Session::get('Done'))
             <div class="alert alert-success" role="alert">
                 {{ $message }}
             </div>
@@ -48,105 +44,135 @@
                 {{ session('status') }}
                 @endif
 
+            </div>
 
-                <div class="card-body">
-                <div class="col-sm-6 col-12 text-sm-end">
-                            <div class="mx-n1">
+                        <div class="col-xl-12">
+                            <div class="card mg-b-20">
+                                <div class="card-header pb-0">
+                                    <div class="d-flex justify-content-between">
+                                        <h4 class="card-title mg-b-0">قائمة الحجوزات</h4>
+                                        <i class="mdi mdi-dots-horizontal text-gray"></i>
+                                    </div>
+                                    <p class="tx-12 tx-gray-500 mb-2">يمكنك إضافة حجز جدبد<a href="{{route('appointments.create')}}">إضافة حجز</a></p>
                                 </div>
-                            </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table id="example" class="table key-buttons text-md-nowrap">
+                                            <thead>
+                                                <tr>
+                                                    <th class="border-bottom-0">م</th>
+                                                    <th class="border-bottom-0">الإسم</th>
+                                                    <th class="border-bottom-0">رقم الجوال</th>
+                                                    <th class="border-bottom-0">تاريخ الحجز</th>
+                                                    <th class="border-bottom-0">موعد الحجز</th>
+                                                    <th class="border-bottom-0">تأكيد الحجز</th>
+                                                    <th class="border-bottom-0">حالة الحجز</th>
+                                                    <TH>
+                                                    <th class="border-bottom-0">التحكم</th>
+                                                    </TH>
+                                                </tr>
 
-                            <div class="container">
-            <a href="{{route('appointments.create')}}" class="btn d-inline-flex btn-md~ btn-success mx-1">
-               <span class=" pe-2"> <i class="bi bi-plus"></i> </span> <span>Create</span> </a>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="table-responsive">
+                        </thead>
+                        @if($appointments->count() > 0 )
+                        <tbody class="text-center">
 
-<table class="table table-success table-striped table-hover">
-<thead class="table-dark text-center">
-                        <tr   style="color: #fff; background: black;" class="table-active ">
+                            @php
+                            $i = 1;
+                            @endphp
+                            @foreach ($appointments as $item)
 
-                            <th>Id</th>
+                        <tbody>
 
-                            <th>Client Name</th>
-                            <th>Phone</th>
-                            <th>Apt Date</th>
-                            <th>Apt Time</th>
-                            <th>Status</th>
-
-                            <th>Control</th>
-                            <th></th>
-
-
-
-
-
-
-                        </tr>
-                    </thead>
-                    @if($appointments->count() > 0 )
-                    <tbody class="text-center">
-
-                        @php
-                        $i = 1;
-                        @endphp
-                        @foreach ($appointments as $item)
-                        <tr>
-                            <td>
-                                {{ $item->id }}
-                            </td>
-                            <!-- <td >
+                            <tr>
+                                <td>
+                                    {{ $item->id }}
+                                </td>
+                                <!-- <td >
                            <a  href="{{route('appointments.show',$item->id)}}">
 
                                {{ $item->apt_number }}</a> </td> -->
-                            <td>
-                                {{ $item->name }}
-                            </td>
-                            <td>
-                                {{ $item->phone }}
-                            </td>
-                            <td>
-                                {{ $item->apt_date }}
-                            </td>
-                            <td>
-                                {{ $item->apt_time }}
-                            </td>
+                                <td>
+                                    {{ $item->name }}
+                                </td>
+                                <td>
+                                    {{ $item->phone }}
+                                </td>
+                                <td>
+                                    {{ $item->apt_date }}
+                                </td>
+                                <td>
+                                    {{ $item->apt_time }}
+                                </td>
+                                <td>
+                                    {{ $item->apply_date }}
+                                </td>
 
-                            <td>
-                                {{ $item->status }}
-                            </td>
-
-
-
-                            <td>
-                                <span>
+                                <td>
+                                    {{ $item->status }}
+                                </td>
 
 
-                                    <a class="btn btn-primary"
-                                    href="{{route('appointments.edit',$item->id)}}">Edit</a>
-
-                                </span>
-                            </td>
-                            <!-- <td>
-                                <span>
+                                <td>
+                                    <span>
 
 
-                                    <a class="btn btn-success" href="{{ route('appointments.show',$item->id) }}">Show</a>
-                                </span>
-                            </td> -->
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div> {!! $appointments->links() !!}
+                                        <a class="btn btn-primary"
+                                            href="{{route('appointments.edit',$item->id)}}">Edit</a>
 
 
-            @else
-            <div class="col">
-                <div class="alert alert-danger" role="alert">
-No appointments
+                                </td>
+                                <td>
+
+
+
+                                        <a class="btn btn-success"
+                                            href="{{route('appointments.show',$item->id)}}">Show</a>
+
+                                    </span>
+                                </td>
+                                <td></td>
+                            </tr>
+                            </tfoot>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
+        </div>
     </div>
+</div>
+<!-- /row -->
+@else
+<div class="col">
+    <div class="alert alert-danger" role="alert">
+        No appointments
+    </div>
+</div>
+</div>
 @endif
+</div>
+<!-- Container closed -->
+</div>
+<!-- main-content closed -->
+@endsection
+@section('js')
+<!-- Internal Data tables -->
+<script src="{{URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/datatable/js/dataTables.dataTables.min.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/datatable/js/responsive.dataTables.min.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/datatable/js/jquery.dataTables.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/datatable/js/dataTables.bootstrap4.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/datatable/js/dataTables.buttons.min.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/datatable/js/buttons.bootstrap4.min.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/datatable/js/jszip.min.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/datatable/js/pdfmake.min.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/datatable/js/vfs_fonts.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/datatable/js/buttons.html5.min.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/datatable/js/buttons.print.min.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/datatable/js/buttons.colVis.min.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/datatable/js/responsive.bootstrap4.min.js')}}"></script>
+<!--Internal  Datatable js -->
+<script src="{{URL::asset('assets/js/table-data.js')}}"></script>
 @endsection
