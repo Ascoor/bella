@@ -27,9 +27,10 @@ class CreateAppointmentsTable extends Migration
             $table->time('apt_time');
             $table->string('remark')->nullable();
             $table->string('status')->default('pending')->comment('pending,accepted,complete,rejected');
-            $table->string('invoice')->nullable();
+            $table->string('invoice_id')->nullable();
+            $table->string('bill_status')->nullable()->comment('pending,pay,Partial payment');
             $table->timestamp('apply_date')->nullable()->useCurrent();
-            $table->timestamp('remark_date')->useCurrent()->nullable();
+            $table->timestamp('bill_date')->useCurrent()->nullable();
             $table->timestamps();
         });
     }

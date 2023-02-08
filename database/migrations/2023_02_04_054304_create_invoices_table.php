@@ -14,7 +14,15 @@ class CreateInvoicesTable extends Migration
     public function up()
     {
         Schema::create('invoices', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
+            $table->integer('invoice_no');
+            $table->date('invoice_date');
+            $table->date('due_date');
+            $table->string('title');
+            $table->string('client');
+            $table->string('client_address');
+            $table->decimal('subtotal');
+            $table->decimal('grandtotal');
             $table->timestamps();
         });
     }
@@ -29,3 +37,4 @@ class CreateInvoicesTable extends Migration
         Schema::dropIfExists('invoices');
     }
 }
+https://stackoverflow.com/questions/46375213/how-to-insert-into-database-invoice-and-products-in-laravel-5-3
