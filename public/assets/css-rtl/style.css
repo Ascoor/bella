@@ -17682,13 +17682,14 @@ pre {
     top: -2px; }
 
 .main-logo {
+  width: 150px;
+  height: 45px;
   display: flex;
   align-items: center;
   position: relative;
-  height: 2rem;
-  margin: 0 auto;
   justify-content: center;
-  text-align: center; }
+  text-align: center;
+  }
 
 .main-body.main-sidebar-hide .logo-icon {
   display: block;

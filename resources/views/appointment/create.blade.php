@@ -1,83 +1,145 @@
-@extends('home')
-   @section('content')
-   <div class="card-body" >
-       <h4 class="card-header text-center text-light">Appointment Create</h4>
-
-<div class="card-body">
-
-
-
-
-
-                            <div class="container">
-                                <div class="card-body" style="background-color: #bce2ff;">
-                            <a href="{{route('appointments.index')}}" class="btn d-inline-flex btn-md~ btn-warning mx-1">
-                <span class=" pe-2"><i class="bi bi-house-up"></i> </span> <span>Home</span> </a>
-                <div class="row">
-                    <div class="col-md-12">
-                        <form action="{{route('appointments.store')}}" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            
-<div class="input-group ">
-  <span class="input-group-text">Client name</span>
-
-  <select class="border-0 outline-none" name="client_id">
-                                         @foreach ($clients as $item )
-
-                                        <option value="{{ $item->id }}"  >
-                                            {{$item->name}}</option>
-
-                                            <input type="hidden" id="custId" name="name" value="{{ $item->name}}">
-                                            <input type="hidden" id="custId" name="phone" value="{{ $item->phone}}">
-                                            @endforeach
-                                        </select>
+@extends('layouts.master')
+@section('css')
+<!-- Internal Select2 css -->
+<link href="{{URL::asset('assets/plugins/select2/css/select2.min.css')}}" rel="stylesheet">
+<!--Internal  Datetimepicker-slider css -->
+<link href="{{URL::asset('assets/plugins/amazeui-datetimepicker/css/amazeui.datetimepicker.css')}}" rel="stylesheet">
+<link href="{{URL::asset('assets/plugins/jquery-simple-datetimepicker/jquery.simple-dtpicker.css')}}" rel="stylesheet">
+<link href="{{URL::asset('assets/plugins/pickerjs/picker.min.css')}}" rel="stylesheet">
+<!-- Internal Spectrum-colorpicker css -->
+<link href="{{URL::asset('assets/plugins/spectrum-colorpicker/spectrum.css')}}" rel="stylesheet">
+@endsection
+@section('page-header')
+<!-- breadcrumb -->
+<div class="breadcrumb-header justify-content-between">
+    <div class="my-auto">
+        <div class="d-flex">
+            <h4 class="content-title mb-0 my-auto">الحجوزات</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
+           إضافة حجز جديد</span>
+        </div>
+    </div>
 </div>
 
+@endsection
+@section('content')
 
-                            <div class="input-group ">
-                            <span class="input-group-text">{{__('Doctor')}}</span>
-                            
-                            <select class="border-0 " name="doctor_name">
-                                         @foreach ($doctors as $item2 )
+<!-- row -->
 
-                                        <option value="{{ $item2->name }}"  >
-                                            {{$item2->name}}</option>
+<!--div-->
+<div class="col-md-12 col-xl-12 col-xs-12 col-sm-12">
+    <div class="card">
+        <div class="card-body">
+            <form action="{{route('appointments.store')}}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('POST')
+                <div class="main-content-label mg-b-5">
+          بيانات الحجز
+                </div>
+                <br/>
+                <div class="row row-sm">
+                    <div class="col-lg">
+                        <p class="mg-b-10">إسم العميل</p>
+                        <input class="form-control mg-b-20" name="name"type="text">
+                    </div>
+                </div>
 
-                                        @endforeach
-                                    </select>
-                                </div>
+                <div class="row row-sm">
+                    <div class="col-lg">
+                        <p class="mg-b-10">البريد الإلكترونى للعميل</p>
+                        <input class="form-control mg-b-15"  name="email" type="email">
+                    </div>
+                </div>
 
-              
-                                <div class="input-group ">
-                                  <label class="input-group-text" for="inputGroupSelect01">Date</label>
-                                  <input type="date" name="apt_date" class="form-control" placeholder="Apt Date" aria-label="date"></div>
-                                  
-                      
-                                <div class="input-group ">
-                                  <label class="input-group-text" for="inputGroupSelect01">Time</label>
-                                  <input type="time" name="apt_time" class="form-control" placeholder="Apt Time" aria-label="time">
-                                </div>
-                                <div class="input-group mb-3">
-  <label class="input-group-text" for="inputGroupSelect01"><i class="fa fa-sort-amount-asc" aria-hidden="true"></i></label>
-  <span class="input-group-text">{{__('Status')}}</span>
-  <select class="form-select" name="status">
 
-    <option value="pending">Pending</option>
-    <option value="accepted">Accepted</option>
-    <option value="accepted">Complete</option>
-    <option value="rejected">Rejected</option>
-  </select>
+                <div class="row row-sm mg-b-20">
+                    <div class="input-group col-md-4">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <p class="mg-b-10">تاريخ الحجز</p>
+                                <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
+                            </div>
+                        </div><input class="form-control fc-datepicker" name="apt_date" placeholder="MM/DD/YYYY" type="date">
+                    </div>
+
+                    <div class="input-group col-md-4">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <p class="mg-b-10">موعد الحجز</p>
+                                <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
+                            </div>
+                        </div><input class="form-control " name="apt_time" placeholder="00:00" type="time">
+                    </div>
+
+                                <div class="input-group col-md-4">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                رقم الجوال</div>
+
+                        <input class="form-control" id="phoneMask" name="phone"
+                            aria-label="Phone Number" type="tel">
+                    </div><!-- input-group -->
+                </div>
+
+                </div>
+
+
+                <div class="row row-sm mg-b-20">
+                    <div class="col-lg-4">
+                        <p class="mg-b-10">حالة الحجز</p><select class="form-control select2-no-search"
+                            name="status">
+                            <option label="Choose one">
+
+                            <option value="pending" selected>Pending</option>
+                            <option value="accepted">Accepted</option>
+                            <option value="accepted">Complete</option>
+
+                        </select>
+                    </div>
+
+
+                    <div class="col-lg-4">
+                        <p class="mg-b-10">إختر الدكتور</p><select class="form-control select2-no-search"
+                            name="doctor_name" >
+                            <option label="Choose one">
+                                @foreach ($doctors as $item )
+
+                            <option value="{{$item->name}}" >{{$item->name }} </option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="row row-xs wd-xl-80p">
+	<div class="col-sm-6 col-md-3">
+		<button type="submit" class="btn btn-outline-primary btn-block">Primary</button>
+	</div>
+
 </div>
-<div class="card-footer ml-auto">
-            <button type="submit" class="btn btn-outline-primary mr-1">Create</button>
-        </form>
-            
-      </div>
-      <div class="card-footer text-muted">
-        Footer
-      </div>
-    </div>
-    </div>
 
-
+                </div>
+        </div>
+        <!-- row closed -->
+    </div>
+    <!-- Container closed -->
+</div>
+<!-- main-content closed -->
+@endsection
+@section('js')
+<!--Internal  Datepicker js -->
+<script src="{{URL::asset('assets/plugins/jquery-ui/ui/widgets/datepicker.js')}}"></script>
+<!--Internal  jquery.maskedinput js -->
+<script src="{{URL::asset('assets/plugins/jquery.maskedinput/jquery.maskedinput.js')}}"></script>
+<!--Internal  spectrum-colorpicker js -->
+<script src="{{URL::asset('assets/plugins/spectrum-colorpicker/spectrum.js')}}"></script>
+<!-- Internal Select2.min js -->
+<script src="{{URL::asset('assets/plugins/select2/js/select2.min.js')}}"></script>
+<!--Internal Ion.rangeSlider.min js -->
+<script src="{{URL::asset('assets/plugins/ion-rangeslider/js/ion.rangeSlider.min.js')}}"></script>
+<!--Internal  jquery-simple-datetimepicker js -->
+<script src="{{URL::asset('assets/plugins/amazeui-datetimepicker/js/amazeui.datetimepicker.min.js')}}"></script>
+<!-- Ionicons js -->
+<script src="{{URL::asset('assets/plugins/jquery-simple-datetimepicker/jquery.simple-dtpicker.js')}}"></script>
+<!--Internal  pickerjs js -->
+<script src="{{URL::asset('assets/plugins/pickerjs/picker.min.js')}}"></script>
+<!-- Internal form-elements js -->
+<script src="{{URL::asset('assets/js/form-elements.js')}}"></script>
 @endsection
