@@ -26365,7 +26365,8 @@ button.bg-dark:hover, button.bg-dark:focus {
   background-color: #283143 !important; }
 
 .bg-white {
-  background-color: #fff !important; }
+  background-color: #fff0ee !important;
+  }
 
 .bg-transparent {
   background-color: transparent !important; }
@@ -26489,7 +26490,7 @@ button.bg-dark:hover, button.bg-dark:focus {
   background-color: #fce1e7 !important; }
 
 .bg-primary-transparent {
-  background-color: #e8e8e8 !important;
+  background-color: #f7f7f7 !important;
   }
 
 .bg-secondary-transparent {
