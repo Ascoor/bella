@@ -55,8 +55,8 @@ class AppointmentController extends Controller
 
             $appointment = Appointment::create([
                 'apt_number'=>$apt_number,
-                'doctor_name' => $request->doctor_name,
-                'name' => $request->name,
+                'doctor_name' => $request->doctor_id,
+                'name' => $request->client_id,
                 'user_id' =>Auth::id(),
                 'phone' => $request->phone,
                 'apt_date' => $request->apt_date,

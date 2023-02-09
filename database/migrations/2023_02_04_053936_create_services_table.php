@@ -17,7 +17,9 @@ class CreateServicesTable extends Migration
 
                 $table->increments('id');
                 $table->string('name');
-                $table->string('doctor_name');
+                $table->bigInteger('section_id');
+                $table->bigInteger('doctor_id');
+                $table->string('description')->nullable();
                 $table->integer('cost');
                 $table->timestamps();
             });

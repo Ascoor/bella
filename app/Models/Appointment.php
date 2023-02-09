@@ -14,7 +14,7 @@ class Appointment extends Model
     protected $fillable =['apt_number','doctor_name','status','email','name','user_id','phone','apt_date','apt_time'];
     public function service()
     {
-        return $this->belongsToMany('App\Models\Service');
+        return $this->belongsToMany('App\Models\Service','service_id');
     }
     public function user()
     {

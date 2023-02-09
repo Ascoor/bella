@@ -12,14 +12,18 @@ class Doctor extends Model
     protected $fillable =['phone','name','specialty'];
 
 
-    public function services()
+    public function service()
     {
-        return $this->belongsToMany('App\Models\Service');
+        return $this->belongsToMany('App\Models\Service','service_id');
     }
     public function appointment()
     {
-        return $this->belongsToMany('App\Models\Service');
+        return $this->belongsToMany('App\Models\Appointment');
     }
 
+    public function section()
+    {
+    return $this->belongsTo('App\Models\Section');
+    }
 
 }

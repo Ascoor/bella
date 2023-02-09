@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Service;
 use App\Http\Controllers\Controller;
 use App\Models\Doctor;
+use App\Models\Section;
 use Illuminate\Http\Request;
 
 class ServiceController extends Controller
@@ -17,10 +18,11 @@ class ServiceController extends Controller
     public function index()
     {
 
+        $sections = Section::all();
         $services = Service::all();
         $doctors = Doctor::all();
         // $custumers = Client::all();
-        return view('service.index',compact('services', $services))->with('doctors', $doctors);
+        return view('service.index',compact('services', $services))->with('doctors', $doctors)->with('sections', $sections);
     }
 
     /**
@@ -31,6 +33,7 @@ class ServiceController extends Controller
     public function create()
     {
 
+        $sections = Section::all();
         $doctors = Doctor::all();
         return view('service.create')->with('doctors',$doctors);
     }
@@ -48,7 +51,8 @@ class ServiceController extends Controller
             $service = Service::create([
                 'name'=>$request->name,
                 'cost' => $request->cost,
-                'doctor_name' => $request->doctor_name,
+                'doctor_id' => $request->doctor_id,
+                'section_id' => $request->section_id,
 
 
             ]);
@@ -70,11 +74,12 @@ class ServiceController extends Controller
 
         {
 
+            $sections = Section::all();
             $services = Service::all();
             $doctors = Doctor::all();
 
             return view('service.show')
-            ->with('services', $services)->with('doctors', $doctors);
+            ->with('services', $services)->with('doctors', $doctors)->with('sections',$sections);
         }
 
 
@@ -87,11 +92,11 @@ class ServiceController extends Controller
      */
     public function edit($id)
     {
-
+        $sections = Section::all();
         $service = Service::where('id', $id)->first();
         $doctors = Doctor::all();
         return view('service.edit')
-        ->with('service', $service)->with('doctors',$doctors);
+        ->with('service', $service)->with('doctors',$doctors)->with('sections',$sections);
 
     }
 
