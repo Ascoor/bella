@@ -202,7 +202,7 @@
                             <label class="my-1 mr-2" for="inlineFormCustomSelectPref">القسم</label>
                             <select name="section_id" id="section_id" class="custom-select my-1 mr-sm-2" required>
                                 @foreach ($sections as $item1)
-                                    <option value="{{ $item1->id}} ">{{  $item1->section_name  }}</option>
+                                    <option value="{{ $item1->id}} ">{{  $item1->section_name   }}</option>
                                 @endforeach
                             </select>
                             <label class="my-1 mr-2" for="inlineFormCustomSelectPref">الدكتور</label>
