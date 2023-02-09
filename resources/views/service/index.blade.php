@@ -106,7 +106,7 @@
                                                 data-name="{{ $service->name }}" data-pro_id="{{ $service->id }}"
                                                 data-section_name="{{ $service->section->section_name }}"
                                                 data-description="{{ $service->description }}" data-toggle="modal"
-                                                data-target="#edit_Product">تعديل</button>
+                                                data-target="#edit_Service">تعديل</button>
 
                                             <button class="btn btn-outline-danger btn-sm " data-pro_id="{{ $service->id }}"
                                                 data-name="{{ $service-> name }}" data-toggle="modal"
@@ -175,7 +175,7 @@
         </div>
 
         <!-- edit -->
-        <div class="modal fade" id="edit_Product" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        <div class="modal fade" id="edit_Service" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -185,36 +185,36 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action='services/update' method="post">
-                        {{ method_field('patch') }}
+                    <form  action="{{route('services.update',$service)}}" method="post">
+                        {{ method_field('PUT') }}
                         {{ csrf_field() }}
                         <div class="modal-body">
 
                             <div class="form-group">
                                 <label for="title">اسم المنتج :</label>
 
-                                 <input type="hidden" class="form-control" name="pro_id" id="pro_id" value="">
+                                 <input type="hidden" class="form-control"  name="pro_id" id="pro_id">
 
-                                <input type="text" class="form-control" name="name" id="name">
-                                <input type="number" class="form-control" name="cost" id="cost">
+                                <input type="text" class="form-control"  value="{{$service->name}}" name="name" id="name">
+                                <input type="number" class="form-control" value="{{$service->cost}}" name="cost" id="cost">
                             </div>
 
                             <label class="my-1 mr-2" for="inlineFormCustomSelectPref">القسم</label>
-                            <select name="section_id" id="section_" class="custom-select my-1 mr-sm-2" required>
-                                @foreach ($sections as $section)
-                                    <option>{{ $section->name }}</option>
+                            <select name="section_id" id="section_id" class="custom-select my-1 mr-sm-2" required>
+                                @foreach ($sections as $item1)
+                                    <option value="{{ $item1->id}} ">{{  $item1->section_name  }}</option>
                                 @endforeach
                             </select>
                             <label class="my-1 mr-2" for="inlineFormCustomSelectPref">الدكتور</label>
                             <select name="doctor_id" id="doctor_id" class="custom-select my-1 mr-sm-2" required>
                                 @foreach ($doctors as $item)
-                                    <option>{{ $item->name }}</option>
+                                    <option value="{{$item->id}}">{{ $item  ->name }}</option>
                                 @endforeach
                             </select>
 
                             <div class="form-group">
                                 <label for="des">ملاحظات :</label>
-                                <textarea name="description" cols="20" rows="5" id='description'
+                                <textarea name="description" value="{{$service->description}}"cols="20" rows="5" id='description'
                                     class="form-control"></textarea>
                             </div>
 
