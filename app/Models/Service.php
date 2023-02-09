@@ -14,7 +14,7 @@ class Service extends Model
     public function doctor()
     {
 
-        return $this->hasOne('App\Models\Doctor','doctor_id');
+        return $this->belongsTo('App\Models\Doctor','doctor_id');
         }
 
         public function section()

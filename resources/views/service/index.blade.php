@@ -98,7 +98,8 @@
                                     <tr>
                                         <td>{{ $i }}</td>
                                         <td>{{ $service->name }}</td>
-                                        <td>{{ $service->section->section_name }}</td>
+                                        <td>{{ $service->section->name }}</td>
+                                        <td>{{ $service->doctor->name }}</td>
                                         <td>{{ $service->description }}</td>
                                         <td>
                                             <button class="btn btn-outline-success btn-sm"
