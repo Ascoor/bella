@@ -20,7 +20,7 @@ class ServiceController extends Controller
         $services = Service::all();
         $doctors = Doctor::all();
         // $custumers = Client::all();
-        return view('service.index',compact('services', $services))->with('doctor', $doctors);
+        return view('service.index',compact('services', $services))->with('doctors', $doctors);
     }
 
     /**

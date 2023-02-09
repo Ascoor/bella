@@ -13,7 +13,7 @@
 				<div class="breadcrumb-header justify-content-between">
 					<div class="my-auto">
 						<div class="d-flex">
-							<h4 class="content-title mb-0 my-auto">Tables</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ Data Tables</span>
+							<h4 class="content-title mb-0 my-auto">الحجوزات</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ قائمة الحجوزات</span>
 						</div>
 					</div>
 
@@ -24,48 +24,32 @@
 @section('content')
 				<!-- row opened -->
 
+				
+			<!-- row opened -->
+            <div class="row row-sm">
 					<div class="col-xl-12">
 						<div class="card">
 							<div class="card-header pb-0">
 								<div class="d-flex justify-content-between">
-									<h4 class="card-title mg-b-0">قائمة الحجوزات</h4>
-									<i class="mdi mdi-dots-horizontal text-gray"></i>
-								</div>
-
-
-    @if($message = Session::get('Done'))
-            <div class="alert alert-success" role="alert">
-                {{ $message }}
-            </div>
-            @endif
-            @if(session('status'))
-            <div class="alert alert-danger" role="alert">
-                {{ session('status') }}
-                @endif
-
-				</div>
-							<div class="card-body">
-								<div class="table-responsive hoverable-table">
-									<a id="button" href="{{route('appointments.create') }}" class="btn btn-primary mg-b-20">إضافة حجز</a>
-
-                                    @if($appointments->count() > 0 )
-                                    <table id="example-delete" class="table text-md-nowrap">
-										<thead>
-											<tr>
-                                            <th>Id</th>
-
-<th>Client Name</th>
-<th>Phone</th>
-<th>Apt Date</th>
-<th>Apt Time</th>
-<th>Status</th>
-
-<th>Control</th>
-<th></th>
-<th></th>
-
-											</tr>
-										</thead>
+                <div class="card-body">
+                <div class="col-sm-6 col-md-4 col-xl-3">
+										<a class="modal-effect btn btn-outline-primary btn-block" data-effect="effect-scale" data-toggle="modal" href="#modaldemo8">إضافة حجز جديد</a>
+									</div>
+                    <div class="table-responsive">
+                        <table id="example1" class="table key-buttons text-md-nowrap" data-page-length='50'style="text-align: center">
+                            <thead>
+                                <tr>
+                                    <th class="border-bottom-0">#</th>
+                                    <th class="border-bottom-0">إسم العميل</th>
+                                    <th class="border-bottom-0">رقم الهاتف</th>
+                                    <th class="border-bottom-0">تاريخ الحجز</th>
+                                    <th class="border-bottom-0">موعد الحجز</th>
+                                    <th class="border-bottom-0">الدكتور</th>
+                                    <th class="border-bottom-0">حالة الحجز</th>
+                                    
+                                    <th class="border-bottom-0">العمليات</th>
+                                </tr>
+                            </thead>
 
                     <tbody class="text-center">
 
@@ -97,6 +81,9 @@
                                 {{ $item->apt_time }}
                             </td>
 
+                            <td>
+                                {{ $item->doctor_name}}
+                            </td>
                             <td>
                                 {{ $item->status }}
                             </td>
@@ -132,17 +119,11 @@
 					</div>
 				</div>
 				<!-- /row -->
-                @else
-            <div class="col">
-                <div class="alert alert-danger" role="alert">
-No appointments
-                </div>
-            </div>
-    </div>
-@endif
+
 			</div>
 			<!-- Container closed -->
 		</div>
+       
 		<!-- main-content closed -->
 @endsection
 @section('js')
