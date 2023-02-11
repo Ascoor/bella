@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Doctor;
 use App\Http\Controllers\Controller;
+use App\Models\Section;
 use Illuminate\Http\Request;
 
 class DoctorController extends Controller
@@ -15,8 +16,9 @@ class DoctorController extends Controller
      */
     public function index()
     {
-       $doctors = Doctor::all();
-       return view('doctor.index')->with('doctors',$doctors);
+        $sections = Section::all();
+        $doctors = Doctor::with('section')->get();
+       return view('doctor.index')->with('doctors',$doctors)->with('sections',$sections);
     }
 
     /**
@@ -26,8 +28,9 @@ class DoctorController extends Controller
      */
     public function create()
     {
-
-          return view('doctor.create');
+$sections = Section::all();
+$doctor = Doctor::with('section')->get();
+          return view('doctor.create')->with('sections',$sections);
     }
 
     /**
@@ -41,10 +44,11 @@ class DoctorController extends Controller
         $doctor = Doctor::create([
 
             'name' => $request->name,
+            'section_id' => $request->section_id,
 
 
             'phone' => $request->phone,
-            'specialty' => $request->specialty,
+            'specialization' => $request->specialization,
 
 
 
@@ -79,6 +83,7 @@ class DoctorController extends Controller
     public function edit($id)
     {
         $doctor = Doctor::where('id', $id)->first();
+        $doctor = Doctor::with('section')->get();
         return view('doctor.edit')
         ->with('doctor', $doctor);
     }
@@ -102,8 +107,11 @@ class DoctorController extends Controller
      * @param  \App\Models\Doctor  $doctor
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Doctor $doctor)
+    public function destroy(Request $request)
     {
-        //
+        $Products = Doctor::findOrFail($request->pro_id);
+        $Products->delete();
+        session()->flash('delete', 'تم حذف المنتج بنجاح');
+        return back();;
     }
 }

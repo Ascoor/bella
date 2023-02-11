@@ -99,17 +99,17 @@
                                     <td>{{ $x->description }}</td>
                                     <td>
 
-                                            <a class="modal-effect btn btn-sm btn-info" data-effect="effect-scale"
-                                                data-id="{{ $x->id }}" data-section_name="{{ $x->section_name }}"
-                                                data-description="{{ $x->description }}" data-toggle="modal"
-                                                href="#exampleModal2" title="تعديل"><i class="las la-pen"></i></a>
+                                    <td>
+                                            <button class="btn btn-outline-success btn-sm"
+                                                data-name="{{ $x->section_name }}" data-pro_id="{{ $x->id }}"
 
+                                                data-specialization="{{ $x->description }}"  data-toggle="modal"
+                                                data-target="#edit_section">تعديل</button>
 
-                                            <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
-                                                data-id="{{ $x->id }}" data-section_name="{{ $x->section_name }}"
-                                                data-toggle="modal" href="#modaldemo9" title="حذف"><i
-                                                    class="las la-trash"></i></a>
-
+                                            <button class="btn btn-outline-danger btn-sm " data-pro_id="{{ $x->id }}"
+                                                data-name="{{ $x->section_name }}" data-toggle="modal"
+                                                data-target="#modaldemo9">حذف</button>
+                                        </td>
                                     </td>
                                 </tr>
                             @endforeach
@@ -171,7 +171,7 @@
                         {{ method_field('patch') }}
                         {{ csrf_field() }}
                         <div class="form-group">
-                            <input type="hidden" name="id" id="id" value="">
+                            <input type="hidden" name="pro_id" id="pro_id" value="">
                             <label for="recipient-name" class="col-form-label">اسم القسم:</label>
                             <input class="form-control" name="section_name" id="section_name" type="text">
                         </div>
@@ -202,7 +202,7 @@
                     {{ csrf_field() }}
                     <div class="modal-body">
                         <p>هل انت متاكد من عملية الحذف ؟</p><br>
-                        <input type="hidden" name="id" id="id" value="">
+                        <input type="hidden" name="pro_id" id="pro_id" value="">
                         <input class="form-control" name="section_name" id="section_name" type="text" readonly>
                     </div>
                     <div class="modal-footer">
@@ -248,23 +248,26 @@
 <script>
     $('#exampleModal2').on('show.bs.modal', function(event) {
         var button = $(event.relatedTarget)
-        var id = button.data('id')
+        var name = button.data('name')
         var section_name = button.data('section_name')
+        var pro_id = button.data('pro_id')
         var description = button.data('description')
         var modal = $(this)
         modal.find('.modal-body #id').val(id);
-        modal.find('.modal-body #section_name').val(section_name);
+        modal.find('.modal-body #name').val(section_name);
         modal.find('.modal-body #description').val(description);
-    })
+        modal.find('.modal-body #pro_id').val(pro_id);
+
+  })
 </script>
 
 <script>
     $('#modaldemo9').on('show.bs.modal', function(event) {
         var button = $(event.relatedTarget)
-        var id = button.data('id')
-        var section_name = button.data('section_name')
+        var pro_id = button.data('pro_id')
+        var name = button.data('section_name')
         var modal = $(this)
-        modal.find('.modal-body #id').val(id);
+        modal.find('.modal-body #pro_id').val(pro_id);
         modal.find('.modal-body #section_name').val(section_name);
     })
 </script>
