@@ -17,7 +17,7 @@ class DoctorController extends Controller
     public function index()
     {
         $sections = Section::all();
-        $doctors = Doctor::with('section')->get();
+        $doctors = Doctor::all();
        return view('doctor.index')->with('doctors',$doctors)->with('sections',$sections);
     }
 
@@ -70,7 +70,7 @@ $doctor = Doctor::with('section')->get();
     {
         $doctor = Doctor::where('id', $id)->first();
 
-        return view('doctor.show')
+        return view('doctor.index')
         ->with('doctor', $doctor);
     }
 
@@ -98,7 +98,8 @@ $doctor = Doctor::with('section')->get();
     public function update(Request $request, Doctor $doctor)
     {
         $doctor->update($request->all());
-        return redirect()->route('doctors.index')->with('Done', 'Updated Success');
+        session()->flash('Edit', 'تم تعديل بيانات الدكتور بنجاح');
+        return redirect('/doctors');
     }
 
     /**
@@ -109,8 +110,8 @@ $doctor = Doctor::with('section')->get();
      */
     public function destroy(Request $request)
     {
-        $Products = Doctor::findOrFail($request->pro_id);
-        $Products->delete();
+        $doctor = Doctor::findOrFail($request->pro_id);
+        $doctor->delete();
         session()->flash('delete', 'تم حذف المنتج بنجاح');
         return back();;
     }
