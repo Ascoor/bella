@@ -35,7 +35,7 @@ class ServiceController extends Controller
 
         $sections = Section::all();
         $doctors = Doctor::all();
-        return view('service.create')->with('doctors',$doctors);
+        return view('service.create')->with('doctors',$doctors)->with('sections',$sections);
     }
 
     /**
@@ -50,7 +50,7 @@ class ServiceController extends Controller
 
             $service = Service::create([
                 'name'=>$request->name,
-                'cost' => $request->cost,
+                'price' => $request->price,
                 'doctor_id' => $request->doctor_id,
                 'section_id' => $request->section_id,
 

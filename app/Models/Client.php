@@ -8,16 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Client extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'name', 'email', 'phone'
+    ];
 
-    public function invoice()
+    public function appointments()
     {
-        return $this->belongsToMany('App\Models\Invoice');
+        return $this->hasMany(Appointment::class);
     }
-    public function appointment()
-    {
-        return $this->belongsToMany('App\Models\Appointment');
-    }
-    protected $fillable =['email','name','phone','details'];
-
 }
-

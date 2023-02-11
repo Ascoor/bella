@@ -8,22 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Service extends Model
 {
     use HasFactory;
-    protected $fillable =['name','doctor_id','section_id','description','cost'];
-
+    protected $fillable = [
+        'name', 'price', 'doctor_id', 'section_id'
+    ];
 
     public function doctor()
     {
+        return $this->belongsTo(Doctor::class);
+    }
 
-        return $this->belongsTo('App\Models\Doctor','doctor_id');
-        }
-
-        public function section()
-        {
-        return $this->belongsTo('App\Models\Section','section_id');
-        }
-
-
-     }
-
-
-
+    public function section()
+    {
+        return $this->belongsTo(Section::class);
+    }
+}
