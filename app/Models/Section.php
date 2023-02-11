@@ -8,5 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Section extends Model
 {
     use HasFactory;
-    protected $fillable = ['section_name','description','Created_by'];
+    protected $fillable = [
+        'section_name'
+    ];
+
+    public function doctors()
+    {
+        return $this->hasMany(Doctor::class);
+    }
 }
