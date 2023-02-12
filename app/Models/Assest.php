@@ -10,11 +10,11 @@ class Assest extends Model
     use HasFactory;
 
     protected $fillable = [
-        'asset_name', 'section_id'
+        'asset_name', 'section_id','phone'
     ];
 
     public function section()
     {
-        return $this->belongsTo('App\Section');
+        return $this->belongsTo(Section::class);
     }
 }

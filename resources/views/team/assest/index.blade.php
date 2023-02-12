@@ -21,7 +21,7 @@
         <div class="my-auto">
             <div class="d-flex">
                 <h4 class="content-title mb-0 my-auto">الاعدادات</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
-                    المنتجات</span>
+                    قائمة المساعدين</span>
             </div>
         </div>
     </div>
@@ -75,7 +75,7 @@
                 <div class="card-header pb-0">
                     <div class="d-flex justify-content-between">
                         <a class="modal-effect btn btn-outline-primary btn-block" data-effect="effect-scale"
-                            data-toggle="modal" href="#exampleModal">اضافة منتج</a>
+                            data-toggle="modal" href="#exampleModal">اضافة مساعد</a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -84,17 +84,18 @@
                             <thead>
                                 <tr>
                                     <th class="border-bottom-0">#</th>
-                                    <th class="border-bottom-0">اسم المنتج</th>
-                                    <th class="border-bottom-0">اسم القسم</th>
-                                    <th class="border-bottom-0">ملاحظات</th>
+                                    <th class="border-bottom-0">الأسم</th>
+                                    <th class="border-bottom-0">القسم</th>
+
                                     <th class="border-bottom-0">رقم الجوال</th>
                                     <th class="border-bottom-0">العمليات</th>
 
                                 </tr>
                             </thead>
                             <tbody>
+@foreach ($assests as $assest)
 
-                                @foreach ($assests as $assest)
+
 
                                     <tr>
                                         <td>{{ $assest->id }}</td>
@@ -105,7 +106,7 @@
                                         <td>
                                             <button class="btn btn-outline-success btn-sm"
                                                 data-assest_name="{{ $assest->assest_name }}" data-pro_id="{{ $assest->id }}"
-                                                data-section_name="{{ $assest->section->section_name }}"
+                                                data-section_id="{{ $assest->section->id }}"
                                                  data-phone="{{ $assest->phone }}" data-toggle="modal"
                                                 data-target="#edit_assest">تعديل</button>
 
@@ -128,7 +129,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">اضافة منتج</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">اضافة مساعد</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -137,7 +138,7 @@
  @csrf
                         <div class="modal-body">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">اسم المنتج</label>
+                                <label for="exampleInputEmail1">الأسم</label>
                                 <input type="text" class="form-control" id="assest_name" name="assest_name" required>
                             </div>
 
@@ -151,7 +152,7 @@
 
                         </div>
                         <div class="form-group">
-                                <label for="title">اسم المنتج :</label>
+                                <label for="title">رقم الجوال:</label>
 
 
                                 <input type="tel" class="form-control" name="phone" id="phone">
@@ -173,7 +174,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">تعديل منتج</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">تعديل مساعد</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -186,7 +187,7 @@
                         <div class="modal-body">
 
                             <div class="form-group">
-                                <label for="title">اسم المنتج :</label>
+                                <label for="title">اسم المساعد :</label>
 
                                 <input type="hidden" class="form-control" name="pro_id" id="pro_id" value="">
 
@@ -196,12 +197,12 @@
                             <label class="my-1 mr-2" for="inlineFormCustomSelectPref">القسم</label>
                             <select name="section_id" id="section_id" class="custom-select my-1 mr-sm-2" required>
                                 @foreach ($sections as $section)
-                                    <option>{{ $section->section_name }}</option>
+                                    <option value="{{$section->id}}">{{ $section->section_name }}</option>
                                 @endforeach
                             </select>
 
                             <div class="form-group">
-                                <label for="title">اسم المنتج :</label>
+                                <label for="title">رقم الجوال</label>
 
 
                                 <input type="tel" class="form-control" name="phone" id="phone">
@@ -222,7 +223,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">حذف المنتج</h5>
+                        <h5 class="modal-title">حذف المساعد</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -286,13 +287,13 @@
         $('#edit_assest').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget)
             var assest_name = button.data('assest_name')
-            var section_name = button.data('section_name')
+            var section_id = button.data('section_id')
             var pro_id = button.data('pro_id')
 
             var phone = button.data('phone')
             var modal = $(this)
             modal.find('.modal-body #assest_name').val(assest_name);
-            modal.find('.modal-body #section_name').val(section_name);
+            modal.find('.modal-body #section_id').val(section_id);
 
             modal.find('.modal-body #phone').val(phone);
             modal.find('.modal-body #pro_id').val(pro_id);

@@ -85,8 +85,8 @@
                     <tr>
                         <th>ID</th>
                         <th>Service Name</th>
-                        <th>Doctor Name</th>
-                        <th>Section Name</th>
+                        <th>section Name</th>
+
                         <th>Section price</th>
                         <th>Action</th>
                     </tr>
@@ -95,9 +95,8 @@
                     @foreach($services as $service)
                     <tr>
                         <td>{{ $service->id }}</td>
-                        <td>{{ $service->service_name }}</td>
-                        <td>{{ $service->doctor->name }}</td>
-                        <td>{{ $service->section->section_name }}</td>
+                        <td>{{ $service->name }}</td>
+            <td>{{ $service->section->section_name }}</td>
                         <td>{{ $service->price }}</td>
                         <td>
 
@@ -106,7 +105,7 @@
 
                                                 data-description="{{ $service->description }}"
                                                 data-price="{{ $service->price }}"
-                                                data-doctor_id="{{ $service->doctor->id }}"
+
                                                 data-section_id="{{ $service->section->id }}"  data-toggle="modal"
                                                 data-target="#edit_Service">تعديل</button>
 
@@ -135,15 +134,16 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="{{ route('services.store') }}" method="post">
+        <form action="{{ route('services.store') }}" method="POST">
           @csrf
+
           <div class="form-group">
             <label for="service_name">Service Name:</label>
             <input type="text" name="service_name" id="service_name" class="form-control" required>
           </div>
           <div class="form-group">
             <label for="price">Service price:</label>
-            <input type="number" service_name="price" id="price" class="form-control">
+            <input type="number" name="price" id="price" class="form-control">
           </div>
 
           <div class="form-group">
@@ -157,26 +157,22 @@
               <option value="">Select Section</option>
               @foreach($sections as $section)
                 <option value="{{ $section->id }}">{{ $section->section_name }}</option>
-              @endforeach
+
             </select>
           </div>
-          <div class="form-group">
-            <label for="doctor">Doctor:</label>
-            <select name="doctor_id" id="doctor_id" class="form-control" required>
-              <option value="">Select Doctor</option>
-              @foreach($doctors as $doctor)
-                <option value="{{ $doctor->id }}">{{ $doctor->name }}</option>
+
               @endforeach
-            </select>
           </div>
-      </div>
+
       <div class="modal-footer">
         <button type="submit" class="btn btn-primary">Create</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
       </form>
+      </div>
+</div>
     </div>
-  </div>
+
 </div>
   <!-- edit -->
   <div class="modal fade" id="edit_Service" tabindex="-1" role="dialog" aria-labelledby="createServiceModalLabel" aria-hidden="true">
@@ -189,9 +185,12 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="{{ route('services.update',$service) }}" method="post">
+        @foreach ($services as $services)
+
+        <form action="{{ route('services.update',$service->id) }}" method="post">
           @csrf
-          @method('PATCH')
+
+          @endforeach
           <div class="form-group">
             <label for="service_name">Service Name:</label>
             <input type="text" name="service_name" id="service_name" class="form-control" required>
@@ -215,15 +214,6 @@
               @endforeach
             </select>
           </div>
-          <div class="form-group">
-            <label for="doctor">Doctor:</label>
-            <select name="doctor_id" id="doctor_id" class="form-control" required>
-              <option value="">Select Doctor</option>
-              @foreach($doctors as $doctor)
-                <option value="{{ $doctor->id }}">{{ $doctor->name }}</option>
-              @endforeach
-            </select>
-          </div>
       </div>
       <div class="modal-footer">
         <button type="submit" class="btn btn-primary">Create</button>
@@ -232,9 +222,7 @@
       </form>
     </div>
   </div>
-</div>
 
-        </div>
         <!-- delete -->
         <div class="modal fade" id="modaldemo9" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
@@ -260,8 +248,7 @@
                                     </div>
                             </div>
                             </form>
-            </div>
-        </div>
+
 
 
 
@@ -307,14 +294,14 @@
             var button = $(event.relatedTarget)
             var  service_name = button.data('service_name')
             var section_id = button.data('section_id')
-            var doctor_id = button.data('doctor_id')
+
             var pro_id = button.data('pro_id')
             var price = button.data('price')
             var description = button.data('description')
             var modal = $(this)
             modal.find('.modal-body #service_name').val(service_name);
             modal.find('.modal-body #section_id').val(section_id);
-            modal.find('.modal-body #doctor_id').val(doctor_id);
+
             modal.find('.modal-body #price').val(price);
             modal.find('.modal-body #description').val(description);
             modal.find('.modal-body #pro_id').val(pro_id);

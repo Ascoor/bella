@@ -16,8 +16,12 @@ class Section extends Model
     {
         return $this->hasMany(Doctor::class);
     }
+    public function services()
+    {
+        return $this->hasMany(Doctor::class);
+    }
     public function assests()
     {
-        return $this->hasMany('App\Asset');
+        return $this->hasMany('App\Models\Assest');
     }
 }

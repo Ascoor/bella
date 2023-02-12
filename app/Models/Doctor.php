@@ -18,9 +18,5 @@ class Doctor extends Model
         return $this->belongsTo(Section::class);
     }
 
-    public function services()
-    {
-        return $this->hasMany(Service::class);
-    }
 }
 

@@ -20,8 +20,8 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">الاعدادات</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
-                    المنتجات</span>
+                <h4 class="content-title mb-0 my-auto">الفريق الطبي</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
+                    قائمة الأطباء</span>
             </div>
         </div>
     </div>
@@ -75,7 +75,7 @@
                 <div class="card-header pb-0">
                     <div class="d-flex justify-content-between">
                         <a class="modal-effect btn btn-outline-primary btn-block" data-effect="effect-scale"
-                            data-toggle="modal" href="#exampleModal">اضافة منتج</a>
+                            data-toggle="modal" href="#exampleModal">اضافة دكتور</a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -84,9 +84,9 @@
                             <thead>
                                 <tr>
                                     <th class="border-bottom-0">#</th>
-                                    <th class="border-bottom-0">اسم المنتج</th>
-                                    <th class="border-bottom-0">اسم القسم</th>
-                                    <th class="border-bottom-0">ملاحظات</th>
+                                    <th class="border-bottom-0"> الدكتور</th>
+                                    <th class="border-bottom-0"> القسم</th>
+                                    <th class="border-bottom-0">التخصص</th>
                                     <th class="border-bottom-0">رقم الجوال</th>
                                     <th class="border-bottom-0">العمليات</th>
 
@@ -94,23 +94,23 @@
                             </thead>
                             <tbody>
 
-                                @foreach ($doctors as $item)
+                                @foreach ($doctors as $doctor)
 
                                     <tr>
-                                        <td>{{ $item->id }}</td>
-                                        <td>{{ $item->name }}</td>
-                                        <td>{{ $item->section->section_name }}</td>
-                                        <td>{{ $item->specialization }}</td>
-                                        <td>{{ $item->phone }}</td>
+                                        <td>{{ $doctor->id }}</td>
+                                        <td>{{ $doctor->name }}</td>
+                                        <td>{{ $doctor->section->section_name }}</td>
+                                        <td>{{ $doctor->specialization }}</td>
+                                        <td>{{ $doctor->phone }}</td>
                                         <td>
                                             <button class="btn btn-outline-success btn-sm"
-                                                data-name="{{ $item->name }}" data-pro_id="{{ $item->id }}"
-                                                data-section_name="{{ $item->section->section_name }}"
-                                                data-specialization="{{ $item->specialization }}"   data-phone="{{ $item->phone }}" data-toggle="modal"
+                                                data-name="{{ $doctor->name }}" data-pro_id="{{ $doctor->id }}"
+                                                data-section_name="{{ $doctor->section->section_name }}"
+                                                data-specialization="{{ $doctor->specialization }}"   data-phone="{{ $doctor->phone }}" data-toggle="modal"
                                                 data-target="#edit_doctor">تعديل</button>
 
-                                            <button class="btn btn-outline-danger btn-sm " data-pro_id="{{ $item->id }}"
-                                                data-name="{{ $item->name }}" data-toggle="modal"
+                                            <button class="btn btn-outline-danger btn-sm " data-pro_id="{{ $doctor->id }}"
+                                                data-name="{{ $doctor->name }}" data-toggle="modal"
                                                 data-target="#modaldemo9">حذف</button>
                                         </td>
                                     </tr>
@@ -128,7 +128,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">اضافة منتج</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">اضافة دكتور</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -137,7 +137,7 @@
  @csrf
                         <div class="modal-body">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">اسم المنتج</label>
+                                <label for="exampleInputEmail1">اسم الدكتور</label>
                                 <input type="text" class="form-control" id="name" name="name" required>
                             </div>
 
@@ -175,17 +175,20 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">تعديل منتج</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">تعديل دكتور</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="{{route('doctors.update',$item->id)}}" method="PUT">
-                    @csrf
+                    @foreach ($doctors as $doctor )
+
+                    <form action="{{route('doctors.update',$doctor->id)}}" method="PUT">
+                        @csrf
+                        @endforeach
                         <div class="modal-body">
 
                             <div class="form-group">
-                                <label for="title">اسم المنتج :</label>
+                                <label for="title">اسم الدكتور :</label>
 
                                 <input type="hidden" class="form-control" name="pro_id" id="pro_id" value="">
 
@@ -224,7 +227,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">حذف المنتج</h5>
+                        <h5 class="modal-title">حذف الدكتور</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>

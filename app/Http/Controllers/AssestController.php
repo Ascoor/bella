@@ -14,10 +14,9 @@ class AssestController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {  $sections = Section::all();
+    { $sections = Section::all();
         $assests = Assest::with('section')->get();
-
-        return view('team.assest.index', compact('assests'))->with('sections',$sections);
+        return view('team.assest.index', ['assests' => $assests])->with('sections',$sections);
     }
 
     /**
@@ -43,10 +42,12 @@ class AssestController extends Controller
         $request->validate([
             'assest_name' => 'required',
             'section_id' => 'required',
+            'phone' => 'required',
         ]);
 
         $assest = new Assest;
         $assest->assest_name = $request->assest_name;
+        $assest->phone = $request->phone;
         $assest->section_id = $request->section_id;
         $assest->save();
 
@@ -64,7 +65,7 @@ class AssestController extends Controller
     {
         $assest = Assest::with('section')->find($assest->id);
 
-        return view('assests.show', compact('assest'));
+        return view('team.assest.index', compact('assest'));
     }
 
     /**
@@ -93,11 +94,13 @@ class AssestController extends Controller
         $request->validate([
             'assest_name' => 'required',
             'section_id' => 'required',
+            'phone' => 'required',
         ]);
 
         $assest = Assest::find($assest->id);
         $assest->assest_name = $request->assest_name;
         $assest->section_id = $request->section_id;
+        $assest->phone = $request->phone;
         $assest->save();
         session()->flash('edit','تم تعديل القسم بنجاج');
         return redirect('/assests');

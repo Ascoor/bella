@@ -15,16 +15,14 @@ class CreateServicesTable extends Migration
     {
         Schema::create('services', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('doctor_id');
+
             $table->unsignedBigInteger('section_id');
             $table->string('service_name');
             $table->float('price');
             $table->text('description')->nullable();
             $table->timestamps();
 
-            $table->foreign('doctor_id')
-                  ->references('id')->on('doctors')
-                  ->onDelete('cascade');
+
 
             $table->foreign('section_id')
                   ->references('id')->on('sections')
