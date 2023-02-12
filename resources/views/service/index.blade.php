@@ -95,23 +95,23 @@
                     @foreach($services as $service)
                     <tr>
                         <td>{{ $service->id }}</td>
-                        <td>{{ $service->name }}</td>
+                        <td>{{ $service->service_name }}</td>
                         <td>{{ $service->doctor->name }}</td>
                         <td>{{ $service->section->section_name }}</td>
                         <td>{{ $service->price }}</td>
                         <td>
 
                         <button class="btn btn-outline-success btn-sm"
-                                                data-name="{{ $service->name }}" data-pro_id="{{ $service->id }}"
+                                                data-service_name="{{ $service->service_name }}" data-pro_id="{{ $service->id }}"
 
                                                 data-description="{{ $service->description }}"
                                                 data-price="{{ $service->price }}"
-                                                data-doctor_name="{{ $service->doctor->name }}"
-                                                data-section_name="{{ $service->section->section_name }}"  data-toggle="modal"
+                                                data-doctor_id="{{ $service->doctor->id }}"
+                                                data-section_id="{{ $service->section->id }}"  data-toggle="modal"
                                                 data-target="#edit_Service">تعديل</button>
 
                                             <button class="btn btn-outline-danger btn-sm " data-pro_id="{{ $service->id }}"
-                                                data-name="{{ $service->name }}" data-toggle="modal"
+                                                data-service_name="{{ $service->service_name }}" data-toggle="modal"
                                                 data-target="#modaldemo9">حذف</button>
 
                         </td>
@@ -138,12 +138,12 @@
         <form action="{{ route('services.store') }}" method="post">
           @csrf
           <div class="form-group">
-            <label for="name">Service Name:</label>
-            <input type="text" name="name" id="name" class="form-control" required>
+            <label for="service_name">Service Name:</label>
+            <input type="text" name="service_name" id="service_name" class="form-control" required>
           </div>
           <div class="form-group">
             <label for="price">Service price:</label>
-            <input type="number" name="price" id="price" class="form-control">
+            <input type="number" service_name="price" id="price" class="form-control">
           </div>
 
           <div class="form-group">
@@ -153,7 +153,7 @@
                             </div>
           <div class="form-group">
             <label for="section">Section:</label>
-            <select name="section_id" id="section_name" class="form-control" required>
+            <select name="section_id" id="section_id" class="form-control" required>
               <option value="">Select Section</option>
               @foreach($sections as $section)
                 <option value="{{ $section->id }}">{{ $section->section_name }}</option>
@@ -162,7 +162,7 @@
           </div>
           <div class="form-group">
             <label for="doctor">Doctor:</label>
-            <select name="doctor_id" id="doctor_name" class="form-control" required>
+            <select name="doctor_id" id="doctor_id" class="form-control" required>
               <option value="">Select Doctor</option>
               @foreach($doctors as $doctor)
                 <option value="{{ $doctor->id }}">{{ $doctor->name }}</option>
@@ -179,57 +179,61 @@
   </div>
 </div>
   <!-- edit -->
-  <div class="modal fade" id="edit_Service" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">تعديل منتج</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form  action="{{route('services.update',$service)}}" method="post">
-                        {{ method_field('PUT') }}
-                        {{ csrf_field() }}
-                        <div class="modal-body">
+  <div class="modal fade" id="edit_Service" tabindex="-1" role="dialog" aria-labelledby="createServiceModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="createServiceModalLabel">Create Service</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="{{ route('services.update',$service) }}" method="post">
+          @csrf
+          @method('PATCH')
+          <div class="form-group">
+            <label for="service_name">Service Name:</label>
+            <input type="text" name="service_name" id="service_name" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="price">Service price:</label>
+            <input type="number" name="price" id="price" class="form-control">
+          </div>
 
-                            <div class="form-group">
-                                <label for="title">اسم المنتج :</label>
-
-                                 <input type="hidden" class="form-control"  name="pro_id" id="pro_id">
-
-                                <input type="text" class="form-control"  value="{{$service->name}}" name="name" id="name">
-                                <input type="number" class="form-control" value="{{$service->price}}" name="price" id="price">
-                            </div>
-
-                            <label class="my-1 mr-2" for="inlineFormCustomSelectPref">القسم</label>
-                            <select name="section_id" id="section_id" class="custom-select my-1 mr-sm-2" required>
-                                @foreach ($sections as $item1)
-                                    <option value="{{ $item1->id}} ">{{  $item1->section_name   }}</option>
-                                @endforeach
-                            </select>
-                            <label class="my-1 mr-2" for="inlineFormCustomSelectPref">الدكتور</label>
-                            <select name="doctor_id" id="doctor_id" class="custom-select my-1 mr-sm-2" required>
-                                @foreach ($doctors as $item)
-                                    <option value="{{$item->id}}">{{ $item ->name }}</option>
-                                @endforeach
-                            </select>
-
-                            <div class="form-group">
+          <div class="form-group">
                                 <label for="des">ملاحظات :</label>
-                                <textarea name="description" value="{{$service->description}}"cols="20" rows="5" id='description'
+                                <textarea name="description" cols="20" rows="5" id='description'
                                     class="form-control"></textarea>
                             </div>
+          <div class="form-group">
+            <label for="section">Section:</label>
+            <select name="section_id" id="section_id" class="form-control" required>
+              <option value="">Select Section</option>
+              @foreach($sections as $section)
+                <option value="{{ $section->id }}">{{ $section->section_name }}</option>
+              @endforeach
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="doctor">Doctor:</label>
+            <select name="doctor_id" id="doctor_id" class="form-control" required>
+              <option value="">Select Doctor</option>
+              @foreach($doctors as $doctor)
+                <option value="{{ $doctor->id }}">{{ $doctor->name }}</option>
+              @endforeach
+            </select>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Create</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
 
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary">تعديل البيانات</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">اغلاق</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
         </div>
         <!-- delete -->
         <div class="modal fade" id="modaldemo9" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -242,22 +246,23 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="services/destroy" method="post">
-                        {{ method_field('delete') }}
-                        {{ csrf_field() }}
-                        <div class="modal-body">
-                            <p>هل انت متاكد من عملية الحذف ؟</p><br>
-                            <input type="hidden" name="pro_id" id="pro_id" value="">
-                            <input class="form-control" name="name" id="name" type="text" readonly>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
-                            <button type="submit" class="btn btn-danger">تاكيد</button>
-                        </div>
-                    </form>
-                </div>
+                    <form action="sevices/destroy" method="post">
+                                    {{method_field('delete')}}
+                                    {{csrf_field()}}
+                                    <div class="modal-body">
+                                        <p>هل انت متاكد من عملية الحذف ؟</p><br>
+                                        <input type="hidden" name="id" id="id" value="">
+                                        <input class="form-control" name="service_name" id="service_name" type="text" readonly>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
+                                        <button type="submit" class="btn btn-danger">تاكيد</button>
+                                    </div>
+                            </div>
+                            </form>
             </div>
         </div>
+
 
 
     </div>
@@ -300,16 +305,16 @@
     <script>
         $('#edit_Service').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget)
-            var  name = button.data('name')
-            var section_name = button.data('section_name')
-            var doctor_name = button.data('doctor_name')
+            var  service_name = button.data('service_name')
+            var section_id = button.data('section_id')
+            var doctor_id = button.data('doctor_id')
             var pro_id = button.data('pro_id')
             var price = button.data('price')
             var description = button.data('description')
             var modal = $(this)
-            modal.find('.modal-body #name').val( name);
-            modal.find('.modal-body #section_name').val(section_name);
-            modal.find('.modal-body #doctor_name').val(doctor_name);
+            modal.find('.modal-body #service_name').val(service_name);
+            modal.find('.modal-body #section_id').val(section_id);
+            modal.find('.modal-body #doctor_id').val(doctor_id);
             modal.find('.modal-body #price').val(price);
             modal.find('.modal-body #description').val(description);
             modal.find('.modal-body #pro_id').val(pro_id);
@@ -319,11 +324,11 @@
         $('#modaldemo9').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget)
             var pro_id = button.data('pro_id')
-            var name = button.data('name')
+            var service_name = button.data(service_name)
             var modal = $(this)
 
             modal.find('.modal-body #pro_id').val(pro_id);
-            modal.find('.modal-body #name').val(name);
+            modal.find('.modal-body #service_name').val(service_name);
         })
 
     </script>

@@ -17,7 +17,7 @@ class CreateServicesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('doctor_id');
             $table->unsignedBigInteger('section_id');
-            $table->string('name');
+            $table->string('service_name');
             $table->float('price');
             $table->text('description')->nullable();
             $table->timestamps();

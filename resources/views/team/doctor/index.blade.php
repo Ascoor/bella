@@ -87,6 +87,7 @@
                                     <th class="border-bottom-0">اسم المنتج</th>
                                     <th class="border-bottom-0">اسم القسم</th>
                                     <th class="border-bottom-0">ملاحظات</th>
+                                    <th class="border-bottom-0">رقم الجوال</th>
                                     <th class="border-bottom-0">العمليات</th>
 
                                 </tr>
@@ -100,6 +101,7 @@
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->section->section_name }}</td>
                                         <td>{{ $item->specialization }}</td>
+                                        <td>{{ $item->phone }}</td>
                                         <td>
                                             <button class="btn btn-outline-success btn-sm"
                                                 data-name="{{ $item->name }}" data-pro_id="{{ $item->id }}"

@@ -190,9 +190,9 @@
                                     <h6 class="modal-title">حذف القسم</h6><button aria-label="Close" class="close" data-dismiss="modal"
                                                                                    type="button"><span aria-hidden="true">&times;</span></button>
                                 </div>
-                                <form action="sections/destroy" method="post">
-                                    {{method_field('delete')}}
-                                    {{csrf_field()}}
+                                <form action="sections/destroy" method="POST">
+                        @method('DELETE')
+                        @csrf
                                     <div class="modal-body">
                                         <p>هل انت متاكد من عملية الحذف ؟</p><br>
                                         <input type="hidden" name="id" id="id" value="">

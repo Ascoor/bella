@@ -49,7 +49,7 @@ class ServiceController extends Controller
 
 
             $service = Service::create([
-                'name'=>$request->name,
+                'service_name'=>$request->service_name,
                 'price' => $request->price,
                 'doctor_id' => $request->doctor_id,
                 'section_id' => $request->section_id,
@@ -120,8 +120,12 @@ $service->update($request->all());
      * @param  \App\Models\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Service $service)
+    public function destroy(Request $request)
     {
-        //
+        $service = Service::findOrFail($request->pro_id);
+        $service->delete();
+        session()->flash('delete', 'تم حذف المنتج بنجاح');
+        return back();;
     }
+
 }
