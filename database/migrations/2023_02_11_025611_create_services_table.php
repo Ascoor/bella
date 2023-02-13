@@ -14,19 +14,12 @@ class CreateServicesTable extends Migration
     public function up()
     {
         Schema::create('services', function (Blueprint $table) {
-            $table->bigIncrements('id');
-
-            $table->unsignedBigInteger('section_id');
+            $table->id();
             $table->string('service_name');
-            $table->float('price');
+            $table->unsignedBigInteger('section_id');
+            $table->decimal('price', 8, 2);
             $table->text('description')->nullable();
             $table->timestamps();
-
-
-
-            $table->foreign('section_id')
-                  ->references('id')->on('sections')
-                  ->onDelete('cascade');
         });
     }
 

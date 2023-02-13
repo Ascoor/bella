@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Service;
+
 use App\Http\Controllers\Controller;
+use App\Models\Service;
 use App\Models\Doctor;
 use App\Models\Section;
 use Illuminate\Http\Request;
@@ -16,105 +17,98 @@ class ServiceController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-        public function index()
-        {
-            $services = Service::with(['section'])->get();
-$sections = Section::all();
-            return view('service.index', compact('services',$services))->with('sections', $sections);;
-        }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
+     public function index()
+     { $sections = Section::all();
+         $services = Service::with('section')->get();
+         return view('service.index', ['services' => $services])->with('sections',$sections);
+     }
 
-        $sections =
-        $sections = Section::all();
-
-        return view('service.create')->with('sections',$sections);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-
-        $validatedData = $request->validate([
-            'service_name' => 'required|unique:sections|max:255',
-            'price' => 'required',
-        ],[
-
-            'service_name.required' =>'يرجي ادخال اسم القسم',
-            'service_name.unique' =>'اسم القسم مسجل مسبقا',
-            'price.required' =>'يرجي ادخال قيمة الخدمة ',
-
-        ]);
-
-        Service::create([
-                'service_name' => $request->service_name,
-                'price' => $request->price,
+     /**
+      * Show the form for creating a new resource.
+      *
+      * @return \Illuminate\Http\Response
+      */
 
 
-            ]);
-            session()->flash('Add', 'تم اضافة القسم بنجاح ');
-            return redirect()->back();
+     /**
+      * Store a newly created resource in storage.
+      *
+      * @param  \Illuminate\Http\Request  $request
+      * @return \Illuminate\Http\Response
+      */
+     public function store(Request $request)
+     {
+         $request->validate([
+             'service_name' => 'required',
+             'section_id' => 'required',
+             'price' => 'required',
+         ]);
 
-        }
+         $service = new Service;
+         $service->service_name = $request->service_name;
+         $service->price = $request->price;
+         $service->section_id = $request->section_id;
+         $service->save();
 
+         return redirect()->route('services.index')
+             ->with('success', 'Service created successfully');
+     }
 
+     /**
+      * Display the specified resource.
+      *
+      * @param  \App\Service  $service
+      * @return \Illuminate\Http\Response
+      */
+     public function show(Service $service)
+     {
+         $service = Service::with('section')->find($service->id);
 
-        public function show(Service $service)
-        {
-            return view('service.show', compact('service'));
-        }
+         return view('service.index', compact('service'));
+     }
 
-        /**
-         * Show the form for editing the specified service.
-         *
-         * @param  \App\Service  $service
-         * @return \Illuminate\View\View
-         */
-        public function edit(Service $service)
-        {
-            return view('service.edit', compact('service'));
-        }
+     /**
+      * Show the form for editing the specified resource.
+      *
+      * @param  \App\Service  $service
+      * @return \Illuminate\Http\Response
+      */
+     public function edit(Service $service)
+     {
+         $service = Service::find($service->id);
+         $sections = Section::all();
 
-        /**
-         * Update the specified service in storage.
-         *
-         * @param  \Illuminate\Http\Request  $request
-         * @param  \App\Service  $service
-         * @return \Illuminate\Http\RedirectResponse
-         */
-        public function update(Request $request, Service $service)
-        {
-            $request->validate([
-                'service_name' => 'required',
-                'price' => 'required',
-                'section_id' => 'required',
-            ]);
+         return view('services.edit', compact('service', 'sections'));
+     }
 
-            $service->update($request->all());
+     /**
+      * Update the specified resource in storage.
+      *
+      * @param  \Illuminate\Http\Request  $request
+      * @param  \App\Service  $service
+      * @return \Illuminate\Http\Response
+      */
+     public function update(Request $request, Service $service)
+     {
+         $request->validate([
+             'service_name' => 'required',
+             'section_id' => 'required',
+             'price' => 'required',
+         ]);
 
-            return redirect()->route('services.index')->with('success', 'Service updated successfully');
-        }
-
-        /**
-         * Remove the specified service from storage.
-         *
-         * @param  \App\Service  $service
-         * @return \Illuminate\Http\RedirectResponse
-         */
-        public function destroy(Service $service)
-        {
-            $service->delete();
-
-            return redirect()->route('services.index')->with('success', 'Service deleted successfully');
-        }
+         $service = Service::find($service->id);
+         $service->service_name = $request->service_name;
+         $service->section_id = $request->section_id;
+         $service->price = $request->price;
+         $service->save();
+         session()->flash('edit','تم تعديل القسم بنجاج');
+         return redirect('/services ');
+     }
+     public function destroy(Request $request)
+     {
+         $id = $request->id;
+         Service::find($id)->delete();
+         session()->flash('delete','تم حذف القسم بنجاح');
+         return redirect('/services');
+     }
     }
