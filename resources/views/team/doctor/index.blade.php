@@ -94,25 +94,27 @@
                             </thead>
                             <tbody>
 
-                                @foreach ($doctors as $doctor)
+                            <?php $i = 0; ?>
+                            @foreach ($doctors as $x)
+                                <?php $i++; ?>
 
                                     <tr>
-                                        <td>{{ $doctor->id }}</td>
-                                        <td>{{ $doctor->name }}</td>
-                                        <td>{{ $doctor->section->section_name }}</td>
-                                        <td>{{ $doctor->specialization }}</td>
-                                        <td>{{ $doctor->phone }}</td>
+                                        <td>{{ $x->id }}</td>
+                                        <td>{{ $x->name }}</td>
+                                        <td>{{ $x->section->section_name }}</td>
+                                        <td>{{ $x->specialization }}</td>
+                                        <td>{{ $x->phone }}</td>
                                         <td>
-                                            <button class="btn btn-outline-success btn-sm"
-                                                data-name="{{ $doctor->name }}" data-pro_id="{{ $doctor->id }}"
-                                                data-section_name="{{ $doctor->section->section_name }}"
-                                                data-specialization="{{ $doctor->specialization }}"   data-phone="{{ $doctor->phone }}" data-toggle="modal"
-                                                data-target="#edit_doctor">تعديل</button>
+                                        <a class="modal-effect btn btn-sm btn-info" data-effect="effect-scale"
+                                                data-id="{{ $x->id }}" data-name="{{ $x->name }}" data-section_id="{{ $x->section->id }}"
+                                                data-specialization="{{ $x->specialization }}"  data-phone="{{ $x->phone }}" data-toggle="modal"
+                                                href="#edit_doctor" title="تعديل"><i class="las la-pen"></i></a>
 
-                                            <button class="btn btn-outline-danger btn-sm " data-pro_id="{{ $doctor->id }}"
-                                                data-name="{{ $doctor->name }}" data-toggle="modal"
-                                                data-target="#modaldemo9">حذف</button>
-                                        </td>
+
+                                            <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
+                                                data-id="{{ $x->id }}" data-name="{{ $x->name }}"
+                                                data-toggle="modal" href="#modaldemo9" title="حذف"><i
+                                                    class="las la-trash"></i></a>    </td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -182,23 +184,24 @@
                     </div>
                     @foreach ($doctors as $doctor )
 
-                    <form action="{{route('doctors.update',$doctor->id)}}" method="PUT">
+                    <form action="{{route('doctors.update',$doctor->id)}}" method="POST">
                         @csrf
+                        @method('PATCH')
                         @endforeach
                         <div class="modal-body">
 
                             <div class="form-group">
                                 <label for="title">اسم الدكتور :</label>
 
-                                <input type="hidden" class="form-control" name="pro_id" id="pro_id" value="">
+                                <input type="hidden" class="form-control" name="id" id="id" value="">
 
                                 <input type="text" class="form-control" name="name" id="name">
                             </div>
 
                             <label class="my-1 mr-2" for="inlineFormCustomSelectPref">القسم</label>
-                            <select name="section_name" id="section_name" class="custom-select my-1 mr-sm-2" required>
+                            <select name="section_id" id="section_id" class="custom-select my-1 mr-sm-2" required>
                                 @foreach ($sections as $section)
-                                    <option>{{ $section->section_name }}</option>
+                                    <option value="{{$section->id}}">{{ $section->section_name }}</option>
                                 @endforeach
                             </select>
 
@@ -237,7 +240,7 @@
                         {{ csrf_field() }}
                         <div class="modal-body">
                             <p>هل انت متاكد من عملية الحذف ؟</p><br>
-                            <input type="hidden" name="pro_id" id="pro_id" value="">
+                            <input type="hidden" name="id" id="id" value="">
                             <input class="form-control" name="name" id="name" type="text" readonly>
                         </div>
                         <div class="modal-footer">
@@ -291,26 +294,26 @@
         $('#edit_doctor').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget)
             var name = button.data('name')
-            var section_name = button.data('section_name')
-            var pro_id = button.data('pro_id')
+            var section_id = button.data('section_id')
+            var id = button.data('id')
             var specialization = button.data('specialization')
             var phone = button.data('phone')
             var modal = $(this)
             modal.find('.modal-body #name').val(name);
-            modal.find('.modal-body #section_name').val(section_name);
+            modal.find('.modal-body #section_id').val(section_id);
             modal.find('.modal-body #specialization').val(specialization);
             modal.find('.modal-body #phone').val(phone);
-            modal.find('.modal-body #pro_id').val(pro_id);
+            modal.find('.modal-body #id').val(id);
         })
 
 
         $('#modaldemo9').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget)
-            var pro_id = button.data('pro_id')
+            var id = button.data('id')
             var name = button.data('name')
             var modal = $(this)
 
-            modal.find('.modal-body #pro_id').val(pro_id);
+            modal.find('.modal-body #id').val(id);
             modal.find('.modal-body #name').val(name);
         })
 

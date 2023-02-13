@@ -58,11 +58,12 @@ class DoctorController extends Controller
         return redirect('/doctors');
     }
 
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        $doctor = ModelsDoctor::find($id);
-        $doctor->delete();
-        return redirect('/doctors');
+        $id = $request->id;
+        ModelsDoctor::find($id)->delete();
+        session()->flash('delete','تم حذف القسم بنجاح');
+        return redirect()->back();
     }
 }
 

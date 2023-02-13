@@ -98,8 +98,8 @@
                                     <td>{{ $service->section->section_name }}</td>
                                     <td>{{ $service->price }}</td>
                                     <td>
-                                        <button class="btn btn-outline-success btn-sm" data-service_name="{{ $service->service_name }}" data-service_id="{{ $service->id }}" data-description="{{ $service->description }}" data-price="{{ $service->price }}" data-section_id="{{ $service->section->id }}" data-toggle="modal" data-target="#editServiceModal">Edit</button>
-                                        <button class="btn btn-outline-danger btn-sm " data-service_id="{{ $service->id }}" data-service_name="{{ $service->service_name }}" data-toggle="modal" data-target="#modaldemo9">Delete</button>
+                                        <button class="btn btn-outline-success btn-sm" data-service_name="{{ $service->service_name }}" data-id="{{ $service->id }}" data-description="{{ $service->description }}" data-price="{{ $service->price }}" data-section_id="{{ $service->section->id }}" data-toggle="modal" data-target="#editServiceModal">Edit</button>
+                                        <button class="btn btn-outline-danger btn-sm " data-id="{{ $service->id }}" data-service_name="{{ $service->service_name }}" data-toggle="modal" data-target="#modaldemo9">Delete</button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -169,9 +169,12 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="{{ route('services.update',$service) }}" method="post">
-          @csrf
-          @method('PATCH')
+        @foreach ($services as $service )
+
+        <form action="{{ route('services.update',$service->id) }}" method="post">
+            @csrf
+            @method('PATCH')
+            @endforeach
           <div class="form-group">
             <label for="service_name">Service Name:</label>
             <input type="text" name="service_name" id="service_name" class="form-control" required>
@@ -208,31 +211,27 @@
 
         </div>
         <!-- delete -->
-        <div class="modal fade" id="modaldemo9" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">حذف المنتج</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+        <div class="modal" id="modaldemo9">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-header">
+                    <h6 class="modal-title">حذف القسم</h6><button aria-label="Close" class="close" data-dismiss="modal"
+                        type="button"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <form action="services/destroy" method="post">
+                    {{ method_field('delete') }}
+                    {{ csrf_field() }}
+                    <div class="modal-body">
+                        <p>هل انت متاكد من عملية الحذف ؟</p><br>
+                        <input type="hidden" name="id" id="id" value="">
+                        <input class="form-control" name="service_name" id="service_name" type="text" readonly>
                     </div>
-                    <form method="post" action="{{ route('services.destroy', $service->id) }}">
-        @method('DELETE')
-        @csrf
-        <div class="form-group">
-            <label for="name">Are you sure you want to delete the service ?</label>
-            <input type="hidden" name="service_id" id="service_id" value="">
-                                        <input class="form-control" name="service_name" id="service_name" type="text" readonly>
-
-                                    </div>
-
-        <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
-                                        <button type="submit" class="btn btn-danger">تاكيد</button>
-                                    </div>
-    </form>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
+                        <button type="submit" class="btn btn-danger">تاكيد</button>
+                    </div>
+            </div>
+            </form>
 
         </div>
 
@@ -281,7 +280,7 @@
             var  service_name = button.data('service_name')
             var section_id = button.data('section_id')
 
-            var service_id = button.data('service_id')
+            var id = button.data('id')
             var price = button.data('price')
             var description = button.data('description')
             var modal = $(this)
@@ -290,21 +289,22 @@
 
             modal.find('.modal-body #price').val(price);
             modal.find('.modal-body #description').val(description);
-            modal.find('.modal-body #service_id').val(service_id);
+            modal.find('.modal-body #id').val(id);
         })
 
+</script>
+<script>
+    $('#modaldemo9').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget)
+        var id = button.data('id')
+        var service_name = button.data('service_name')
+        var modal = $(this)
+        modal.find('.modal-body #id').val(id);
+        modal.find('.modal-body #service_name').val(service_name);
+    })
+</script>
 
-        $('#modaldemo9').on('show.bs.modal', function(event) {
-            var button = $(event.relatedTarget)
-            var service_id = button.data('service_id')
-            var service_name = button.data('service_name')
-            var modal = $(this)
 
-            modal.find('.modal-body #service_id').val(service_id);
-            modal.find('.modal-body #service_name').val(service_name);
-        })
-
-    </script>
 
 
 

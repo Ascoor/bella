@@ -100,10 +100,11 @@ class ServiceController extends Controller
       * @param  \App\Service  $service
       * @return \Illuminate\Http\Response
       */
-     public function destroy(Service $service)
-     {
-         $service->delete();
-
-         return redirect()->back()->with('message', 'Service Deleted Successfully');
-     }
+      public function destroy(Request $request)
+      {
+          $id = $request->id;
+          Service::find($id)->delete();
+          session()->flash('delete','تم حذف القسم بنجاح');
+          return redirect()->back();
+      }
     }
