@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-
-use App\Http\Controllers\Controller;
 use App\Models\Service;
+use App\Http\Controllers\Controller;
 use App\Models\Doctor;
 use App\Models\Section;
 use Illuminate\Http\Request;
@@ -18,9 +17,11 @@ class ServiceController extends Controller
      */
 
      public function index()
-     { $sections = Section::all();
+     {
          $services = Service::with('section')->get();
-         return view('service.index', ['services' => $services])->with('sections',$sections);
+         $sections = Section::all();
+
+         return view('service.index', compact('services', 'sections'));
      }
 
      /**
@@ -28,7 +29,10 @@ class ServiceController extends Controller
       *
       * @return \Illuminate\Http\Response
       */
-
+     public function create()
+     {
+         //
+     }
 
      /**
       * Store a newly created resource in storage.
@@ -38,20 +42,14 @@ class ServiceController extends Controller
       */
      public function store(Request $request)
      {
-         $request->validate([
-             'service_name' => 'required',
-             'section_id' => 'required',
-             'price' => 'required',
-         ]);
-
          $service = new Service;
          $service->service_name = $request->service_name;
          $service->price = $request->price;
+         $service->description = $request->description;
          $service->section_id = $request->section_id;
          $service->save();
 
-         return redirect()->route('services.index')
-             ->with('success', 'Service created successfully');
+         return redirect()->back()->with('message', 'Service Created Successfully');
      }
 
      /**
@@ -62,9 +60,7 @@ class ServiceController extends Controller
       */
      public function show(Service $service)
      {
-         $service = Service::with('section')->find($service->id);
-
-         return view('service.index', compact('service'));
+         //
      }
 
      /**
@@ -75,7 +71,6 @@ class ServiceController extends Controller
       */
      public function edit(Service $service)
      {
-         $service = Service::find($service->id);
          $sections = Section::all();
 
          return view('services.edit', compact('service', 'sections'));
@@ -90,25 +85,25 @@ class ServiceController extends Controller
       */
      public function update(Request $request, Service $service)
      {
-         $request->validate([
-             'service_name' => 'required',
-             'section_id' => 'required',
-             'price' => 'required',
-         ]);
-
-         $service = Service::find($service->id);
          $service->service_name = $request->service_name;
-         $service->section_id = $request->section_id;
          $service->price = $request->price;
+         $service->description = $request->description;
+         $service->section_id = $request->section_id;
          $service->save();
-         session()->flash('edit','تم تعديل القسم بنجاج');
-         return redirect('/services ');
+
+         return redirect()->back()->with('message', 'Service Updated Successfully');
      }
-     public function destroy(Request $request)
+
+     /**
+      * Remove the specified resource from storage.
+      *
+      * @param  \App\Service  $service
+      * @return \Illuminate\Http\Response
+      */
+     public function destroy(Service $service)
      {
-         $id = $request->id;
-         Service::find($id)->delete();
-         session()->flash('delete','تم حذف القسم بنجاح');
-         return redirect('/services');
+         $service->delete();
+
+         return redirect()->back()->with('message', 'Service Deleted Successfully');
      }
     }

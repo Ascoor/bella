@@ -6,6 +6,8 @@ use App\Models\Section;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
+
 class SectionController extends Controller
 {
     /**
@@ -52,7 +54,7 @@ class SectionController extends Controller
         Section::create([
                 'section_name' => $request->section_name,
                 'description' => $request->description,
-                'Created_by' => (Auth::user()->name),
+
 
             ]);
             session()->flash('Add', 'تم اضافة القسم بنجاح ');
@@ -91,32 +93,29 @@ class SectionController extends Controller
      * @param  \App\sections  $sections
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
-    {
-        $id = $request->id;
 
-        $this->validate($request, [
 
-            'section_name' => 'required|max:255|unique:sections,section_name,'.$id,
-            'description' => 'required',
-        ],[
 
-            'section_name.required' =>'يرجي ادخال اسم القسم',
-            'section_name.unique' =>'اسم القسم مسجل مسبقا',
-            'description.required' =>'يرجي ادخال البيان',
+     public function update(Request $request, $id)
+{
+    $request->validate([
+        'section_name' => ['required', 'max:255', Rule::unique('sections')->ignore($id)],
+        'description' => 'required',
+    ], [
+        'section_name.required' =>'يرجي ادخال اسم القسم',
+        'section_name.unique' =>'اسم القسم مسجل مسبقا',
+        'description.required' =>'يرجي ادخال البيان',
 
-        ]);
+    ]);
 
-        $sections = Section::find($id);
-        $sections->update([
-            'section_name' => $request->section_name,
-            'description' => $request->description,
-        ]);
+    $section = Section::findOrFail($id);
+    $section->update([
+        'section_name' => $request->section_name,
+        'description' => $request->description,
+    ]);
 
-        session()->flash('edit','تم تعديل القسم بنجاج');
-        return redirect('/sections');
-    }
-
+    return redirect()->back()->with('success', 'The section has been updated successfully.');
+}
     /**
      * Remove the specified resource from storage.
      *
@@ -128,6 +127,6 @@ class SectionController extends Controller
         $id = $request->id;
         Section::find($id)->delete();
         session()->flash('delete','تم حذف القسم بنجاح');
-        return redirect('/sections');
+        return redirect()->back();
     }
 }

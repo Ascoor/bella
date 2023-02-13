@@ -19,6 +19,9 @@ class CreateServicesTable extends Migration
             $table->unsignedBigInteger('section_id');
             $table->decimal('price', 8, 2);
             $table->text('description')->nullable();
+            $table->foreign('section_id')
+            ->references('id')->on('sections')
+            ->onDelete('cascade');
             $table->timestamps();
         });
     }
