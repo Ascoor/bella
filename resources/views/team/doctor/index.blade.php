@@ -104,7 +104,7 @@
                                         <td>{{ $x->section->section_name }}</td>
                                         <td>{{ $x->specialization }}</td>
                                         <td>
-                                        <img src="{{URL::asset('/uploads/doctors/$x->photo')}}" class="logo-1" alt="Doctor Image">
+                                        <img src="{{ asset('uploads/doctors/' . $x->image) }}" alt="Post Image">
 
                                         <td>
                                         <a class="modal-effect btn btn-sm btn-info" data-effect="effect-scale"
