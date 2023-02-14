@@ -35,7 +35,7 @@ class DoctorController extends Controller
          if ($request->hasFile('photo')) {
             $photo = $request->file('photo');
             $photoName = time() . '_' . $photo->getClientOriginalName();
-            $photo->storeAs('/uploads/doctors', $photoName); // Store the photo in the "public/photos" directory
+            $photo->storeAs('public/uploads/doctors', $photoName); // Store the photo in the "public/photos" directory
         } else {
             $photoName = null;
         }
