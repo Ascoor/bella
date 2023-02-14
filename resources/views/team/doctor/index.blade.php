@@ -103,11 +103,13 @@
                                         <td>{{ $x->name }}</td>
                                         <td>{{ $x->section->section_name }}</td>
                                         <td>{{ $x->specialization }}</td>
-                                        <td>{{ $x->phone }}</td>
+                                        <td>
+                                        <img src="{{ asset('uploads/doctors/' , $x->photo) }}" alt="Post Image">
+
                                         <td>
                                         <a class="modal-effect btn btn-sm btn-info" data-effect="effect-scale"
                                                 data-id="{{ $x->id }}" data-name="{{ $x->name }}" data-section_id="{{ $x->section->id }}"
-                                                data-specialization="{{ $x->specialization }}"  data-phone="{{ $x->phone }}" data-toggle="modal"
+                                                data-specialization="{{ $x->specialization }}"  data-phone="{{ $x->phone }}" ata-photo="{{ $x->photo }}" data-toggle="modal"
                                                 href="#edit_doctor" title="تعديل"><i class="las la-pen"></i></a>
 
 
@@ -135,12 +137,13 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="{{ route('doctors.store') }}" method="POST">
+                    <form action="{{ route('doctors.store') }}" method="POST" enctype="multipart/form-data">>
  @csrf
                         <div class="modal-body">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">اسم الدكتور</label>
                                 <input type="text" class="form-control" id="name" name="name" required>
+                                <input type="file" class="form-control" id="photo" name="photo" required>
                             </div>
 
                             <label class="my-1 mr-2" for="inlineFormCustomSelectPref">القسم</label>
@@ -162,7 +165,7 @@
                             </div>
 
 
-                        <div class="modal-footer">
+                            <div class="modal-footer">
                             <button type="submit" class="btn btn-success">تاكيد</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">اغلاق</button>
                         </div>
@@ -184,7 +187,7 @@
                     </div>
                     @foreach ($doctors as $doctor )
 
-                    <form action="{{route('doctors.update',$doctor->id)}}" method="POST">
+                    <form action="{{route('doctors.update',$doctor->id)}}" method="POST" enctype="multipart/form-data">>
                         @csrf
                         @method('PATCH')
                         @endforeach
@@ -197,6 +200,7 @@
 
                                 <input type="text" class="form-control" name="name" id="name">
                             </div>
+                            <input type="file" class="form-control" id="photo" name="photo" required>
 
                             <label class="my-1 mr-2" for="inlineFormCustomSelectPref">القسم</label>
                             <select name="section_id" id="section_id" class="custom-select my-1 mr-sm-2" required>
@@ -298,11 +302,13 @@
             var id = button.data('id')
             var specialization = button.data('specialization')
             var phone = button.data('phone')
+            var photo = button.data('photo')
             var modal = $(this)
             modal.find('.modal-body #name').val(name);
             modal.find('.modal-body #section_id').val(section_id);
             modal.find('.modal-body #specialization').val(specialization);
             modal.find('.modal-body #phone').val(phone);
+            modal.find('.modal-body #photo').val(photo);
             modal.find('.modal-body #id').val(id);
         })
 

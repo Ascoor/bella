@@ -19,6 +19,7 @@ class CreateDoctorsTable extends Migration
             $table->string('name');
             $table->text('specialization');
             $table->string('phone');
+            $table->string('photo')->nullable();
             $table->timestamps();
 
             $table->foreign('section_id')

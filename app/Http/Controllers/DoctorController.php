@@ -24,13 +24,31 @@ class DoctorController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate($request,[
+            'name' =>  'required',
+            'section_id' =>  'required',
+            'specialization' =>  'required',
+            'photo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Add validation for the photo file
+
+        ]);
+         // Handle the photo upload
+         if ($request->hasFile('photo')) {
+            $photo = $request->file('photo');
+            $photoName = time() . '_' . $photo->getClientOriginalName();
+            $photo->storeAs('/uploads/doctors', $photoName); // Store the photo in the "public/photos" directory
+        } else {
+            $photoName = null;
+        }
         $doctor = new ModelsDoctor;
         $doctor->name = $request->input('name');
         $doctor->section_id = $request->input('section_id');
         $doctor->specialization = $request->input('specialization');
         $doctor->phone = $request->input('phone');
 
+        $doctor->photo = $photoName; // Save the photo file name in the database
         $doctor->save();
+
+
         return redirect('/doctors');
     }
 
