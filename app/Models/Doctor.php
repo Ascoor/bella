@@ -17,9 +17,9 @@ class Doctor extends Model
     {
         return $this->belongsTo(Section::class);
     }
-//    public function getFeaturedAttribute($photo)
-//     {
-//         return asset($photo);
-//     }
+   public function getFeaturedAttribute($photo)
+    {
+        return asset($photo);
+    }
 }
 

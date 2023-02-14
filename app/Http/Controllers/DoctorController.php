@@ -77,10 +77,10 @@ class DoctorController extends Controller
         if ($request->hasFile('photo')) {
             $image = $request->file('photo');
             $filename = time() . '.' . $image->getClientOriginalExtension();
-            $path = public_path('uploads/posts/' . $filename);
-            $image->move(public_path('uploads/posts'), $filename);
+            $path = public_path('uploads/doctors/' . $filename);
+            $image->move(public_path('uploads/doctors'), $filename);
             if ($doctor->photo != null) {
-                unlink(public_path('uploads/posts/' . $doctor->photo));
+                unlink(public_path('uploads/doctors/' . $doctor->photo));
             }
         } else {
             $filename = $doctor->photo;
@@ -93,7 +93,7 @@ class DoctorController extends Controller
         $doctor->photo = $filename;
         $doctor->save();
 
-        return redirect()->route('posts.index');
+        return redirect()->route('doctors.index');
     }
 
 

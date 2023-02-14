@@ -19,7 +19,7 @@ class DoctorFactory extends Factory
            'name' => $this->faker->name('ar_doctor'),
         'specialization' =>$this->faker->text(),
             'phone'  =>$this->faker->phoneNumber(),
-            'photo'   =>$this->faker->image('public/uploads/doctors/',50,50,null,false),
+            'photo'  =>  'logo.png',
         ];
     }
 }
