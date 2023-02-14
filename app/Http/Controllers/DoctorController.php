@@ -67,12 +67,22 @@ class DoctorController extends Controller
 
     public function update(Request $request, $id)
     {
+        if ($request->hasFile('photo')) {
+            $photo = $request->file('photo');
+            $photoName = time() . '_' . $photo->getClientOriginalName();
+            $photo->storeAs('public/uploads/doctors', $photoName); // Store the photo in the "public/photos" directory
+        } else {
+            $photoName = null;
+        }
         $doctor = ModelsDoctor::find($id);
         $doctor->name = $request->input('name');
         $doctor->section_id = $request->input('section_id');
         $doctor->phone = $request->input('phone');
         $doctor->specialization = $request->input('specialization');
+        $doctor->photo = $photoName; // Save the photo file name in the database
         $doctor->save();
+
+
         return redirect('/doctors');
     }
 
