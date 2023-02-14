@@ -21,7 +21,6 @@ class DoctorController extends Controller
     //     $sections = ModelsDoctor::all();
     //     return view('doctor.create', ['sections' => $sections]);
     // }
-
     public function store(Request $request)
     {
         $this->validate($request,[
@@ -31,25 +30,26 @@ class DoctorController extends Controller
             'photo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Add validation for the photo file
 
         ]);
-         // Handle the photo upload
-         if ($request->hasFile('photo')) {
-            $photo = $request->file('photo');
-            $photoName = time() . '_' . $photo->getClientOriginalName();
-            $photo->storeAs('public/uploads/doctors', $photoName); // Store the photo in the "public/photos" directory
+
+        if ($request->Has('photo')) {
+            $image = $request->file('photo');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $path = public_path('uploads/doctors/' . $filename);
+            $image->move(public_path('uploads/doctors'), $filename);
         } else {
-            $photoName = null;
+            $filename = null;
         }
+
         $doctor = new ModelsDoctor;
         $doctor->name = $request->input('name');
         $doctor->section_id = $request->input('section_id');
-        $doctor->specialization = $request->input('specialization');
         $doctor->phone = $request->input('phone');
+        $doctor->specialization = $request->input('specialization');
 
-        $doctor->photo = $photoName; // Save the photo file name in the database
+        $doctor->photo = $filename;
         $doctor->save();
 
-
-        return redirect('/doctors');
+        return redirect()->route('doctors.index');
     }
 
     public function show($id)
@@ -64,27 +64,38 @@ class DoctorController extends Controller
         $sections = Section::all();
         return view('doctor.edit', ['doctor' => $doctor, 'sections' => $sections]);
     }
-
-    public function update(Request $request, $id)
+    public function update(Request $request, ModelsDoctor $id)
     {
-        if ($request->hasFile('photo')) {
-            $photo = $request->file('photo');
-            $photoName = time() . '_' . $photo->getClientOriginalName();
-            $photo->storeAs('public/uploads/doctors', $photoName); // Store the photo in the "public/photos" directory
-        } else {
-            $photoName = null;
-        }
         $doctor = ModelsDoctor::find($id);
+        $validatedData = $request->validate([
+            'name' =>  'required',
+            'section_id' =>  'required',
+            'specialization' =>  'required',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        if ($request->hasFile('photo')) {
+            $image = $request->file('photo');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $path = public_path('uploads/posts/' . $filename);
+            $image->move(public_path('uploads/posts'), $filename);
+            if ($doctor->photo != null) {
+                unlink(public_path('uploads/posts/' . $doctor->photo));
+            }
+        } else {
+            $filename = $doctor->photo;
+        }
+
         $doctor->name = $request->input('name');
         $doctor->section_id = $request->input('section_id');
-        $doctor->phone = $request->input('phone');
         $doctor->specialization = $request->input('specialization');
-        $doctor->photo = $photoName; // Save the photo file name in the database
+
+        $doctor->photo = $filename;
         $doctor->save();
 
-
-        return redirect('/doctors');
+        return redirect()->route('posts.index');
     }
+
 
     public function destroy(Request $request)
     {

@@ -87,7 +87,7 @@
                                     <th class="border-bottom-0"> الدكتور</th>
                                     <th class="border-bottom-0"> القسم</th>
                                     <th class="border-bottom-0">التخصص</th>
-                                    <th class="border-bottom-0">رقم الجوال</th>
+                                    <th class="border-bottom-0">صورة</th>
                                     <th class="border-bottom-0">العمليات</th>
 
                                 </tr>
@@ -104,9 +104,11 @@
                                         <td>{{ $x->section->section_name }}</td>
                                         <td>{{ $x->specialization }}</td>
                                         <td>
-                                        <img src="{{ asset('uploads/doctors/' . $x->image) }}" alt="Post Image">
+                                        <img src="{{ asset('uploads/doctors/' . $x->photo) }}" class="img-tumbnail" width="50" height="50">
 
-                                        <td>
+
+</td>
+<td>
                                         <a class="modal-effect btn btn-sm btn-info" data-effect="effect-scale"
                                                 data-id="{{ $x->id }}" data-name="{{ $x->name }}" data-section_id="{{ $x->section->id }}"
                                                 data-specialization="{{ $x->specialization }}"  data-phone="{{ $x->phone }}" ata-photo="{{ $x->photo }}" data-toggle="modal"
