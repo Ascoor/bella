@@ -6,6 +6,7 @@ use App\Models\Assest;
 use App\Models\Doctor;
 use App\Models\Section;
 use App\Models\Service;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -17,6 +18,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+
+        User::factory(1)->create();
         Section::factory(10)->create();
         Service::factory(10)->create();
         Doctor::factory(10)->create();

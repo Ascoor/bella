@@ -116,13 +116,10 @@
 
                         <div class="col-md-12 col-12 mb-6">
                                 <div class="form-control d-flex flex-column">
-                                    <p class="h-blue">{{__('Appointment Date')}}</p> <input class="inputbox textmuted" type="date" name="apt_date">
-                                </div>
-
-
-                                <div class="form-control d-flex flex-column">
-                                    <p class="h-blue">{{__('Apointment Time')}}</p> <input class="inputbox textmuted " type="time" name="apt_time">
-
+                                <div class="form-group">
+        <label for="appointment_time">Appointment Time</label>
+        <input type="datetime-local" class="form-control" id="appointment_time" name="appointment_time" required>
+    </div>
                                 </div>
 
                                 <div class="form-control d-flex flex-column">

@@ -14,20 +14,22 @@ class CreateAppointmentsTable extends Migration
     public function up()
     {
         Schema::create('appointments', function (Blueprint $table) {
+
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('client_id')->nullable();
-            $table->unsignedBigInteger('doctor_id');
+            $table->string('apt_number');
+            $table->string('name');
 
-            $table->text('notes')->nullable();
-
-                $table->dateTime('appointment_time')->nullable();
-                $table->enum('status', ['pending', 'confirmed', 'cancelled'])->default('pending');
-                $table->timestamps();
-
-$table->foreign('doctor_id')->references('id')->on('doctors')->cascadeOnDelete();
-            $table->foreign('client_id')
-                  ->references('id')->on('clients')
-                  ->onDelete('cascade');
+            $table->string('doctor_name');
+            $table->string('user_id')->nullable();
+            $table->string('phone');
+            $table->date('apt_date');
+            $table->time('apt_time');
+            $table->string('remark')->nullable();
+            $table->string('status')->default('pending')->comment('pending,accepted,complete,rejected');
+            $table->string('invoice')->nullable();
+            $table->timestamp('apply_date')->nullable()->useCurrent();
+            $table->timestamp('remark_date')->useCurrent()->nullable();
+            $table->timestamps();
         });
     }
 

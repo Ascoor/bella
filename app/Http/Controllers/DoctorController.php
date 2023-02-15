@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class DoctorController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         $sections = Section::all();
@@ -64,7 +69,7 @@ class DoctorController extends Controller
         $sections = Section::all();
         return view('doctor.edit', ['doctor' => $doctor, 'sections' => $sections]);
     }
-    public function update(Request $request, ModelsDoctor $id)
+    public function update(Request $request,  $id)
     {
         $doctor = ModelsDoctor::find($id);
         $validatedData = $request->validate([
@@ -95,6 +100,7 @@ class DoctorController extends Controller
 
         return redirect()->route('doctors.index');
     }
+
 
 
     public function destroy(Request $request)

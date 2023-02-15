@@ -93,25 +93,28 @@
                                 </tr>
                             </thead>
                             <tbody>
-@foreach ($assests as $assest)
+
+                            <?php $i = 0; ?>
+                            @foreach ($assests as $x)
+                                <?php $i++; ?>
 
 
 
                                     <tr>
-                                        <td>{{ $assest->id }}</td>
-                                        <td>{{ $assest->assest_name }}</td>
-                                        <td>{{ $assest->section->section_name }}</td>
+                                        <td>{{ $x->id }}</td>
+                                        <td>{{ $x->assest_name }}</td>
+                                        <td>{{ $x->section->section_name }}</td>
 
-                                        <td>{{ $assest->phone }}</td>
+                                        <td>{{ $x->phone }}</td>
                                         <td>
                                             <button class="btn btn-outline-success btn-sm"
-                                                data-assest_name="{{ $assest->assest_name }}" data-pro_id="{{ $assest->id }}"
-                                                data-section_id="{{ $assest->section->id }}"
-                                                 data-phone="{{ $assest->phone }}" data-toggle="modal"
+                                                data-assest_name="{{ $x->assest_name }}" data-id="{{ $x->id }}"
+                                                data-section_id="{{ $x->section->id }}"
+                                                 data-phone="{{ $x->phone }}" data-toggle="modal"
                                                 data-target="#edit_assest">تعديل</button>
 
-                                            <button class="btn btn-outline-danger btn-sm " data-pro_id="{{ $assest->id }}"
-                                                data-assest_name="{{ $assest->assest_name }}" data-toggle="modal"
+                                            <button class="btn btn-outline-danger btn-sm " data-id="{{ $x->id }}"
+                                                data-assest_name="{{ $x->assest_name }}" data-toggle="modal"
                                                 data-target="#modaldemo9">حذف</button>
                                         </td>
                                     </tr>
@@ -135,6 +138,7 @@
                         </button>
                     </div>
                     <form action="{{ route('assests.store') }}" method="POST">
+                        @method('POST')
  @csrf
                         <div class="modal-body">
                             <div class="form-group">
@@ -146,7 +150,7 @@
                             <select name="section_id" id="section_id" class="form-control" required>
                                 <option value="" selected disabled> --حدد القسم--</option>
                                 @foreach ($sections as $section)
-                                    <option value="{{ $section->id }}">{{ $section->section_name }}</option>
+                                    <option ">{{ $section->section_name }}</option>
                                 @endforeach
                             </select>
 
@@ -176,20 +180,20 @@
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">تعديل مساعد</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
+                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    @foreach ($assests as $assest )
+                    @foreach ($assests as $assest    )                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                est )
 
-                    <form action="{{route('assests.update',$assest->id)}}" method="PUT">
-                        @csrf
-                        @endforeach
-                        <div class="modal-body">
+                    <form action="{{ route('assests.update',$assest->id) }}" method="post">
+            @csrf
+            @method('PATCH')
+            @endforeach    <div class="modal-body">
 
                             <div class="form-group">
                                 <label for="title">اسم المساعد :</label>
 
-                                <input type="hidden" class="form-control" name="pro_id" id="pro_id" value="">
+                                <input type="hidden" class="form-control" name="id" id="id" value="">
 
                                 <input type="text" class="form-control" name="assest_name" id="assest_name">
                             </div>
@@ -233,7 +237,7 @@
                         {{ csrf_field() }}
                         <div class="modal-body">
                             <p>هل انت متاكد من عملية الحذف ؟</p><br>
-                            <input type="hidden" name="pro_id" id="pro_id" value="">
+                            <input type="hidden" name="id" id="id" value="">
                             <input class="form-control" name="assest_name" id="assest_name" type="text" readonly>
                         </div>
                         <div class="modal-footer">
@@ -288,7 +292,7 @@
             var button = $(event.relatedTarget)
             var assest_name = button.data('assest_name')
             var section_id = button.data('section_id')
-            var pro_id = button.data('pro_id')
+            var id = button.data('id')
 
             var phone = button.data('phone')
             var modal = $(this)
@@ -296,17 +300,19 @@
             modal.find('.modal-body #section_id').val(section_id);
 
             modal.find('.modal-body #phone').val(phone);
-            modal.find('.modal-body #pro_id').val(pro_id);
+            modal.find('.modal-body #id').val(id);
         })
 
 
+        </script>
+        <script>
         $('#modaldemo9').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget)
-            var pro_id = button.data('pro_id')
+            var id = button.data('id')
             var assest_name = button.data('assest_name')
             var modal = $(this)
 
-            modal.find('.modal-body #pro_id').val(pro_id);
+            modal.find('.modal-body #id').val(id);
             modal.find('.modal-body #assest_name').val(assest_name);
         })
 

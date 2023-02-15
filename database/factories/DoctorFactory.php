@@ -14,6 +14,7 @@ class DoctorFactory extends Factory
      */
     public function definition()
     {
+
         return [
             'section_id' => Section::all()->random()->id,
            'name' => $this->faker->name('ar_doctor'),

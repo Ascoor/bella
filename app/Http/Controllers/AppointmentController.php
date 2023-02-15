@@ -74,17 +74,29 @@ class AppointmentController extends Controller
     {
 
         $apt_number = Str::random(15);
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'phone_number' => 'required|string|max:255',
+            'doctor_id' => 'required|string|max:255',
+            'appointment_time' => 'required|date',
+        ]);
 
-    $appointment = Appointment::create([
-        'apt_number'=>$apt_number,
-        'name' => $request->name,
-'doctor_id' => $request->doctor_id,
-        'phone' => $request->phone,
-        'apt_date' => $request->apt_date,
-        'apt_time' => $request->apt_time
-    ]);
+        $client = Client::create([
+            'name' => $request->name,
+            'phone_number' => $request->phone_number,
+        ]);
 
+        $appointment = Appointment::create([
+            'client_id' => $client->id,
+            'service' => $request->service,
+            'appointment_time' => $request->appointment_time,
+            'status' => 'pending',
+        ]);
 
+        // Mail::to('admin@example.com')->send(new Appointment($appointment));
+
+        return redirect()->route('thanks');
+    }
 
 
        // Send the notifications
@@ -95,14 +107,6 @@ class AppointmentController extends Controller
 
 
 
-        Client::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'phone' => $request->phone
-
-        ]);
-        return view('thanks');
-    }
 
     /**
      * Display the specified resource.
