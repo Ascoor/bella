@@ -18,7 +18,7 @@ class UserFactory extends Factory
             'name' => 'Abd El-hamed',
             'email' => 'askar@ask-ar.com',
             'email_verified_at' => now(),
-            'password' => 'Ask@123456', // password
+            'password' => bcrypt( 'Ask@123456'), // password
             'remember_token' => Str::random(10),
         ];
     }
