@@ -13,7 +13,7 @@ class Doctor extends Model
         'name', 'section_id','phone','specialization','photo'
     ];
 
-    public function Apointment()
+    public function appointments()
     {
         return $this->BelongsToMany(Appointment::class);
     }
