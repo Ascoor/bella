@@ -12,10 +12,6 @@ class Appointment extends Model
         'remarks','status','edited_by', 'apt_date', 'apt_time', 'doctor_id','client_id'
     ];
 
-    public function  doctor()
-    {
-        return $this->belongsTo(Doctor::class);
-    }
     public function client()
     {
         return $this->belongsTo(Client::class);
