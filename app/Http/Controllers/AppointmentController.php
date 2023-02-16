@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 use App\Notifications\AppointmentNotification;
-use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Notification;
 
 class AppointmentController extends Controller
 {
@@ -58,12 +58,10 @@ class AppointmentController extends Controller
 
         ]);
 
-    // Send notification to users and doctors associated with the appointment
-    $users = User::all();
-    Notification::send($users, new AppointmentNotification($appointment));
+// Send notification to users and doctors associated with the appointment
+$users = User::all();
+Notification::send($users, new AppointmentNotification($appointment));
 
-    $doctor = Doctor::find($appointment->doctor_id);
-    $doctor->notify(new AppointmentNotification($appointment));
 
         // Redirect back to the welcome page with a success message.
         return view('thanks')->with('success', 'Appointment created successfully!');

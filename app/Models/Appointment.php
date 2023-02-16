@@ -4,9 +4,25 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Notifications\Notifiable;
 class Appointment extends Model
 {
     use HasFactory;
-    protected $fillable['']
+use Notifiable;
+    protected $fillable = ['client_id','doctor_id','apt_date','apt_time','remarks','edited_by','status'];
+
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
+    }
+    public function doctor()
+    {
+        return $this->belongsTo(Doctor::class);
+    }
+
+
+
 }
+
+

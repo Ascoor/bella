@@ -27,6 +27,6 @@ class DatabaseSeeder extends Seeder
         Assest::factory(10)->create();
 
         Client::factory(10)->create();
-        Appointment::factory(10)->create();
+        // Appointment::factory(10)->create();
     }
 }
