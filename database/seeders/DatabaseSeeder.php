@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Appointment;
 use App\Models\Assest;
+use App\Models\Client;
 use App\Models\Doctor;
 use App\Models\Section;
 use App\Models\Service;
@@ -23,5 +25,8 @@ class DatabaseSeeder extends Seeder
         Service::factory(10)->create();
         Doctor::factory(10)->create();
         Assest::factory(10)->create();
+
+        Client::factory(10)->create();
+        Appointment::factory(10)->create();
     }
 }

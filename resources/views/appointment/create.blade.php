@@ -90,9 +90,10 @@
                             <option label="Choose one">
 
                             <option value="pending" selected>Pending</option>
-                            <option value="accepted">Accepted</option>
-                            <option value="accepted">Complete</option>
+                            <option value="accepted">confirmed</option>
 
+                            <option value="accepted">Complete</option>
+                            <option value="accepted">cancelled</option>
                         </select>
                     </div>
 

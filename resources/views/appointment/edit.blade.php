@@ -102,24 +102,24 @@
                             <option label="Choose one">
                                 @if($appointment->status == 'pending')
                             <option value="pending" selected>Pending</option>
-                            <option value="accepted">Accepted</option>
-                            <option value="accepted">Complete</option>
+                            <option value="confirmed">confirmed</option>
+                            <option value="confirmed">Complete</option>
 
-                            <option value="rejected">Rejected</option>
-                            @elseif($appointment->status == 'accepted')
+                            <option value="cancelled">cancelled</option>
+                            @elseif($appointment->status == 'confirmed')
                             <option value="pending">Pending</option>
-                            <option value="accepted" selected>Accepted</option>
-                            <option value="accepted">Complete</option>
-                            <option value="rejected">Rejected</option>
+                            <option value="confirmed" selected>confirmed</option>
+                            <option value="confirmed">Complete</option>
+                            <option value="cancelled">cancelled</option>
                             @elseif($appointment->status == 'complete')
                             <option value="pending">Pending</option>
-                            <option value="accepted">Accepted</option>
-                            <option value="accepted" selected>Complete</option>
-                            <option value="rejected">Rejected</option>
+                            <option value="confirmed">confirmed</option>
+                            <option value="confirmed" selected>Complete</option>
+                            <option value="cancelled">cancelled</option>
                             @else
                             <option value="pending">Pending</option>
-                            <option value="accepted">Accepted</option>
-                            <option value="rejected" selected>Rejected</option>
+                            <option value="confirmed">confirmed</option>
+                            <option value="cancelled" selected>cancelled</option>
                             @endif
                         </select>
                     </div>
