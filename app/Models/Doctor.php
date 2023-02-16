@@ -13,6 +13,10 @@ class Doctor extends Model
         'name', 'section_id','phone','specialization','photo'
     ];
 
+    public function Apointment()
+    {
+        return $this->BelongsToMany(Appointment::class);
+    }
     public function section()
     {
         return $this->belongsTo(Section::class);
