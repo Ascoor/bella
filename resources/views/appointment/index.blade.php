@@ -24,7 +24,7 @@
 @section('content')
 				<!-- row opened -->
 
-				
+
 			<!-- row opened -->
             <div class="row row-sm">
 					<div class="col-xl-12">
@@ -46,7 +46,7 @@
                                     <th class="border-bottom-0">موعد الحجز</th>
                                     <th class="border-bottom-0">الدكتور</th>
                                     <th class="border-bottom-0">حالة الحجز</th>
-                                    
+
                                     <th class="border-bottom-0">العمليات</th>
                                 </tr>
                             </thead>
@@ -69,10 +69,10 @@
 
                                {{ $item->apt_number }}</a> </td> -->
                             <td>
-                                {{ $item->name }}
+                                {{ $item->client->client_name }}
                             </td>
                             <td>
-                                {{ $item->phone }}
+                                {{ $item->client->client_phone }}
                             </td>
                             <td>
                                 {{ $item->apt_date }}
@@ -82,7 +82,7 @@
                             </td>
 
                             <td>
-                                {{ $item->doctor_name}}
+                                {{ $item->doctor->name}}
                             </td>
                             <td>
                                 {{ $item->status }}
@@ -123,7 +123,7 @@
 			</div>
 			<!-- Container closed -->
 		</div>
-       
+
 		<!-- main-content closed -->
 @endsection
 @section('js')

@@ -148,79 +148,65 @@
                             <body oncontextmenu='return false' class='snippet-body'>
                             <div id="booking" class="section">
     <div class="section-center">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8 col-md-push-5">
-                    <div class="booking-cta">
-                        <h1>Appointment Now</h1>
-                        <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi facere, soluta magnam consectetur molestias itaque
-                            ad sint fugit architecto incidunt iste culpa perspiciatis possimus voluptates aliquid consequuntur cumque quasi.
-                            Perspiciatis.
-                        </p> -->
-                    </div>
-                </div>
-                <div class="col-md-4 col-md-pull-7">
-                    <div class="booking-form">
-                    <form action="{{route('clientstore')}}" method="POST"
-            enctype="multipart/form-data">
-            @csrf
-                            <div class="form-group">
-                                <span class="form-label">Your Name</span>
-                                <input class="inputbox"
-                                        placeholder="Your Name"  name="name"  type="text">
-                            </div>
-                            <div class="form-group">
-                            <span class="form-label">Phone Number</span>
-                                <input class="inputbox"
-                                        placeholder="Your Phone Number" name="phone" type="tel">
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <span class="form-label">Appointmet Time</span>
+    <div class="container">
 
-                                        <input class="inputbox textmuted " type="time" name="apt_time">
+    <h1>Create Appointment</h1>
 
+@if (session('success'))
+    <div class="alert alert-success">{{ session('success') }}</div>
+@endif
 
+<form method="post" action="{{ route('appointments.submitForm') }}">
+    @csrf
 
+    <div class="form-group">
+        <label for="doctor_id">Doctor</label>
+        <select name="doctor_id" id="doctor_id" class="form-control @error('doctor_id') is-invalid @enderror">
+            <option value="">Select a doctor</option>
+            @foreach ($doctors as $doctor)
+                <option value="{{ $doctor->id }}" {{ old('doctor_id') == $doctor->id ? 'selected' : '' }}>{{ $doctor->name }}</option>
+            @endforeach
+        </select>
+        @error('doctor_id')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </div>
 
+    <div class="form-group">
+        <label for="appointment_time">Appointment Time</label>
+        <input type="time" name="apt_time" id="apt_time" class="form-control @error('appointment_time') is-invalid @enderror" value="{{ old('apt_time') }}">
+        @error('appointment_time')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </div>
 
-                                        <span class="form-label">Appointment Date</span>
-                                        <input class="inputbox textmuted" type="date" name="apt_date">
-                                </div>
+    <div class="form-group">
+        <label for="appointment_date">Appointment Date</label>
+        <input type="date" name="apt_date" id="apt_date" class="form-control @error('appointment_date') is-invalid @enderror" value="{{ old('apt_date') }}">
+        @error('appointment_date')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </div>
 
+    <div class="form-group">
+        <label for="client_name">Your Name</label>
+        <input type="text" name="client_name" id="client_name" class="form-control @error('client_name') is-invalid @enderror" value="{{ old('client_name') }}">
+        @error('client_name')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </div>
 
-                                </div>
+    <div class="form-group">
+        <label for="client_phone">Your Phone Number</label>
+        <input type="text" name="client_phone" id="client_phoner" class="form-control @error('client_phone') is-invalid @enderror" value="{{ old('client_phone') }}">
+        @error('client_phone')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </div>
 
-                            </div>
-
-
-
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <span class="form-label">Doctors</span>
-                                        <select class="border-0 outline-none" name="doctor_name">
-                                         @foreach ($doctors as $item )
-
-                                        <option value="{{ $item->name }}"  >
-                                            {{$item->name}}</option>
-
-                                        @endforeach
-                                    </select>
-                                        <span class="select-arrow"></span>
-                                    </div>
-                                    </div>
-                                    </div>
-
-
-                            <div class="form-btn">
-                                <button class="submit-btn">Apointment Now</button>
-                            </div>
-                        </form>
-                    </div>
-
-                  <script type='text/javascript'></script>
+    <button type="submit" class="btn btn-primary">Create Appointment</button>
+</form>
+</div>               <script type='text/javascript'></script>
 
                             <!-- ALL JS FILES -->
 

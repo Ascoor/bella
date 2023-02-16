@@ -39,7 +39,7 @@
                 <div class="row row-sm">
                     <div class="col-lg">
                         <p class="mg-b-10">إسم العميل</p>
-                        <input class="form-control mg-b-20"  disabled placeholddiser="" value="{{ $appointment->name }}" type="text">
+                        <input class="form-control mg-b-20"  disabled placeholddiser="" value="{{ $appointment->client->client_name }}" type="text">
                     </div>
                 </div>
 
@@ -75,7 +75,7 @@
                                 <p class="mg-b-10"> الموعد المؤكد</p>
                                 <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
                             </div>
-                        </div><input class="form-control fc-datepicker"  disabled placeholddiser=""  value="{{$appointment->apply_date}}"  placeholder="00:00" type="time">
+                        </div><input class="form-control fc-datepicker"  disabled placeholddiser=""  value="{{$appointment->remarks}}"  placeholder="00:00" type="time">
                     </div>
 
                                 <div class="input-group col-md-4">
@@ -83,7 +83,7 @@
                             <div class="input-group-text">
                                 رقم الجوال</div>
 
-                        <input class="form-control" id="phoneMask" disabled placeholddiser="" value="{{ $appointment->phone }}"
+                        <input class="form-control" id="phoneMask" disabled placeholddiser="" value="{{ $appointment->client->client_phone }}"
                             aria-label="Phone Number" type="tel">
                     </div><!-- input-group -->
                 </div>
@@ -106,7 +106,7 @@
                            value="{{ $appointment->doctor_name }}">
 
 
-                            <option     value="{{ $appointment->doctor_name }}"> {{ $appointment->doctor_name }}</option>
+                            <option     value="{{ $appointment->doctor->id }}"> {{ $appointment->doctor->name }}</option>
 
                         </select>
                     </div>

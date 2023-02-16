@@ -9,11 +9,15 @@ class Appointment extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'client_id', 'date', 'time', 'notes'
+        'remarks','status','edited_by', 'apt_date', 'apt_time', 'doctor_id','client_id'
     ];
 
     public function client()
     {
         return $this->belongsTo(Client::class);
+    }
+    public function doctor()
+    {
+        return $this->belongsTo(Doctor::class);
     }
 }

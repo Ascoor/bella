@@ -29,17 +29,17 @@
 <div class="col-md-12 col-xl-12 col-xs-12 col-sm-12">
     <div class="card">
         <div class="card-body">
-            <form action="{{route('appointments.update',$appointment)}}" method="POST" enctype="multipart/form-data">
-                @csrf
-                @method('PUT')
-                <div class="main-content-label mg-b-5">
+        <form method="POST" action="{{ route('appointments.update', ['appointment' => $appointment->id]) }}">
+    @csrf
+    @method('PUT')      <div class="main-content-label mg-b-5">
           بيانات الحجز
                 </div>
                 <br/>
                 <div class="row row-sm">
                     <div class="col-lg">
                         <p class="mg-b-10">إسم العميل</p>
-                        <input class="form-control mg-b-20" name="name" value="{{ $appointment->name }}" type="text">
+                        <input class="form-control mg-b-20"  value="{{ $appointment->client->client_name }}" type="text">
+                        <input hidden class="form-control mg-b-20" name="edited_by"  type="number">
                     </div>
                 </div>
 
@@ -78,7 +78,7 @@
                                 <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
                             </div>
                         </div>
-                            <input class="form-control fc-datepicker"  name="apply_date"  value="{{$appointment->apply_date}}"  placeholder="00:00" type="time">
+                            <input class="form-control fc-datepicker"  name="remarks"  value="{{$appointment->remarks}}"  placeholder="00:00" type="time">
                         </div>
 
 
@@ -87,7 +87,7 @@
                             <div class="input-group-text">
                                 رقم الجوال</div>
 
-                        <input class="form-control" id="phoneMask" value="{{ $appointment->phone }}" name="phone"
+                        <input class="form-control" id="client_phone" value="{{ $appointment->client->client_phone }}"
                             aria-label="Phone Number" type="tel">
                     </div><!-- input-group -->
                 </div>
@@ -127,14 +127,15 @@
 
                     <div class="col-lg-4">
                         <p class="mg-b-10">إختر الدكتور</p><select class="form-control select2-no-search"
-                            name="doctor_name" value="{{ $appointment->doctor_name }}">
+                            name="doctor_id" value="{{ $appointment->doctor_id }}">
                             <option label="Choose one">
                                 @foreach ($doctors as $item )
 
-                            <option value="{{$item->name}}" selected>{{$item->name }} </option>
+                            <option value="{{$item->id}}" selected>{{$item->name }} </option>
                             @endforeach
                         </select>
                     </div>
+                    <button type="submit">Update</button>
                 </div>
         </div>
         <!-- row closed -->

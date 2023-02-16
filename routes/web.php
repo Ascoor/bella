@@ -24,21 +24,25 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $doctors = Doctor::all();
-    $services = Service::all();
-    return view('welcome')->with('doctors',$doctors)->with('services',$services);
+    return view('welcome', [
+        'doctors' => Doctor::all(),
+    ]);
 });
-Route::controller(AppointmentController::class)->group(function () {
 
-    Route::post('store', 'clientstore')->name('clientstore');
-});
+Route::post('/submit', [AppointmentController::class, 'submitForm'])->name('appointments.submitForm');
 Auth::routes();
+Route::get('/appointments', [AppointmentController::class, 'listAppointments'])->name('appointments.list');
+Route::get('/appointments/{id}/edit', [AppointmentController::class, 'edit'])->name('appointments.edit');
+Route::get('/appointments/{appointment}', [AppointmentController::class, 'show'])->name('appointments.show');
+
+Route::put('/appointments/{appointment}', [AppointmentController::class, 'update'])->name('appointments.update');
+
 Route::resource('sections', SectionController::class);
 Route::resource('doctors', DoctorController::class);
 Route::resource('assests', AssestController::class);
 Route::resource('services', ServiceController::class);
 Route::resource('clients', ClientController::class);
-Route::resource('appointments', AppointmentController::class);
+// Route::resource('appointments', AppointmentController::class);
 Route::resource('invoices', InvoiceController::class);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/{page}', [App\Http\Controllers\AdminController::class, 'index'])->name('{page}');
