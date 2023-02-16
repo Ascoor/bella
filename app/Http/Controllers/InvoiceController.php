@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Invoice;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class InvoiceController extends Controller
@@ -13,15 +12,9 @@ class InvoiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
-     public function __construct()
-     {
-         $this->middleware('auth');
-     }
     public function index()
     {
-       $invoices = Invoice::all();
-       return view('invoice.index', compact('invoices'));
+        //
     }
 
     /**

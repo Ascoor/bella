@@ -151,10 +151,13 @@
     <div class="container">
 
     <h1>Create Appointment</h1>
+    <div class="card">
+<div class="card-body">
 
-@if (session('success'))
+
+    @if (session('success'))
     <div class="alert alert-success">{{ session('success') }}</div>
-@endif
+    @endif
 
 <form method="post" action="{{ route('appointments.submitForm') }}">
     @csrf
@@ -169,7 +172,7 @@
         </select>
         @error('doctor_id')
             <div class="invalid-feedback">{{ $message }}</div>
-        @enderror
+            @enderror
     </div>
 
     <div class="form-group">
@@ -208,6 +211,7 @@
 </form>
 </div>               <script type='text/javascript'></script>
 
+</div>
                             <!-- ALL JS FILES -->
 
                             <script type='text/javascript' src=''></script>
@@ -235,4 +239,4 @@
                         @endif
                     @endauth
                 </div>
-            @endif -->
+                @endif -->
