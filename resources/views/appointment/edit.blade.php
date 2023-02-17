@@ -135,9 +135,16 @@
                             @endforeach
                         </select>
                     </div>
-                    <button type="submit">Update</button>
                 </div>
-        </div>
+
+            <div class="row">
+
+                <span>
+                    <button class="btn btn-primary text-light"
+                    type="submit">تحديث</button>
+                </span>
+            </div>
+            </div>
         <!-- row closed -->
     </div>
     <!-- Container closed -->

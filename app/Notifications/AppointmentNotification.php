@@ -47,7 +47,7 @@ class AppointmentNotification extends Notification
             'appointment_id' => $this->appointment->id,
             'appointment_date' => $this->appointment->apt_date,
             'appointment_time' => $this->appointment->apt_time,
-            'client_name' => $this->appointment->client->name,
+            'client_name' => $this->appointment->client->client_name,
         ];
     }
 
