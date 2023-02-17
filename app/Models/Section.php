@@ -18,7 +18,7 @@ class Section extends Model
     }
     public function services()
     {
-        return $this->hasMany(Doctor::class);
+        return $this->hasMany(Service::class);
     }
     public function assests()
     {

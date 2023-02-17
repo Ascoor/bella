@@ -20,13 +20,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::factory(1)->create();
-        Section::factory(10)->create();
-        Service::factory(10)->create();
-        Doctor::factory(10)->create();
-        Assest::factory(10)->create();
+        // User::factory(1)->create();
+        // Section::factory(10)->create();
+        // Service::factory(10)->create();
+        // Doctor::factory(10)->create();
+        // Assest::factory(10)->create();
 
         Client::factory(10)->create();
-        // Appointment::factory(10)->create();
+        Appointment::factory(10)->create();
     }
 }

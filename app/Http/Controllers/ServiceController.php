@@ -3,18 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Service;
-use App\Http\Controllers\Controller;
+
 use App\Models\Doctor;
 use App\Models\Section;
 use Illuminate\Http\Request;
 
+
 class ServiceController extends Controller
 {
 
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+
     /**
      * Display a listing of the resource.
      *
@@ -38,6 +36,8 @@ class ServiceController extends Controller
      {
          //
      }
+
+
 
      /**
       * Store a newly created resource in storage.
@@ -98,6 +98,14 @@ class ServiceController extends Controller
 
          return redirect()->back()->with('message', 'Service Updated Successfully');
      }
+
+
+public function servicesBysection($section_id)
+{
+    $services = Service::where('section_id', $section_id)->get();
+    $sections = Section::all();
+    return view('services.index', compact('services', 'sections'));
+}
 
      /**
       * Remove the specified resource from storage.

@@ -23,6 +23,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/ww', function () {
+    return view('accordion', [
+        'doctors' => Doctor::all(),
+    ]);
+});
 Route::get('/', function () {
     return view('welcome', [
         'doctors' => Doctor::all(),
@@ -44,6 +49,9 @@ Route::resource('sections', SectionController::class);
 Route::resource('doctors', DoctorController::class);
 Route::resource('assests', AssestController::class);
 Route::resource('services', ServiceController::class);
+Route::get('/services/{section_id}', [ServiceController::class, 'servicesBysection'])->name('services.by.section');
+
+
 Route::resource('clients', ClientController::class);
 // Route::resource('appointments', AppointmentController::class);
 Route::resource('invoices', InvoiceController::class);
