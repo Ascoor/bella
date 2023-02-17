@@ -10,12 +10,9 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laracademy/generators": "^3.6",
         "laravel/framework": "^8.75",
-        "laravel/nexmo-notification-channel": "^2.5",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.4",
-        "laravel/vonage-notification-channel": "^2.5",
-        "nexmo/laravel": "^2.4",
         "reliese/laravel": "^1.1"
     },
     "require-dev": {
