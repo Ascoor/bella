@@ -34,8 +34,11 @@ Auth::routes();
 Route::get('/appointments', [AppointmentController::class, 'listAppointments'])->name('appointments.list');
 Route::get('/appointments/{id}/edit', [AppointmentController::class, 'edit'])->name('appointments.edit');
 Route::get('/appointments/{appointment}', [AppointmentController::class, 'show'])->name('appointments.show');
+Route::post('/appointments/store', [App\Http\Controllers\AppointmentController::class, 'store'])->name('appointments.store');
 
 Route::put('/appointments/{appointment}', [AppointmentController::class, 'update'])->name('appointments.update');
+
+
 
 Route::resource('sections', SectionController::class);
 Route::resource('doctors', DoctorController::class);

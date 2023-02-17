@@ -25,6 +25,11 @@ class AppointmentController extends Controller
         // You can pass data to the form view here, such as a list of available doctors.
         return view('appointments.form');
     }
+    public function create()
+    {
+        $doctors= Doctor::all();
+        return view('appointment.create')->with('doctors',$doctors);
+    }
 
     /**
      * Handle a submitted appointment form.
@@ -76,9 +81,9 @@ Notification::send($users, new AppointmentNotification($appointment));
     {
         // Get all appointments with their associated clients and doctors.
         $appointments = Appointment::with('client', 'doctor')->get();
-
+$doctors = Doctor::all();
         // You can pass data to the appointments list view here, such as the list of appointments.
-        return view('appointment.index', compact('appointments'));
+        return view('appointment.index', compact('appointments'))->with('doctors',$doctors);
     }
     public function show($id)
     {
@@ -119,7 +124,35 @@ $doctors = Doctor::all();
 
         return redirect()->route('appointments.show', ['appointment' => $appointment->id]);
     }
+    public function store(Request $request)
+    {
+        // Validate the form input.
+        $validatedData = $request->validate([
+            'doctor_id' => 'required',
+            'apt_time' => 'required',
+            'apt_date' => 'required|date_format:Y-m-d',
+            'client_name' => 'required',
+            'client_phone' => 'required',
+        ]);
 
+        // Create the client.
+        $client = Client::create([
+            'client_name' => $validatedData['client_name'],
+            'client_phone' => $validatedData['client_phone'],
+        ]);
+
+        // Create the appointment.
+        $appointment = Appointment::create([
+            'doctor_id' => $validatedData['doctor_id'],
+            'apt_time' => $validatedData['apt_time'],
+            'apt_date' => $validatedData['apt_date'],
+            'client_id' => $client->id,
+
+        ]);
+
+        // Redirect the user to a page with a success message
+        return redirect()->route('appointments.index')->with('success', 'Appointment created successfully.');
+    }
     /**
      * Remove the specified resource from storage.
      *
@@ -128,7 +161,10 @@ $doctors = Doctor::all();
      */
     public function destroy(appointment $appointment)
     {
-        //
+        $appointment->delete();
+
+        return redirect()->route('appointments.index')
+                         ->with('success', 'Appointment deleted successfully');
     }
 
 }

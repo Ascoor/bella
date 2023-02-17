@@ -14,7 +14,7 @@
 <div class="breadcrumb-header justify-content-between">
     <div class="my-auto">
         <div class="d-flex">
-            <h4 class="content-title mb-0 my-auto">الحجوزات</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
+            <h4 class="content-title mb-0 my-auto"><a type="btn" href="/appointments">الحجوزات</a></h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
             تفاصيل الحجز</span>
         </div>
     </div>
@@ -111,6 +111,13 @@
                         </select>
                     </div>
                 </div>
+                <span>
+
+
+<a class="btn btn-success"
+href="{{route('appointments.edit',$appointment->id)}}">Edit</a>
+
+</span>
         </div>
         <!-- row closed -->
     </div>
