@@ -21,10 +21,10 @@ class ServiceController extends Controller
 
      public function index()
      {
-         $services = Service::with('section')->get();
+         $services = Service::all();
          $sections = Section::all();
 
-         return view('service.index', compact('services', 'sections'));
+         return view('service.index')->with('services',$services)->with('sections',$sections);
      }
 
      /**
@@ -88,8 +88,9 @@ class ServiceController extends Controller
       * @param  \App\Service  $service
       * @return \Illuminate\Http\Response
       */
-     public function update(Request $request, Service $service)
+     public function update(Request $request,$id)
      {
+        $service = Service::find($id);
          $service->service_name = $request->service_name;
          $service->price = $request->price;
          $service->description = $request->description;
@@ -100,12 +101,6 @@ class ServiceController extends Controller
      }
 
 
-public function servicesBysection($section_id)
-{
-    $services = Service::where('section_id', $section_id)->get();
-    $sections = Section::all();
-    return view('services.index', compact('services', 'sections'));
-}
 
      /**
       * Remove the specified resource from storage.

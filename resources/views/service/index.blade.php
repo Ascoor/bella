@@ -91,15 +91,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($services as $service)
+                        <?php $i = 0; ?>
+                            @foreach ($services as $x)
+                                <?php $i++; ?>
                                 <tr>
-                                    <td>{{ $service->id }}</td>
-                                    <td>{{ $service->service_name }}</td>
-                                    <td>{{ $service->section->section_name }}</td>
-                                    <td>{{ $service->price }}</td>
+                                    <td>{{$i}}</td>
+                                    <td>{{ $x->service_name }}</td>
+                                    <td>{{ $x->section->section_name }}</td>
+                                    <td>{{ $x->price }}</td>
                                     <td>
-                                        <button class="btn btn-outline-success btn-sm" data-service_name="{{ $service->service_name }}" data-id="{{ $service->id }}" data-description="{{ $service->description }}" data-price="{{ $service->price }}" data-section_id="{{ $service->section->id }}" data-toggle="modal" data-target="#editServiceModal">Edit</button>
-                                        <button class="btn btn-outline-danger btn-sm " data-id="{{ $service->id }}" data-service_name="{{ $service->service_name }}" data-toggle="modal" data-target="#modaldemo9">Delete</button>
+                                        <button class="btn btn-outline-success btn-sm" data-service_name="{{ $x->service_name }}" data-id="{{ $x->id }}" data-description="{{ $x->description }}" data-price="{{ $x->price }}" data-section_id="{{ $x->section->id }}" data-toggle="modal" data-target="#editServiceModal">Edit</button>
+                                        <button class="btn btn-outline-danger btn-sm " data-id="{{ $x->id }}" data-service_name="{{ $x->sevice_name }}" data-toggle="modal" data-target="#modaldemo9">Delete</button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -169,12 +171,10 @@
         </button>
       </div>
       <div class="modal-body">
-        @foreach ($services as $service )
-
-        <form action="{{ route('services.update',$service->id) }}" method="post">
+        <form action="{{ route('services.update',$x->id) }}" method="post">
             @csrf
             @method('PATCH')
-            @endforeach
+
           <div class="form-group">
             <label for="service_name">Service Name:</label>
             <input type="text" name="service_name" id="service_name" class="form-control" required>

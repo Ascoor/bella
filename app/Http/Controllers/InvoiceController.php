@@ -12,6 +12,7 @@ use App\Models\Service;
 use App\Models\Section;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class InvoiceController extends Controller
 {
@@ -35,8 +36,8 @@ class InvoiceController extends Controller
 {
     $clients = Client::all();
 
-$section =Service::with('section');
-    return view('Invoice.add_invoice',compact('section'))->with('clients',$clients);
+$sections =Section::all();
+    return view('Invoice.add_invoice')->with('clients',$clients)->with('sections',$sections);
 }
 
 
@@ -138,7 +139,13 @@ $section =Service::with('section');
 
     return response()->json(['message' => 'Invoice updated successfully', 'invoice' => $invoice]);
 }
+public function getservices($section_id)
+{
 
+
+    $services = DB::table('services')->where('section_id', $section_id)->get();
+    return response()->json($services);
+}
 public function delete($id)
 {
     $invoice = Invoice::findOrFail($id);

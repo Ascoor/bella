@@ -29,7 +29,14 @@
 @endsection
 @section('content')
 
-
+    @if (session()->has('Add'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>{{ session()->get('Add') }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
 
     <!-- row -->
     <div class="row">
@@ -47,21 +54,11 @@
                                 <label for="inputName" class="control-label">رقم الفاتورة</label>
                                 <input type="text" class="form-control" id="inputName" name="invoice_number"
                                     title="يرجي ادخال رقم الفاتورة" required>
-
-
-                            <label for="inputName" class="control-label">العميل</label>
-                                <select name="Section" class="form-control SlectBox" onclick="console.log($(this).val())"
-                                    onchange="console.log('change is firing')">
-                                    <!--placeholder-->
-                                    <option value="" selected disabled>حدد العميل</option>
-                                    @foreach ($clients as $client)
-                                        <option value="{{ $client->id }}"> {{ $client->client_name }}</option>
-                                    @endforeach
-                                </select>
                             </div>
+
                             <div class="col">
                                 <label>تاريخ الفاتورة</label>
-                                <input class="form-control fc-datepicker" name="invoice_date" placeholder="YYYY-MM-DD"
+                                <input class="form-control fc-datepicker" name="invoice_Date" placeholder="YYYY-MM-DD"
                                     type="text" value="{{ date('Y-m-d') }}" required>
                             </div>
 
@@ -75,57 +72,47 @@
 
                         {{-- 2 --}}
                         <div class="row">
+  <div class="col">
+    <label for="inputName" class="control-label">القسم</label>
+    <select name="Section" class="form-control SlectBox" onclick="console.log($(this).val())"
+      onchange="console.log('change is firing')">
+      <!--placeholder-->
+      <option value="" selected disabled>حدد القسم</option>
+      @foreach ($sections as $section)
+        <option value="{{ $section->id }}"> {{ $section->section_name }}</option>
+      @endforeach
+    </select>
+  </div>
 
-                        <div class="form-group">
-    <
+  <div class="col">
+    <label for="inputName" class="control-label">الخدمات</label>
+    <select id="services" name="services[]" class="form-control" multiple>
+    </select>
+  </div>
 
-        <label for="section">Select Section</label>
-        <select name="section" class="form-control">
-            <option value="">-- Select Section --</option>
-            @foreach($sections as $section)
-                <option value="{{ $section->id }}">{{ $section->section_name }}</option>
-            @endforeach
-        </select>
-    </div>
-    <div class="col">
-    <div class="form-group">
-        <label for="services">Select Service</label>
-        <select name="services" class="form-control">
-            <option value="">-- Select Service --</option>
-            @foreach($services as $service)
-                <option value="{{ $service->id }}">{{ $service->service_name }} - ${{ $service->price }}</option>
-            @endforeach
-        </select>
-    </div>
-
+  <div class="col">
+    <label for="inputName" class="control-label">مبلغ التحصيل</label>
+    <input type="text" class="form-control" id="inputName" name="Amount_collection"
+      oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+  </div>
 </div>
-</div>
-
-
-
-                            <div class="col">
-                                <label for="inputName" class="control-label">مبلغ التحصيل</label>
-                                <input type="text" class="form-control" id="inputName" name="amount_collection"
-                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-                            </div>
-                        </div>
 
 
                         {{-- 3 --}}
 
                         <div class="row">
 
-                            <!-- <div class="col">
+                            <div class="col">
                                 <label for="inputName" class="control-label">مبلغ العمولة</label>
-                                <input type="text" class="form-control form-control-lg" id="amount_Commission"
+                                <input type="text" class="form-control form-control-lg" id="Amount_Commission"
                                     name="Amount_Commission" title="يرجي ادخال مبلغ العمولة "
                                     oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                                     required>
-                            </div> -->
+                            </div>
 
                             <div class="col">
                                 <label for="inputName" class="control-label">الخصم</label>
-                                <input type="text" class="form-control form-control-lg" id="Discount" name="discount"
+                                <input type="text" class="form-control form-control-lg" id="Discount" name="Discount"
                                     title="يرجي ادخال مبلغ الخصم "
                                     oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
                                     value=0 required>
@@ -133,7 +120,7 @@
 
                             <div class="col">
                                 <label for="inputName" class="control-label">نسبة ضريبة القيمة المضافة</label>
-                                <select name="rate_vat" id="Rate_VAT" class="form-control" onchange="myFunction()">
+                                <select name="Rate_VAT" id="Rate_VAT" class="form-control" onchange="myFunction()">
                                     <!--placeholder-->
                                     <option value="" selected disabled>حدد نسبة الضريبة</option>
                                     <option value=" 5%">5%</option>
@@ -148,12 +135,12 @@
                         <div class="row">
                             <div class="col">
                                 <label for="inputName" class="control-label">قيمة ضريبة القيمة المضافة</label>
-                                <input type="text" class="form-control" id="Value_VAT" name="value_vat" readonly>
+                                <input type="text" class="form-control" id="Value_VAT" name="Value_VAT" readonly>
                             </div>
 
                             <div class="col">
                                 <label for="inputName" class="control-label">الاجمالي شامل الضريبة</label>
-                                <input type="text" class="form-control" id="Total" name="total" readonly>
+                                <input type="text" class="form-control" id="Total" name="Total" readonly>
                             </div>
                         </div>
 
@@ -193,39 +180,74 @@
     <!-- main-content closed -->
 @endsection
 @section('js')
-   <!---Internal Select2 js-->
-<script src="{{ URL::asset('assets/plugins/select2/js/select2.min.js') }}"></script>
-<!--Internal Fileuploads js-->
-<script src="{{ URL::asset('assets/plugins/fileuploads/js/fileupload.js') }}"></script>
-<!--Internal Fancy uploader js-->
-<script src="{{ URL::asset('assets/plugins/fancyuploder/jquery.ui.widget.js') }}"></script>
-<script src="{{ URL::asset('assets/plugins/fancyuploder/jquery.fileupload.js') }}"></script>
-<script src="{{ URL::asset('assets/plugins/fancyuploder/jquery.iframe-transport.js') }}"></script>
-<script src="{{ URL::asset('assets/plugins/fancyuploder/fancy-uploader.js') }}"></script>
-<!--Internal  Datepicker js-->
-<script src="{{ URL::asset('assets/plugins/jquery-ui/ui/widgets/datepicker.js') }}"></script>
-<!--Internal  jquery.maskedinput js-->
-<script src="{{ URL::asset('assets/plugins/jquery.maskedinput/jquery.maskedinput.js') }}"></script>
-<!--Internal  spectrum-colorpicker js-->
-<script src="{{ URL::asset('assets/plugins/spectrum-colorpicker/spectrum.js') }}"></script>
-<!-- Internal form-elements js -->
-<script src="{{ URL::asset('assets/js/form-elements.js') }}"></script>
+    <!-- Internal Select2 js-->
+    <script src="{{ URL::asset('assets/plugins/select2/js/select2.min.js') }}"></script>
+    <!--Internal Fileuploads js-->
+    <script src="{{ URL::asset('assets/plugins/fileuploads/js/fileupload.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/fileuploads/js/file-upload.js') }}"></script>
+    <!--Internal Fancy uploader js-->
+    <script src="{{ URL::asset('assets/plugins/fancyuploder/jquery.ui.widget.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/fancyuploder/jquery.fileupload.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/fancyuploder/jquery.iframe-transport.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/fancyuploder/jquery.fancy-fileupload.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/fancyuploder/fancy-uploader.js') }}"></script>
+    <!--Internal  Form-elements js-->
+    <script src="{{ URL::asset('assets/js/advanced-form-elements.js') }}"></script>
+    <script src="{{ URL::asset('assets/js/select2.js') }}"></script>
+    <!--Internal Sumoselect js-->
+    <script src="{{ URL::asset('assets/plugins/sumoselect/jquery.sumoselect.js') }}"></script>
+    <!--Internal  Datepicker js -->
+    <script src="{{ URL::asset('assets/plugins/jquery-ui/ui/widgets/datepicker.js') }}"></script>
+    <!--Internal  jquery.maskedinput js -->
+    <script src="{{ URL::asset('assets/plugins/jquery.maskedinput/jquery.maskedinput.js') }}"></script>
+    <!--Internal  spectrum-colorpicker js -->
+    <script src="{{ URL::asset('assets/plugins/spectrum-colorpicker/spectrum.js') }}"></script>
+    <!-- Internal form-elements js -->
+    <script src="{{ URL::asset('assets/js/form-elements.js') }}"></script>
 
+    <script>
+        var date = $('.fc-datepicker').datepicker({
+            dateFormat: 'yy-mm-dd'
+        }).val();
 
+    </script>
 
-<script>$.ajax({
-    url: "{{ route('services.by.section', ['section_id' => $section->id]) }}",
-    type: "GET",
-    data: {section_id: sectionId},
-    dataType: "json",
-    success: function(data) {
-        $('select[name="services"]').empty();
-        $.each(data, function(key, service) {
-            $('select[name="services"]').append('<option value="' + service.id + '">' + service.service_name + ' - $' + service.price + '</option>');
-        });
+<script>
+   $(document).ready(function() {
+  $('select[name="Section"]').on('change', function() {
+    var SectionId = $(this).val();
+    if (SectionId) {
+      $.ajax({
+        url: "{{ URL::to('section/services') }}/" + SectionId,
+        type: "GET",
+        dataType: "json",
+        success: function(data) {
+          var servicesSelect = $('select[name="services[]"]');
+          servicesSelect.empty();
+          var totalPrice = 0;
+          $.each(data, function(key, value) {
+            servicesSelect.append('<option value="' + value.id + '">' + value.service_name + ' - $' + value.price + '</option>');
+          });
+
+          servicesSelect.on('change', function() {
+            totalPrice = 0;
+            $('select[name="services[]"] option:selected').each(function() {
+              totalPrice += parseFloat($(this).text().split(' - $')[1]);
+            });
+            $('input[name="Amount_collection"]').val(totalPrice.toFixed(2));
+          });
+        },
+      });
+    } else {
+      console.log('AJAX load did not work');
     }
+  });
 });
+
 </script>
+
+
+
     <script>
         function myFunction() {
 

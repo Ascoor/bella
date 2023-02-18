@@ -10,6 +10,7 @@ use App\Http\Controllers\InvoiceController;
 use App\Models\Doctor;
 use App\Models\Service;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -49,8 +50,12 @@ Route::resource('sections', SectionController::class);
 Route::resource('doctors', DoctorController::class);
 Route::resource('assests', AssestController::class);
 Route::resource('services', ServiceController::class);
-Route::get('/services/{section_id}', [ServiceController::class, 'servicesBysection'])->name('services.by.section');
+Route::get('/section/services/{id}', function ($section_id) {
+    $services = DB::table('services')->where('section_id', $section_id)->get();
+    return response()->json($services);
+    return json_encode($services);
 
+});
 
 Route::resource('clients', ClientController::class);
 // Route::resource('appointments', AppointmentController::class);

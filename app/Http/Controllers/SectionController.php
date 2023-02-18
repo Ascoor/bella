@@ -25,12 +25,7 @@ class SectionController extends Controller
         $sections = Section::all();
         return view('section.index')->with('sections',$sections);
     }
-    public function getBySection(Request $request)
-    {
-        $services = Section::where('section_id', $request->input('section_id'))->get(['id', 'service_name', 'price']);
 
-        return response()->json($services);
-    }
     /**
      * Show the form for creating a new resource.
      *
