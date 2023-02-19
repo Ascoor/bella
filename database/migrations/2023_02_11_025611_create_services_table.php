@@ -17,7 +17,7 @@ class CreateServicesTable extends Migration
             $table->id();
             $table->string('service_name');
             $table->unsignedBigInteger('section_id');
-            $table->decimal('price', 8, 2);
+            $table->integer('price');
             $table->text('description')->nullable();
             $table->foreign('section_id')
             ->references('id')->on('sections')

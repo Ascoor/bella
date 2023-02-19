@@ -71,44 +71,47 @@
                         </div>
 
                         {{-- 2 --}}
+
                         <div class="row">
-  <div class="col">
-    <label for="inputName" class="control-label">القسم</label>
-    <select name="Section" class="form-control SlectBox" onclick="console.log($(this).val())"
-      onchange="console.log('change is firing')">
-      <!--placeholder-->
-      <option value="" selected disabled>حدد القسم</option>
-      @foreach ($sections as $section)
-        <option value="{{ $section->id }}"> {{ $section->section_name }}</option>
-      @endforeach
-    </select>
-  </div>
-
-  <div class="col">
-    <label for="inputName" class="control-label">الخدمات</label>
-    <select id="services" name="services[]" class="form-control" multiple>
-    </select>
-  </div>
-
-  <div class="col">
-    <label for="inputName" class="control-label">مبلغ التحصيل</label>
-    <input type="text" class="form-control" id="inputName" name="Amount_collection"
-      oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-  </div>
+    <div class="col">
+        <label for="section" class="control-label">Choose Section:</label>
+        <select id="section" name="section">
+            <option value="">Choose</option>
+            @foreach ($sections as $section)
+            <option value="{{ $section->id }}">{{ $section->section_name }}</option>
+            @endforeach
+        </select>
+    </div>
+    <div class="col">
+        <label for="services" class="control-label">Choose Services:</label>
+        <select id="services" name="services[]" multiple class="form-control">
+        </select>
+        <button type="button" class="btn btn-primary btn-sm mt-2" id="add-services-btn">Add Selected Services</button>
+    </div>
+    <div class="col">
+        <label for="amount_collection" class="control-label">Total Amount Before Discount and Tax</label>
+        <input type="text" class="form-control" id="amount_collection" name="amount_collection">
+    </div>
 </div>
+<div class="row mt-4">
+    <div class="col">
+        <h4>Selected Services:</h4>
+        <ul id="selectedServices" class="list-group">
+        </ul>
+    </div>
+</div>
+<div class="row mt-4">
+    <div class="col">
+        <button type="button" class="btn btn-danger btn-sm" id="remove-services-btn">Remove Selected Services</button>
 
+    </div>
+</div>
 
                         {{-- 3 --}}
 
-                        <div class="row">
 
-                            <div class="col">
-                                <label for="inputName" class="control-label">مبلغ العمولة</label>
-                                <input type="text" class="form-control form-control-lg" id="Amount_Commission"
-                                    name="Amount_Commission" title="يرجي ادخال مبلغ العمولة "
-                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                                    required>
-                            </div>
+
+
 
                             <div class="col">
                                 <label for="inputName" class="control-label">الخصم</label>
@@ -179,7 +182,8 @@
     </div>
     <!-- main-content closed -->
 @endsection
-@section('js')
+@section('js')<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+
     <!-- Internal Select2 js-->
     <script src="{{ URL::asset('assets/plugins/select2/js/select2.min.js') }}"></script>
     <!--Internal Fileuploads js-->
@@ -212,29 +216,22 @@
 
     </script>
 
-<script>
-   $(document).ready(function() {
-  $('select[name="Section"]').on('change', function() {
-    var SectionId = $(this).val();
-    if (SectionId) {
+<script>$(document).ready(function() {
+  var totalAmount = 0;
+  var selectedServices = [];
+
+  // جميع الأكواد المتعلقة بتحديد القسم وتحميل الخدمات المتاحة
+  $('select[name="section"]').on('change', function() {
+    var sectionId = $(this).val();
+    if (sectionId) {
       $.ajax({
-        url: "{{ URL::to('section/services') }}/" + SectionId,
+        url: "{{ URL::to('section/services') }}/" + sectionId,
         type: "GET",
         dataType: "json",
         success: function(data) {
-          var servicesSelect = $('select[name="services[]"]');
-          servicesSelect.empty();
-          var totalPrice = 0;
+          $('select[name="services[]"]').empty();
           $.each(data, function(key, value) {
-            servicesSelect.append('<option value="' + value.id + '">' + value.service_name + ' - $' + value.price + '</option>');
-          });
-
-          servicesSelect.on('change', function() {
-            totalPrice = 0;
-            $('select[name="services[]"] option:selected').each(function() {
-              totalPrice += parseFloat($(this).text().split(' - $')[1]);
-            });
-            $('input[name="Amount_collection"]').val(totalPrice.toFixed(2));
+            $('select[name="services[]"]').append('<option value="' + value.id + '" data-price="' + value.price + '">' + value.service_name + ' - $' + value.price + '</option>');
           });
         },
       });
@@ -242,45 +239,49 @@
       console.log('AJAX load did not work');
     }
   });
+
+  $('#add-services-btn').on('click', function() {
+    var servicesSelect = $('#services');
+    var selected = servicesSelect.find('option:selected');
+    var servicesList = $('#selectedServices');
+
+    selected.each(function(i, service) {
+        var serviceId = $(service).val();
+        var serviceName = $(service).text().replace(/ - \$\d+/, '');
+        var servicePrice = $(service).data('price');
+        var serviceListItem = $('<li>').text(serviceName + ' - $' + servicePrice);
+        serviceListItem.data('id', serviceId);
+        serviceListItem.data('price', servicePrice);
+        servicesList.append(serviceListItem);
+        selectedServices.push({
+            id: serviceId,
+            name: serviceName,
+            price: servicePrice
+        });
+        totalAmount += servicePrice;
+    });
+
+    $('input[name="amount_collection"]').val(totalAmount.toFixed(2));
+  });
+
+  $('#remove-services-btn').on('click', function() {
+    var selected = $('#selectedServices').find('li.selected');
+    selected.each(function(i, service) {
+        var serviceId = $(service).data('id');
+        var servicePrice = $(service).data('price');
+        totalAmount = Math.max(0, totalAmount - servicePrice);
+        selectedServices = selectedServices.filter(function(item) {
+            return item.id != serviceId;
+        });
+        $(service).remove();
+    });
+    $('input[name="amount_collection"]').val(totalAmount.toFixed(2));
+  });
 });
 
 </script>
 
 
-
-    <script>
-        function myFunction() {
-
-            var Amount_Commission = parseFloat(document.getElementById("Amount_Commission").value);
-            var Discount = parseFloat(document.getElementById("Discount").value);
-            var Rate_VAT = parseFloat(document.getElementById("Rate_VAT").value);
-            var Value_VAT = parseFloat(document.getElementById("Value_VAT").value);
-
-            var Amount_Commission2 = Amount_Commission - Discount;
-
-
-            if (typeof Amount_Commission === 'undefined' || !Amount_Commission) {
-
-                alert('يرجي ادخال مبلغ العمولة ');
-
-            } else {
-                var intResults = Amount_Commission2 * Rate_VAT / 100;
-
-                var intResults2 = parseFloat(intResults + Amount_Commission2);
-
-                sumq = parseFloat(intResults).toFixed(2);
-
-                sumt = parseFloat(intResults2).toFixed(2);
-
-                document.getElementById("Value_VAT").value = sumq;
-
-                document.getElementById("Total").value = sumt;
-
-            }
-
-        }
-
-    </script>
 
 
 @endsection
