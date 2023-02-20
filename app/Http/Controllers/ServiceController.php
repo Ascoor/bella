@@ -2,17 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Service;
 
+use App\Http\Controllers\Controller;
+use App\Models\Service;
 use App\Models\Doctor;
 use App\Models\Section;
 use Illuminate\Http\Request;
 
-
 class ServiceController extends Controller
 {
-
-
     /**
      * Display a listing of the resource.
      *
@@ -20,11 +18,9 @@ class ServiceController extends Controller
      */
 
      public function index()
-     {
-         $services = Service::all();
-         $sections = Section::all();
-
-         return view('service.index')->with('services',$services)->with('sections',$sections);
+     { $sections = Section::all();
+         $services = Service::with('section')->get();
+         return view('service.index', ['services' => $services])->with('sections',$sections);
      }
 
      /**
@@ -32,11 +28,6 @@ class ServiceController extends Controller
       *
       * @return \Illuminate\Http\Response
       */
-     public function create()
-     {
-         //
-     }
-
 
 
      /**
@@ -47,14 +38,20 @@ class ServiceController extends Controller
       */
      public function store(Request $request)
      {
+         $request->validate([
+             'service_name' => 'required',
+             'section_id' => 'required',
+             'price' => 'required',
+         ]);
+
          $service = new Service;
          $service->service_name = $request->service_name;
          $service->price = $request->price;
-         $service->description = $request->description;
          $service->section_id = $request->section_id;
          $service->save();
 
-         return redirect()->back()->with('message', 'Service Created Successfully');
+         return redirect()->route('services.index')
+             ->with('success', 'Service created successfully');
      }
 
      /**
@@ -65,7 +62,9 @@ class ServiceController extends Controller
       */
      public function show(Service $service)
      {
-         //
+         $service = Service::with('section')->find($service->id);
+
+         return view('service.index', compact('service'));
      }
 
      /**
@@ -76,6 +75,7 @@ class ServiceController extends Controller
       */
      public function edit(Service $service)
      {
+         $service = Service::find($service->id);
          $sections = Section::all();
 
          return view('services.edit', compact('service', 'sections'));
@@ -88,31 +88,27 @@ class ServiceController extends Controller
       * @param  \App\Service  $service
       * @return \Illuminate\Http\Response
       */
-     public function update(Request $request,$id)
+     public function update(Request $request, Service $service)
      {
-        $service = Service::find($id);
-         $service->service_name = $request->service_name;
-         $service->price = $request->price;
-         $service->description = $request->description;
-         $service->section_id = $request->section_id;
-         $service->save();
+         $request->validate([
+             'service_name' => 'required',
+             'section_id' => 'required',
+             'price' => 'required',
+         ]);
 
-         return redirect()->back()->with('message', 'Service Updated Successfully');
+         $service = Service::find($service->id);
+         $service->service_name = $request->service_name;
+         $service->section_id = $request->section_id;
+         $service->price = $request->price;
+         $service->save();
+         session()->flash('edit','تم تعديل القسم بنجاج');
+         return redirect('/services ');
+     }
+     public function destroy($id)
+     {
+         $service = Service::find($id);
+         $service->delete();
+         return redirect()->back()->with('message', 'Service Deleted Successfully');
      }
 
-
-
-     /**
-      * Remove the specified resource from storage.
-      *
-      * @param  \App\Service  $service
-      * @return \Illuminate\Http\Response
-      */
-      public function destroy(Request $request)
-      {
-          $id = $request->id;
-          Service::find($id)->delete();
-          session()->flash('delete','تم حذف القسم بنجاح');
-          return redirect()->back();
-      }
     }

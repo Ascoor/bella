@@ -92,16 +92,16 @@
                         </thead>
                         <tbody>
                         <?php $i = 0; ?>
-                            @foreach ($services as $x)
+                            @foreach ($services as $service)
                                 <?php $i++; ?>
                                 <tr>
                                     <td>{{$i}}</td>
-                                    <td>{{ $x->service_name }}</td>
-                                    <td>{{ $x->section->section_name }}</td>
-                                    <td>{{ $x->price }}</td>
+                                    <td>{{ $service->service_name }}</td>
+                                    <td>{{ $service->section->section_name }}</td>
+                                    <td>{{ $service->price }}</td>
                                     <td>
-                                        <button class="btn btn-outline-success btn-sm" data-service_name="{{ $x->service_name }}" data-id="{{ $x->id }}" data-description="{{ $x->description }}" data-price="{{ $x->price }}" data-section_id="{{ $x->section->id }}" data-toggle="modal" data-target="#editServiceModal">Edit</button>
-                                        <button class="btn btn-outline-danger btn-sm " data-id="{{ $x->id }}" data-service_name="{{ $x->sevice_name }}" data-toggle="modal" data-target="#modaldemo9">Delete</button>
+                                        <button class="btn btn-outline-success btn-sm" data-service_name="{{ $service->service_name }}" data-id="{{ $service->i}}" data-description="{{ $service->description }}" data-price="{{ $service->price }}" data-section_id="{{ $service->section->id }}" data-toggle="modal" data-target="#editServiceModal">Edit</button>
+                                        <button class="btn btn-outline-danger btn-sm " data-id="{{ $service->i }}" data-service_name="{{ $service->service_name }}" data-toggle="modal" data-target="#modaldemo9">Delete</button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -133,7 +133,8 @@
           </div>
           <div class="form-group">
             <label for="price">Service price:</label>
-            <input type="number" name="price" id="price" class="form-control">
+
+<input type="number" id="price" name="price" step="0.01" min="0" required>
           </div>
 
           <div class="form-group">
@@ -171,17 +172,19 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="{{ route('services.update',$x->id) }}" method="post">
-            @csrf
-            @method('PATCH')
 
+
+
+<form action="{{ route('services.update',$service->id) }}" method="post">
+  @csrf
+  @method('PATCH')
           <div class="form-group">
             <label for="service_name">Service Name:</label>
             <input type="text" name="service_name" id="service_name" class="form-control" required>
           </div>
           <div class="form-group">
             <label for="price">Service price:</label>
-            <input type="number" name="price" id="price" class="form-control">
+            <input type="number" id="price" name="price" step="0.01" min="0" required>
           </div>
 
           <div class="form-group">
@@ -218,8 +221,10 @@
                     <h6 class="modal-title">حذف القسم</h6><button aria-label="Close" class="close" data-dismiss="modal"
                         type="button"><span aria-hidden="true">&times;</span></button>
                 </div>
-                <form action="services/destroy" method="post">
-                    {{ method_field('delete') }}
+                <form action="{{ route('services.destroy',$service->id) }}" method="post">
+
+@method('DELETE')
+@csrf
                     {{ csrf_field() }}
                     <div class="modal-body">
                         <p>هل انت متاكد من عملية الحذف ؟</p><br>

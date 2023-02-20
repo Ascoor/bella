@@ -24,8 +24,6 @@ class CreateInvoicesTable extends Migration
             $table->string('rate_vat', 999);
             $table->decimal('total', 8, 2);
             $table->text('note')->nullable();
-            $table->unsignedBigInteger('appointment_id')->nullable();
-            $table->foreign('appointment_id')->references('id')->on('appointments')->onDelete('set null');
 
             $table->unsignedBigInteger('client_id');
             $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
