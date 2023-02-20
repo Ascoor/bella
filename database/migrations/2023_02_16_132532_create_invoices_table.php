@@ -16,8 +16,8 @@ class CreateInvoicesTable extends Migration
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
             $table->string('invoice_number', 50);
-            $table->date('invoice_date');
-            $table->date('due_date');
+            $table->string('invoice_date');
+            $table->string('due_date');
             $table->decimal('amount_collection', 8, 2)->nullable();
             $table->decimal('discount', 8, 2);
             $table->decimal('value_vat', 8, 2);
@@ -34,15 +34,15 @@ class CreateInvoicesTable extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
-        Schema::create('invoice_details', function (Blueprint $table) {
+        Schema::create('Invoice_details', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('invoice_id');
             $table->foreign('invoice_id')->references('id')->on('invoices')->onDelete('cascade');
             $table->string('status', 50);
             $table->integer('value_status');
-            $table->date('payment_date')->nullable();
+            $table->string('payment_date')->nullable();
             $table->text('note')->nullable();
-            $table->string('user', 300);
+            $table->string('user_id', 300);
             $table->timestamps();
         });
         Schema::create('client_invoice', function (Blueprint $table) {
@@ -53,7 +53,7 @@ class CreateInvoicesTable extends Migration
             $table->foreign('invoice_id')->references('id')->on('invoices')->onDelete('cascade');
             $table->timestamps();
         });
-        Schema::create('invoices_services', function (Blueprint $table) {
+        Schema::create('invoice_service', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('invoice_id');
             $table->foreign('invoice_id')->references('id')->on('invoices')->onDelete('cascade');
@@ -61,7 +61,7 @@ class CreateInvoicesTable extends Migration
             $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade');
             $table->unsignedBigInteger('section_id');
             $table->foreign('section_id')->references('id')->on('sections')->onDelete('cascade');
-            $table->decimal('price', 8, 2);
+
             $table->timestamps();
         });
 

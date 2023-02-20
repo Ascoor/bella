@@ -56,7 +56,7 @@
 
                         <div class="col">
                             <label>تاريخ الفاتورة</label>
-                            <input class="form-control fc-datepicker" name="invoice_Date" placeholder="YYYY-MM-DD" type="text" value="{{ date('Y-m-d') }}" required>
+                            <input class="form-control fc-datepicker" name="invoice_date" placeholder="YYYY-MM-DD" type="text" value="{{ date('Y-m-d') }}" required>
                         </div>
 
                         <div class="col">
@@ -65,7 +65,18 @@
                         </div>
 
                     </div>
-
+                    <div class="row">
+                        <div class="col">
+                            <label for="client" class="control-label">Choose client:</label>
+                            <select id="client_id" name="client_id">
+                                <option value="">Choose</option>
+                                @foreach ($clients as $client)
+                                <option value="{{ $client->id }}">{{ $client->client_name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <br/>
                     {{-- 2 --}}
 
                     <div class="row">
@@ -79,7 +90,7 @@
                             </select>
                         </div>
 
-<div class="row mt-4">
+
   <div class="col">
     <label for="services" class="control-label">Choose Services:</label>
     <select id="services" name="services[]" multiple class="form-control">
@@ -94,8 +105,8 @@
     <h4>Selected Services:</h4>
     <ul id="selectedServices" class="list-group">
     </ul>
-    <button type="button" class="btn btn-danger btn-sm mt-2" id="remove-services-btn" onclick="remove-services-btn">Remove Selected Services</button>
-  </div>
+    <button type="button" class="btn btn-danger btn-sm mt-2" id="remove-services-btn">Remove Selected Services</button>
+</div>
 </div>
 
 <div class="row mt-4">
@@ -109,20 +120,23 @@
   </div>
   <div class="col">
     <label for="rate_vat" class="control-label">Rate VAT:</label>
-    <select id="rate_vat" name="rate_vat" class="form-control">
+    <select id="rate_vat" name="rate_vat" class="form-control" value="0.00">
       <option value="0">0%</option>
       <option value="5">5%</option>
       <option value="10">10%</option>
     </select>
   </div>
+</div>
+  <div class="row mt-4">
+  <div class="col">
+                                <label for="inputName" class="control-label">قيمة ضريبة القيمة المضافة</label>
+                                <input type="text" class="form-control" id="value_vat" name="value_vat"  value="0.00" readonly>
+                            </div>
   <div class="col">
     <label for="total" class="control-label">Total:</label>
     <input type="text" id="total" name="total" class="form-control" value="0.00" readonly>
   </div>
 </div>
-
-</div>
-                    </div>
 
 
                     {{-- 5 --}}
@@ -137,7 +151,7 @@
                     <h5 class="card-title">المرفقات</h5>
 
                     <div class="col-sm-12 col-md-12">
-                        <input type="file" name="pic" class="dropify" accept=".pdf,.jpg, .png, image/jpeg, image/png" data-height="70" />
+                        <input type="file" name="attached[]" class="dropify" accept=".pdf,.jpg, .png, image/jpeg, image/png" data-height="70" />
                     </div><br>
 
                     <div class="d-flex justify-content-center">
@@ -190,8 +204,7 @@
 <script>
 $(document).ready(function() {
   // On section change
- // On section change
- $("#section").on("change", function() {
+  $("#section").on("change", function() {
     var sectionId = $(this).val();
     if (sectionId) {
       $.ajax({
@@ -210,84 +223,80 @@ $(document).ready(function() {
     }
   });
 
-
-
-
-  /// On add services button click
+  // On add services button click
   $("#add-services-btn").click(function() {
-  var total = 0;
-  var selectedServices = "";
-  $("#services option:selected").each(function() {
-    var serviceName = $(this).text();
-    var servicePrice = $(this).data("price");
-    selectedServices += "<li class='list-group-item' data-price='" + servicePrice + "'>" + serviceName + "</li>";
-    total += parseFloat(servicePrice);
-  });
-  $("#selectedServices").append(selectedServices);
-  $("#amount_collection").val(total.toFixed(2));
-
-  updateAmountCollection(); // Call updateAmountCollection() function
-});
-
-// On remove services button click
-$("#remove-services-btn").click(function() {
-  var total = parseFloat($("#amount_collection").val());
-  $("#selectedServices li.active").each(function() {
-    var price = parseFloat($(this).data("price"));
-    total -= price;
-    $(this).remove();
-  });
-  $("#amount_collection").val(total.toFixed(2));
-
-  updateAmountCollection(); // Call updateAmountCollection() function
-});
-
-
-  // On click of selected services
-  $("#selectedServices").on("click", "li", function() {
-    $(this).toggleClass("active");
-    updateAmountCollection();
+    var total = 0;
+    var selectedServices = "";
+    $("#services option:selected").each(function() {
+      var serviceName = $(this).text();
+      var servicePrice = $(this).data("price");
+      selectedServices += "<li class='list-group-item' data-price='" + servicePrice + "'>" + serviceName + "</li>";
+      total += parseFloat(servicePrice);
+    });
+    $("#selectedServices").append(selectedServices);
+    $("#amount_collection").val(total.toFixed(2));
+    updateAmountCollection(); // Call updateAmountCollection() function
   });
 
-  // On click of remove service button
-
-
-  // On click of selected services remove button
-  $("#selectedServices").on("click", ".remove-service-btn", function() {
-    var servicePrice = parseFloat($(this).parent().data("price"));
+  // On remove services button click
+  $("#remove-services-btn").click(function() {
     var total = parseFloat($("#amount_collection").val());
-    total -= servicePrice;
-    $(this).parent().remove();
+    $("#selectedServices li.active").each(function() {
+      var price = parseFloat($(this).data("price"));
+      total -= price;
+      $(this).remove();
+    });
     $("#amount_collection").val(total.toFixed(2));
     updateAmountCollection();
   });
 
   // On click of selected services
-  $("#selectedServices").on("click", "li", function() {
-    $(this).toggleClass("active");
+  if ($("#selectedServices").length) {
+    $("#selectedServices").on("click", "li", function() {
+      $(this).toggleClass("active");
+      updateAmountCollection();
+    });
+
+    // On click of selected services remove button
+    $("#selectedServices").on("click", ".remove-service-btn", function() {
+      var servicePrice = parseFloat($(this).parent().data("price"));
+      var total = parseFloat($("#amount_collection").val());
+      total -= servicePrice;
+      $(this).parent().remove();
+      $("#amount_collection").val(total.toFixed(2));
+      updateAmountCollection();
+    });
+  }
+
+  // On change of discount input
+  $("#discount").on("input", function() {
+    updateAmountCollection();
+  });
+
+  // On change of rate VAT input
+  $("#rate_vat").on("change", function() {
+    updateAmountCollection();
   });
 
   // Update amount collection based on selected services
-
   function updateAmountCollection() {
-    var selectedServices = $("#selectedServices li");
-    var total = 0;
-    selectedServices.each(function() {
-      total += parseFloat($(this).data("price"));
-    });
+  var selectedServices = $("#selectedServices li");
+  var total = 0;
+  selectedServices.each(function() {
+    total += parseFloat($(this).data("price"));
+  });
 
-   var discountValue = parseFloat($("#discount").val()) || 0;
-    total -= discountValue;
+  var discountValue = parseFloat($("#discount").val()) || 0;
+  total -= discountValue;
 
-    var vatRate = parseFloat($("#rate_vat").val()) || 0;
-    var vatValue = (total * vatRate) / 100;
+  var vatRate = parseFloat($("#rate_vat").val()) || 0;
+  var vatValue = (total * (vatRate/100));
+  $("#value_vat").val(vatValue.toFixed(2));
 
-    $("#vlue_vat").val(vatValue.toFixed(2));
-    $("#amount_collection").val(total.toFixed(2));
-
-    var finalTotal = total + vatValue;
-    $("#total").val(finalTotal.toFixed(2));
-  }
+  total += vatValue;
+  $("#amount_collection").val(total.toFixed(2));
+  $("#total").val(total.toFixed(2));
+}
 
 });
 

@@ -18,4 +18,8 @@ class Service extends Model
     {
         return $this->belongsTo(Section::class);
     }
+    public function invoice()
+    {
+        return $this->belongsToMany(invoice::class);
+    }
 }

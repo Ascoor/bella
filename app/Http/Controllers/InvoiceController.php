@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use App\Models\Invoice;
-use App\Models\Invoice_detail;
-use App\Models\Invoice_service;
-use App\Models\Invoice_attachment;
-use App\Models\Invoice_details;
+
+use App\Models\InvoiceService;
+
+use App\Models\InvoiceDetail;
+use App\Models\InvoiceAttachment;
 use App\Models\Service;
 use App\Models\Section;
 use Illuminate\Http\Request;
@@ -47,72 +48,58 @@ $sections =Section::all();
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        $invoice = new Invoice;
-        $invoice->invoice_number = $request->invoice_number;
-        $invoice->invoice_date = $request->invoice_date;
-        $invoice->due_date = $request->due_date;
-        $invoice->amount_collection = 0;
-        $invoice->discount = $request->discount;
-        $invoice->value_vat = $request->value_vat;
-        $invoice->total = 0;
-        $invoice->status = 'pending';
-        $invoice->save();
 
-        foreach ($request->services as $serviceData) {
-            $service = Service::find($serviceData['id']);
-            $servicePrice = $service->price;
-            $Invoice_service = new Invoice_service;
-            $Invoice_service->invoice_id = $invoice->id;
-            $Invoice_service->service_id = $service->id;
-            $Invoice_service->section_id = $service->section_id;
-            $Invoice_service->quantity = $serviceData['quantity'];
-            $Invoice_service->price = $servicePrice;
-            $Invoice_service->save();
-            $invoice->amount_collection += $servicePrice * $serviceData['quantity'];
-        }
+     public function store(Request $request)
+     {
+         $validatedData = $request->validate([
+             'invoice_number' => 'required',
+             'invoice_date' => 'required',
+             'due_date' => 'required',
+             'client_id' => 'required|exists:clients,id',
+             'section' => 'required|exists:sections,id',
+             'services' => 'required|array',
+             'amount_collection' => 'required|numeric|min:0',
+             'discount' => 'required|numeric|min:0',
+             'rate_vat' => 'required|numeric|min:0',
+             'value_vat' => 'required|numeric|min:0',
+             'total' => 'required|numeric|min:0',
+             'note' => 'nullable|string',
+             'attached.*' => 'nullable|mimes:pdf,jpeg,jpg,png|max:2048',
+         ]);
 
-        $invoice->amount_collection -= $invoice->discount;
+         $invoice = new Invoice();
+         $invoice->invoice_number = $validatedData['invoice_number'];
+         $invoice->invoice_date = $validatedData['invoice_date'];
+         $invoice->due_date = $validatedData['due_date'];
+         $invoice->client_id = $validatedData['client_id'];
 
-        if ($invoice->value_vat) {
-            $vatAmount = ($invoice->amount_collection * $invoice->value_vat) / 100;
-            $invoice->rate_vat = $invoice->value_vat;
-            $invoice->amount_vat = $vatAmount;
-            $invoice->total = $invoice->amount_collection + $vatAmount;
-        } else {
-            $invoice->total = $invoice->amount_collection;
-        }
+         $invoice->amount_collection = $validatedData['amount_collection'];
+         $invoice->discount = $validatedData['discount'];
+         $invoice->rate_vat = $validatedData['rate_vat'];
+         $invoice->value_vat = $validatedData['value_vat'];
+         $invoice->total = $validatedData['total'];
+         $invoice->note = $validatedData['note'];
+         $invoice->created_by = Auth::id();
 
-        $invoice->save();
+         $invoice->save();
 
-        $invoiceDetails = new Invoice_details();
-        $invoiceDetails->invoice_id = $invoice->id;
-        $invoiceDetails->status = 'pending';
-        $invoiceDetails->value_status = 0;
-        $invoiceDetails->user = auth()->user()->name;
-        $invoiceDetails->save();
+// Attach services to the invoice
+$invoice->services()->attach($validatedData['services'], ['section_id' => $validatedData['section']]);
 
-        if ($request->hasFile('attachment')) {
-            $files = $request->file('attachment');
-            $attachedFiles = [];
-            foreach ($files as $file) {
-                $path = $file->store('public/invoice_attachments');
-                $attachedFiles[] = [
-                    'name' => $file->getClientOriginalName(),
-                    'path' => $path,
-                ];
-            }
 
-            $invoiceAttachments = new Invoice_attachment();
-            $invoiceAttachments->invoice_id = $invoice->id;
-            $invoiceAttachments->attached_files = json_encode($attachedFiles);
-            $invoiceAttachments->created_by = auth()->user()->id;
-            $invoiceAttachments->save();
-        }
+         // Handle file upload
+         if ($request->hasFile('attached')) {
+             foreach ($request->file('attached') as $file) {
+                 $path = $file->store('public/attachments');
+                 $invoice->attachments()->create(['file_path' => $path]);
+             }
+         }
 
-        return response()->json(['message' => 'Invoice created successfully.'], 201);
-    }
+         return redirect()->route('invoices.index')->with('success', 'Invoice created successfully!');
+     }
+
+
+
     public function update(Request $request, $id)
 {
     $invoice = Invoice::findOrFail($id);
@@ -142,9 +129,9 @@ $sections =Section::all();
 public function getservices($section_id)
 {
 
-
     $services = DB::table('services')->where('section_id', $section_id)->get();
     return response()->json($services);
+    return json_encode($services);
 }
 public function delete($id)
 {
