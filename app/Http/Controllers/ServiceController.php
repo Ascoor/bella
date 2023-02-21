@@ -88,7 +88,7 @@ class ServiceController extends Controller
       * @param  \App\Service  $service
       * @return \Illuminate\Http\Response
       */
-     public function update(Request $request, Service $service)
+     public function update(Request $request)
      {
          $request->validate([
              'service_name' => 'required',
@@ -96,7 +96,7 @@ class ServiceController extends Controller
              'price' => 'required',
          ]);
 
-         $service = Service::find($service->id);
+         $service = Service::find($request->id);
          $service->service_name = $request->service_name;
          $service->section_id = $request->section_id;
          $service->price = $request->price;

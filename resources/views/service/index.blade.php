@@ -174,10 +174,11 @@
       <div class="modal-body">
 
 
-
+      @foreach ($services as $service )
 <form action="{{ route('services.update',$service->id) }}" method="post">
   @csrf
   @method('PATCH')
+  @endforeach
           <div class="form-group">
             <label for="service_name">Service Name:</label>
             <input type="text" name="service_name" id="service_name" class="form-control" required>
@@ -221,12 +222,14 @@
                     <h6 class="modal-title">حذف القسم</h6><button aria-label="Close" class="close" data-dismiss="modal"
                         type="button"><span aria-hidden="true">&times;</span></button>
                 </div>
+
+
+      @foreach ($services as $service )
                 <form action="{{ route('services.destroy',$service->id) }}" method="post">
 
 @method('DELETE')
 @csrf
-                    {{ csrf_field() }}
-                    <div class="modal-body">
+    @endforeach                <div class="modal-body">
                         <p>هل انت متاكد من عملية الحذف ؟</p><br>
                         <input type="hidden" name="id" id="id" value="">
                         <input class="form-control" name="service_name" id="service_name" type="text" readonly>
