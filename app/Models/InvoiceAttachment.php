@@ -11,13 +11,5 @@ class InvoiceAttachment extends Model
 
     protected $table = 'invoice_attachments';
 
-    public function invoice()
-    {
-        return $this->belongsTo(Invoice::class);
-    }
 
-    public function createdBy()
-    {
-        return $this->belongsTo(User::class, 'created_by');
-    }
 }

@@ -15,27 +15,40 @@ class CreateInvoicesTable extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
+
+
+
+
             $table->string('invoice_number', 50);
-            $table->string('invoice_date');
-            $table->string('due_date');
-            $table->decimal('amount_collection', 8, 2)->nullable();
-            $table->decimal('discount', 8, 2);
-            $table->decimal('value_vat', 8, 2);
-            $table->string('rate_vat', 999);
-            $table->decimal('total', 8, 2);
-            $table->text('note')->nullable();
+                $table->string('invoice_date');
+                $table->string('due_date');
+                $table->decimal('amount_collection', 8, 2)->nullable();
+                $table->decimal('discount', 8, 2);
+                $table->decimal('value_vat', 8, 2);
+                $table->string('rate_vat', 999);
+                $table->decimal('total', 8, 2);
+                $table->integer('value_status');
+                $table->string('status', 50);
+                $table->bigInteger( 'section_id' )->unsigned();
+                $table->foreign('section_id')->references('id')->on('sections')->onDelete('cascade');
+                $table->text('note')->nullable();
+                $table->unsignedBigInteger('client_id');
+                $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
+                $table->unsignedBigInteger('created_by');
+                $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
 
-            $table->unsignedBigInteger('client_id');
-            $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
+                $table->string('payment_date')->nullable();
 
 
-            $table->unsignedBigInteger('created_by');
-            $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();
         });
         Schema::create('Invoice_details', function (Blueprint $table) {
             $table->id();
+
+            $table->string('service', 50);
+            $table->string('section', 999);
+
             $table->unsignedBigInteger('invoice_id');
             $table->foreign('invoice_id')->references('id')->on('invoices')->onDelete('cascade');
             $table->string('status', 50);
@@ -53,15 +66,11 @@ class CreateInvoicesTable extends Migration
             $table->foreign('invoice_id')->references('id')->on('invoices')->onDelete('cascade');
             $table->timestamps();
         });
-        Schema::create('invoice_service', function (Blueprint $table) {
+        Schema::create('invoice_services', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('invoice_id');
-            $table->foreign('invoice_id')->references('id')->on('invoices')->onDelete('cascade');
-            $table->unsignedBigInteger('service_id');
-            $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade');
-            $table->unsignedBigInteger('section_id');
-            $table->foreign('section_id')->references('id')->on('sections')->onDelete('cascade');
 
+            $table->unsignedBigInteger('service_id');
             $table->timestamps();
         });
 

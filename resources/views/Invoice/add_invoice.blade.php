@@ -82,7 +82,7 @@
                     <div class="row">
                         <div class="col">
                             <label for="section" class="control-label">Choose Section:</label>
-                            <select id="section" name="section">
+                            <select id="section" name="section_id">
                                 <option value="">Choose</option>
                                 @foreach ($sections as $section)
                                 <option value="{{ $section->id }}">{{ $section->section_name }}</option>
@@ -93,7 +93,7 @@
 
   <div class="col">
     <label for="services" class="control-label">Choose Services:</label>
-    <select id="services" name="services[]" multiple class="form-control">
+    <select id="services"  class="form-control">
 
     </select>
     <button type="button" class="btn btn-primary btn-sm mt-2" id="add-services-btn">Add Selected Services</button>
@@ -103,7 +103,7 @@
 <div class="row mt-4">
   <div class="col">
     <h4>Selected Services:</h4>
-    <ul id="selectedServices" class="list-group">
+    <ul id="selectedServices" multiple  name="services[]" class="list-group">
     </ul>
     <button type="button" class="btn btn-danger btn-sm mt-2" id="remove-services-btn">Remove Selected Services</button>
 </div>

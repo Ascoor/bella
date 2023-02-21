@@ -19,9 +19,13 @@ class Invoice extends Model
         'value_vat',
         'rate_vat',
         'total',
+        'value_status',
+        'status',
+        'section_id',
         'note',
         'client_id',
         'created_by',
+        'payment_date',
     ];
 
 
@@ -46,9 +50,10 @@ class Invoice extends Model
         {
             return $this->hasMany(Attachment::class);
         }
-        public function invoice_details()
+        public function invoice_detail()
         {
-            return $this->hasMany(InvoiceDetail::class);
+            return $this->belongsTo(InvoiceDetail::class);
         }
+
     }
 

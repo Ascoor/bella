@@ -58,17 +58,12 @@ Route::get('/section/services/{id}', function ($section_id) {
 });
 
 
-Route::get('/invoices', [InvoiceController::class, 'index'])->name('invoices.index');
-Route::get('/invoices/create', [InvoiceController::class, 'create'])->name('invoices.create');
-Route::post('/invoices', [InvoiceController::class, 'store'])->name('invoices.store');
-Route::put('/invoices/{id}', [InvoiceController::class, 'update'])->name('invoices.update');
 
-Route::delete('/invoices/{id}', [InvoiceController::class, 'delete'])->name('invoices.delete');
 
 
 Route::resource('clients', ClientController::class);
 // Route::resource('appointments', AppointmentController::class);
-// Route::resource('invoices', InvoiceController::class);
+Route::resource('invoices', InvoiceController::class);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/{page}', [App\Http\Controllers\AdminController::class, 'index'])->name('{page}');
 
