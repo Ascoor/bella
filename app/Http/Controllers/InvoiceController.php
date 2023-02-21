@@ -24,7 +24,7 @@ class InvoiceController extends Controller
     {
         $invoices = Invoice::with('services')->get();
 $services = Service::all();
-        return view('Invoice.index', compact('invoices'))->with('services',$services);
+        return view('ivoice.index', compact('invoices'))->with('services',$services);
     }
 
 
