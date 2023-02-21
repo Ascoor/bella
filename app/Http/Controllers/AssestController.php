@@ -17,10 +17,10 @@ class AssestController extends Controller
 
      public function index()
      {
-         $assests = Assest::with('section')->get();
+         $assests = Assest::all();
          $sections = Section::all();
 
-         return view('team.assest.index', compact('assests', 'sections'));
+         return view('team.assest.index')->with('assests',$assests)->with('sections',$sections);
      }
 
      /**
@@ -46,6 +46,7 @@ class AssestController extends Controller
 
 
          $assest->section_id = $request->section_id;
+         $assest->phone = $request->phone;
          $assest->save();
 
          return redirect()->back()->with('message', 'Assest Created Successfully');

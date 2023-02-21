@@ -101,19 +101,19 @@
 
 
                                     <tr>
-                                        <td>{{ $x->id }}</td>
+                                        <td>{{ $i }}</td>
                                         <td>{{ $x->assest_name }}</td>
                                         <td>{{ $x->section->section_name }}</td>
 
                                         <td>{{ $x->phone }}</td>
                                         <td>
                                             <button class="btn btn-outline-success btn-sm"
-                                                data-assest_name="{{ $x->assest_name }}" data-id="{{ $x->id }}"
+                                                data-assest_name="{{ $x->assest_name }}" data-id="{{ $x->i }}"
                                                 data-section_id="{{ $x->section->id }}"
                                                  data-phone="{{ $x->phone }}" data-toggle="modal"
                                                 data-target="#edit_assest">تعديل</button>
 
-                                            <button class="btn btn-outline-danger btn-sm " data-id="{{ $x->id }}"
+                                            <button class="btn btn-outline-danger btn-sm " data-id="{{ $x->i }}"
                                                 data-assest_name="{{ $x->assest_name }}" data-toggle="modal"
                                                 data-target="#modaldemo9">حذف</button>
                                         </td>
@@ -127,8 +127,10 @@
         </div>
 
         <!-- add -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <!-- code here -->
+<
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -150,7 +152,7 @@
                             <select name="section_id" id="section_id" class="form-control" required>
                                 <option value="" selected disabled> --حدد القسم--</option>
                                 @foreach ($sections as $section)
-                                    <option ">{{ $section->section_name }}</option>
+                                    <option value="{{$section->id }}">{{ $section->section_name   }}</option>
                                 @endforeach
                             </select>
 
@@ -159,7 +161,7 @@
                                 <label for="title">رقم الجوال:</label>
 
 
-                                <input type="tel" class="form-control" name="phone" id="phone">
+                                <input class="form-control" id="phone" name="phone" type="tel">
                             </div>
 
 
@@ -172,9 +174,11 @@
             </div>
         </div>
 
+
+
         <!-- edit -->
-        <div class="modal fade" id="edit_assest" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
+
+        <div class="modal fade" id="edit_assest" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -183,12 +187,13 @@
                              <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    @foreach ($assests as $assest    )                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                est )
+@foreach ($assests as $assest )
 
-                    <form action="{{ route('assests.update',$assest->id) }}" method="post">
-            @csrf
-            @method('PATCH')
-            @endforeach    <div class="modal-body">
+<form action="{{ route('assests.update', ['assest' => $assest->id]) }}" method="post">
+    @csrf
+    @method('PATCH')
+    @endforeach
+            <div class="modal-body">
 
                             <div class="form-group">
                                 <label for="title">اسم المساعد :</label>
@@ -221,10 +226,9 @@
             </div>
         </div>
 
-        <!-- delete -->
-        <div class="modal fade" id="modaldemo9" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
+<div class="modal fade" id="modaldemo9" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">حذف المساعد</h5>
