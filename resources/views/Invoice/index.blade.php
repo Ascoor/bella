@@ -116,7 +116,14 @@
                                         <td>{{ $invoice->invoice_number }} </td>
                                         <td>{{ $invoice->invoice_date }}</td>
                                         <td>{{ $invoice->due_date }}</td>
+                                        <td>@foreach ($invoice->services as $service )
+                                            <br/>
+                                            {{$service->service_name}}
+                                            {{$service->price}}
+                                            <br/>
+                                        @endforeach</td>
                                         <td>{{ $invoice->section->section_name }}</td>
+
 
                                         <td>{{ $invoice->discount }}</td>
                                         <td>{{ $invoice->rate_vat }}</td>
@@ -124,11 +131,11 @@
                                         <td>{{ $invoice->total }}</td>
                                         <td>
                                             @if ($invoice->Value_Status == 1)
-                                                <span class="text-success">{{ $invoice->Status }}</span>
+                                                <span class="text-success">{{ $invoice->status }}</span>
                                             @elseif($invoice->Value_Status == 2)
-                                                <span class="text-danger">{{ $invoice->Status }}</span>
+                                                <span class="text-danger">{{ $invoice->status }}</span>
                                             @else
-                                                <span class="text-warning">{{ $invoice->Status }}</span>
+                                                <span class="text-warning">{{ $invoice->status }}</span>
                                             @endif
 
                                         </td>
@@ -142,7 +149,7 @@
                                                 <div class="dropdown-menu tx-13">
                                                     ('تعديل الفاتورة')
                                                         <a class="dropdown-item"
-                                                            href=" {{ url('edit_invoice') }}/{{ $invoice->id }}">تعديل
+                                                            href=" {{ route('invoices.edit',$invoice) }}">تعديل
                                                             الفاتورة</a>
 
 
@@ -155,7 +162,7 @@
 
                                                     ('تغير حالة الدفع')
                                                         <a class="dropdown-item"
-                                                            href="{{ URL::route('Status_show', [$invoice->id]) }}"><i
+                                                            ><i
                                                                 class=" text-success fas
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     fa-money-bill"></i>&nbsp;&nbsp;تغير
                                                             حالة
@@ -192,61 +199,8 @@
     </div>
 
     <!-- حذف الفاتورة -->
-    <div class="modal fade" id="delete_invoice" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">حذف الفاتورة</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <form action="{{ route('invoices.delete', 'test') }}" method="post">
-                        {{ method_field('delete') }}
-                        {{ csrf_field() }}
-                </div>
-                <div class="modal-body">
-                    هل انت متاكد من عملية الحذف ؟
-                    <input type="hidden" name="invoice_id" id="invoice_id" value="">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
-                    <button type="submit" class="btn btn-danger">تاكيد</button>
-                </div>
-                </form>
-            </div>
-        </div>
-    </div>
 
 
-    <!-- ارشيف الفاتورة -->
-    <div class="modal fade" id="Transfer_invoice" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">ارشفة الفاتورة</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <form action="{{ route('invoices.delete', 'test') }}" method="post">
-                        {{ method_field('delete') }}
-                        {{ csrf_field() }}
-                </div>
-                <div class="modal-body">
-                    هل انت متاكد من عملية الارشفة ؟
-                    <input type="hidden" name="invoice_id" id="invoice_id" value="">
-                    <input type="hidden" name="id_page" id="id_page" value="2">
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
-                    <button type="submit" class="btn btn-success">تاكيد</button>
-                </div>
-                </form>
-            </div>
-        </div>
-    </div>
 
     </div>
     <!-- row closed -->

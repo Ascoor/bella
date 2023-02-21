@@ -25,7 +25,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/ww', function () {
-    return view('accordion', [
+    return view('semantic-ui', [
         'doctors' => Doctor::all(),
     ]);
 });

@@ -15,75 +15,30 @@ class CreateInvoicesTable extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
-
-
-
-
             $table->string('invoice_number', 50);
-                $table->string('invoice_date');
-                $table->string('due_date');
-                $table->decimal('amount_collection', 8, 2)->nullable();
-                $table->decimal('discount', 8, 2);
-                $table->decimal('value_vat', 8, 2);
-                $table->string('rate_vat', 999);
-                $table->decimal('total', 8, 2);
-                $table->integer('value_status');
-                $table->string('status', 50);
-                $table->bigInteger( 'section_id' )->unsigned();
-                $table->foreign('section_id')->references('id')->on('sections')->onDelete('cascade');
-                $table->text('note')->nullable();
-                $table->unsignedBigInteger('client_id');
-                $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
-                $table->unsignedBigInteger('created_by');
-                $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
-
-                $table->string('payment_date')->nullable();
-
-
+            $table->date('invoice_date')->nullable();
+            $table->date('due_date')->nullable();
+            $table->decimal('amount_collection', 8, 2)->nullable();
+            $table->decimal('discount', 8, 2)->default(0);
+            $table->decimal('value_vat', 8, 2)->default(0);
+            $table->decimal('rate_vat', 8, 2)->default(0);
+            $table->decimal('total', 8, 2);
+            $table->unsignedTinyInteger('value_status')->default(2);
+            $table->string('status', 50)->default('غير مدفوعة');
+            $table->unsignedBigInteger('section_id');
+            $table->foreign('section_id')->references('id')->on('sections')->onDelete('cascade');
+            $table->text('note')->nullable();
+            $table->unsignedBigInteger('client_id');
+            $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
+            $table->unsignedBigInteger('created_by');
+            $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
+            $table->date('payment_date')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
-        Schema::create('Invoice_details', function (Blueprint $table) {
-            $table->id();
 
-            $table->string('service', 50);
-            $table->string('section', 999);
 
-            $table->unsignedBigInteger('invoice_id');
-            $table->foreign('invoice_id')->references('id')->on('invoices')->onDelete('cascade');
-            $table->string('status', 50);
-            $table->integer('value_status');
-            $table->string('payment_date')->nullable();
-            $table->text('note')->nullable();
-            $table->string('user_id', 300);
-            $table->timestamps();
-        });
-        Schema::create('client_invoice', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('client_id');
-            $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
-            $table->unsignedBigInteger('invoice_id');
-            $table->foreign('invoice_id')->references('id')->on('invoices')->onDelete('cascade');
-            $table->timestamps();
-        });
-        Schema::create('invoice_services', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('invoice_id');
 
-            $table->unsignedBigInteger('service_id');
-            $table->timestamps();
-        });
-
-        Schema::create('invoice_attachments', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('invoice_id');
-            $table->foreign('invoice_id')->references('id')->on('invoices')->onDelete('cascade');
-            $table->json('attached_files');
-            $table->unsignedBigInteger('created_by');
-            $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
-
-            $table->timestamps();
-        });
     }
 
     /**
