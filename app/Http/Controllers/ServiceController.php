@@ -19,7 +19,7 @@ class ServiceController extends Controller
 
      public function index()
      { $sections = Section::all();
-         $services = Service::with('section')->get();
+         $services = Service::all();
          return view('service.index', ['services' => $services])->with('sections',$sections);
      }
 
