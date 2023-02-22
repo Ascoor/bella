@@ -1,14 +1,14 @@
 @extends('layouts.master')
 @section('css')
-    <!-- Internal Data table css -->
-    <link href="{{ URL::asset('assets/plugins/datatable/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet" />
-    <link href="{{ URL::asset('assets/plugins/datatable/css/buttons.bootstrap4.min.css') }}" rel="stylesheet">
-    <link href="{{ URL::asset('assets/plugins/datatable/css/responsive.bootstrap4.min.css') }}" rel="stylesheet" />
-    <link href="{{ URL::asset('assets/plugins/datatable/css/jquery.dataTables.min.css') }}" rel="stylesheet">
-    <link href="{{ URL::asset('assets/plugins/datatable/css/responsive.dataTables.min.css') }}" rel="stylesheet">
-    <link href="{{ URL::asset('assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
+<!-- Internal Data table css -->
+<link href="{{ URL::asset('assets/plugins/datatable/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet" />
+<link href="{{ URL::asset('assets/plugins/datatable/css/buttons.bootstrap4.min.css') }}" rel="stylesheet">
+<link href="{{ URL::asset('assets/plugins/datatable/css/responsive.bootstrap4.min.css') }}" rel="stylesheet" />
+<link href="{{ URL::asset('assets/plugins/datatable/css/jquery.dataTables.min.css') }}" rel="stylesheet">
+<link href="{{ URL::asset('assets/plugins/datatable/css/responsive.dataTables.min.css') }}" rel="stylesheet">
+<link href="{{ URL::asset('assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
 @section('title')
-    الاقسام
+الاقسام
 @stop
 
 @endsection
@@ -23,44 +23,44 @@
     </div>
 </div>
 <!-- breadcrumb -->
+
 @endsection
 @section('content')
-
 @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
 @endif
 
 @if (session()->has('Add'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>{{ session()->get('Add') }}</strong>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>{{ session()->get('Add') }}</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
 @endif
 
 @if (session()->has('delete'))
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <strong>{{ session()->get('delete') }}</strong>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>{{ session()->get('delete') }}</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
 @endif
 
 @if (session()->has('edit'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>{{ session()->get('edit') }}</strong>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>{{ session()->get('edit') }}</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
 @endif
 <!-- row -->
 <div class="row">
@@ -71,16 +71,14 @@
             <div class="card-header pb-0">
                 <div class="d-flex justify-content-between">
 
-                        <a class="modal-effect btn btn-outline-primary btn-block" data-effect="effect-scale"
-                            data-toggle="modal" href="#addmodel">اضافة قسم</a>
+                    <a class="modal-effect btn btn-outline-primary btn-block" data-effect="effect-scale" data-toggle="modal" href="#addmodel">اضافة قسم</a>
 
                 </div>
 
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table id="example1" class="table key-buttons text-md-nowrap" data-page-length='50'
-                        style="text-align: center">
+                    <table id="example1" class="table key-buttons text-md-nowrap" data-page-length='50' style="text-align: center">
                         <thead>
                             <tr>
                                 <th class="border-bottom-0">#</th>
@@ -92,26 +90,20 @@
                         <tbody>
                             <?php $i = 0; ?>
                             @foreach ($sections as $x)
-                                <?php $i++; ?>
-                                <tr>
-                                    <td>{{ $i }}</td>
-                                    <td>{{ $x->section_name }}</td>
-                                    <td>{{ $x->description }}</td>
-                                    <td>
+                            <?php $i++; ?>
+                            <tr>
+                                <td>{{ $i }}</td>
+                                <td>{{ $x->section_name }}</td>
+                                <td>{{ $x->description }}</td>
+                                <td>
 
-                                            <a class="modal-effect btn btn-sm btn-info" data-effect="effect-scale"
-                                                data-id="{{ $i}}" data-section_name="{{ $x->section_name }}"
-                                                data-description="{{ $x->description }}" data-toggle="modal"
-                                                href="#editmodel" title="تعديل"><i class="las la-pen"></i></a>
+                                    <a class="modal-effect btn btn-sm btn-info" data-effect="effect-scale" data-id="{{ $i}}" data-section_name="{{ $x->section_name }}" data-description="{{ $x->description }}" data-toggle="modal" href="#editmodel" title="تعديل"><i class="las la-pen"></i></a>
 
 
-                                            <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
-                                                data-id="{{ $i }}" data-section_name="{{ $x->section_name }}"
-                                                data-toggle="modal" href="#deletemodel" title="حذف"><i
-                                                    class="las la-trash"></i></a>
+                                    <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale" data-id="{{ $i }}" data-section_name="{{ $x->section_name }}" data-toggle="modal" href="#deletemodel" title="حذف"><i class="las la-trash"></i></a>
 
-                                    </td>
-                                </tr>
+                                </td>
+                            </tr>
                             @endforeach
                         </tbody>
                     </table>
@@ -123,13 +115,12 @@
 
     <!-- End Basic modal -->
 
-  <!-- Add -->
-    <div class="modal fade" id="addmodel" tabindex="-1" role="dialog" aria-labelledby="add-section"     aria-hidden="true">
+    <!-- Add -->
+    <div class="modal fade" id="addmodel" tabindex="-1" role="dialog" aria-labelledby="add-section" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content modal-content-demo">
                 <div class="modal-header">
-                    <h6 class="modal-title">اضافة قسم</h6><button aria-label="Close" class="close" data-dismiss="modal"
-                        type="button"><span aria-hidden="true">&times;</span></button>
+                    <h6 class="modal-title">اضافة قسم</h6><button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
                     <form action="{{ route('sections.store') }}" method="post">
@@ -159,8 +150,7 @@
 
 
     <!-- edit -->
-    <div class="modal fade" id="editmodel" tabindex="-1" role="dialog" aria-labelledby="edit-section"
-        aria-hidden="true">
+    <div class="modal fade" id="editmodel" tabindex="-1" role="dialog" aria-labelledby="edit-section" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -170,11 +160,11 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                <form action="{{ route('sections.update',$x->id) }}" method="post">       {{ method_field('patch') }}
+                    <form action="{{ route('sections.update',$x->id) }}" method="post"> {{ method_field('patch') }}
                         {{ csrf_field() }}
 
-       <div class="form-group">
-       <input type="hidden" name="id" id="id" value="">
+                        <div class="form-group">
+                            <input type="hidden" name="id" id="id" value="">
 
                             <label for="recipient-name" class="col-form-label">اسم القسم:</label>
                             <input class="form-control" name="section_name" id="section_name" type="text">
@@ -197,12 +187,11 @@
 
 
     <!-- delete -->
-    <div class="modal fade" id="deletemodel" tabindex="-1" role="dialog" aria-labelledby="delete-section"   aria-hidden="true">
+    <div class="modal fade" id="deletemodel" tabindex="-1" role="dialog" aria-labelledby="delete-section" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content modal-content-demo">
                 <div class="modal-header">
-                    <h6 class="modal-title">حذف القسم</h6><button aria-label="Close" class="close" data-dismiss="modal"
-                        type="button"><span aria-hidden="true">&times;</span></button>
+                    <h6 class="modal-title">حذف القسم</h6><button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <form action="{{route('sections.destroy',$x->id)}}" method="post">
                     {{ method_field('delete') }}
