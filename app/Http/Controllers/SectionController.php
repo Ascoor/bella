@@ -118,7 +118,7 @@ class SectionController extends Controller
         'section_name' => $request->section_name,
         'description' => $request->description,
     ]);
-
+    session()->flash('Add', 'تم التعديل بنجاح ');
     return redirect()->back()->with('success', 'The section has been updated successfully.');
 }
     /**
@@ -127,9 +127,9 @@ class SectionController extends Controller
      * @param  \App\sections  $sections
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy($id)
     {
-        $id = $request->id;
+
         Section::find($id)->delete();
         session()->flash('delete','تم حذف القسم بنجاح');
         return redirect()->back();
