@@ -73,11 +73,12 @@
                     </div>
                     <div class="input-group col-md-4">
                         <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                <p class="mg-b-10"> لموعد المؤكد</p>
-                                <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
-                                <input class="form-control fc-datepicker"  name="remarks"   placeholder="00:00" type="datetime">
-                            </div>
+                        <div class="input-group-text">
+  <p class="mg-b-10">لموعد المؤكد</p>
+  <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
+  <input class="form-control fc-datepicker" name="remarks" placeholder="00:00" type="datetime-local" value="2023-02-23T12:00">
+</div>
+
                         </div>
                         </div>
 
