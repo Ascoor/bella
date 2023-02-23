@@ -538,10 +538,11 @@ slide is-expanded side-menu__item {
   white-space: nowrap;
   color: #5b6e88;
   position: relative;
-  font-size: 13.5px;
+  font-size: 21.5px;
   line-height: 1;
   vertical-align: middle;
-  font-weight: 400; }
+  font-weight: 400;
+  }
 
 .app-sidebar .slide .side-menu__item.active::before {
   content: '';

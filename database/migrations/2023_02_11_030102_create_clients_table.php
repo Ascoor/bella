@@ -18,6 +18,8 @@ class CreateClientsTable extends Migration
             $table->string('client_name');
             $table->string('email')->nullable();
             $table->string('client_phone');
+            $table->string('note')->nullable();
+            $table->string('address')->nullable();;
             $table->timestamps();
         });
     }

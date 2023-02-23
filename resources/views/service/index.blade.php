@@ -17,8 +17,8 @@
 <div class="breadcrumb-header justify-content-between">
     <div class="my-auto">
         <div class="d-flex">
-            <h4 class="content-title mb-0 my-auto">الخدمات الطبية الطبية</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
-                الاقسام</span>
+            <h4 class="content-title mb-0 my-auto">الخدمات الطبية </h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
+                الخدمات</span>
         </div>
     </div>
 </div>
@@ -72,7 +72,7 @@
                 <div class="d-flex justify-content-between">
 
                         <a class="modal-effect btn btn-outline-primary btn-block" data-effect="effect-scale"
-                            data-toggle="modal" href="#modaldemo8">اضافة قسم</a>
+                            data-toggle="modal" href="#modaldemo8">اضافة خدمة</a>
 
                 </div>
 
@@ -152,7 +152,7 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlTextarea1">التكلفة</label>
-                            <textarea class="form-control" id="price" name="price" rows="3"></textarea>
+                            <input class="form-control" id="price" name="price" type="number">
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlTextarea1">ملاحظات</label>
@@ -205,7 +205,7 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlTextarea1">التكلفة</label>
-                            <input class="form-control" name="price" id="price" type="text">
+                            <input class="form-control" id="price" name="price" type="number">
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlTextarea1">ملاحظات</label>

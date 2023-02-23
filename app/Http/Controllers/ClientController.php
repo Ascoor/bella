@@ -28,9 +28,7 @@ class ClientController extends Controller
 
         public function create()
     {
-        $clients = Client::all();
 
-        return view('client.create')->with('clients', $clients);
     }
 
     /**
@@ -41,14 +39,21 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'client_name' => 'required',
+            'client_phone' => 'required',
+
+        ]);
         $client = Client::create([
 
-            'name' => $request->name,
+            'client_name' => $request->client_name,
 
 
             'email' => $request->email,
-            'phone' => $request->phone,
-            'details' => $request->details,
+            'client_phone' => $request->client_phone,
+            'note' => $request->note,
+            'address' => $request->address,
+
 
 
 
@@ -56,8 +61,8 @@ class ClientController extends Controller
 
 
 
-
-        return redirect()->route('clients.index')->with('تمت', 'تم الإضافة  بنجاح');
+        session()->flash('Add','تم إضافة العميل بنجاح');
+        return redirect()->route('clients.index');
     }
 
     /**
@@ -79,8 +84,7 @@ class ClientController extends Controller
      */
     public function edit($id)
     {
-        $client = Client::find($id);
-        return view('client.edit')->with('client', $client);
+
     }
 
     /**
@@ -90,10 +94,13 @@ class ClientController extends Controller
      * @param  \App\Models\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Client $client)
+    public function update(Request $request, $id)
     {
+        $id = $request->input('id');
+        $client = Client::find($id);
         $client->update($request->all());
-            return redirect()->route('clients.index')->with('Done', 'Updated Success');
+        session()->flash('edit','تم تحديث بيانات العميل بنجاح');
+            return redirect()->route('clients.index');
 
     }
 
@@ -103,8 +110,14 @@ class ClientController extends Controller
      * @param  \App\Models\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Client $client)
-    {
-        //
-    }
+public function destroy(Request $request)
+{
+$id = intval($request->id);
+
+Client::find($id)->delete();
+
+session()->flash('delete','تم حذف العميل بنجاح');
+
+return redirect()->back();
+}
 }

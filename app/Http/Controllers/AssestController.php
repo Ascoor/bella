@@ -59,7 +59,7 @@ class AssestController extends Controller
          $assest->phone = $request->phone;
          $assest->save();
 
-         return redirect()->route('assest.index')
+         return redirect()->route('assests.index')
              ->with('success', 'Assest created successfully');
      }
 
