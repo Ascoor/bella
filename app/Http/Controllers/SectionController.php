@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Section;
-
+use Doctrine\DBAL\Driver\Mysqli\Initializer\Secure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
@@ -20,11 +20,14 @@ class SectionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $sections = Section::all();
-        return view('section.index')->with('sections',$sections);
-    }
+        public function index()
+        {
+            $sections = Section::all();
+            return view('section.index',compact('sections'));
+        }
+
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -101,8 +104,10 @@ class SectionController extends Controller
 
 
 
-     public function update(Request $request, $id)
-{
+     public function update(Request $request)
+     {
+         $id = $request->id;
+
     $request->validate([
         'section_name' => ['required', 'max:255', Rule::unique('sections')->ignore($id)],
         'description' => 'required',
@@ -127,11 +132,15 @@ class SectionController extends Controller
      * @param  \App\sections  $sections
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy(Request $request)
+{
+    $id = intval($request->id);
 
-        Section::find($id)->delete();
-        session()->flash('delete','تم حذف القسم بنجاح');
-        return redirect()->back();
-    }
+    Section::find($id)->delete();
+
+    session()->flash('delete','تم حذف القسم بنجاح');
+
+    return redirect()->back();
+}
+
 }
