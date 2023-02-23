@@ -80,7 +80,8 @@
 </div>
 <input class="form-control fc-datepicker" name="remarks" value="{{$appointment->remarks}}" placeholder="YYYY-MM-DDTHH:MM" type="datetime-local">
 
-
+                        </div>
+                    </div>
                                 <div class="input-group col-md-4">
                         <div class="input-group-prepend">
                             <div class="input-group-text">
