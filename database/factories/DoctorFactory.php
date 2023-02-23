@@ -12,15 +12,29 @@ class DoctorFactory extends Factory
      *
      * @return array
      */
-    public function definition()
-    {
 
-        return [
-            'section_id' => Section::all()->random()->id,
-           'name' => $this->faker->name('ar_doctor'),
-        'specialization' =>$this->faker->text(),
-            'phone'  =>$this->faker->phoneNumber(),
-            'photo'  =>  'logo.png',
-        ];
-    }
+public function definition()
+{
+    $ar_doctor_name = $this->faker->unique()->name('ar_SA');
+    $specializations = [
+        'جراحة عامة',
+        'جراحة الأوعية الدموية',
+        'جراحة التجميل',
+        'أمراض النساء والولادة',
+        'أمراض القلب والشرايين',
+        'أمراض المسالك البولية',
+        'أمراض الجهاز الهضمي',
+        'أمراض الجهاز التنفسي',
+        'أمراض الجهاز العصبي',
+        'أمراض الدم والأورام',
+    ];
+
+    return [
+        'section_id' => Section::all()->random()->id,
+        'name' => $ar_doctor_name,
+        'specialization' => $this->faker->randomElement($specializations),
+        'phone' => $this->faker->phoneNumber(),
+        'photo' => 'logo.png',
+    ];
+}
 }

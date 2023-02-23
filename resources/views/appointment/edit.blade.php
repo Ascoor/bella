@@ -29,7 +29,7 @@
 <div class="col-md-12 col-xl-12 col-xs-12 col-sm-12">
     <div class="card">
         <div class="card-body">
-        <form method="POST" action="{{ route('appointments.update', ['appointment' => $appointment->id]) }}">
+        <form method="POST" action="{{ route('appointments.update',  $appointment->id ) }}">
     @csrf
     @method('PUT')      <div class="main-content-label mg-b-5">
           بيانات الحجز

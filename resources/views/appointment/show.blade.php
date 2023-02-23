@@ -43,6 +43,9 @@
                     </div>
                 </div>
 
+                    </div>
+                </div>
+
                 <div class="row row-sm">
                     <div class="col-lg">
                         <p class="mg-b-10">البريد الإلكترونى للعميل</p>
@@ -84,7 +87,7 @@
                                 رقم الجوال</div>
 
                         <input class="form-control" id="phoneMask" disabled placeholddiser="" value="{{ $appointment->client->client_phone }}"
-                            aria-label="Phone Number" type="tel">
+                            aria-label="Phone Number" type="tel" readonly>
                     </div><!-- input-group -->
                 </div>
 

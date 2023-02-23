@@ -110,12 +110,12 @@
                                 <td>{{ $x->name }}</td>
                                 <td>{{ $x->section->section_name }}</td>
                                 <td>{{ $x->specialization }}</td>
-                                <td>{{ $x->phone }}</td>
                                 <td>
                                     <img src="{{ asset('uploads/doctors/' . $x->photo) }}" class="img-tumbnail"
                                         width="50" height="50">
 
                                 </td>
+                                <td>{{ $x->phone }}</td>
                                     <td>
                                         <a class="modal-effect btn btn-sm btn-info" data-effect="effect-scale"
                                             data-id="{{ $x->id }}" data-section_id="{{ $x->section->id }}"

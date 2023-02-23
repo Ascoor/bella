@@ -118,7 +118,7 @@ $doctors = Doctor::all();
 
         $appointment->doctor_id = $request->input('doctor_id');
 
-        $appointment->edited_by = auth()->user()->id;
+        $appointment->edited_by = Auth::id();
         $appointment->remarks = $request->input('remarks');
         $appointment->save();
 

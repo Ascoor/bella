@@ -14,13 +14,14 @@ class ServiceFactory extends Factory
      */
     public function definition()
     {
+        $services = ['خدمة طبية 1', 'خدمة طبية 2', 'خدمة طبية 3', 'خدمة طبية 4', 'خدمة طبية 5'];
+
         return [
-
-                'service_name'   => $this->faker->unique()->name('ar_service'),
-                'section_id' =>Section::all()->random()->id,
-                'description' => $this->faker->text(),
-                'price' => $this->faker->randomDigit,
-
+            'service_name' => $this->faker->unique(10)->randomElement($services),
+            'section_id' => Section::all()->random()->id,
+            'description' => $this->faker->sentence($nbWords = 6, $variableNbWords = true) . ' في المجال الطبي',
+            'price' => $this->faker->numberBetween(100, 200),
         ];
     }
+
 }
