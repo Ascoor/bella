@@ -76,9 +76,9 @@
                             <div class="input-group-text">
                                 <p class="mg-b-10"> لموعد المؤكد</p>
                                 <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
+                                <input class="form-control fc-datepicker"  name="remarks"   placeholder="00:00" type="datetime">
                             </div>
                         </div>
-                            <input class="form-control fc-datepicker"  name="remarks"  value="{{$appointment->remarks}}"  placeholder="00:00" type="time">
                         </div>
 
 
