@@ -102,13 +102,13 @@
 				</div>
 				<!-- row closed -->
 
-			
 
-	
+
+
 
 				<!-- row opened -->
 				<div class="row row-sm row-deck">
-				
+
 					<div class="col-md-12 col-lg-8 col-xl-12">
 						<div class="card card-table-two">
 							<div class="d-flex justify-content-between">
