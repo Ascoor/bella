@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Assest;
 
+use App\Http\Controllers\Controller;
+
+
+
+use App\Models\Assest;
 use App\Models\Section;
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 
 class AssestController extends Controller
@@ -15,95 +20,126 @@ class AssestController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     public function index()
-     {
-         $assests = Assest::all();
-         $sections = Section::all();
+     public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $assests =Assest::all();
+        $sections = Section::all();
+        return view('team.assest.index',compact('assests'))->with('sections',$sections);
+    }
 
-         return view('team.assest.index')->with('assests',$assests)->with('sections',$sections);
-     }
 
-     /**
-      * Show the form for creating a new resource.
-      *
-      * @return \Illuminate\Http\Response
-      */
-     public function create()
-     {
-         //
-     }
 
-     /**
-      * Store a newly created resource in storage.
-      *
-      * @param  \Illuminate\Http\Request  $request
-      * @return \Illuminate\Http\Response
-      */
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
      public function store(Request $request)
-     {
+    {
+         $request->validate([
+             'assest_name' => 'required',
+             'section_id' => 'required',
+             'phone' => 'required',
+
+         ]);
+
          $assest = new Assest;
          $assest->assest_name = $request->assest_name;
-
 
          $assest->section_id = $request->section_id;
          $assest->phone = $request->phone;
          $assest->save();
 
-         return redirect()->back()->with('message', 'Assest Created Successfully');
+         return redirect()->route('assest.index')
+             ->with('success', 'Assest created successfully');
      }
 
-     /**
-      * Display the specified resource.
-      *
-      * @param  \App\Assest  $assest
-      * @return \Illuminate\Http\Response
-      */
-     public function show(Assest $assest)
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\sections  $sections
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Assest $section)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\sections  $sections
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Assest $section)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\sections  $sections
+     * @return \Illuminate\Http\Response
+     */
+
+
+
+     public function update(Request $request)
      {
-         //
-     }
+         $id = $request->id;
+    $request->validate([
+        'assest_name' => ['required', 'max:255', Rule::Unique('assests')->ignore($id)],
 
-     /**
-      * Show the form for editing the specified resource.
-      *
-      * @param  \App\Assest  $assest
-      * @return \Illuminate\Http\Response
-      */
-     public function edit(Assest $assest)
-     {
-         $sections = Section::all();
 
-         return view('assests.edit', compact('assest', 'sections'));
-     }
 
-     /**
-      * Update the specified resource in storage.
-      *
-      * @param  \Illuminate\Http\Request  $request
-      * @param  \App\Assest  $assest
-      * @return \Illuminate\Http\Response
-      */
-     public function update(Request $request, Assest $assest)
-     {
-         $assest->assest_name = $request->assest_name;
+        'section_id' => 'required',
+        'phone' => 'required',
 
-         $assest->section_id = $request->section_id;
-         $assest->save();
 
-         return redirect()->back()->with('message', 'Assest Updated Successfully');
-     }
+    ], [
+        'assest_name.required' =>'يرجي ادخال اسم المساعد',
+        'section_id.required' =>'اسم المساعد مسجل مسبقا',
+        'phone.required' =>'يرجي ادخال رقم الجوال',
 
-     /**
-      * Remove the specified resource from storage.
-      *
-      * @param  \App\Assest  $assest
-      * @return \Illuminate\Http\Response
-      */
-      public function destroy(Request $request)
-      {
-          $id = $request->id;
-          Assest::find($id)->delete();
-          session()->flash('delete','تم حذف القسم بنجاح');
-          return redirect()->back();
-      }
+
+    ]);
+
+    $assest = Assest::findOrFail($id);
+    $assest->update([
+        'assest_name' => $request->assest_name,
+        'section_id' => $request->section_id,
+
+         'phone' => $request->phone,
+    ]);
+    session()->flash('Add', 'تم التعديل بنجاح ');
+    return redirect()->back()->with('success', 'The section has been updated successfully.');
+}
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\sections  $sections
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Request $request)
+    {
+        $id = intval($request->id);
+
+        Assest::find($id)->delete();
+
+        session()->flash('delete','تم حذف القسم بنجاح');
+
+        return redirect()->back();
+    }
+
     }

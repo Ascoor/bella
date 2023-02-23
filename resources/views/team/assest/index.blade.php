@@ -14,6 +14,10 @@
     <link href="{{ URL::asset('assets/plugins/multislider/multislider.css') }}" rel="stylesheet">
     <!--- Select2 css -->
     <link href="{{ URL::asset('assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
+    @section('title')
+الخدمات المعاونة
+@stop
+
 @endsection
 @section('page-header')
     <!-- breadcrumb -->
@@ -107,15 +111,17 @@
 
                                         <td>{{ $x->phone }}</td>
                                         <td>
-                                            <button class="btn btn-outline-success btn-sm"
-                                                data-assest_name="{{ $x->assest_name }}" data-id="{{ $x->i }}"
-                                                data-section_id="{{ $x->section->id }}"
-                                                 data-phone="{{ $x->phone }}" data-toggle="modal"
-                                                data-target="#edit_assest">تعديل</button>
+                                        <a class="modal-effect btn btn-sm btn-info" data-effect="effect-scale"
+                                                data-id="{{ $x->id }}" data-section_id="{{ $x->section->id }}" data-assest_name="{{ $x->assest_name }}"
+                                                data-phone="{{ $x->phone }}" data-toggle="modal"
+                                                href="#edit_assest" title="تعديل"><i class="las la-pen"></i></a>
 
-                                            <button class="btn btn-outline-danger btn-sm " data-id="{{ $x->i }}"
-                                                data-assest_name="{{ $x->assest_name }}" data-toggle="modal"
-                                                data-target="#modaldemo9">حذف</button>
+
+
+                                            <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
+                                                data-id="{{ $x->id }}" data-service_name="{{ $x->service_name }}"
+                                                data-toggle="modal" href="#modaldemo9" title="حذف"><i
+                                                    class="las la-trash"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -125,7 +131,7 @@
                 </div>
             </div>
         </div>
-
+    </div>
         <!-- add -->
 
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -150,7 +156,7 @@
 
                             <label class="my-1 mr-2" for="inlineFormCustomSelectPref">القسم</label>
                             <select name="section_id" id="section_id" class="form-control" required>
-                                <option value="" selected disabled> --حدد القسم--</option>
+                                <option selected disabled> --حدد القسم--</option>
                                 @foreach ($sections as $section)
                                     <option value="{{$section->id }}">{{ $section->section_name   }}</option>
                                 @endforeach
@@ -161,7 +167,7 @@
                                 <label for="title">رقم الجوال:</label>
 
 
-                                <input class="form-control" id="phone" name="phone" type="tel">
+                                <input class="form-control" id="phone" name="phone" >
                             </div>
 
 
@@ -178,53 +184,45 @@
 
         <!-- edit -->
 
-        <div class="modal fade" id="edit_assest" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">تعديل مساعد</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                             <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-@foreach ($assests as $assest )
-
-<form action="{{ route('assests.update', ['assest' => $assest->id]) }}" method="post">
-    @csrf
-    @method('PATCH')
-    @endforeach
-            <div class="modal-body">
-
-                            <div class="form-group">
-                                <label for="title">اسم المساعد :</label>
-
-                                <input type="hidden" class="form-control" name="id" id="id" value="">
-
-                                <input type="text" class="form-control" name="assest_name" id="assest_name">
-                            </div>
-
-                            <label class="my-1 mr-2" for="inlineFormCustomSelectPref">القسم</label>
-                            <select name="section_id" id="section_id" class="custom-select my-1 mr-sm-2" required>
-                                @foreach ($sections as $section)
-                                    <option value="{{$section->id}}">{{ $section->section_name }}</option>
-                                @endforeach
-                            </select>
-
-                            <div class="form-group">
-                                <label for="title">رقم الجوال</label>
-
-
-                                <input type="tel" class="form-control" name="phone" id="phone">
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary">تعديل البيانات</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">اغلاق</button>
-                        </div>
-                    </form>
-                </div>
+     <!-- edit -->
+<div class="modal fade" id="edit_assest" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">تعديل مساعد</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
+            <form action="assests/update" method="post" autocomplete="off">
+                {{ method_field('patch') }}
+                {{ csrf_field() }}
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">الأسم</label>
+                        <input type="text" class="form-control" id="assest_name" name="assest_name" required>
+                    </div>
+                    <label class="my-1 mr-2" for="inlineFormCustomSelectPref">القسم</label>
+                    <select name="section_id" id="section_id" class="form-control" required>
+                        <option value="" selected disabled> --حدد القسم--</option>
+                        @foreach ($sections as $section)
+                        <option value="{{$section->id }}">{{ $section->section_name }}</option>
+                        @endforeach
+                    </select>
+                    <div class="form-group">
+                        <label for="title">رقم الجوال:</label>
+                        <input class="form-control" id="phone" name="phone">
+                    </div>
+                    <input type="hidden" name="id" id="id" value="">
+                </div>
+                <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">تعديل البيانات</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">اغلاق</button>
+                </div>
+            </form>
         </div>
+    </div>
+</div>
 
 <div class="modal fade" id="modaldemo9" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
