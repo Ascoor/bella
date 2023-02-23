@@ -74,12 +74,12 @@
                     </div>
                     <div class="input-group col-md-4">
                         <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                <p class="mg-b-10"> الموعد المؤكد</p>
-                                <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
-                            </div>
-                        </div><input class="form-control fc-datepicker"  disabled placeholddiser=""  value="{{$appointment->remarks}}"  placeholder="00:00" type="time">
-                    </div>
+                        <div class="input-group-text">
+    <p class="mg-b-10"> الموعد المؤكد</p>
+    <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
+</div>
+<input class="form-control fc-datepicker" name="remarks" value="{{$appointment->remarks}}" placeholder="YYYY-MM-DDTHH:MM" type="datetime-local">
+
 
                                 <div class="input-group col-md-4">
                         <div class="input-group-prepend">
