@@ -129,10 +129,9 @@
                         <p class="mg-b-10">إختر الدكتور</p><select class="form-control select2-no-search"
                             name="doctor_id" value="{{ $appointment->doctor_id }}">
                             <option label="Choose one">
-                                @foreach ($doctors as $item )
 
-                            <option value="{{$item->id}}" selected>{{$item->name }} </option>
-                            @endforeach
+                            <option value="{{$appointment->doctor->id}}" selected>{{$appointment->doctor->name }} </option>
+
                         </select>
                     </div>
                 </div>
