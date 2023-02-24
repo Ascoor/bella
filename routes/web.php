@@ -28,7 +28,30 @@ Route::get('/ww', function () {
     return view('semantic-ui', [
         'doctors' => Doctor::all(),
     ]);
+
 });
+Route::get('/doctor/login', [DoctorController::class, 'loginForm'])->name('doctor.login.form');
+Route::post('/doctor/login', [DoctorController::class, 'login'])->name('doctor.login');
+
+// define routes for doctor's dashboard
+Route::prefix('doctor')->group(function () {
+    // login route
+
+
+
+    // logout route
+    Route::post('/logout', 'DoctorAuthController@logout')->name('doctor.logout');
+
+    // dashboard route (authenticated)
+    Route::middleware(['auth:doctor'])->group(function () {
+        Route::get('/', 'DoctorDashboardController@index')->name('doctor.dashboard');
+        Route::get('/appointments', 'DoctorDashboardController@appointments')->name('doctor.appointments');
+        Route::get('/clients', 'DoctorDashboardController@clients')->name('doctor.clients');
+    });
+});
+
+
+
 Route::get('/', function () {
     return view('welcome', [
         'doctors' => Doctor::all(),

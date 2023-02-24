@@ -117,13 +117,13 @@
                                 </td>
                                 <td>{{ $x->phone }}</td>
                                     <td>
-                                        <a class="modal-effect btn btn-sm btn-info" data-effect="effect-scale"
-                                            data-id="{{ $x->id }}" data-section_id="{{ $x->section->id }}"
-                                            data-name="{{ $x->name }}"data-specialization="{{ $x->specialization }}" data-phone="{{ $x->phone }}"
-
-                                            data-toggle="modal" href="#exampleModal2"
-                                            title="تعديل"><i class="las la-pen"></i></a>
-
+                                    <a class="modal-effect btn btn-sm btn-info" data-effect="effect-scale"
+   data-id="{{ $x->id }}" data-section_id="{{ $x->section->id }}"
+   data-toggle="modal" data-name="{{ $x->name }}" data-username="{{ $x->username }}"
+   data-password="{{ $x->password }}" data-specialization="{{ $x->specialization }}"
+   data-phone="{{ $x->phone }}" href="#exampleModal2" title="تعديل">
+    <i class="las la-pen"></i>
+</a>
 
 
 
@@ -137,123 +137,124 @@
                     </table>
                 </div>
             </div>
-        </div>
+            </div>
     </div>
 </div>
+
 <!-- add -->
-
-
-<div class="modal" id="modaldemo8">
-
-
-
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">اضافة طبيب</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+<div class="modal fade" id="modaldemo8" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">تعديل طبيب</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
             <form action="{{ route('doctors.store') }}" method="POST">
                 @method('POST')
                 @csrf
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">الأسم</label>
-                        <input type="text" class="form-control" id="name" name="name" required>
-                    </div>
-                    <div class="form-group">
-                    <label for="exampleInputEmail1">الصورة الشخصية</label>
-                    <input type="file" class="form-control" id="photo" name="photo">
-                </div>
-                <div class="form-group">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="name" class="col-form-label">الاسم:</label>
 
-                    <label class="my-1 mr-2" for="inlineFormCustomSelectPref">القسم</label>
-                    <select name="section_id" id="section_id" class="form-control" required>
-                        <option selected disabled> --حدد القسم--</option>
-                        @foreach ($sections as $section)
-                        <option value="{{$section->id }}">{{ $section->section_name }}</option>
-                        @endforeach
-                    </select>
-
-                </div>
-                <div class="form-group">
-                    <label for="title">التخصص:</label>
-
-
-                    <input class="form-control" id="specialization" name="specialization" type="text">
-                </div>
-                <div class="form-group">
-                    <label for="title">رقم الجوال:</label>
-
-
-                    <input class="form-control" type="te
-                    " id="phone" name="phone">
-                </div>
-
-
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-success">تاكيد</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">اغلاق</button>
-                </div>
-            </form>
+            <input type="text" class="form-control" id="name" name="name">
+          </div>
+          <div class="form-group">
+            <label for="section_id" class="col-form-label">القسم:</label>
+            <select class="form-control" name="section_id" id="section_id">
+              <option value="">-- اختر القسم --</option>
+              @foreach($sections as $section)
+              <option value="{{ $section->id }}">{{ $section->section_name }}</option>
+              @endforeach
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="specialization" class="col-form-label">التخصص:</label>
+            <input type="text" class="form-control" id="specialization" name="specialization">
+          </div>
+          <div class="form-group">
+            <label for="phone" class="col-form-label">رقم الجوال:</label>
+            <input type="text" class="form-control" id="phone" name="phone">
+          </div>
+          <div class="form-group">
+            <label for="username" class="col-form-label">اسم المستخدم:</label>
+            <input type="text" class="form-control" id="username" name="username">
+          </div>
+          <div class="form-group">
+            <label for="password" class="col-form-label">كلمة المرور:</label>
+            <input type="password" class="form-control" id="password" name="password">
+          </div>
         </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">اغلاق</button>
+          <button type="submit" class="btn btn-primary">حفظ التعديلات</button>
+        </div>
+      </form>
     </div>
+  </div>
 </div>
+
+
 
 <!-- edit --> <!-- edit -->
-    <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">تعديل الخدمة</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-
-                <form action=" doctors/update" method="post" autocomplete="off">
-                    {{ method_field('patch') }}
-                    {{ csrf_field() }}
-                    <div class="form-group">
-                        <input type="hidden" name="id" id="id" value="">
-                        <label for="recipient-name" class="col-form-label">اسم الطبيب:</label>
-                        <input class="form-control" name="name" id="name" type="text">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleFormControlTextarea1">القسم</label>
-                 <select id="section_id" name="section_id">
-                    @foreach ($sections  as $section)
-
-                    <option value="{{ $section->id }}">{{$section->section_name}}</option>
-                    @endforeach
-
-                 </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="title">التخصص:</label>
-
-
-                        <input class="form-control" id="specialization" name="specialization" type="text">
-                    </div>
-                    <div class="form-group">
-                        <label for="title">رقم الجوال:</label>
-
-
-                        <input class="form-control" type="te
-                        " id="phone" name="phone">
-                    </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">تاكيد</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">اغلاق</button>
-            </div>
-            </form>
+<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">تعديل طبيب</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action=" doctors/update" method="post" autocomplete="off">
+        {{ method_field('patch') }}
+        {{ csrf_field() }}
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="name" class="col-form-label">الاسم:</label>
+            <input type="hidden" name="id" id="id" value="">
+            <input type="text" class="form-control" id="name" name="name">
+          </div>
+          <div class="form-group">
+            <label for="section_id" class="col-form-label">القسم:</label>
+            <select class="form-control" name="section_id" id="section_id">
+              <option value="">-- اختر القسم --</option>
+              @foreach($sections as $section)
+              <option value="{{ $section->id }}">{{ $section->section_name }}</option>
+              @endforeach
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="specialization" class="col-form-label">التخصص:</label>
+            <input type="text" class="form-control" id="specialization" name="specialization">
+          </div>
+          <div class="form-group">
+            <label for="phone" class="col-form-label">رقم الجوال:</label>
+            <input type="text" class="form-control" id="phone" name="phone">
+          </div>
+          <div class="form-group">
+            <label for="username" class="col-form-label">اسم المستخدم:</label>
+            <input type="text" class="form-control" id="username" name="username">
+          </div>
+          <div class="form-group">
+            <label for="password" class="col-form-label">كلمة المرور:</label>
+            <input type="password" class="form-control" id="password" name="password">
+          </div>
         </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">اغلاق</button>
+          <button type="submit" class="btn btn-primary">حفظ التعديلات</button>
+        </div>
+      </form>
     </div>
+  </div>
 </div>
-</div>
+
+
+
 
 <div class="modal fade" id="modaldemo9" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
@@ -282,7 +283,7 @@
         </div>
     </div>
 </div>
-
+    </div>
 
 </div>
 <!-- row closed -->
@@ -329,16 +330,21 @@
         var specialization = button.data('specialization')
         var phone = button.data('phone')
         var id = button.data('id')
+        var username = button.data('username')
+        var password = button.data('password')
 
         var modal = $(this)
-        modal.find('.modal-body #name').val(name);
-        modal.find('.modal-body #section_id').val(section_id);
-        modal.find('.modal-body #specialization').val(specialization);
-
-        modal.find('.modal-body #phone').val(phone);
-        modal.find('.modal-body #id').val(id);
+        modal.find('.modal-body #name').val(name)
+        modal.find('.modal-body #section_id').val(section_id)
+        modal.find('.modal-body #specialization').val(specialization)
+        modal.find('.modal-body #phone').val(phone)
+        modal.find('.modal-body #id').val(id)
+        modal.find('.modal-body #username').val(username)
+        modal.find('.modal-body #password').val(password)
     })
+
 </script>
+
 <script>
     $('#modaldemo9').on('show.bs.modal', function(event) {
         var button = $(event.relatedTarget)

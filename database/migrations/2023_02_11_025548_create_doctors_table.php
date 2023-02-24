@@ -19,13 +19,16 @@ class CreateDoctorsTable extends Migration
             $table->string('name');
             $table->text('specialization');
             $table->string('phone');
-            $table->string('photo')->nullable();
+            $table->string('photo');
+            $table->string('username')->unique();
+            $table->string('password');
             $table->timestamps();
 
             $table->foreign('section_id')
                   ->references('id')->on('sections')
                   ->onDelete('cascade');
         });
+
     }
 
     /**
