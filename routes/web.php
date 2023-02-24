@@ -6,6 +6,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\AssestController;
 use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\DoctorDashboardController;
 use App\Http\Controllers\InvoiceController;
 use App\Models\Doctor;
 use App\Models\Service;
@@ -30,13 +31,13 @@ Route::get('/ww', function () {
     ]);
 
 });
-Route::get('/doctor/login', [DoctorController::class, 'loginForm'])->name('doctor.login.form');
-Route::post('/doctor/login', [DoctorController::class, 'login'])->name('doctor.login');
 
 // define routes for doctor's dashboard
 Route::prefix('doctor')->group(function () {
     // login route
 
+    Route::get('/doctor/login', [DoctorController::class, 'loginForm'])->name('doctor.login.form');
+    Route::post('/doctor/login', [DoctorController::class, 'login'])->name('doctor.login');
 
 
     // logout route
@@ -44,7 +45,7 @@ Route::prefix('doctor')->group(function () {
 
     // dashboard route (authenticated)
     Route::middleware(['auth:doctor'])->group(function () {
-        Route::get('/', 'DoctorDashboardController@index')->name('doctor.dashboard');
+        Route::get('/',[DoctorDashboardController::class ,'index'])->name('doctor.dashboard');
         Route::get('/appointments', 'DoctorDashboardController@appointments')->name('doctor.appointments');
         Route::get('/clients', 'DoctorDashboardController@clients')->name('doctor.clients');
     });

@@ -18,7 +18,7 @@
 				<div class="col-md-6 col-lg-6 col-xl-5 bg-white">
 					<div class="login d-flex align-items-center py-2">
 						<!-- Demo content-->
-          )           <div class="card">
+              <div class="card">
                     <div class="card-header">{{ __('Doctor Login') }}</div>
 
                     <div class="card-body">

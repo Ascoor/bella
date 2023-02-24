@@ -1736,16 +1736,16 @@
         },
         {
             "name": "laravel/tinker",
-            "version": "v2.8.0",
+            "version": "v2.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/tinker.git",
-                "reference": "74d0b287cc4ae65d15c368dd697aae71d62a73ad"
+                "reference": "04a2d3bd0d650c0764f70bf49d1ee39393e4eb10"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/tinker/zipball/74d0b287cc4ae65d15c368dd697aae71d62a73ad",
-                "reference": "74d0b287cc4ae65d15c368dd697aae71d62a73ad",
+                "url": "https://api.github.com/repos/laravel/tinker/zipball/04a2d3bd0d650c0764f70bf49d1ee39393e4eb10",
+                "reference": "04a2d3bd0d650c0764f70bf49d1ee39393e4eb10",
                 "shasum": ""
             },
             "require": {
@@ -1798,9 +1798,9 @@
             ],
             "support": {
                 "issues": "https://github.com/laravel/tinker/issues",
-                "source": "https://github.com/laravel/tinker/tree/v2.8.0"
+                "source": "https://github.com/laravel/tinker/tree/v2.8.1"
             },
-            "time": "2023-01-10T18:03:30+00:00"
+            "time": "2023-02-15T16:40:09+00:00"
         },
         {
             "name": "laravel/ui",
@@ -6078,29 +6078,29 @@
     "packages-dev": [
         {
             "name": "bennett-treptow/laravel-migration-generator",
-            "version": "4.3.0",
+            "version": "4.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bennett-treptow/laravel-migration-generator.git",
-                "reference": "ba257c854f37e096ca6b56a26e1323b26fedccec"
+                "reference": "286fbaa87000080b97c5887cf70d2301182d2b91"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bennett-treptow/laravel-migration-generator/zipball/ba257c854f37e096ca6b56a26e1323b26fedccec",
-                "reference": "ba257c854f37e096ca6b56a26e1323b26fedccec",
+                "url": "https://api.github.com/repos/bennett-treptow/laravel-migration-generator/zipball/286fbaa87000080b97c5887cf70d2301182d2b91",
+                "reference": "286fbaa87000080b97c5887cf70d2301182d2b91",
                 "shasum": ""
             },
             "require": {
-                "illuminate/config": "^6.0|^7.0|^8.0|^9.0",
-                "illuminate/console": "^6.0|^7.0|^8.0|^9.0",
-                "illuminate/database": "^6.0|^7.0|^8.0|^9.0",
-                "illuminate/support": "^6.0|^7.0|^8.0|^9.0",
+                "illuminate/config": "^6.0|^7.0|^8.0|^9.0|^10.0",
+                "illuminate/console": "^6.0|^7.0|^8.0|^9.0|^10.0",
+                "illuminate/database": "^6.0|^7.0|^8.0|^9.0|^10.0",
+                "illuminate/support": "^6.0|^7.0|^8.0|^9.0|^10.0",
                 "marcj/topsort": "^2.0",
                 "php": "^7.4|^8.0"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.16",
-                "orchestra/testbench": "^6.17"
+                "friendsofphp/php-cs-fixer": "^2.16|^3.14",
+                "orchestra/testbench": "^6.17|^8.0"
             },
             "type": "library",
             "extra": {
@@ -6128,7 +6128,7 @@
             "description": "Generate migrations from existing database structures",
             "support": {
                 "issues": "https://github.com/bennett-treptow/laravel-migration-generator/issues",
-                "source": "https://github.com/bennett-treptow/laravel-migration-generator/tree/4.3.0"
+                "source": "https://github.com/bennett-treptow/laravel-migration-generator/tree/4.3.1"
             },
             "funding": [
                 {
@@ -6140,7 +6140,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-08-09T01:08:12+00:00"
+            "time": "2023-02-24T01:51:14+00:00"
         },
         {
             "name": "doctrine/instantiator",
@@ -6600,16 +6600,16 @@
         },
         {
             "name": "laravel/sail",
-            "version": "v1.20.2",
+            "version": "v1.21.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sail.git",
-                "reference": "5ae072b182b1efbec927409e8a3ce3b1078cc42c"
+                "reference": "758a914fc4da41f3f6ca5522c85902181b228bd1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/5ae072b182b1efbec927409e8a3ce3b1078cc42c",
-                "reference": "5ae072b182b1efbec927409e8a3ce3b1078cc42c",
+                "url": "https://api.github.com/repos/laravel/sail/zipball/758a914fc4da41f3f6ca5522c85902181b228bd1",
+                "reference": "758a914fc4da41f3f6ca5522c85902181b228bd1",
                 "shasum": ""
             },
             "require": {
@@ -6657,7 +6657,7 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
-            "time": "2023-02-08T20:22:21+00:00"
+            "time": "2023-02-16T19:16:27+00:00"
         },
         {
             "name": "marcj/topsort",

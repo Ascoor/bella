@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
-class Doctor extends Model
+use Illuminate\Foundation\Auth\User  as Authenticatable;
+class Doctor extends  Authenticatable
 {
     use HasFactory;
 use Notifiable;
@@ -60,5 +60,9 @@ protected $fillable = [
     {
         return 'remember_token';
     }
+    protected $hidden = [
+        'password',
+    ];
+
 }
 

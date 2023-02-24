@@ -35,6 +35,8 @@ public function definition()
         'specialization' => $this->faker->randomElement($specializations),
         'phone' => $this->faker->phoneNumber(),
         'photo' => 'logo.png',
+        'username' => $this->faker->unique()->name(),
+        'password' => $this->faker->unique()->password(),
     ];
 }
 }
