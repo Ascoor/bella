@@ -40,23 +40,24 @@ class AppointmentNotification extends Notification
      *
      * @param  mixed  $notifiable
      * @return array
-     */
-    public function toDatabase($notifiable)
+     *//**
+ * Get the array representation of the notification.
+ *
+ * @param  mixed  $notifiable
+ * @return array
+ */
+public function toDatabase($notifiable)
 {
-    $url = route('notifications.markAsRead', [
-        'id' => $this->id
-    ]);
+    $url = route('notifications.markAsRead', ['id' => $this->id]);
 
     return [
         'appointment_id' => $this->appointment->id,
         'appointment_date' => $this->appointment->apt_date,
         'appointment_time' => $this->appointment->apt_time,
         'client_name' => $this->appointment->client->client_name,
-        'read_url' => $url
+        'read_url' => $url // add the read URL to the notification data
     ];
 }
-
-
 
 
 }

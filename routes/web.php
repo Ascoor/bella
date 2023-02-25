@@ -31,17 +31,13 @@ Route::get('/ww', function () {
     ]);
 
 });
-Route::get('/notifications/read', [NotificationController::class, 'read'])->middleware('auth')->name('notifications.read');
+Route::post('/notifications/read', [NotificationController::class, 'read'])->name('notifications.read');
 
 Route::get('/notifications/count', [NotificationController::class, 'getNotificationsCount'])->middleware('auth')->name('notifications.count');
 
 Route::put('/notifications/{id}/markAsRead', [NotificationController::class, 'markAsRead'])->middleware('auth')->name('notifications.markAsRead');
+Route::delete('/notifications/{id}', 'NotificationController@destroy');
 
-Route::delete('/notifications/{id}', function ($id) {
-    auth()->user()->notifications()->findOrFail($id)->delete();
-
-    return redirect()->back()->with('success', 'Notification has been deleted.');
-})->middleware('auth')->name('notifications.destroy');
 // define routes for doctor's dashboard
 Route::prefix('doctor')->group(function () {
     // login route
@@ -75,6 +71,7 @@ Route::get('/appointments', [AppointmentController::class, 'listAppointments'])-
 Route::get('/appointments/{id}/edit', [AppointmentController::class, 'edit'])->name('appointments.edit');
 Route::get('/appointments/{appointment}', [AppointmentController::class, 'show'])->name('appointments.show');
 Route::post('/appointments/store', [App\Http\Controllers\AppointmentController::class, 'store'])->name('appointments.store');
+Route::delete('/appointments/{id}',  [App\Http\Controllers\AppointmentController::class, 'destroy'])->name('appointments.destroy');
 
 Route::put('/appointments/{appointment}', [AppointmentController::class, 'update'])->name('appointments.update');
 

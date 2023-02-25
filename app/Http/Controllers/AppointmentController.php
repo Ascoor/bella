@@ -80,7 +80,7 @@ Notification::send($users, new AppointmentNotification($appointment));
     public function listAppointments()
     {
         // Get all appointments with their associated clients and doctors.
-        $appointments = Appointment::with('client', 'doctor')->get();
+        $appointments = Appointment::all();
 $doctors = Doctor::all();
         // You can pass data to the appointments list view here, such as the list of appointments.
         return view('appointment.index', compact('appointments'))->with('doctors',$doctors);
@@ -159,8 +159,10 @@ $doctors = Doctor::all();
      * @param  \App\Models\appointment  $appointment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(appointment $appointment)
+    public function destroy($id)
     {
+        $appointment = Appointment::find($id);
+
         $appointment->delete();
 
         return redirect()->route('appointments.index')

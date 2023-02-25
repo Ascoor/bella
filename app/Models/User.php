@@ -40,9 +40,11 @@ use HasFactory;
         'email_verified_at' => 'datetime',
     ];
 
-    public function notification()
-    {
-        return $this->morphMany(DatabaseNotification::class, 'notifiable')->orderBy('created_at', 'desc');
-    }
 
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class);
+    }
 }
+
+

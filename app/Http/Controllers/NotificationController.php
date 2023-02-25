@@ -2,52 +2,47 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class NotificationController extends Controller
 {
-    /**
-     * Mark a notification as read.
-     *
-     * @param  Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function markAsRead(Request $request, $id)
+    public function index()
     {
-        /** @var Authenticatable|null $user */
-        $user = $request->user();
+        $notifications = Auth::user()->notifications()->paginate(10);
+        Auth::user()->unreadNotifications->markAsRead();
+        return view('notifications.index', compact('notifications'));
+    }
 
-        if (!$user) {
-            return response()->json(['error' => 'Unauthorized.'], 401);
-        }
+    public function read(Request $request)
+    {
+        $notificationId = $request->input('notification_id');
+        Auth::user()->notifications()->where('id', $notificationId)->update(['read_at' => now()]);
+        return response()->json(['success' => true]);
+    }
 
-        $notification = $user->notifications()->where('id', $id)->first();
-
+    public function markNotificationAsRead($id)
+    {
+        $notification = Auth::user()->notifications()->where('id', $id)->first();
         if ($notification) {
             $notification->markAsRead();
-            return response()->json(['message' => 'Notification marked as read.']);
-        } else {
-            return response()->json(['error' => 'Notification not found.'], 404);
+            $notification->delete();
+            return redirect()->back();
         }
     }
 
-    /**
-     * Get the count of unread notifications for the authenticated user.
-     *
-     * @param  Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function getNotificationsCount(Request $request)
+    public function destroy($id)
     {
-        /** @var Authenticatable|null $user */
-        $user = $request->user();
+        // Retrieve the notification
+        $notification = Auth::user()->notifications()->findOrFail($id);
 
-        if (!$user) {
-            return response()->json(['error' => 'Unauthorized.'], 401);
-        }
+        // Mark the notification as read
+        $notification->markAsRead();
 
-        $count = $user->unreadNotifications->count();
-        return response()->json(['count' => $count]);
+        // Delete the notification
+        $notification->delete();
+
+        // Return a success response
+        return response()->json(['success' => true]);
     }
 }

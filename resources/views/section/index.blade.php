@@ -247,7 +247,7 @@
 <script src="{{ URL::asset('assets/js/modal.js') }}"></script>
 
 <script>
-    $('#exampleModal2').on('show.bs.modal', function(event) {
+   jQuery(document).on('click', '.notification-link', function(event) {
         var button = $(event.relatedTarget)
         var id = button.data('id')
         var section_name = button.data('section_name')

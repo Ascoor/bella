@@ -5,10 +5,38 @@
                                 <meta name='viewport' content='width=device-width, initial-scale=1'>
                                 <title>Bella Clinic</title>
                                 <link href='https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css' rel='stylesheet'>
-                                <link href='' rel='stylesheet'>
+                                <link href='{{asset('/public/css/app.css')}}' rel='stylesheet'>
                                 <style>.section {
     position: relative;
     height: 100vh;
+}
+
+.form-control {
+    display: block;
+    width: 75%;
+    min-height: calc(1.5em + 0.75rem + 2px);
+    padding: 0.375rem 0.75rem;
+    font-size: medium;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #6c757d;
+    background-color: #ffffff7a;
+    background-clip: padding-box;
+    border: 1px solid #f50b0b;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: revert;
+    border-radius: 0.25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #d01414;
+    border-color: #fd0d5b;
+}
+.card {
+
+    display: contents;
 }
 
 .section .section-center {
@@ -150,7 +178,7 @@
     <div class="section-center">
     <div class="container">
 
-    <h1>Create Appointment</h1>
+    <h1 style="color:aliceblue">Create Appointment</h1>
     <div class="card">
 <div class="card-body">
 
@@ -163,7 +191,7 @@
     @csrf
 
     <div class="form-group">
-        <label for="doctor_id">Doctor</label>
+
         <select name="doctor_id" id="doctor_id" class="form-control @error('doctor_id') is-invalid @enderror">
             <option value="">Select a doctor</option>
             @foreach ($doctors as $doctor)
@@ -176,15 +204,15 @@
     </div>
 
     <div class="form-group">
-        <label for="appointment_time">Appointment Time</label>
-        <input type="time" name="apt_time" id="apt_time" class="form-control @error('appointment_time') is-invalid @enderror" value="{{ old('apt_time') }}">
+
+        <input type="time" name="apt_time" id="apt_time" class="form-control @error('appointment_time') is-invalid @enderror" placeholder="Select Appointment Time">
         @error('appointment_time')
             <div class="invalid-feedback">{{ $message }}</div>
         @enderror
     </div>
 
     <div class="form-group">
-        <label for="appointment_date">Appointment Date</label>
+
         <input type="date" name="apt_date" id="apt_date" class="form-control @error('appointment_date') is-invalid @enderror" value="{{ old('apt_date') }}">
         @error('appointment_date')
             <div class="invalid-feedback">{{ $message }}</div>
@@ -192,22 +220,22 @@
     </div>
 
     <div class="form-group">
-        <label for="client_name">Your Name</label>
-        <input type="text" name="client_name" id="client_name" class="form-control @error('client_name') is-invalid @enderror" value="{{ old('client_name') }}">
+
+        <input type="text" placeholder="Your Name" name="client_name" id="client_name" class="form-control @error('client_name') is-invalid @enderror" value="{{ old('client_name') }}">
         @error('client_name')
             <div class="invalid-feedback">{{ $message }}</div>
         @enderror
     </div>
 
     <div class="form-group">
-        <label for="client_phone">Your Phone Number</label>
-        <input type="text" name="client_phone" id="client_phoner" class="form-control @error('client_phone') is-invalid @enderror" value="{{ old('client_phone') }}">
+
+        <input type="text" name="client_phone" id="client_phoner" class="form-control @error('client_phone') is-invalid @enderror" placeholder="Your Phone Number" value="{{ old('client_phone') }}">
         @error('client_phone')
             <div class="invalid-feedback">{{ $message }}</div>
         @enderror
     </div>
 
-    <button type="submit" class="btn btn-primary">Create Appointment</button>
+    <button type="submit" class="btn btn-primary">Create Now</button>
 </form>
 </div>               <script type='text/javascript'></script>
 
