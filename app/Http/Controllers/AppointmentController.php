@@ -82,8 +82,9 @@ Notification::send($users, new AppointmentNotification($appointment));
         // Get all appointments with their associated clients and doctors.
         $appointments = Appointment::all();
 $doctors = Doctor::all();
+$clients = Client::all();
         // You can pass data to the appointments list view here, such as the list of appointments.
-        return view('appointment.index', compact('appointments'))->with('doctors',$doctors);
+        return view('appointment.index',compact('appointments'))->with('doctors',$doctors)->with('clients',$clients);
     }
     public function show($id)
     {
@@ -109,9 +110,9 @@ $doctors = Doctor::all();
      * @param  \App\Models\appointment  $appointment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,  $id)
+    public function update(Request $request)
     {
-        $appointment = Appointment::find($id);
+        $appointment = Appointment::findOrFail($request-> id);;
         $appointment->apt_date = $request->input('apt_date');
         $appointment->apt_time = $request->input('apt_time');
         $appointment->status = $request->input('status');

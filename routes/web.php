@@ -26,7 +26,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/ww', function () {
-    return view('ex.icons', [
+    return view('ex.table-data', [
         'doctors' => Doctor::all(),
     ]);
 
