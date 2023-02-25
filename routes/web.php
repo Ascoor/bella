@@ -26,12 +26,22 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/ww', function () {
-    return view('semantic-ui', [
+    return view('ex.icons', [
         'doctors' => Doctor::all(),
     ]);
 
 });
+Route::get('/notifications/read', [NotificationController::class, 'read'])->middleware('auth')->name('notifications.read');
 
+Route::get('/notifications/count', [NotificationController::class, 'getNotificationsCount'])->middleware('auth')->name('notifications.count');
+
+Route::put('/notifications/{id}/markAsRead', [NotificationController::class, 'markAsRead'])->middleware('auth')->name('notifications.markAsRead');
+
+Route::delete('/notifications/{id}', function ($id) {
+    auth()->user()->notifications()->findOrFail($id)->delete();
+
+    return redirect()->back()->with('success', 'Notification has been deleted.');
+})->middleware('auth')->name('notifications.destroy');
 // define routes for doctor's dashboard
 Route::prefix('doctor')->group(function () {
     // login route

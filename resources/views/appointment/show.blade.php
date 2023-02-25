@@ -37,29 +37,33 @@
                 </div>
                 <br/>
                 <div class="row row-sm">
-                    <div class="col-lg">
-                        <p class="mg-b-10">إسم العميل</p>
-                        <input class="form-control mg-b-20"  disabled placeholddiser="" value="{{ $appointment->client->client_name }}" type="text">
+
+
+
+                    <div class="input-group col-md-4">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                          <p class="mg-b-10">إسم العميل</p>
+                        <i class="fas fa-user"></i>
                     </div>
+                    <input class="form-control mg-b-20"  disabled placeholddiser="" value="{{ $appointment->client->client_name }}" type="text">
                 </div>
 
+                    </div>
 
 
                 <div class="row row-sm">
-                    <div class="col-lg">
-                        <p class="mg-b-10">البريد الإلكترونى للعميل</p>
-                        <input class="form-control mg-b-15"  disabled placeholddiser="" value="{{ $appointment->email }}" type="email">
-                    </div>
+
 
                     <div class="input-group col-md-4">
                         <div class="input-group-prepend">
                             <div class="input-group-text">
                                 <p class="mg-b-10">الطبيب</p>
-                                <i class="typcn user-hard-hat-outline tx-24 lh--9 op-6"></i><i class="fas fa-"></i>
+                                <i class="fas fa-user-md"></i>
                             </div>
                         </div>
 
-                        <input class="form-control mg-b-15" id="status" type="text" value="{{ $appointment->doctor->name }}">
+                        <input class="form-control mg-b-15" id="status" type="text" value="{{ $appointment->doctor->name }}"  disabled placeholddiser="">
 
                     </div>
 
@@ -73,9 +77,9 @@
                                 <i class="typcn typcn-phone-outline tx-24 lh--9 op-6"></i>
                             </div>
                         </div>
-                        <input class="form-control mg-b-15" value="{{$appointment->client->client_phone}}"  type="tel">
+                        <input class="form-control mg-b-15" value="{{$appointment->client->client_phone}}"  disabled placeholddiser="" type="tel">
                     </div>
-                </div>
+
 
                 <div class="row row-sm mg-b-20">
                     <div class="input-group col-md-4">
@@ -107,7 +111,7 @@
                             </div>
                         </div>
 
-                        <input class="form-control mg-b-7" id="status" type="text" value="{{ $appointment->status }}">
+                        <input class="form-control mg-b-7"  disabled placeholddiser="" id="status" type="text" value="{{ $appointment->status }}">
 
                 </div>
 
@@ -121,7 +125,8 @@
 
 
                     </div>
-
+                </div>
+                </div>
                     <script>
         var date = $('.fc-datepicker').datepicker({
             dateFormat: 'yy-mm-dd'

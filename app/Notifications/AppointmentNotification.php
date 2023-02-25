@@ -42,13 +42,21 @@ class AppointmentNotification extends Notification
      * @return array
      */
     public function toDatabase($notifiable)
-    {
-        return [
-            'appointment_id' => $this->appointment->id,
-            'appointment_date' => $this->appointment->apt_date,
-            'appointment_time' => $this->appointment->apt_time,
-            'client_name' => $this->appointment->client->client_name,
-        ];
-    }
+{
+    $url = route('notifications.markAsRead', [
+        'id' => $this->id
+    ]);
+
+    return [
+        'appointment_id' => $this->appointment->id,
+        'appointment_date' => $this->appointment->apt_date,
+        'appointment_time' => $this->appointment->apt_time,
+        'client_name' => $this->appointment->client->client_name,
+        'read_url' => $url
+    ];
+}
+
+
+
 
 }
