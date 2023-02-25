@@ -170,4 +170,10 @@
 <script src="{{URL::asset('assets/plugins/pickerjs/picker.min.js')}}"></script>
 <!-- Internal form-elements js -->
 <script src="{{URL::asset('assets/js/form-elements.js')}}"></script>
+<script>
+        var date = $('.fc-datepicker').datepicker({
+            dateFormat: 'yy-mm-dd'
+        }).val();
+
+    </script>
 @endsection

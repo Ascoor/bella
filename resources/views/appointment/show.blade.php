@@ -43,16 +43,39 @@
                     </div>
                 </div>
 
-                    </div>
-                </div>
+
 
                 <div class="row row-sm">
                     <div class="col-lg">
                         <p class="mg-b-10">البريد الإلكترونى للعميل</p>
                         <input class="form-control mg-b-15"  disabled placeholddiser="" value="{{ $appointment->email }}" type="email">
                     </div>
-                </div>
 
+                    <div class="input-group col-md-4">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <p class="mg-b-10">الطبيب</p>
+                                <i class="typcn user-hard-hat-outline tx-24 lh--9 op-6"></i><i class="fas fa-"></i>
+                            </div>
+                        </div>
+
+                        <input class="form-control mg-b-15" id="status" type="text" value="{{ $appointment->doctor->name }}">
+
+                    </div>
+
+
+
+                <div class="input-group col-md-4">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <p class="mg-b-10"> رقم الجوال</p>
+
+                                <i class="typcn typcn-phone-outline tx-24 lh--9 op-6"></i>
+                            </div>
+                        </div>
+                        <input class="form-control mg-b-15" value="{{$appointment->client->client_phone}}"  type="tel">
+                    </div>
+                </div>
 
                 <div class="row row-sm mg-b-20">
                     <div class="input-group col-md-4">
@@ -61,67 +84,50 @@
                                 <p class="mg-b-10">تاريخ الحجز</p>
                                 <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
                             </div>
-                        </div><input class="form-control fc-datepicker"    value="{{$appointment->apt_date}}" disabled placeholddiser=""   type="text">
+                        </div>
+                        <input class="form-control fc-datepicker"    value="{{$appointment->apt_date}}" disabled placeholddiser=""   type="text">
                     </div>
 
                     <div class="input-group col-md-4">
                         <div class="input-group-prepend">
                             <div class="input-group-text">
-                                <p class="mg-b-10">موعد الحجز</p>
+                                <p class="mg-b-10">تأكيد الحجز </p>
                                 <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
                             </div>
-                        </div><input class="form-control fc-datepicker" value="{{$appointment->apt_time}}"  disabled placeholddiser="" type="time">
+                        </div>
+                        <input class="form-control fc-datepicker" value="{{$appointment->remarks}}"  disabled placeholddiser="" type="datetime">
                     </div>
+
+
                     <div class="input-group col-md-4">
                         <div class="input-group-prepend">
-                        <div class="input-group-text">
-    <p class="mg-b-10"> الموعد المؤكد</p>
-    <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
-</div>
-<input class="form-control fc-datepicker" name="remarks" value="{{$appointment->remarks}}" placeholder="YYYY-MM-DDTHH:MM" type="datetime-local">
-
-                        </div>
-                    </div>
-                                <div class="input-group col-md-4">
-                        <div class="input-group-prepend">
                             <div class="input-group-text">
-                                رقم الجوال</div>
+                                <p class="mg-b-5">حالة الحجز</p>
+                                <i class="far fa-question-circle tx-24 lh--9 op-6"></i>
+                            </div>
+                        </div>
 
-                        <input class="form-control" id="phoneMask" disabled placeholddiser="" value="{{ $appointment->client->client_phone }}"
-                            aria-label="Phone Number" type="tel" readonly>
-                    </div><!-- input-group -->
+                        <input class="form-control mg-b-7" id="status" type="text" value="{{ $appointment->status }}">
+
                 </div>
 
-                </div>
+                    <div class="row row-sm mg-b-20">
+<span>
 
 
-                <div class="row row-sm mg-b-20">
-                    <div class="col-lg-4">
-                        <p class="mg-b-10">حالة الحجز</p><select class="form-control select2-no-search">
-
-                            <option  selected> {{ $appointment->status }}</option>
-
-                        </select>
-                    </div>
-
-
-                    <div class="col-lg-4">
-                        <p class="mg-b-10"> الدكتور</p><select class="form-control select2-no-search"
-                           value="{{ $appointment->doctor_name }}">
-
-
-                            <option     value="{{ $appointment->doctor->id }}"> {{ $appointment->doctor->name }}</option>
-
-                        </select>
-                    </div>
-                </div>
-                <span>
-
-
-<a class="btn btn-success"
-href="{{route('appointments.edit',$appointment->id)}}">Edit</a>
-
+    <a class="btn btn-success"
+    href="{{route('appointments.edit',$appointment->id)}}">Edit</a>
 </span>
+
+
+                    </div>
+
+                    <script>
+        var date = $('.fc-datepicker').datepicker({
+            dateFormat: 'yy-mm-dd'
+        }).val();
+
+    </script>
         </div>
         <!-- row closed -->
     </div>
