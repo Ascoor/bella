@@ -160,14 +160,17 @@ $doctors = Doctor::all();
      * @param  \App\Models\appointment  $appointment
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        $appointment = Appointment::find($id);
 
-        $appointment->delete();
+    public function destroy(Request $request)
+{
+    $id = intval($request->id);
 
-        return redirect()->route('appointments.index')
-                         ->with('success', 'Appointment deleted successfully');
-    }
+    Appointment::find($id)->delete();
+
+    session()->flash('delete','تم حذف الحجز بنجاح');
+
+    return redirect()->back();
+}
+
 
 }
