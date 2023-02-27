@@ -52,12 +52,14 @@ public function toDatabase($notifiable)
 
     return [
         'appointment_id' => $this->appointment->id,
-        'appointment_date' => $this->appointment->apt_date,
-        'appointment_time' => $this->appointment->apt_time,
+        'appointment_date' => $this->appointment->apt_datetime,
         'client_name' => $this->appointment->client->client_name,
-        'read_url' => $url // add the read URL to the notification data
+        'mark_as_read_url' => $url,
     ];
 }
 
 
+
 }
+
+

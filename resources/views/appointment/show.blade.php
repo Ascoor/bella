@@ -85,11 +85,11 @@
                     <div class="input-group col-md-4">
                         <div class="input-group-prepend">
                             <div class="input-group-text">
-                                <p class="mg-b-10">تاريخ الحجز</p>
+                                <p class="mg-b-10">تاريخ وموعد الحجز</p>
                                 <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
                             </div>
                         </div>
-                        <input class="form-control fc-datepicker"    value="{{$appointment->apt_date}}" disabled placeholddiser=""   type="text">
+                        <input class="form-control fc-datepicker"    value="{{$appointment->apt_datetime}}" disabled placeholddiser=""   type="text">
                     </div>
 
                     <div class="input-group col-md-4">

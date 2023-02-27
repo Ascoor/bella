@@ -90,8 +90,8 @@
                                     <th class="border-bottom-0">#</th>
                                     <th class="border-bottom-0">إسم العميل</th>
                                     <th class="border-bottom-0">رقم الهاتف</th>
-                                    <th class="border-bottom-0">تاريخ الحجز</th>
-                                    <th class="border-bottom-0">موعد الحجز</th>
+                                    <th class="border-bottom-0">تاريخ و موعد الحجز</th>
+
                                     <th class="border-bottom-0">الدكتور</th>
                                     <th class="border-bottom-0">حالة الحجز</th>
                                     <th class="border-bottom-0">العمليات</th>
@@ -107,8 +107,8 @@
 
                                             {{ $item->client->client_name }}</a> </td>
                                     <td> {{ $item->client->client_phone }} </td>
-                                    <td> {{ $item->apt_date }} </td>
-                                    <td> {{ $item->apt_time }} </td>
+                                    <td> {{ $item->apt_datetime }} </td>
+
                                     <td> {{ $item->doctor->name }} </td>
                                     <td> {{ $item->status }} </td>
                                     <td>
@@ -117,9 +117,9 @@
                                             data-client_name="{{ $item->client->client_name }}"
                                             data-edited_by="{{ $item->edited_by }}"
                                             data-client_phone="{{ $item->client->client_phone }}"
-                                            data-apt_date="{{ $item->apt_date }}"
+                                            data-apt_datetime="{{ $item->apt_datetime }}"
                                             data-remarks="{{ $item->remarks }}"
-                                            data-apt_time="{{ $item->apt_time }}" data-toggle="modal"
+                                         data-toggle="modal"
                                             href="#edit_apt_modal" title="تعديل">
                                             <i class="las la-pen"></i>
                                         </a>
@@ -185,22 +185,14 @@
                         <div class="input-group col-md-4">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
-                                    <p class="mg-b-10">تاريخ الحجز</p> <i
+                                    <p class="mg-b-10">تاريخ و موعد الحجز</p> <i
                                         class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
                                 </div>
                             </div>
-                            <input class="form-control fc-datepicker" name="apt_date" placeholder="MM/DD/YYYY"
+                            <input class="form-control fc-datepicker" name="apt_datetime" placeholder="MM/DD/YYYY"
                                 type="date">
                         </div>
-                        <div class="input-group col-md-4">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text">
-                                    <p class="mg-b-10">موعد الحجز</p> <i
-                                        class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
-                                </div>
-                            </div>
-                            <input class="form-control-time " name="apt_time" placeholder="00:00" type="time">
-                        </div>
+
                         <div class="input-group col-md-4">
                             <div class="input-group-prepend">
                                 <div class="input-group-text"> رقم الجوال</div>
@@ -285,13 +277,10 @@
                         <input type="text" class="form-control" id="client_phone" name="client_phone" readonly>
                     </div>
                     <div class="form-group">
-                        <label for="apt_date">تاريخ الحجز</label>
-                        <input type="text" class="form-control" id="apt_date" name="apt_date">
+                        <label for="apt_datetime">تاريخ وموعد الحجز</label>
+                        <input type="text" class="form-control" id="apt_datetime" name="apt_datetime">
                     </div>
-                    <div class="form-group">
-                        <label for="apt_time">موعد الحجز</label>
-                        <input type="text" class="form-control" id="apt_time" name="apt_time">
-                    </div>
+
                     <div class="form-group">
                         <label for="doctor_name">الدكتور</label>
                         <select class="form-control" id="doctor_id" name="doctor_id">
@@ -421,8 +410,8 @@
     var id = button.data('id');
     var client_name = button.data('client_name');
     var client_phone = button.data('client_phone');
-    var apt_time = button.data('apt_time');
-    var apt_date = button.data('apt_date');
+
+    var apt_datetime = button.data('apt_datetime');
     var remarks = button.data('remarks');
     var status = button.data('status');
     var edited_by = button.data('edited_by');
@@ -431,8 +420,7 @@
 
     modal.find('.modal-body #id').val(id);
     modal.find('.modal-body #client_name').val(client_name);
-    modal.find('.modal-body #apt_time').val(apt_time);
-    modal.find('.modal-body #apt_date').val(apt_date);
+    modal.find('.modal-body #apt_datetime').val(apt_datetime);
     modal.find('.modal-body #client_phone').val(client_phone);
     modal.find('.modal-body #remarks').val(remarks);
     modal.find('.modal-body #edited_by').val(edited_by);

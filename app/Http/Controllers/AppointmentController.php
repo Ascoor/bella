@@ -42,8 +42,7 @@ class AppointmentController extends Controller
         // Validate the form input.
         $validatedData = $request->validate([
             'doctor_id' => 'required',
-            'apt_time' => 'required',
-            'apt_date' => 'required|date_format:Y-m-d',
+            'apt_datetime' => 'required',
             'client_name' => 'required',
             'client_phone' => 'required',
         ]);
@@ -57,15 +56,14 @@ class AppointmentController extends Controller
         // Create the appointment.
         $appointment = Appointment::create([
             'doctor_id' => $validatedData['doctor_id'],
-            'apt_time' => $validatedData['apt_time'],
-            'apt_date' => $validatedData['apt_date'],
+
+            'apt_datetime' => $validatedData['apt_datetime'],
             'client_id' => $client->id,
 
         ]);
-
-// Send notification to users and doctors associated with the appointment
-$users = User::all();
-Notification::send($users, new AppointmentNotification($appointment));
+ // Send notification to users and doctors associated with the appointment
+ $users = User::query()->get();
+ Notification::sendNow($users, new AppointmentNotification($appointment));
 
 
         // Redirect back to the welcome page with a success message.
@@ -113,8 +111,8 @@ $doctors = Doctor::all();
     public function update(Request $request)
     {
         $appointment = Appointment::findOrFail($request-> id);;
-        $appointment->apt_date = $request->input('apt_date');
-        $appointment->apt_time = $request->input('apt_time');
+        $appointment->apt_datetime = $request->input('apt_datetime');
+
         $appointment->status = $request->input('status');
 
         $appointment->doctor_id = $request->input('doctor_id');
@@ -130,8 +128,8 @@ $doctors = Doctor::all();
         // Validate the form input.
         $validatedData = $request->validate([
             'doctor_id' => 'required',
-            'apt_time' => 'required',
-            'apt_date' => 'required|date_format:Y-m-d',
+
+            'apt_datetime' => 'required|date_format:Y-m-d\TH:i:s',
             'client_name' => 'required',
             'client_phone' => 'required',
         ]);
@@ -145,8 +143,8 @@ $doctors = Doctor::all();
         // Create the appointment.
         $appointment = Appointment::create([
             'doctor_id' => $validatedData['doctor_id'],
-            'apt_time' => $validatedData['apt_time'],
-            'apt_date' => $validatedData['apt_date'],
+
+            'apt_datetime' => $validatedData['apt_datetime'],
             'client_id' => $client->id,
 
         ]);
