@@ -119,7 +119,7 @@
 
 
                                             <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
-                                                data-id="{{ $x->id }}" data-service_name="{{ $x->service_name }}"
+                                                data-id="{{ $x->id }}" data-assest_name="{{ $x->assest_name }}"
                                                 data-toggle="modal" href="#modaldemo9" title="حذف"><i
                                                     class="las la-trash"></i></a>
                                         </td>
