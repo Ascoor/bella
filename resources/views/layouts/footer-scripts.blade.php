@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <script src="{{URL::asset('assets/plugins/ionicons/ionicons.js')}}"></script>
 <!-- Moment js -->
 <script src="{{URL::asset('assets/plugins/moment/moment.js')}}"></script>
-
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
 <!-- Rating js-->
 <script src="{{URL::asset('assets/plugins/rating/jquery.rating-stars.js')}}"></script>
 <script src="{{URL::asset('assets/plugins/rating/jquery.barrating.js')}}"></script>
