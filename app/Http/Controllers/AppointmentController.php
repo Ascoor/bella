@@ -131,7 +131,7 @@ $doctors = Doctor::all();
         $validatedData = $request->validate([
             'doctor_id' => 'required',
 
-            'apt_datetime' => 'required|date_format:Y-m-d\TH:i:s',
+            'apt_datetime' => 'required',
             'client_name' => 'required',
             'client_phone' => 'required',
         ]);
