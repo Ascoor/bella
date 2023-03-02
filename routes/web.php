@@ -26,7 +26,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/ww', function () {
-    return view('ex.table-data', [
+    return view('ex.form-elements', [
         'doctors' => Doctor::all(),
     ]);
 
@@ -71,7 +71,7 @@ Route::get('/appointments', [AppointmentController::class, 'listAppointments'])-
 Route::get('/appointments/{id}/edit', [AppointmentController::class, 'edit'])->name('appointments.edit');
 Route::get('/appointments/{appointment}', [AppointmentController::class, 'show'])->name('appointments.show');
 Route::post('/appointments/store', [App\Http\Controllers\AppointmentController::class, 'store'])->name('appointments.store');
-Route::delete('/appointments/{id}',  [App\Http\Controllers\AppointmentController::class, 'destroy'])->name('appointments.destroy');
+Route::delete('/appointments/{id}', 'App\Http\Controllers\AppointmentController@destroy')->name('appointments.destroy');
 
 Route::put('/appointments/{appointment}', [AppointmentController::class, 'update'])->name('appointments.update');
 

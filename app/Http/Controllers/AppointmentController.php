@@ -7,6 +7,7 @@ use App\Models\Client;
 use App\Models\Doctor;
 use App\Models\Invoice;
 use App\Models\User;
+use App\Notifications\AppointmentCreated;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -65,7 +66,7 @@ class AppointmentController extends Controller
 
 // Send notification to users and doctors associated with the appointment
 $users = User::all();
-Notification::send($users, new AppointmentNotification($appointment));
+Notification::send($users, new AppointmentCreated($appointment));
 
 
         // Redirect back to the welcome page with a success message.
@@ -123,7 +124,7 @@ $doctors = Doctor::all();
         $appointment->remarks = $request->input('remarks');
         $appointment->save();
 
-        return redirect()->route('appointments.show', ['appointment' => $appointment->id]);
+        return redirect()->back();
     }
     public function store(Request $request)
     {
@@ -160,17 +161,17 @@ $doctors = Doctor::all();
      * @param  \App\Models\appointment  $appointment
      * @return \Illuminate\Http\Response
      */
-
     public function destroy(Request $request)
-{
-    $id = intval($request->id);
+    {
+        $id = intval($request->id);
 
-    Appointment::find($id)->delete();
+        Appointment::find($id)->delete();
 
-    session()->flash('delete','تم حذف الحجز بنجاح');
+        session()->flash('delete','تم حذف القسم بنجاح');
 
-    return redirect()->back();
-}
+        return redirect()->back();
+    }
+
 
 
 }

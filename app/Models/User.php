@@ -41,10 +41,11 @@ use HasFactory;
     ];
 
 
-    public function notifications()
+    public function notification()
     {
-        return $this->hasMany(Notification::class);
+        return $this->morphMany(DatabaseNotification::class, 'notifiable')->orderBy('created_at', 'desc');
     }
+
 }
 
 
