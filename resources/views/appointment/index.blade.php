@@ -153,6 +153,8 @@
 </table>
 </div>
 </div>
+</div>
+</div>
 
 </div>
 
@@ -171,14 +173,14 @@
                         aria-hidden="true">&times;</span> </button>
             </div>
             <div class="modal-body">
+                <div class="row row-sm">
+                    <div class="col-lg">
                 <form action="{{ route('appointments.store') }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
                     @method('POST')
                     <div class="main-content-label mg-b-5"> بيانات الحجز </div>
                     <br />
-                    <div class="row row-sm">
-                        <div class="col-lg">
                             <p class="mg-b-10">إسم العميل</p>
                             <input class="form-control mg-b-20" name="name" type="text">
                         </div>
@@ -259,8 +261,7 @@
         </div>
     </div>
 </div>
-</div>
-</div>
+
 
 
 <!-- End Add Appointments Modal -->
@@ -306,16 +307,21 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="remarks">تأكيد الموعد</label>
-                        <input class="form-control fc-datepicker" id="remarks" name="remarks" type="datetime" readonly>
-                    </div>
-                </div>
+                        <div class="input-group-text">
+                            <p class="mg-b-10">لموعد المؤكد</p> <i
+                            class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
 
-                <div class="col-lg-4">
+                        </div>
+                        <input class="form-control fc-datepicker" name="remarks" id="remarks"
+                        placeholder="00:00" type="datetime-local" value="2023-02-23T12:00">
+                    </div>
+                    <div class="form-group">
+
                     <label for="status" class="form-label">حالة الحجز</label>
                     <input class="form-control" id="status" name="status" type="text" readonly>
 
                 </div>
+
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">غلق</button>
@@ -323,8 +329,8 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
+        </div>
+        </div>
 </div>
 
 <!-- End Show Appointment Modal -->
@@ -336,16 +342,16 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="createServiceModalLabel">تعديل الحجز</h5>
+                <h5 class="modal-title" id="createServiceModalLabel">بيانات الحجز</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span
                         aria-hidden="true">&times;</span> </button>
             </div>
             <div class="modal-body">
-                <form action="appointments/update" method="post" autocomplete="off">
+                <div class="row row-sm">
+                    <div class="col-sm">
+                      <form action="appointments/update" method="post" autocomplete="off">
                     {{ method_field('PUT') }} {{ csrf_field() }}
                     <br />
-                    <div class="row row-sm">
-                        <div class="col-sm">
                             <p class="mg-b-10">إسم العميل</p>
                             <input type="hidden" id="edited_by" name="edited_by" value="">
                             <input type="hidden" id="id" name="id" value="">
@@ -373,15 +379,13 @@
                             </select>
                         </div>
 
+                        <div class="input-group-text">
+                                                        <p class="mg-b-10">لموعد المؤكد</p> <i
+                                                            class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
+                                                    </div>
 
-            <div class="input-group-prepend">
-                <div class="input-group-text">
-                    <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
-                    <p class="mg-b-10">لموعد المؤكد</p>
-                </div>
-                <input class="form-control datetime=local" name="remarks" id="remarks" type="datetime=local"
-                    value="2018-12-20 21:05">
-            </div>
+                                                <input class="form-control fc-datepicker" name="remarks" id="remarks"
+                                                    placeholder="00:00" type="datetime-local" value="2023-02-23T12:00">
 
 
             <div class="col-lg-4">
@@ -406,7 +410,6 @@
 </div>
 </div>
 </div>
-            </div>
 
 
 
@@ -443,8 +446,8 @@
                 </div>
             </form>
         </div>
-
-
+    </div>
+</div>
 
     <!---------  End Delete Appointment Model    --------->
 
@@ -452,9 +455,9 @@
 
 
     <!-- row closed -->
-</div>
+
 <!-- Container closed -->
-</div>
+
 <!-- main-content closed -->
 @endsection
 @section('js')
