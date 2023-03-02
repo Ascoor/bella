@@ -21,7 +21,6 @@ class CreateNotificationsTable extends Migration
             $table->timestamp('read_at')->nullable();
             $table->timestamps();
         });
-
     }
 
     /**

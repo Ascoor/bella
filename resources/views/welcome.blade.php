@@ -195,29 +195,19 @@
         <select name="doctor_id" id="doctor_id" class="form-control @error('doctor_id') is-invalid @enderror">
             <option value="">Select a doctor</option>
             @foreach ($doctors as $doctor)
-                <option value="{{ $doctor->id }}" {{ old('doctor_id') == $doctor->id ? 'selected' : '' }}>{{ $doctor->name }}</option>
+                <option value="{{ $doctor->id }}">{{ $doctor->name }}</option>
             @endforeach
         </select>
         @error('doctor_id')
             <div class="invalid-feedback">{{ $message }}</div>
             @enderror
     </div>
+    <div class="form-group"><input type="datetime-local" name="apt_datetime" id="apt_datetime" class="form-control @error('apt_datetime') is-invalid @enderror">
+@error('apt_datetime')
+    <div class="invalid-feedback">{{ $message }}</div>
+@enderror
 
-    <div class="form-group">
 
-        <input type="time" name="apt_time" id="apt_time" class="form-control @error('appointment_time') is-invalid @enderror" placeholder="Select Appointment Time">
-        @error('appointment_time')
-            <div class="invalid-feedback">{{ $message }}</div>
-        @enderror
-    </div>
-
-    <div class="form-group">
-
-        <input type="date" name="apt_date" id="apt_date" class="form-control @error('appointment_date') is-invalid @enderror" value="{{ old('apt_date') }}">
-        @error('appointment_date')
-            <div class="invalid-feedback">{{ $message }}</div>
-        @enderror
-    </div>
 
     <div class="form-group">
 
@@ -229,7 +219,7 @@
 
     <div class="form-group">
 
-        <input type="text" name="client_phone" id="client_phoner" class="form-control @error('client_phone') is-invalid @enderror" placeholder="Your Phone Number" value="{{ old('client_phone') }}">
+        <input type="text" name="client_phone" id="client_phone" class="form-control @error('client_phone') is-invalid @enderror" placeholder="Your Phone Number" value="{{ old('client_phone') }}">
         @error('client_phone')
             <div class="invalid-feedback">{{ $message }}</div>
         @enderror

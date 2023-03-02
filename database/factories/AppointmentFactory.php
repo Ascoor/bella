@@ -17,8 +17,9 @@ class AppointmentFactory extends Factory
     public function definition()
     {
         return [
-            'apt_date' => $this->faker->date('Y-m-d'),
-            'apt_time' => $this->faker->time(),
+            'apt_datetime' => $this->faker->datetime('Y-m-d H:i:s'),
+
+
             'status' => $this->faker->randomElement(['pending','Complete', 'confirmed', 'cancelled']),
 
 

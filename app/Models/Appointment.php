@@ -9,7 +9,7 @@ class Appointment extends Model
 {
     use HasFactory;
 use Notifiable;
-    protected $fillable = ['client_id','doctor_id','apt_date','apt_time','remarks','edited_by','status'];
+    protected $fillable = ['client_id','doctor_id','apt_datetime','remarks','edited_by','status'];
 
 
     public function client()

@@ -25,9 +25,10 @@ class CreateAppointmentsTable extends Migration
             ->onDelete('cascade');
 
             $table->datetime('remarks')->nullable();
-            $table->date('apt_date');
-            $table->time('apt_time');
+            $table->datetime('apt_datetime');
+
             $table->unsignedBigInteger('edited_by')->nullable();
+
 
             $table->timestamps();
             $table->string('status')->default('pending');
