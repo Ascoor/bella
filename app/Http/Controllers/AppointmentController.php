@@ -152,7 +152,7 @@ $doctors = Doctor::all();
         ]);
 
         // Redirect the user to a page with a success message
-        return redirect()->route('appointments.index')->with('success', 'Appointment created successfully.');
+        return redirect()->back();
     }
     /**
      * Remove the specified resource from storage.

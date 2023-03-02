@@ -64,7 +64,7 @@
    <div class="card mg-b-20">
       <div class="card-header pb-0">
          <div class="d-flex justify-content-between">
-            <a class="modal-effect btn btn-outline-primary btn-block" data-effect="effect-scale" data-toggle="modal" href="#add_apt_modal">اضافة عميل</a>
+            <a class="modal-effect btn btn-outline-primary btn-block" data-effect="effect-scale" data-toggle="modal" href="#add_apt_modal">اضافة حجز</a>
          </div>
       </div>
       <div class="card-body">
@@ -98,7 +98,7 @@
                         <a class="modal-effect btn btn-sm btn-success" data-effect="effect-scale" data-id="{{ $item->id }}" data-doctor_name="{{ $item->doctor->name }}" data-status="{{ $item->status }}" data-client_name="{{ $item->client->client_name }}" data-edited_by="{{ $item->edited_by }}" data-client_phone="{{ $item->client->client_phone }}" data-apt_datetime="{{ $item->apt_datetime }}" data-remarks="{{ $item->remarks }}" data-apt_time="{{ $item->apt_time }}" data-toggle="modal" href="#show_apt_modal" title="مشاهدة">
                         <i class="las la-eye"></i>
                         </a>
-                        <a class="modal-effect btn btn-sm btn-info" data-effect="effect-scale" data-id="{{ $item->id }}" data-doctor_id="{{ $item->doctor->id }}" data-status="{{ $item->status }}" data-client_name="{{ $item->client->client_name }}" data-edited_by="{{ $item->edited_by }}" data-client_phone="{{ $item->client->client_phone }}" data-apt_datetime="{{ $item->apt_datetime }}" data-remarks="{{ $item->remarks }}" data-toggle="modal" href="#edit_apt_modal" title="تعديل">
+                        <a class="modal-effect btn btn-sm btn-info" data-effect="effect-scale" data-id="{{ $item->id }}" data-doctor_id="{{ $item->doctor->id }}"  data-doctor_name="{{ $item->doctor->name }}" data-status="{{ $item->status }}" data-client_name="{{ $item->client->client_name }}" data-edited_by="{{ $item->edited_by }}" data-client_phone="{{ $item->client->client_phone }}" data-apt_datetime="{{ $item->apt_datetime }}" data-remarks="{{ $item->remarks }}" data-toggle="modal" href="#edit_apt_modal" title="تعديل">
                         <i class="fas fa-edit"></i>
                         </a>
                         <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale" data-id="{{ $item->id }}" data-client_name="{{ $item->client->client_name }}" data-toggle="modal" href="#delete_apt_modal" title="حذف">
@@ -109,57 +109,86 @@
                   @endforeach
                </tbody>
             </table>
-         </div>
-      </div>
-   </div>
+        </div>
+    </div>
 </div>
+
 <!------- Add Appointment Modal ---------->
 <div class="modal fade" id="add_apt_modal" tabindex="-1" role="dialog" aria-labelledby="addAptModalLabel" aria-hidden="true">
-   <div class="modal-dialog" role="document">
-      <div class="modal-content">
-         <div class="modal-header">
-            <h5 class="modal-title" id="createServiceModalLabel">إضافة حجز</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-         </div>
-         <div class="modal-body">
-            <div class="row row-sm">
-               <div class="col-lg">
-                  <form action="{{ route('appointments.store') }}" method="POST" enctype="multipart/form-data">
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">إضافة حجز</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <form action="{{ route('appointments.store') }}" method="POST" enctype="form-data">
                      @csrf
                      @method('POST')
-                     <div class="main-content-label mg-b-5"> بيانات الحجز </div>
-                     <br />
-                     <p class="mg-b-10">إسم العميل</p>
-                     <input class="form-control mg-b-20" name="name" type="text">
-                     <div class="form-group">
-                        <label for="exampleInputEmail1">العنوان</label>
-                        <input type="text" class="form-control" id="address" name="address">
-                     </div>
-                     <div class="form-group">
-                        <label for="exampleInputEmail1">رقم الجوال</label>
-                        <input type="text" class="form-control" id="client_phone" name="client_phone" required>
-                     </div>
-                     <div class="row row-sm">
-                        <div class="col-lg">
-                           <p class="mg-b-10">البريد الإلكترونى للعميل</p>
-                           <input class="form-control mg-b-15" name="email" type="email">
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">إسم العميل</label>
+            <input class="form-control mg-b-20" name="client_name" id="client_name" type="text">
+            @error('client_name')
+    <span class="invalid-feedback" role="alert">
+      <strong>{{ $message }}</strong>
+    </span>
+  @enderror
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">رقم الجوال</label>
+            <input type="tell" class="form-control" id="client_phone" name="client_phone" >
+            @error('client_phone')
+    <span class="invalid-feedback" role="alert">
+      <strong>{{ $message }}</strong>
+    </span>
+  @enderror
+          </div>
+   <div class="form-group">
+                           <p class="mg-b-10">إختر الدكتور</p>
+                           <select class="form-control select2-no-search" id="doctor_name" name="doctor_id">
+                              <option label="Choose one">
+                                 @foreach($doctors as $doctor)
+                              <option value="{{ $doctor->id }}">{{ $doctor->name }} </option>
+                              @endforeach
+                           </select>
+                           @error('doctor_id')
+    <span class="invalid-feedback" role="alert">
+      <strong>{{ $message }}</strong>
+    </span>
+  @enderror
                         </div>
-                     </div>
-                     <div class="row row-sm mg-b-20">
-                        <div class="input-group col-md-4">
-                           <div class="input-group-prepend">
-                              <div class="input-group-text">
-                                 <p class="mg-b-10">تاريخ و موعد الحجز</p>
-                                 <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
-                              </div>
-                           </div>
-                           <input class="form-control fc-datepicker" name="apt_datetime" placeholder="MM/DD/YYYY" type="date">
-                        </div>
-                     </div>
-                     <div class="row row-sm mg-b-20">
-                        <div class="col-lg-4">
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">العنوان</label>
+            <input type="text" class="form-control" id="address" name="address">
+            @error('address')
+    <span class="invalid-feedback" role="alert">
+      <strong>{{ $message }}</strong>
+    </span>
+  @enderror
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">البريد الإلكترونى للعميل</label>
+            <input class="form-control mg-b-15" name="email" type="email">
+            @error('address')
+    <span class="invalid-feedback" role="alert">
+      <strong>{{ $message }}</strong>
+    </span>
+  @enderror
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">تاريخ وموعد الحجز</label>
+            <input type="datetime-local" name="apt_datetime" id="apt_datetime" class="form-control @error('apt_datetime') is-invalid @enderror">
+            @error('apt_datetime')
+    <span class="invalid-feedback" role="alert">
+      <strong>{{ $message }}</strong>
+    </span>
+  @enderror
+                  </div>
+
+          <div class="form-group">
+
                            <p class="mg-b-10">حالة الحجز</p>
                            <select class="form-control select2-no-search" id="status" name="status">
                               <option label="Choose one">
@@ -168,147 +197,214 @@
                               <option value="accepted">Complete</option>
                               <option value="accepted">cancelled</option>
                            </select>
+                           @error('status')
+    <span class="invalid-feedback" role="alert">
+      <strong>{{ $message }}</strong>
+    </span>
+  @enderror
                         </div>
-                        <div class="col-lg-4">
-                           <p class="mg-b-10">إختر الدكتور</p>
-                           <select class="form-control select2-no-search" name="doctor_name">
-                              <option label="Choose one">
-                                 @foreach($doctors as $doctor)
-                              <option value="{{ $doctor->id }}">{{ $doctor->name }} </option>
-                              @endforeach
-                           </select>
-                        </div>
-                     </div>
-                     <div class="form-group">
-                        <label for="remarks">تأكيد الموعد</label>
-                        <input class="form-control fc-datepicker" name="remarks" id="" type="remarks">
-                     </div>
-                     <div class="modal-footer">
-                        <div class="row row-xs wd-xl-80p">
-                           <div class="col-sm-6 col-md-3">
-                              <button type="submit" class="btn btn-outline-primary btn-block">سجل</button>
-                           </div>
-                        </div>
-                  </form>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-   </div>
-   <!-- End Add Appointments Modal -->
+
+
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">تأكيد الحجز</label>
+            <input type="datetime-local" name="remarks" id="remarks" class="form-control @error('remarks') is-invalid @enderror">
+            @error('remarks')
+    <span class="invalid-feedback" role="alert">
+      <strong>{{ $message }}</strong>
+    </span>
+  @enderror
+          </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">إلغاء</button>
+            <button type="submit" class="btn btn-primary">سجل</button>
+        </div>
+    </form>
+    </div>
+  </div>
+</div>
+                  <!-- End Add Appointments Modal -->
+
+
+
    <!--  show Appointments Modal -->
    <div class="modal fade" id="show_apt_modal" tabindex="-1" role="dialog" aria-labelledby="showAptModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-         <div class="modal-content">
-            <div class="modal-header">
-               <h5 class="modal-title" id="createServiceModalLabel">بيانات الحجز</h5>
-               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-               <span aria-hidden="true">&times;</span>
-               </button>
-            </div>
-            <div class="modal-body">
-               <div class="row row-sm">
-                  <div class="col-sm">
-                     <p class="mg-b-10">إسم العميل</p>
-                     <input type="hidden" id="edited_by" name="edited_by" value="">
-                     <input type="hidden" id="id" name="id" value="">
-                     <input class="form-control mg-b-20" id="client_name" type="text" readonly>
-                  </div>
-                  <div class="form-group">
-                     <label for="client_phone">رقم الهاتف</label>
-                     <input type="text" class="form-control" id="client_phone" name="client_phone" readonly>
-                  </div>
-                  <div class="form-group">
-                     <label for="apt_datetime">تاريخ وموعد الحجز</label>
-                     <input type="text" class="form-control" id="apt_datetime" name="apt_datetime" readonly>
-                  </div>
-                  <div class="form-group">
-                     <label for="doctor_name">الدكتور</label>
-                     <input class="form-control fc-datepicker" name="doctor_name" id="doctor_name"
-                        type="text" >
-                  </div>
-                  <div class="form-group">
-                     <p class="mg-b-10">تأكيد الموعد</p>
-                     <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
-                     <input type="datetime-local" name="remarks" id="remarks" class="form-control @error('apt_datetime') is-invalid @enderror"
-                  </div>
-               </div>
-               <div class="form-group">
-                  <label for="status" class="form-label">حالة الحجز</label>
-                  <input class="form-control" id="status" name="status" type="text" readonly>
-               </div>
-               <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">غلق</button>
-               </div>
-            </div>
-         </div>
+   <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">بيانات حجز</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
+      <div class="modal-body">
+          <div class="form-group">
+
+      <input type="hidden" id="edited_by" name="edited_by" value="">
+                           <input type="hidden" id="id" name="id" value="">
+            <label for="recipient-name" class="col-form-label">إسم العميل</label>
+            <input class="form-control mg-b-20" name="client_name" id="client_name" type="text">
+
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">رقم الجوال</label>
+            <input type="tell" class="form-control" id="client_phone" name="client_phone" >
+
+          </div>
+   <div class="form-group">
+   <label for="recipient-name" class="col-form-label">الطبيب</label>
+                           <input type="فثءف" class="form-control" id="doctor_name" name="doctor_name" >
+
+                        </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">العنوان</label>
+            <input type="text" class="form-control" id="address" name="address">
+
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">البريد الإلكترونى للعميل</label>
+            <input class="form-control mg-b-15" name="email" type="email">
+
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">تاريخ وموعد الحجز</label>
+            <input type="text" name="apt_datetime" id="apt_datetime" class="form-control @error('apt_datetime') is-invalid @enderror">
+
+                  </div>
+
+          <div class="form-group">
+
+                           <p class="mg-b-10">حالة الحجز</p>
+                           <input type="text" name="status" id="status" class="form-control @error('status') is-invalid @enderror">
+
+</div>
+
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">تأكيد الحجز</label>
+            <input type="text" name="remarks" id="remarks" class="form-control @error('remarks') is-invalid @enderror">
+
+          </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">إلغاء</button>
+
+        </div>
+
+    </div>
+  </div>
+</div>
+
+
 
       <!-- End Show Appointment Modal -->
       <!-- Edit Appointment Modal -->
       <div class="modal fade" id="edit_apt_modal" tabindex="-1" role="dialog" aria-labelledby="edit_apt_modal_label" aria-hidden="true">
-         <div class="modal-dialog" role="document">
-            <div class="modal-content">
-               <div class="modal-header">
-                  <h5 class="modal-title" id="createServiceModalLabel">بيانات الحجز</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                  </button>
-               </div>
-               <div class="modal-body">
-                  <div class="row row-sm">
-                     <div class="col-sm">
-                        <form action="appointments/update" method="post" autocomplete="off">
-                           {{ method_field('PUT') }} {{ csrf_field() }}
-                           <br />
-                           <p class="mg-b-10">إسم العميل</p>
-                           <input type="hidden" id="edited_by" name="edited_by" value="">
-                           <input type="hidden" id="id" name="id" value="">
-                           <input class="form-control mg-b-20" id="client_name" type="text">
-                           <div class="form-group">
-                              <label for="client_phone">رقم الهاتف</label>
-                              <input type="text" class="form-control" id="client_phone" name="client_phone" readonly>
-                           </div>
-                           <div class="form-group">
-                              <label for="apt_datetime">تاريخ وموعد الحجز</label>
-                              <input type="datetime-local" name="apt_datetime" id="apt_datetime" class="form-control @error('apt_datetime') is-invalid @enderror"
-                           </div>
-                     </div>
-                     <div class="form-group">
-                     <label for="doctor_name">الدكتور</label>
-                     <select class="form-control" id="doctor_id" name="doctor_id">
-                     @foreach($doctors as $doctor)
-                     <option value="{{ $doctor->id }}">{{ $doctor->name }}</option>
-                     @endforeach
-                     </select>
-                     </div>
-                     <div class="input-group-text">
-                     <p class="mg-b-10">تأكيد الموعد</p>
-                     <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
-                     <input type="datetime-local" name="remarks" id="remarks" class="form-control @error('apt_datetime') is-invalid @enderror"   >            </div>
-                  </div>
-                  <div class="col-lg-4">
-                  <label for="status" class="form-label">حالة الحجز</label>
-                  <select class="form-select" id="status" name="status">
-                  <option label="Choose one">
-                  <option value="pending" selected>Pending</option>
-                  <option value="confirmed">confirmed</option>
-                  <option value="Complete">completed</option>
-                  <option value="cancelled">cancelled</option>
-                  </select>
-                  </div>
-                  <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">إلغاء</button>
-                  <button type="submit" class="btn btn-primary">حفظ التغييرات</button>
-                  </div>
-                  </form>
-               </div>
-            </div>
-         </div>
+      <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">إضافة حجز</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
-   </div>
-   <!---------   End Edit Model Appointment Model    --------->
+      <div class="modal-body">
+      <form action="appointments/update" method="POST" enctype="form-data">
+                     @csrf
+                     @method('PUT')
+          <div class="form-group">
+          <input type="hidden" id="edited_by" name="edited_by" value="">
+          <input type="hidden" id="id" name="id" value="">
+
+            <label for="recipient-name" class="col-form-label">إسم العميل</label>
+            <input class="form-control mg-b-20" name="client_name" id="client_name" type="text">
+            @error('client_name')
+    <span class="invalid-feedback" role="alert">
+      <strong>{{ $message }}</strong>
+    </span>
+  @enderror
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">رقم الجوال</label>
+            <input type="tell" class="form-control" id="client_phone" name="client_phone" >
+            @error('client_phone')
+    <span class="invalid-feedback" role="alert">
+      <strong>{{ $message }}</strong>
+    </span>
+  @enderror
+          </div>
+          <div class="form-group">
+   <label for="recipient-name" class="col-form-label">الطبيب</label>
+                           <input type="text" class="form-control" id="doctor_name" name="doctor_name" >
+                           <input type="hidden" class="form-control" id="doctor_id" name="doctor_id" >
+
+                        </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">العنوان</label>
+            <input type="text" class="form-control" id="address" name="address">
+            @error('address')
+    <span class="invalid-feedback" role="alert">
+      <strong>{{ $message }}</strong>
+    </span>
+  @enderror
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">البريد الإلكترونى للعميل</label>
+            <input class="form-control mg-b-15" name="email" type="email">
+            @error('address')
+    <span class="invalid-feedback" role="alert">
+      <strong>{{ $message }}</strong>
+    </span>
+  @enderror
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">تاريخ وموعد الحجز</label>
+            <input type="datetime-local" name="apt_datetime" id="apt_datetime" class="form-control @error('apt_datetime') is-invalid @enderror">
+            @error('apt_datetime')
+    <span class="invalid-feedback" role="alert">
+      <strong>{{ $message }}</strong>
+    </span>
+  @enderror
+                  </div>
+
+          <div class="form-group">
+
+                           <p class="mg-b-10">حالة الحجز</p>
+                           <select class="form-control select2-no-search" id="status" name="status">
+                              <option label="Choose one">
+                              <option value="pending" selected>Pending</option>
+                              <option value="accepted">accepted</option>
+                              <option value="Complete">Complete</option>
+                              <option value="cancelled">cancelled</option>
+                           </select>
+                           @error('status')
+    <span class="invalid-feedback" role="alert">
+      <strong>{{ $message }}</strong>
+    </span>
+  @enderror
+                        </div>
+
+
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">تأكيد الحجز</label>
+            <input type="datetime-local" name="remarks" id="remarks" class="form-control @error('remarks') is-invalid @enderror">
+            @error('remarks')
+    <span class="invalid-feedback" role="alert">
+      <strong>{{ $message }}</strong>
+    </span>
+  @enderror
+          </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">إلغاء</button>
+            <button type="submit" class="btn btn-primary">سجل</button>
+        </div>
+    </form>
+    </div>
+  </div>
+</div>
+
+
+<!---------   End Edit Model Appointment Model    --------->
    <!---------   Delete Appointment Model    --------->
    <div class="modal fade" id="delete_apt_modal" tabindex="-1" role="dialog" aria-labelledby="deleteAptModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -335,6 +431,9 @@
             </form>
         </div>
     </div>
+</div>
+
+</div>
 </div>
 
 <!---------  End Delete Appointment Model    --------->
@@ -378,6 +477,7 @@
        var status = button.data('status');
        var edited_by = button.data('edited_by');
        var doctor_id = button.data('doctor_id');
+       var doctor_name = button.data('doctor_name');
        var modal = $(this);
 
        modal.find('.modal-body #id').val(id);
@@ -388,6 +488,7 @@
        modal.find('.modal-body #remarks').val(remarks);
        modal.find('.modal-body #edited_by').val(edited_by);
        modal.find('.modal-body #doctor_id').val(doctor_id);
+       modal.find('.modal-body #doctor_name').val(doctor_name);
 
        // Set the selected value for the status field
        modal.find('.modal-body #status').val(status);
