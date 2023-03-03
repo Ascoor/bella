@@ -126,7 +126,7 @@ $doctors = Doctor::all();
 
         $appointments = $appointments->orderBy('status')->get();
 
-        return view('appointments.index', [
+        return view('appointment.index', [
             'appointments' => $appointments,
         ]);
     }
