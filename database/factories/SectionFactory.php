@@ -12,9 +12,9 @@ class SectionFactory extends Factory
      * @return array
      */
     public function definition()
-    {
+    {  $sections = ['قسم جراحة النجمبل','قسم الجلدية',' قسم الأسنان','قسم العظام ','قسم النساء والتوليد'];
         return [
-            'section_name' => $this->faker->unique()->name('ar_section'),
+            'section_name' =>  $this->faker->unique(10)->randomElement($sections),
             'description' => $this->faker->realText(200, 2),
         ];
     }

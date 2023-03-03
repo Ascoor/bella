@@ -9,21 +9,21 @@ class NotificationController extends Controller
 {
     public function index()
     {
-        $notifications = Auth::user()->notifications()->paginate(10);
-        Auth::user()->unreadNotifications->markAsRead();
-        return view('notifications.index', compact('notifications'));
+        $notification = Auth::user()->notification()->paginate(10);
+        Auth::user()->unreadnotification->markAsRead();
+        return view('notification.index', compact('notification'));
     }
 
     public function read(Request $request)
     {
         $notificationId = $request->input('notification_id');
-        Auth::user()->notifications()->where('id', $notificationId)->update(['read_at' => now()]);
+        Auth::user()->notification()->where('id', $notificationId)->update(['read_at' => now()]);
         return response()->json(['success' => true]);
     }
 
     public function markNotificationAsRead($id)
     {
-        $notification = Auth::user()->notifications()->where('id', $id)->first();
+        $notification = Auth::user()->notification()->where('id', $id)->first();
         if ($notification) {
             $notification->markAsRead();
             $notification->delete();
@@ -34,7 +34,7 @@ class NotificationController extends Controller
     public function destroy($id)
     {
         // Retrieve the notification
-        $notification = Auth::user()->notifications()->findOrFail($id);
+        $notification = Auth::user()->notification()->findOrFail($id);
 
         // Mark the notification as read
         $notification->markAsRead();
