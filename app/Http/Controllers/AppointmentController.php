@@ -123,12 +123,13 @@ $doctors = Doctor::all();
         if ($status) {
             $appointments->where('status', $status);
         }
-
+$doctors = Doctor::all();
+$clients = Client::all();
         $appointments = $appointments->orderBy('status')->get();
 
         return view('appointment.index', [
             'appointments' => $appointments,
-        ]);
+        ])->with('doctors', $doctors)->with('clients', $clients);
     }
     public function update(Request $request)
     {
