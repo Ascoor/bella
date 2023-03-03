@@ -110,6 +110,26 @@ $doctors = Doctor::all();
      * @param  \App\Models\appointment  $appointment
      * @return \Illuminate\Http\Response
      */
+
+
+
+
+    public function sort(Request $request)
+    {
+        $status = $request->query('status');
+
+        $appointments = Appointment::query();
+
+        if ($status) {
+            $appointments->where('status', $status);
+        }
+
+        $appointments = $appointments->orderBy('status')->get();
+
+        return view('appointments.index', [
+            'appointments' => $appointments,
+        ]);
+    }
     public function update(Request $request)
     {
         $appointment = Appointment::findOrFail($request-> id);;

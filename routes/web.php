@@ -78,6 +78,7 @@ Route::put('/appointments/{appointment}', [AppointmentController::class, 'update
 
 Route::get('/appointments', [AppointmentController::class, 'sort'])->name('appointments.sort');
 
+
 Route::resource('sections', SectionController::class);
 Route::resource('doctors', DoctorController::class);
 Route::resource('assests', AssestController::class);
