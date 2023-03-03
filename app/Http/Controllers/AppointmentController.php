@@ -26,24 +26,6 @@ class AppointmentController extends Controller
         // You can pass data to the form view here, such as a list of available doctors.
         return view('appointments.form');
     }
-
-    public function sort(Request $request)
-    {
-        $status = $request->query('status');
-
-        $appointments = Appointment::query();
-
-        if ($status) {
-            $appointments->where('status', $status);
-        }
-
-        $appointments = $appointments->orderBy('status')->get();
-$doctors = Doctor::all();
-$clients = Client::all();
-        return view('appointment.index', [
-            'appointments' => $appointments,
-        ])->with('clients', $clients)->with('doctors', $doctors);
-    }
     public function create()
     {
         $doctors= Doctor::all();
@@ -192,6 +174,3 @@ $doctors = Doctor::all();
 
 
 }
-
-
-
