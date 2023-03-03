@@ -6,30 +6,7 @@
 <!-- Bootstrap Bundle js -->
 <script src="{{URL::asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-$(document).ready(function() {
-    // Listen for changes in the notification count
-    Echo.private('App.User.' + {{ auth()->user()->id }})
-        .notification((notification) => {
-            updateNotificationCount();
-        });
 
-    // Update the notification count and pulse class
-    function updateNotificationCount() {
-        var count = {{ auth()->user()->unreadNotifications->count() }};
-        var pulse = $('.pulse');
-
-        if (count > 0) {
-            pulse.addClass('on');
-        } else {
-            pulse.removeClass('on');
-        }
-    }
-
-    // Call the updateNotificationCount function on page load
-    updateNotificationCount();
-});
-</script>
 
     <!-- Initialize PerfectScrollbar on the scrollable element -->
     <script>
@@ -41,30 +18,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
     </script>
-<script>
-$(document).ready(function() {
-    // Listen for changes in the notification count
-    Echo.private('App.User.' + {{ auth()->user()->id }})
-        .notification((notification) => {
-            updateNotificationCount();
-        });
-
-    // Update the notification count and pulse class
-    function updateNotificationCount() {
-        var count = {{ auth()->user()->unreadNotifications->count() }};
-        var pulse = $('.pulse');
-
-        if (count > 0) {
-            pulse.addClass('on');
-        } else {
-            pulse.removeClass('on');
-        }
-    }
-
-    // Call the updateNotificationCount function on page load
-    updateNotificationCount();
-});
-</script>
 
 <!-- Ionicons js -->
 <script src="{{URL::asset('assets/plugins/ionicons/ionicons.js')}}"></script>
