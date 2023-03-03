@@ -34,6 +34,7 @@ Route::get('/ww', function () {
 Route::post('/notifications/read', [NotificationController::class, 'read'])->name('notifications.read');
 
 Route::get('/notifications/count', [NotificationController::class, 'getNotificationsCount'])->middleware('auth')->name('notifications.count');
+Route::get('/notifications/index', [NotificationController::class, 'getNotificationsCount'])->middleware('auth')->name('notifications.index');
 
 Route::put('/notifications/{id}/markAsRead', [NotificationController::class, 'markAsRead'])->middleware('auth')->name('notifications.markAsRead');
 Route::delete('/notifications/{id}', 'NotificationController@destroy');
@@ -75,7 +76,7 @@ Route::delete('/appointments/{id}', 'App\Http\Controllers\AppointmentController@
 
 Route::put('/appointments/{appointment}', [AppointmentController::class, 'update'])->name('appointments.update');
 
-
+Route::get('/appointments', [AppointmentController::class, 'sort'])->name('appointments.sort');
 
 Route::resource('sections', SectionController::class);
 Route::resource('doctors', DoctorController::class);

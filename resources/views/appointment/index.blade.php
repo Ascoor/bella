@@ -253,7 +253,7 @@
           </div>
    <div class="form-group">
    <label for="recipient-name" class="col-form-label">الطبيب</label>
-                           <input type="فثءف" class="form-control" id="doctor_name" name="doctor_name" >
+                           <input type="text" class="form-control" id="doctor_name" name="doctor_name" >
 
                         </div>
           <div class="form-group">
@@ -507,6 +507,8 @@
        }
        modal.find('.modal-body #old_status').text(status_text);
    });
+
+
    $('#show_apt_modal').on('show.bs.modal', function(event) {
        var button = $(event.relatedTarget);
        var id = button.data('id');

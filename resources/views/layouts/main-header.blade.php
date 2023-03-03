@@ -52,26 +52,38 @@
             <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
             <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
         </svg>
-        <span class="pulse @if (auth()->user()->unreadNotifications->isEmpty()) off @endif"></span>
+		@if (auth()->user()->unreadNotifications->isNotEmpty())
+    <span class="pulse on"></span>
+@else
+    <span class="pulse off"></span>
+    <?php cache()->forget('unreadNotifications.' . auth()->user()->id); ?>
+@endif
+
     </a>
+
+
     <div class="dropdown-menu">
         <div class="menu-header-content bg-light text-right">
             <div class="main-message-list chat-scroll">
-                @foreach (auth()->user()->unreadNotifications as $notification)
-                    <a class="d-flex p-3 border-bottom notification-item" href="{{ route('appointments.show', $notification->data['appointment_id']) }}" data-id="{{ $notification->id }}">
-                        <div class="notifyimg bg-pink">
-                            <i class="la la-file-alt text-white"></i>
-                        </div>
-                        <div class="mr-3">
-                            <h5 class="notification-label mb-1">تم تسجيل جديد من {{ $notification->data['client_name'] }}</h5>
-                            <div class="notification-subtext">في يوم {{ $notification->data['appointment_date'] }}</div>
-                            <div class="notification-subtext">الساعة {{ $notification->data['appointment_time'] }}</div>
-                        </div>
-                        <div class="mr-auto">
-                            <i class="las la-angle-left text-left text-muted"></i>
-                        </div>
-                    </a>
-                @endforeach
+			@foreach (auth()->user()->unreadNotifications as $notification)
+    <a class="d-flex p-3 border-bottom notification-item" href="{{ route('appointments.show', $notification->data['appointment_id']) }}" data-id="{{ $notification->id }}">
+        <div class="notifyimg bg-pink">
+            <i class="la la-file-alt text-white"></i>
+        </div>
+        <div class="mr-3">
+            <h5 class="notification-label mb-1">تم تسجيل جديد من {{ $notification->data['client_name'] }}</h5>
+            <div class="notification-subtext">في يوم {{ $notification->data['appointment_date'] }}</div>
+            @if(isset($notification->data['doctor_name']))
+                <div class="notification-subtext">مع الطبيب {{ $notification->data['doctor_name'] }}</div>
+            @endif
+        </div>
+        <div class="mr-auto">
+            <i class="las la-angle-left text-left text-muted"></i>
+        </div>
+    </a>
+    {{ $notification->markAsRead() }}
+@endforeach
+
             </div>
             <div class="dropdown-footer">
                 <a href="">VIEW ALL</a>
