@@ -48,25 +48,27 @@ class AppointmentController extends Controller
             'client_phone' => 'required',
         ]);
 
-        // Create the client.
-        $client = Client::create([
-            'client_name' => $validatedData['client_name'],
-            'client_phone' => $validatedData['client_phone'],
-        ]);
+        // Check if a client with the provided phone number already exists
+        $client = Client::where('client_phone', $validatedData['client_phone'])->first();
+
+        if (!$client) {
+            // If the client doesn't exist, create a new one.
+            $client = Client::create([
+                'client_name' => $validatedData['client_name'],
+                'client_phone' => $validatedData['client_phone'],
+            ]);
+        }
 
         // Create the appointment.
         $appointment = Appointment::create([
             'doctor_id' => $validatedData['doctor_id'],
-
             'apt_datetime' => $validatedData['apt_datetime'],
             'client_id' => $client->id,
-
         ]);
 
-// Send notification to users and doctors associated with the appointment
-$users = User::all();
-Notification::send($users, new AppointmentCreated($appointment));
-
+        // Send notification to users and doctors associated with the appointment
+        $users = User::all();
+        Notification::send($users, new AppointmentCreated($appointment));
 
         // Redirect back to the welcome page with a success message.
         return view('thanks')->with('success', 'Appointment created successfully!');
