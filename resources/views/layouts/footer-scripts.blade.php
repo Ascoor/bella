@@ -1,4 +1,13 @@
 <a href="#top" id="back-to-top"><i class="las la-angle-double-up"></i></a>
+<script>
+    const darkModeSwitch = document.getElementById('dark-mode-switch');
+    const body = document.body;
+
+    darkModeSwitch.addEventListener('change', () => {
+        body.classList.toggle('dark-mode');
+});
+        </script>
+
 <!-- PerfectScrollbar CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.5.2/css/perfect-scrollbar.min.css" />
 

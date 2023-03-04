@@ -1,5 +1,9 @@
 <!-- Title -->
 <title> @yield("title") </title>
+
+<!-- PerfectScrollbar CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.5.2/css/perfect-scrollbar.min.css" />
+
 <!-- Favicon -->
 <link rel="icon" href="{{URL::asset('assets/img/brand/favicon.png')}}" type="image/x-icon"/>
 <!-- Icons css -->

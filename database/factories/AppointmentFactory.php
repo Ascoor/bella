@@ -17,7 +17,7 @@ class AppointmentFactory extends Factory
     public function definition()
     {
         return [
-            'apt_datetime' => $this->faker->datetime('Y-m-d H:i:s'),
+            'apt_datetime' => $this->faker->datetime('m-d-Y H:i:s'),
 
 
             'status' => $this->faker->randomElement(['pending','Complete', 'confirmed', 'cancelled']),
@@ -27,7 +27,7 @@ class AppointmentFactory extends Factory
             'client_id' => Client::all()->random()->id,
             'created_at' => $this->faker->date(),
             'updated_at' => $this->faker->date(),
-            'remarks' => $this->faker->dateTime(),
+            'remarks' => $this->faker->datetime('m-d-Y H:i:s'),
 
 
         ];

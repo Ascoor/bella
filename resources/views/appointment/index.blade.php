@@ -427,7 +427,7 @@
                     <div class="form-group">
                         <label for="recipient-name" class="col-form-label">تأكيد الحجز</label>
                         <input type="datetime-local" name="remarks" id="remarks"
-                            value="{{ date('Y-m-d h:i A') }}"
+                            value="{{ date('d-m-Y h:i A') }}"
                             class="form-control @error('remarks') is-invalid @enderror">
                         @error('remarks')
                             <span class="invalid-feedback" role="alert">

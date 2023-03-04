@@ -4,7 +4,17 @@
                                 <meta charset='utf-8'>
                                 <meta name='viewport' content='width=device-width, initial-scale=1'>
                                 <title>Bella Clinic</title>
-                                <link href='https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css' rel='stylesheet'>
+                         <!--- Internal Select2 css-->
+<link href="{{URL::asset('assets/plugins/select2/css/select2.min.css')}}" rel="stylesheet">
+<!---Internal Fileupload css-->
+<link href="{{URL::asset('assets/plugins/fileuploads/css/fileupload.css')}}" rel="stylesheet" type="text/css"/>
+<!---Internal Fancy uploader css-->
+<link href="{{URL::asset('assets/plugins/fancyuploder/fancy_fileupload.css')}}" rel="stylesheet" />
+<!--Internal Sumoselect css-->
+<link rel="stylesheet" href="{{URL::asset('assets/plugins/sumoselect/sumoselect-rtl.css')}}">
+<!--Internal  TelephoneInput css-->
+<link rel="stylesheet" href="{{URL::asset('assets/plugins/telephoneinput/telephoneinput-rtl.css')}}">
+
                                 <link href='{{asset('/css/app.css')}}' rel='stylesheet'>
                                 <style>.section {
     position: relative;
@@ -219,11 +229,8 @@
 
     <div class="form-group">
 
-        <input type="text" name="client_phone" id="client_phone" class="form-control @error('client_phone') is-invalid @enderror" placeholder="Your Phone Number" value="{{ old('client_phone') }}">
-        @error('client_phone')
-            <div class="invalid-feedback">{{ $message }}</div>
-        @enderror
-    </div>
+									<input class="form-control" id="phone" name="client_phone" type="tel">
+
 
     <button type="submit" class="btn btn-primary">Create Now</button>
 </form>
@@ -231,12 +238,37 @@
 
 </div>
                             <!-- ALL JS FILES -->
+<!-- jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-                            <script type='text/javascript' src=''></script>
-                                <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js'></script>
+<!-- PerfectScrollbar JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.5.2/perfect-scrollbar.min.js"></script>
 
-                            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- Select2 JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
+
+<!--Internal  Datepicker js -->
+<script src="{{URL::asset('assets/plugins/jquery-ui/ui/widgets/datepicker.js')}}"></script>
+<!-- Internal Select2 js-->
+<script src="{{URL::asset('assets/plugins/select2/js/select2.min.js')}}"></script>
+<!--Internal Fileuploads js-->
+<script src="{{URL::asset('assets/plugins/fileuploads/js/fileupload.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/fileuploads/js/file-upload.js')}}"></script>
+<!--Internal Fancy uploader js-->
+<script src="{{URL::asset('assets/plugins/fancyuploder/jquery.ui.widget.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/fancyuploder/jquery.fileupload.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/fancyuploder/jquery.iframe-transport.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/fancyuploder/jquery.fancy-fileupload.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/fancyuploder/fancy-uploader.js')}}"></script>
+<!--Internal  Form-elements js-->
+<script src="{{URL::asset('assets/js/advanced-form-elements.js')}}"></script>
+<script src="{{URL::asset('assets/js/select2.js')}}"></script>
+<!--Internal Sumoselect js-->
+<script src="{{URL::asset('assets/plugins/sumoselect/jquery.sumoselect.js')}}"></script>
+<!-- Internal TelephoneInput js-->
+<script src="{{URL::asset('assets/plugins/telephoneinput/telephoneinput.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/telephoneinput/inttelephoneinput.js')}}"></script>
                             <script src="{{ asset('js/app.js')}}"></script>
 
                         </body>
