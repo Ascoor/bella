@@ -126,7 +126,7 @@ textarea {
 
 
             <div class="form-group mt-5">
-              <button type="submit" class="btn btn-danger-gradiant btn-block text-uppercase">Book Your Appointment Now</button>
+              <button type="submit" class="btn btn-danger-gradiant btn-block text-uppercase">سجل حجزك الأن</button>
             </div>
           </form>
         </div>
