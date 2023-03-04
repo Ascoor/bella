@@ -85,8 +85,8 @@
                                 <tr>
                                     <th class="border-bottom-0">#</th>
                                     <th class="border-bottom-0">إسم العميل</th>
-                                    <th class="border-bottom-0">رقم الهاتف</th>
                                     <th class="border-bottom-0">تاريخ و موعد الحجز</th>
+                                    <th class="border-bottom-0">تأكيد موعد الحجز</th>
                                     <th class="border-bottom-0">الدكتور</th>
                                     <th class="border-bottom-0">حالة الحجز</th>
                                     <th class="border-bottom-0">العمليات</th>
@@ -101,8 +101,8 @@
                                         <a href="{{ route('appointments.show', $item->id) }}">
                                             {{ $item->client->client_name }}</a>
                                     </td>
-                                    <td> {{ $item->client->client_phone }} </td>
                                     <td> {{ $item->apt_datetime }} </td>
+                                    <td> {{ $item->remarks }} </td>
                                     <td> {{ $item->doctor->name }} </td>
                                     <td> {{ $item->status }} </td>
                                     <td>
