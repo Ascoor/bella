@@ -71,7 +71,7 @@ class AppointmentController extends Controller
         Notification::send($users, new AppointmentCreated($appointment));
 
         // Redirect back to the welcome page with a success message.
-        return view('thanks')->with('success', 'Appointment created successfully!');
+        return view('thanks')->with('appointment',$appointment);
     }
 
     /**

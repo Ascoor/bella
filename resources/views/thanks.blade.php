@@ -10,7 +10,13 @@
     position: relative;
     height: 100vh;
 }
-
+.h2{
+    font-family: Cairo,sans-serif;
+    color: #ff010b;
+    padding-left: 215px;
+    ight: px;
+    font-size: calc(2.325rem + .9vw);
+}
 .section .section-center {
     position: absolute;
     top: 50%;
@@ -168,8 +174,9 @@
             <div class="row">
                 <div class="col-md-7 col-md-push-5">
                     <div class="booking-cta">
-                        <h1>Thank You</h1>
-                        <p>we replay by sms to Tell you about your appointment.
+                        <h1>Thank You  </h1>
+                        <h2>{{$appointment->client->client_name}}</h2>
+                        <p>شكرا لتسجيل الحجز وستصلك رسالة لتأكيد موعد الحجز
                         </p>
                     </div>
                 </div>
