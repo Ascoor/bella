@@ -59,7 +59,7 @@
                             <input class="form-control fc-datepicker" name="invoice_date" placeholder="YYYY-MM-DD" type="text" value="{{ date('Y-m-d') }}" required>
                         </div>
                         <div class="col">
-                            <label>تاريخ الفاتورة</label>
+                            <label>تاريخ إستحقاق الفاتورة</label>
                             <input class="form-control fc-datepicker" name="due_date" placeholder="YYYY-MM-DD"
                                     type="text" required>        </div>
 
@@ -68,9 +68,9 @@
                     </div>
                     <div class="row">
                         <div class="col">
-                            <label for="client" class="control-label">Choose client:</label>
+                            <label for="client" class="control-label">إختر العميل</label>
                             <select id="client_id" name="client_id">
-                                <option value="">Choose</option>
+                                <option value="">إختر</option>
                                 @foreach ($clients as $client)
                                 <option value="{{ $client->id }}">{{ $client->client_name }}</option>
                                 @endforeach
@@ -81,7 +81,7 @@
                     {{-- 2 --}}
                     <div class="row">
   <div class="col">
-    <label for="section" class="control-label">Choose Section:</label>
+    <label for="section" class="control-label">إختيار القسم</label>
     <select id="section" name="section_id">
       <option value="">Choose</option>
       @foreach ($sections as $section)
@@ -92,7 +92,7 @@
 </div>
 <div class="row">
   <div class="col">
-    <label for="services" class="control-label">Choose Services:</label>
+    <label for="services" class="control-label">إختر الخدمة</label>
     <div id="services">
 
     </div>
@@ -101,15 +101,15 @@
 
 <div class="row">
   <div class="col">
-    <label for="amount_collection" class="control-label">Amount Collection:</label>
+    <label for="amount_collection" class="control-label">إجمالى التكلفة</label>
     <input type="text" id="amount_collection" name="amount_collection" class="form-control" value="0.00" readonly>
   </div>
   <div class="col">
-    <label for="discount" class="control-label">Discount:</label>
+    <label for="discount" class="control-label">الخصم</label>
     <input type="text" id="discount" name="discount" class="form-control" value="0.00">
   </div>
   <div class="col">
-    <label for="rate_vat" class="control-label">Rate VAT:</label>
+    <label for="rate_vat" class="control-label">نسبة الضريبة</label>
     <select id="rate_vat" name="rate_vat" class="form-control" value="0.00">
       <option value="0">0%</option>
       <option value="5">5%</option>
@@ -123,8 +123,12 @@
                                 <input type="text" class="form-control" id="value_vat" name="value_vat"  value="0.00" readonly>
                             </div>
   <div class="col">
-    <label for="total" class="control-label">Total:</label>
+    <label for="total" class="control-label">الإجمالى</label>
     <input type="text" id="total" name="total" class="form-control" value="0.00" readonly>
+  </div>
+  <div class="col">
+    <label for="total" class="control-label">المدفوع</label>
+    <input type="text" id="total_amount" name="total_amount" class="form-control" value="0.00" >
   </div>
 </div>
 
@@ -198,8 +202,7 @@
 
     </script>
 
-<script>
-$(document).ready(function() {
+<script>$(document).ready(function() {
   // On section change
   $("#section").on("change", function() {
     var sectionId = $(this).val();
@@ -238,56 +241,45 @@ $(document).ready(function() {
   // Update amount collection based on selected services
   function updateAmountCollection() {
     var selectedServices = $(".service-checkbox:checked");
-    var total = 0;
+    var genTotal = 0;
     selectedServices.each(function() {
-      total += parseFloat($(this).data("price"));
+      genTotal += parseFloat($(this).data("price"));
     });
 
     var discountValue = parseFloat($("#discount").val()) || 0;
-    total -= discountValue;
-
     var vatRate = parseFloat($("#rate_vat").val()) || 0;
-    var vatValue = (total * (vatRate/100));
-    $("#value_vat").val(vatValue.toFixed(2));
+    var vatValue = ((genTotal - discountValue) * (vatRate/100));
+    var tempTotal = (genTotal - discountValue) + vatValue;
 
-    total += vatValue;
-    $("#amount_collection").val(total.toFixed(2));
-    $("#total").val(total.toFixed(2));
+    $("#value_vat").val(vatValue.toFixed(2));
+    $("#amount_collection").val(genTotal.toFixed(2));
+    $("#total").val(tempTotal.toFixed(2));
   }
 
   // On click of add service button
   $("#add-service-btn").on("click", function() {
-    var selectedServices = $(".service-checkbox:checked");
-    selectedServices.each(function() {
-      var serviceId = $(this).val();
-      var serviceName = $(this).parent().text().trim();
-      var servicePrice = parseFloat($(this).data("price"));
-      var listItem = '<li data-price="' + servicePrice + '">' + serviceName + '<button type="button" class="remove-service-btn btn btn-danger btn-sm ml-3">Remove</button></li>';
-      $("#selectedServices").append(listItem);
-    });
-
-    // Update amount collection after adding new services
-    updateAmountCollection();
-  });
-
-  // On click of selected services
-  if ($("#selectedServices").length) {
-    $("#selectedServices").on("click", "li", function() {
-      $(this).toggleClass("active");
-      updateAmountCollection();
-    });
-
-    // On click of selected services remove button
-    $("#selectedServices").on("click", ".remove-service-btn", function() {
-      var servicePrice = parseFloat($(this).parent().data("price"));
-      var total = parseFloat($("#amount_collection").val());
-      total -= servicePrice;
-      $(this).parent().remove();
-      $("#amount_collection").val(total.toFixed(2));
-      updateAmountCollection();
-    });
-  }
+var selectedServices = $(".service-checkbox:checked");
+selectedServices.each(function() {
+var serviceId = $(this).val();
+var serviceName = $(this).parent().text().trim();
+var servicePrice = parseFloat($(this).data("price"));
+var listItem = '<li data-price="' + servicePrice + '">' + serviceName + '<button type="button" class="remove-service-btn btn btn-danger btn-sm ml-3">Remove</button></li>';
+$("#selectedServices").append(listItem);
 });
+// Update amount collection after adding new services
+var selectedServicesPrices = $("#selectedServices li").map(function() {
+    return parseFloat($(this).data("price"));
+}).get();
+
+var total = selectedServicesPrices.reduce(function(a, b) {
+    return a + b;
+}, 0);
+
+$("#amount_collection").val(total.toFixed(2));
+updateAmountCollection();
+});
+});
+
 </script>
 
 

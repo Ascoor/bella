@@ -19,6 +19,7 @@ class Invoice extends Model
         'value_vat',
         'rate_vat',
         'total',
+        'total_amount',
         'value_status',
         'status',
         'section_id',

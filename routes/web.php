@@ -8,6 +8,7 @@ use App\Http\Controllers\AssestController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\DoctorDashboardController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\InvoicesDetailsController;
 use App\Models\Doctor;
 use App\Models\Service;
 use Illuminate\Support\Facades\Auth;
@@ -78,7 +79,7 @@ Route::put('/appointments/{appointment}', [AppointmentController::class, 'update
 
 Route::get('/appointments', [AppointmentController::class, 'sort'])->name('appointments.sort');
 
-
+Route::resource('invoicedetails', InvoicesDetailsController::class);
 Route::resource('sections', SectionController::class);
 Route::resource('doctors', DoctorController::class);
 Route::resource('assests', AssestController::class);

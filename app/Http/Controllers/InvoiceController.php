@@ -62,6 +62,7 @@ $services = Service::all();
              'rate_vat' => 'required',
              'value_vat' => 'required',
              'total' => 'required',
+             'total_amount' => 'nullable',
              'note' => 'nullable|string',
 
 
@@ -81,6 +82,7 @@ $services = Service::all();
          $invoice->rate_vat = $validatedData['rate_vat'];
          $invoice->value_vat = $validatedData['value_vat'];
          $invoice->total = $validatedData['total'];
+         $invoice->total_amount = $validatedData['total_amount'];
          $invoice->note = $validatedData['note'];
          $invoice->created_by = Auth::id();
 
@@ -145,6 +147,7 @@ $invoice =  Invoice::find($id);
             'rate_vat' => 'required',
             'value_vat' => 'required',
             'total' => 'required',
+            'total_amount' => 'required',
             'note' => 'nullable|string',
 
         ]);
@@ -159,6 +162,7 @@ $invoice =  Invoice::find($id);
         $invoice->rate_vat = $validatedData['rate_vat'];
         $invoice->value_vat = $validatedData['value_vat'];
         $invoice->total = $validatedData['total'];
+        $invoice->total_amount = $validatedData['total_amount'];
         $invoice->note = $validatedData['note'];
         $invoice->created_by = Auth::id();
         $invoice->save();

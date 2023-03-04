@@ -23,6 +23,7 @@ class CreateInvoicesTable extends Migration
             $table->decimal('value_vat', 8, 2)->default(0);
             $table->decimal('rate_vat', 8, 2)->default(0);
             $table->decimal('total', 8, 2);
+            $table->decimal('total_amount', 8, 2)->nullable();
             $table->unsignedTinyInteger('value_status')->default(2);
             $table->string('status', 50)->default('غير مدفوعة');
             $table->unsignedBigInteger('section_id');
