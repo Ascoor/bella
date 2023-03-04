@@ -6,7 +6,10 @@
                                 <title>Snippet - GoSNippets</title>
                                 <link href='https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css' rel='stylesheet'>
                                 <link href='' rel='stylesheet'>
-                                <style>.section {
+                                <style>
+
+                                @import url('https://fonts.googleapis.com/css2?family=Cairo&display=swap');
+                                .section {
     position: relative;
     height: 100vh;
 }
