@@ -11,10 +11,10 @@
     height: 100vh;
 }
 .h2{
-    font-family: Cairo,sans-serif;
+    font-family: 'Cairo', sans-serif;
     color: #ff010b;
     padding-left: 215px;
-    ight: px;
+
     font-size: calc(2.325rem + .9vw);
 }
 .section .section-center {
