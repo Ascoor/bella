@@ -91,7 +91,7 @@ textarea {
 
       <div class="card border-0">
         <div class="card-body">
-          <h3 class="my-3 text-center text-light text-uppercase">سجل حجزك الأن</h3>
+          <h3 class="my-3 text-center text-light text-uppercase">إحجزك الأن</h3>
           <form method="post" action="{{ route('appointments.submitForm') }}">
     @csrf
 
@@ -126,7 +126,7 @@ textarea {
 
 
             <div class="form-group mt-5">
-              <button type="submit" class="btn btn-danger-gradiant btn-block text-uppercase">سجل حجزك الأن</button>
+              <button type="submit" class="btn btn-danger-gradiant btn-block text-uppercase">سجل حجزك</button>
             </div>
           </form>
         </div>
