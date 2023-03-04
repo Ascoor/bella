@@ -113,10 +113,7 @@
                                     @endphp
                                     <tr>
                                         <td>{{ $i }}</td>
-                                        <td>
-                                        <a href="{{ route('invoicedetails.show', $invoice->id) }}">
-                                            {{ $invoice->invoice_number }}</a>
-                                    </td>
+                                        <td>{{ $invoice->invoice_number }} </td>
                                         <td>{{ $invoice->invoice_date }}</td>
                                         <td>{{ $invoice->due_date }}</td>
                                         <td>@foreach ($invoice->services as $service )
