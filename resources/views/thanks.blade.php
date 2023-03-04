@@ -22,7 +22,7 @@
 
 #booking {
     font-family: 'Montserrat', sans-serif;
-    background-image: url('img/back4.jpeg');
+    background-image: url('assets/img/media/login.png');
     background-size: cover;
     background-position: center;
 }
@@ -34,7 +34,7 @@
     right: 0;
     bottom: 0;
     top: 0;
-    background: rgba(47, 103, 177, 0.6);
+    background: rgb(255 77 77 / 27%);
 }
 
 .booking-form {
@@ -138,6 +138,7 @@
     text-transform: uppercase;
     color: #fff;
     font-weight: 700;
+    margin-top: 185px;
 }
 
 .booking-cta p {
@@ -152,6 +153,18 @@
                             <div id="booking" class="section">
     <div class="section-center">
         <div class="container">
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
             <div class="row">
                 <div class="col-md-7 col-md-push-5">
                     <div class="booking-cta">

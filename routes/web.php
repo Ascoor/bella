@@ -27,7 +27,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/ww', function () {
-    return view('ex.calendar', [
+    return view('ex.todotask', [
         'doctors' => Doctor::all(),
     ]);
 

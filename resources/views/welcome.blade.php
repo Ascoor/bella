@@ -4,289 +4,164 @@
                                 <meta charset='utf-8'>
                                 <meta name='viewport' content='width=device-width, initial-scale=1'>
                                 <title>Bella Clinic</title>
-                         <!--- Internal Select2 css-->
-<link href="{{URL::asset('assets/plugins/select2/css/select2.min.css')}}" rel="stylesheet">
-<!---Internal Fileupload css-->
-<link href="{{URL::asset('assets/plugins/fileuploads/css/fileupload.css')}}" rel="stylesheet" type="text/css"/>
-<!---Internal Fancy uploader css-->
-<link href="{{URL::asset('assets/plugins/fancyuploder/fancy_fileupload.css')}}" rel="stylesheet" />
+               <!-- CSS -->
+<link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.5.3/css/bootstrap.min.css" integrity="sha384-JvExCACAZcHNJEc7156QaHXTnQL3hQBixvj5RV5buE7vgnNEzzskDtx9NQ4p6BJe" crossorigin="anonymous">
 <!--Internal Sumoselect css-->
 <link rel="stylesheet" href="{{URL::asset('assets/plugins/sumoselect/sumoselect-rtl.css')}}">
 <!--Internal  TelephoneInput css-->
 <link rel="stylesheet" href="{{URL::asset('assets/plugins/telephoneinput/telephoneinput-rtl.css')}}">
 
-                                <link href='{{asset('/css/app.css')}}' rel='stylesheet'>
-                                <style>.section {
-    position: relative;
-    height: 100vh;
+<style>
+  /* Center the form */
+.container-fluid {
+  background: brown;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh
 }
 
+/* Style the form inputs */
 .form-control {
-    display: block;
-    width: 75%;
-    min-height: calc(1.5em + 0.75rem + 2px);
-    padding: 0.375rem 0.75rem;
-    font-size: medium;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #6c757d;
-    background-color: #ffffff7a;
-    background-clip: padding-box;
-    border: 1px solid #f50b0b;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: revert;
-    border-radius: 0.25rem;
-    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  border-radius: 0;
 }
-.btn-primary {
-    color: #fff;
-    background-color: #d01414;
-    border-color: #fd0d5b;
+
+/* Style the submit button */
+.btn-danger-gradiant {
+
+    background: linear-gradient(to right, #f91b4d, #ff4b2b);
+
+  border-radius: 0;
+  border: none;
+  text-transform: uppercase;
+  font-weight: bold;
 }
+
+/* Style the form labels */
+.text-uppercase {
+  text-transform: uppercase;
+  font-weight: bold;
+  color: white;
+}
+
+/* Style the calendar icon */
+.input-group-text {
+  border-radius: 0;
+}
+
+.fa-calendar {
+  font-size: 1.2rem;
+}
+
+/* Style the form message input */
+textarea {
+  resize: none;
+}
+
+/* Set the image height */
+.card-img {
+  height: 100%;
+}
+
+/* Set the card body height */
+.card-body {
+  height: 100%;
+
+    background: #a52a2a;
+}
+
+/* Style the card */
 .card {
-
-    display: contents;
+  height: 100%;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
 }
 
-.section .section-center {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    -webkit-transform: translateY(-50%);
-    transform: translateY(-50%);
+/* Remove padding from columns */
+.p-0 {
+  padding: 0 !important;
 }
 
-#booking {
-    font-family: 'Montserrat', sans-serif;
-    background-image: url('img/back4a.jpg');
-    background-size: cover;
-    background-position: center;
-}
+</style>
 
-#booking::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    top: 0;
-    background: rgba(47, 103, 177, 0.6);
-}
-
-.booking-form {
-    background-color: #fff;
-    padding: 50px 20px;
-    -webkit-box-shadow: 0px 5px 20px -5px rgba(0, 0, 0, 0.3);
-    box-shadow: 0px 5px 20px -5px rgba(0, 0, 0, 0.3);
-    border-radius: 4px;
-}
-
-.booking-form .form-group {
-    position: relative;
-    margin-bottom: 30px;
-}
-
-.booking-form .form-control {
-    background-color: #ebecee;
-    border-radius: 4px;
-    border: none;
-    height: 40px;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    color: #3e485c;
-    font-size: 14px;
-}
-
-.booking-form .form-control::-webkit-input-placeholder {
-    color: rgba(62, 72, 92, 0.3);
-}
-
-.booking-form .form-control:-ms-input-placeholder {
-    color: rgba(62, 72, 92, 0.3);
-}
-
-.booking-form .form-control::placeholder {
-    color: rgba(62, 72, 92, 0.3);
-}
-
-.booking-form input[type="date"].form-control:invalid {
-    color: rgba(62, 72, 92, 0.3);
-}
-
-.booking-form select.form-control {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-}
-
-.booking-form select.form-control+.select-arrow {
-    position: absolute;
-    right: 0px;
-    bottom: 4px;
-    width: 32px;
-    line-height: 32px;
-    height: 32px;
-    text-align: center;
-    pointer-events: none;
-    color: rgba(62, 72, 92, 0.3);
-    font-size: 14px;
-}
-
-.booking-form select.form-control+.select-arrow:after {
-    content: '\279C';
-    display: block;
-    -webkit-transform: rotate(90deg);
-    transform: rotate(90deg);
-}
-
-.booking-form .form-label {
-    display: inline-block;
-    color: #3e485c;
-    font-weight: 700;
-    margin-bottom: 6px;
-    margin-left: 7px;
-}
-
-.booking-form .submit-btn {
-    display: inline-block;
-    color: #fff;
-    background-color: #1e62d8;
-    font-weight: 700;
-    padding: 14px 30px;
-    border-radius: 4px;
-    border: none;
-    -webkit-transition: 0.2s all;
-    transition: 0.2s all;
-}
-
-.booking-form .submit-btn:hover,
-.booking-form .submit-btn:focus {
-    opacity: 0.9;
-}
-
-.booking-cta {
-    margin-top: 80px;
-    margin-bottom: 30px;
-}
-
-.booking-cta h1 {
-    font-size: 52px;
-    text-transform: uppercase;
-    color: #fff;
-    font-weight: 700;
-}
-
-.booking-cta p {
-    font-size: 16px;
-    color: rgba(255, 255, 255, 0.8);
-}</style>
                             </head>
-                            <body oncontextmenu='return false' class='snippet-body'>
-                            <div id="booking" class="section">
-    <div class="section-center">
-    <div class="container">
+                            <body>
+                            <div class="container-fluid">
+  <div class="row">
+  <div class="col-md-6 col-lg-5 p-0">
 
-    <h1 style="color:aliceblue">Create Appointment</h1>
-    <div class="card">
-<div class="card-body">
-
-
-    @if (session('success'))
-    <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
-
-<form method="post" action="{{ route('appointments.submitForm') }}">
+      <div class="card border-0">
+        <div class="card-body">
+          <h3 class="my-3 text-center text-light text-uppercase">سجل حجزك الأن</h3>
+          <form method="post" action="{{ route('appointments.submitForm') }}">
     @csrf
 
-    <div class="form-group">
-
-        <select name="doctor_id" id="doctor_id" class="form-control @error('doctor_id') is-invalid @enderror">
-            <option value="">Select a doctor</option>
+            <div class="form-row">
+              <label for="first-name" class="text-uppercase">الإسم</label>
+              <input type="text" id="client_name" name="client_name" class="form-control" placeholder="الإسم">
+            </div>
+            <div class="form-group mt-4">
+              <label for="booking-date" class="text-uppercase">الطبيب</label>
+              <select name="doctor_id" id="doctor_id" class="form-control @error('doctor_id') is-invalid @enderror">
+            <option value="">إختر الطبيب</option>
             @foreach ($doctors as $doctor)
                 <option value="{{ $doctor->id }}">{{ $doctor->name }}</option>
             @endforeach
         </select>
+            </div>
         @error('doctor_id')
             <div class="invalid-feedback">{{ $message }}</div>
             @enderror
+
+
+            <div class="form-group mt-4">
+
+              <label for="email" class="text-uppercase">تارخ وموعد الحجز</label>
+              <input type="datetime-local" name="apt_datetime" id="apt_datetime" class="form-control @error('apt_datetime') is-invalid @enderror">
+            </div>
+            <div class="form-group mt-4">
+              <label for="phone" class="text-uppercase">رقم الجوال</label>
+              <input type="tel" id="client_phone" name="client_phone"class="form-control" placeholder="إدخل رقم الجوال">
+            </div>
+
+
+
+            <div class="form-group mt-5">
+              <button type="submit" class="btn btn-danger-gradiant btn-block text-uppercase">Book Your Appointment Now</button>
+            </div>
+          </form>
+        </div>
+
+
+            </div>
+      </div>
+      <div class="col-md-6 col-lg-7 p-0">
+    <div class="card border-0">
+      <img src="{{ asset('img/back2.jpeg') }}" class="card-img">
     </div>
-    <div class="form-group"><input type="datetime-local" name="apt_datetime" id="apt_datetime" class="form-control @error('apt_datetime') is-invalid @enderror">
-@error('apt_datetime')
-    <div class="invalid-feedback">{{ $message }}</div>
-@enderror
+      </div>
 
 
 
-    <div class="form-group">
-
-        <input type="text" placeholder="Your Name" name="client_name" id="client_name" class="form-control @error('client_name') is-invalid @enderror" value="{{ old('client_name') }}">
-        @error('client_name')
-            <div class="invalid-feedback">{{ $message }}</div>
-        @enderror
-    </div>
-
-    <div class="form-group">
-
-									<input class="form-control" id="phone" name="client_phone" type="tel">
+    <!-- jQuery and JS bundle w/ Popper.js -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.rtlcss.com/bootstrap/v4.5.3/js/bootstrap.bundle.min.js" integrity="sha384-40ix5a3dj6/qaC7tfz0Yr+p9fqWLzzAXiwxVLt9dw7UjQzGYw6rWRhFAnRapuQyK" crossorigin="anonymous"></script>
 
 
-    <button type="submit" class="btn btn-primary">Create Now</button>
-</form>
-</div>               <script type='text/javascript'></script>
 
-</div>
-                            <!-- ALL JS FILES -->
-<!-- jQuery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
-<!-- PerfectScrollbar JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.5.2/perfect-scrollbar.min.js"></script>
-
-<!-- Select2 JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-
-
-<!--Internal  Datepicker js -->
-<script src="{{URL::asset('assets/plugins/jquery-ui/ui/widgets/datepicker.js')}}"></script>
-<!-- Internal Select2 js-->
-<script src="{{URL::asset('assets/plugins/select2/js/select2.min.js')}}"></script>
-<!--Internal Fileuploads js-->
-<script src="{{URL::asset('assets/plugins/fileuploads/js/fileupload.js')}}"></script>
-<script src="{{URL::asset('assets/plugins/fileuploads/js/file-upload.js')}}"></script>
-<!--Internal Fancy uploader js-->
-<script src="{{URL::asset('assets/plugins/fancyuploder/jquery.ui.widget.js')}}"></script>
-<script src="{{URL::asset('assets/plugins/fancyuploder/jquery.fileupload.js')}}"></script>
-<script src="{{URL::asset('assets/plugins/fancyuploder/jquery.iframe-transport.js')}}"></script>
-<script src="{{URL::asset('assets/plugins/fancyuploder/jquery.fancy-fileupload.js')}}"></script>
-<script src="{{URL::asset('assets/plugins/fancyuploder/fancy-uploader.js')}}"></script>
-<!--Internal  Form-elements js-->
-<script src="{{URL::asset('assets/js/advanced-form-elements.js')}}"></script>
-<script src="{{URL::asset('assets/js/select2.js')}}"></script>
-<!--Internal Sumoselect js-->
-<script src="{{URL::asset('assets/plugins/sumoselect/jquery.sumoselect.js')}}"></script>
-<!-- Internal TelephoneInput js-->
 <script src="{{URL::asset('assets/plugins/telephoneinput/telephoneinput.js')}}"></script>
 <script src="{{URL::asset('assets/plugins/telephoneinput/inttelephoneinput.js')}}"></script>
-                            <script src="{{ asset('js/app.js')}}"></script>
+                      <script>
+                        $(function() {
+  $('#dp').datepicker();
+});$(function() {
+
+// International Telephone Input
+var input = document.querySelector("#client_phone");
+  window.intlTelInput(input, {
+    utilsScript: "assets/plugins/telephoneinput/utils.js",
+  });
+});
+                        </script>
 
                         </body>
                     </html>
-
-<!--
-    <body class="antialiased">
-        <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
-            @if (Route::has('login'))
-            <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-                    @auth
-                        <a href="{{ url('/home') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Home</a>
-                    @else
-                        <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
-                        @endif
-                    @endauth
-                </div>
-                @endif -->
