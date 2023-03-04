@@ -87,6 +87,11 @@ textarea {
                             <body>
                             <div class="container-fluid">
   <div class="row">
+  <div class="col-md-6 col-lg-7 p-0">
+    <div class="card border-0">
+      <img src="{{ asset('img/back2.jpeg') }}" class="card-img">
+    </div>
+      </div>
   <div class="col-md-6 col-lg-5 p-0">
 
       <div class="card border-0">
@@ -134,11 +139,7 @@ textarea {
 
             </div>
       </div>
-      <div class="col-md-6 col-lg-7 p-0">
-    <div class="card border-0">
-      <img src="{{ asset('img/back2.jpeg') }}" class="card-img">
-    </div>
-      </div>
+
 
 
 
