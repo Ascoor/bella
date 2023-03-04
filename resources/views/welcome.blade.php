@@ -5,7 +5,7 @@
                                 <meta name='viewport' content='width=device-width, initial-scale=1'>
                                 <title>Bella Clinic</title>
                                 <link href='https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css' rel='stylesheet'>
-                                <link href='{{asset('/public/css/app.css')}}' rel='stylesheet'>
+                                <link href='{{asset('/css/app.css')}}' rel='stylesheet'>
                                 <style>.section {
     position: relative;
     height: 100vh;
