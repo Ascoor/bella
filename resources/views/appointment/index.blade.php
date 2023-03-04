@@ -227,9 +227,9 @@
                         <select class="form-control select2-no-search" id="status" name="status">
                             <option label="Choose one">
                             <option value="pending" selected>Pending</option>
-                            <option value="accepted">confirmed</option>
+
                             <option value="accepted">Complete</option>
-                            <option value="accepted">cancelled</option>
+                            <option value="cancelled">cancelled</option>
                         </select>
                         @error('status')
                             <span class="invalid-feedback" role="alert">
@@ -411,7 +411,7 @@
                         <select class="form-control select2-no-search" id="status" name="status">
                             <option label="Choose one">
                             <option value="pending" selected>Pending</option>
-                            <option value="accepted">accepted</option>
+
                             <option value="Complete">Complete</option>
                             <option value="cancelled">cancelled</option>
                         </select>
@@ -562,10 +562,8 @@
         var status_text = '';
         if (status === 'pending') {
             status_text = 'pending';
-        } else if (status === 'accepted') {
-            status_text = 'accepted';
-        } else if (status === 'confirmed') {
-            status_text = 'confirmed';
+
+
         } else if (status === 'Complete') {
             status_text = 'completed';
         } else if (status === 'cancelled') {
@@ -604,8 +602,7 @@
         var status_text = '';
         if (status === 'pending') {
             status_text = 'pending';
-        } else if (status === 'accepted') {
-            status_text = 'accepted';
+
         } else if (status === 'Complete') {
             status_text = 'completed';
         } else if (status === 'cancelled') {
