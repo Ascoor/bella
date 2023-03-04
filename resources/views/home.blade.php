@@ -1,5 +1,6 @@
 @extends('layouts.master')
 @section('css')
+<link href="{{URL::asset('assets/plugins/fullcalendar/fullcalendar.min.css')}}" rel="stylesheet">
 <!--  Owl-carousel css-->
 <link href="{{URL::asset('assets/plugins/owl-carousel/owl.carousel.css')}}" rel="stylesheet" />
 <!-- Maps css -->
@@ -109,66 +110,11 @@
 				<!-- row opened -->
 				<div class="row row-sm row-deck">
 
-					<div class="col-md-12 col-lg-8 col-xl-12">
-						<div class="card card-table-two">
-							<div class="d-flex justify-content-between">
-								<h4 class="card-title mb-1">حجوزات قيد الإنتظار</h4>
-								<i class="mdi mdi-dots-horizontal text-gray"></i>
-							</div>
-							<span class="tx-12 tx-muted mb-3 ">حجوزات قيد الإنتظار لحين تأكيد الموعد</span>
-							<div class="table-responsive country-table">
-								<table class="table table-striped table-bordered mb-0 text-sm-nowrap text-lg-nowrap text-xl-nowrap">
-									<thead>
-										<tr>
-											<th class="wd-lg-1-20p">إسم العميل</th>
-											<th class="wd-lg-1-15p tx-right">تاريخ الحجز</th>
-											<th class="wd-lg-1-10p tx-right">الموعد</th>
-											<th class="wd-lg-1-20p tx-right">رقم الهاتف</th>
-											<th class="wd-lg-1-25p tx-right">االدكتور</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>05 Dec 2019</td>
-											<td class="tx-right tx-medium tx-inverse">34</td>
-											<td class="tx-right tx-medium tx-inverse">$658.20</td>
-											<td class="tx-right tx-medium tx-danger">-$45.10</td>
-											<td class="tx-right tx-medium tx-danger">doc</td>
-										</tr>
-										<tr>
-											<td>06 Dec 2019</td>
-											<td class="tx-right tx-medium tx-inverse">26</td>
-											<td class="tx-right tx-medium tx-inverse">$453.25</td>
-											<td class="tx-right tx-medium tx-danger">-$15.02</td>
-											<td class="tx-right tx-medium tx-danger">doc</td>
-										</tr>
-										<tr>
-											<td>07 Dec 2019</td>
-											<td class="tx-right tx-medium tx-inverse">34</td>
-											<td class="tx-right tx-medium tx-inverse">$653.12</td>
-											<td class="tx-right tx-medium tx-danger">-$13.45</td>
-											<td class="tx-right tx-medium tx-danger">doc</td>
-										</tr>
-										<tr>
-											<td>08 Dec 2019</td>
-											<td class="tx-right tx-medium tx-inverse">45</td>
-											<td class="tx-right tx-medium tx-inverse">$546.47</td>
-											<td class="tx-right tx-medium tx-danger">-$24.22</td>
-											<td class="tx-right tx-medium tx-danger">doc</td>
-										</tr>
-										<tr>
-											<td>09 Dec 2019</td>
-											<td class="tx-right tx-medium tx-inverse">31</td>
-											<td class="tx-right tx-medium tx-inverse">$425.72</td>
-											<td class="tx-right tx-medium tx-danger">-$25.01</td>
-											<td class="tx-right tx-medium tx-danger">doc</td>
-										</tr>
-									</tbody>
-								</table>
+							<div class="main-content-body main-content-body-calendar card p-4">
+								<div class="main-calendar" id="calendar"></div>
 							</div>
 						</div>
 					</div>
-				</div>
 				<!-- /row -->
 			</div>
 		</div>
@@ -184,13 +130,20 @@
 <script src="{{URL::asset('assets/plugins/jquery.flot/jquery.flot.pie.js')}}"></script>
 <script src="{{URL::asset('assets/plugins/jquery.flot/jquery.flot.resize.js')}}"></script>
 <script src="{{URL::asset('assets/plugins/jquery.flot/jquery.flot.categories.js')}}"></script>
-<script src="{{URL::asset('assets/js/dashboard.sampledata.js')}}"></script>
-<script src="{{URL::asset('assets/js/chart.flot.sampledata.js')}}"></script>
+
 <!--Internal Apexchart js-->
 <script src="{{URL::asset('assets/js/apexcharts.js')}}"></script>
-<!-- Internal Map -->
-<script src="{{URL::asset('assets/plugins/jqvmap/jquery.vmap.min.js')}}"></script>
-<script src="{{URL::asset('assets/plugins/jqvmap/maps/jquery.vmap.usa.js')}}"></script>
+<!-- moomet min js -->
+<script src="{{URL::asset('assets/plugins/moment/min/moment.min.js')}}"></script>
+<!--Internal  Date picker js -->
+<script src="{{URL::asset('assets/plugins/jquery-ui/ui/widgets/datepicker.js')}}"></script>
+<!--Internal  Fullcalendar js -->
+<script src="{{URL::asset('assets/plugins/fullcalendar/fullcalendar.min.js')}}"></script>
+<!-- Internal Select2.full.min js -->
+<script src="{{URL::asset('assets/plugins/select2/js/select2.full.min.js')}}"></script>
+<!--Internal App calendar js -->
+<script src="{{URL::asset('assets/js/app-calendar-events.js')}}"></script>
+<script src="{{URL::asset('assets/js/app-calendar.js')}}"></script>
 <script src="{{URL::asset('assets/js/modal-popup.js')}}"></script>
 <!--Internal  index js -->
 <script src="{{URL::asset('assets/js/index.js')}}"></script>

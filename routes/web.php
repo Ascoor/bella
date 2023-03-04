@@ -27,7 +27,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/ww', function () {
-    return view('ex.form-elements', [
+    return view('ex.calendar', [
         'doctors' => Doctor::all(),
     ]);
 
