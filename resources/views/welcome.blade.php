@@ -10,10 +10,13 @@
 <link rel="stylesheet" href="{{URL::asset('assets/plugins/sumoselect/sumoselect-rtl.css')}}">
 <!--Internal  TelephoneInput css-->
 <link rel="stylesheet" href="{{URL::asset('assets/plugins/telephoneinput/telephoneinput-rtl.css')}}">
-
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
 <style>
   /* Center the form */
 .container-fluid {
+    font-family: 'Cairo', sans-serif;
   background: #cc2b5e;  /* fallback for old browsers */
 background: -webkit-linear-gradient(to right, #753a88, #cc2b5e);  /* Chrome 10-25, Safari 5.1-6 */
 background: linear-gradient(to right, #753a88, #cc2b5e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
@@ -42,6 +45,7 @@ background: linear-gradient(to right, #753a88, #cc2b5e); /* W3C, IE 10+/ Edge, F
 
 /* Style the form labels */
 .text-uppercase {
+    font-family: 'Cairo', sans-serif;
   text-transform: uppercase;
   font-weight: bold;
   color: white;
@@ -104,7 +108,7 @@ background: linear-gradient(to right, #753a88, #cc2b5e); /* W3C, IE 10+/ Edge, F
 
       <div class="card border-0">
         <div class="card-body">
-          <h3 class="my-3 text-center text-light text-uppercase">إحجزك الأن</h3>
+          <h3 class="my-3 text-center text-light text-uppercase">سجل بياناتك</h3>
           <form method="post" action="{{ route('appointments.submitForm') }}">
     @csrf
 
@@ -128,7 +132,7 @@ background: linear-gradient(to right, #753a88, #cc2b5e); /* W3C, IE 10+/ Edge, F
 
             <div class="form-group mt-4">
 
-              <label for="email" class="text-uppercase">تارخ وموعد الحجز</label>
+              <label for="email" class="text-uppercase">تاريخ وموعد الحجز</label>
               <input type="datetime-local" name="apt_datetime" id="apt_datetime" class="form-control @error('apt_datetime') is-invalid @enderror">
             </div>
             <div class="form-group mt-4">
@@ -139,7 +143,7 @@ background: linear-gradient(to right, #753a88, #cc2b5e); /* W3C, IE 10+/ Edge, F
 
 
             <div class="form-group mt-5">
-              <button type="submit" class="btn btn-danger-gradiant btn-block text-uppercase">سجل حجزك</button>
+              <button type="submit" class="btn btn-danger-gradiant btn-block text-uppercase">إحجزك الأن</button>
             </div>
           </form>
         </div>
