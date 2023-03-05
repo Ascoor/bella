@@ -14,7 +14,10 @@
 <style>
   /* Center the form */
 .container-fluid {
-  background: brown;
+  background: #cc2b5e;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #753a88, #cc2b5e);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #753a88, #cc2b5e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -67,7 +70,10 @@ textarea {
 .card-body {
   height: 100%;
 
-    background: #a52a2a;
+  background: #cc2b5e;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #753a88, #cc2b5e);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #753a88, #cc2b5e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 }
 
 /* Style the card */
@@ -87,11 +93,13 @@ textarea {
                             <body>
                             <div class="container-fluid">
   <div class="row">
+
   <div class="col-md-6 col-lg-7 p-0">
     <div class="card border-0">
-      <img src="{{ asset('img/back2.jpeg') }}" class="card-img">
+      <img src="{{ asset('img/slid1.webp') }}" class="card-img">
     </div>
       </div>
+
   <div class="col-md-6 col-lg-5 p-0">
 
       <div class="card border-0">
@@ -135,12 +143,14 @@ textarea {
             </div>
           </form>
         </div>
+        </div>
+        </div>
 
 
-            </div>
       </div>
 
-
+                            </div>
+                            </div>
 
 
     <!-- jQuery and JS bundle w/ Popper.js -->

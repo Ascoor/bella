@@ -1,5 +1,5 @@
 <!doctype html>
-                        <html>
+                        <html dir="rtl">
                             <head>
                                 <meta charset='utf-8'>
                                 <meta name='viewport' content='width=device-width, initial-scale=1'>
@@ -8,32 +8,33 @@
                                 <link href='' rel='stylesheet'>
                                 <style>
 
-                                @import url('https://fonts.googleapis.com/css2?family=Cairo&display=swap');
-                                .section {
-    position: relative;
-    height: 100vh;
-}
-.h2{
-    font-family: 'Cairo', sans-serif;
-    color: #ff010b;
-    padding-left: 215px;
-
-    font-size: calc(2.325rem + .9vw);
-}
-.section .section-center {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    -webkit-transform: translateY(-50%);
-    transform: translateY(-50%);
+.card {
+  background-image: url('assets/img/media/login.png');
+  background: #e6e3e4;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #753a88, #cc2b5e);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #753a88, #cc2b5e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-#booking {
-    font-family: 'Montserrat', sans-serif;
-    background-image: url('assets/img/media/login.png');
-    background-size: cover;
-    background-position: center;
+
+
+.section-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.container {
+  max-width: 800px;
 }
 
 #booking::before {
@@ -43,33 +44,30 @@
     right: 0;
     bottom: 0;
     top: 0;
-    background: rgb(255 77 77 / 27%);
+    background: url('assets/img/media/login.png') no-repeat center center fixed;
+    background-size: cover;
+    background: #cc2b5e;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #753a88, #cc2b5e);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #753a88, #cc2b5e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    height: 100%;
 }
 
-.booking-form {
-    background-color: #fff;
-    padding: 50px 20px;
-    -webkit-box-shadow: 0px 5px 20px -5px rgba(0, 0, 0, 0.3);
-    box-shadow: 0px 5px 20px -5px rgba(0, 0, 0, 0.3);
-    border-radius: 4px;
+h1, h1 {
+    font-size: calc(1.375rem + 1.5vw);
+    font-family: fantasy;
+    color: honeydew;
+    text-align: center
 }
-
-.booking-form .form-group {
-    position: relative;
-    margin-bottom: 30px;
+.h2, h2 {
+    color: gold;
+    font-size: calc(1.325rem + .9vw);
+    font-family: Cairo
 }
-
-.booking-form .form-control {
-    background-color: #ebecee;
-    border-radius: 4px;
-    border: none;
-    height: 40px;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    color: #3e485c;
-    font-size: 14px;
+p {
+    color: floralwhite;
+    margin-top: 0;
+    margin-bottom: 1rem;
 }
-
 .booking-form .form-control::-webkit-input-placeholder {
     color: rgba(62, 72, 92, 0.3);
 }
@@ -78,116 +76,40 @@
     color: rgba(62, 72, 92, 0.3);
 }
 
-.booking-form .form-control::placeholder {
-    color: rgba(62, 72, 92, 0.3);
-}
 
-.booking-form input[type="date"].form-control:invalid {
-    color: rgba(62, 72, 92, 0.3);
-}
 
-.booking-form select.form-control {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-}
-
-.booking-form select.form-control+.select-arrow {
-    position: absolute;
-    right: 0px;
-    bottom: 4px;
-    width: 32px;
-    line-height: 32px;
-    height: 32px;
-    text-align: center;
-    pointer-events: none;
-    color: rgba(62, 72, 92, 0.3);
-    font-size: 14px;
-}
-
-.booking-form select.form-control+.select-arrow:after {
-    content: '\279C';
-    display: block;
-    -webkit-transform: rotate(90deg);
-    transform: rotate(90deg);
-}
-
-.booking-form .form-label {
-    display: inline-block;
-    color: #3e485c;
-    font-weight: 700;
-    margin-bottom: 6px;
-    margin-left: 7px;
-}
-
-.booking-form .submit-btn {
-    display: inline-block;
-    color: #fff;
-    background-color: #1e62d8;
-    font-weight: 700;
-    padding: 14px 30px;
-    border-radius: 4px;
-    border: none;
-    -webkit-transition: 0.2s all;
-    transition: 0.2s all;
-}
-
-.booking-form .submit-btn:hover,
-.booking-form .submit-btn:focus {
-    opacity: 0.9;
-}
-
-.booking-cta {
-    margin-top: 80px;
-    margin-bottom: 30px;
-}
-
-.booking-cta h1 {
-    font-size: 52px;
-    text-transform: uppercase;
-    color: #fff;
-    font-weight: 700;
-    margin-top: 185px;
-}
-
-.booking-cta p {
-    font-size: 16px;
-    color: rgba(255, 255, 255, 0.8);
-}</style>
-                                <script type='text/javascript' src=''></script>
-                                <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js'></script>
-                                <script type='text/javascript' src='https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js'></script>
-                            </head>
+</style>
+                                 </head>
                             <body oncontextmenu='return false' class='snippet-body'>
                             <div id="booking" class="section">
-    <div class="section-center">
-        <div class="container">
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <div class="row">
-                <div class="col-md-7 col-md-push-5">
-                    <div class="booking-cta">
-                        <h1>Thank You  </h1>
-                        <h2>{{$appointment->client->client_name}}</h2>
-                        <p>شكرا لتسجيل الحجز وستصلك رسالة لتأكيد موعد الحجز
-                        </p>
-                    </div>
-                </div>
+                                <div class="card">
 
-                            <script type='text/javascript'></script>
+
+                      <div class="row">
+                        <div class="col-md-7 col-md-push-5">
+                          <div class="booking-cta">
+                            <h1 >Thank You</h1>
+                            <h2>{{$appointment->client->client_name}}</h2>
+                            <p>شكرا لتسجيل الحجز وستصلك رسالة لتأكيد موعد الحجز</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+            </div>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    </div>   <script type='text/javascript' src=''></script>
+    <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js'></script>
+    <script type='text/javascript' src='https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js'></script>
+
+
 
                             <!-- ALL JS FILES -->
-                            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
                             <script src="{{ asset('js/app.js')}}"></script>
 
