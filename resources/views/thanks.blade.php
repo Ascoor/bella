@@ -10,54 +10,103 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <style>
-        .card {
-
-            background: #e6e3e4;
-            /* fallback for old browsers */
-            background: -webkit-linear-gradient(to right, #753a88, #cc2b5e);
-            /* Chrome 10-25, Safari 5.1-6 */
-            background: linear-gradient(to right, #753a88, #cc2b5e);
-            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 20px;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-
-
-        .section-center {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-        }
-
-        .container {
-            max-width: 800px;
-        }
-
-        #booking::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            top: 0;
-            background: url('assets/img/media/login.png') no-repeat center center fixed;
-            background-size: cover;
+        /* Center the form */
+        .container-fluid {
+            font-family: 'Cairo', sans-serif;
             background: #cc2b5e;
             /* fallback for old browsers */
             background: -webkit-linear-gradient(to right, #753a88, #cc2b5e);
             /* Chrome 10-25, Safari 5.1-6 */
             background: linear-gradient(to right, #753a88, #cc2b5e);
             /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh
+        }
+
+        /* Style the form inputs */
+        .form-control {
+            border-radius: 0;
+        }
+
+        /* Style the submit button */
+        .btn-danger-gradiant {
+
+            background: linear-gradient(to right, #f91b4d, #ff4b2b);
+
+            border-radius: 0;
+            border: none;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        /* Style the form labels */
+        .text-uppercase {
+            text-transform: uppercase;
+            font-weight: bold;
+            color: white;
+        }
+
+        /* Style the calendar icon */
+        .input-group-text {
+            border-radius: 0;
+        }
+
+        .fa-calendar {
+            font-size: 1.2rem;
+        }
+
+        /* Style the form message input */
+        textarea {
+            resize: none;
+        }
+
+        /* Set the image height */
+        .card-img {
+
+            max-height: 300px;
+
+
+        }
+
+        /* Set the card body height */
+        .card-body {
             height: 100%;
+
+            background: #cc2b5e;
+            /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #753a88, #cc2b5e);
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #753a88, #cc2b5e);
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+        }
+
+        /* Style the card */
+        .card {
+            height: 100%;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Remove padding from columns */
+        .p-0 {
+            padding: 0 !important;
+        }
+
+        .carousel-item {
+            border-radius: 50% 50% 50% 50%;
+
+        }
+
+        .footer {
+            font-size: small;
+            color: yellow;
+            text-align: center;
+        }
+    .afoot{
+            color: #e6e3e4;
         }
 
         h1,
@@ -80,43 +129,53 @@
         }
 
         p {
-            font-size: calc(1.375rem + 1.5vw);
+            font-size: calc(1.375rem + 2.5vw);
             font-family: 'Pacifico', cursive;
-            color: #f32f38;
-            text-align: center;
+            color: gold;
+            text-shadow: silver;
+            text-align: left;
             padding-top: 70px;
-            font-size: 42px;
 
-        }
 
-        .booking-form .form-control::-webkit-input-placeholder {
-            color: rgba(62, 72, 92, 0.3);
-        }
-
-        .booking-form .form-control:-ms-input-placeholder {
-            color: rgba(62, 72, 92, 0.3);
-        }
-
-        .footer {
-            font-size: small;
-            color: #ecff4d;
-            text-align: center;
-        }
-        .afoot{
-            color: #e6e3e4;
         }
     </style>
 </head>
 
 <body>
-    <div id="booking" class="section">
+    <div class="container-fluid">
+        <div class="row">
 
-        <div class="card" style="width:25rem;">
-            <img src="{{ asset('img/slid1.webp') }}" class="card-img">
+            <div class="col-md-6 col-lg-7 p-0">
+                <div id="myCarousel" class="carousel slide" data-ride="carousel">
 
-            <div class="card-img-overlay">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="{{ asset('img/slid1.webp') }}" class="d-block w-100"
+                                alt="First slide">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{{ asset('img/slid2.jpg') }}" class="d-block w-100"
+                                alt="Second slide">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{{ asset('img/slid3.jpg') }}" class="d-block w-100"
+                                alt="Third slide">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{{ asset('img/slid4.jpg') }}" class="d-block w-100"
+                                alt="Third slide">
+                        </div>
+                    </div>
 
-                <p class="card-text">
+                </div>
+            </div>
+
+
+            <div class="col-md-6 col-lg-5 p-0">
+
+                <div class="card border-0">
+                    <div class="card-body">
+                <p >
 
 
                     Thank You
@@ -124,20 +183,23 @@
 
 
                 </p>
-            </div>
-            <div class="card-text">>
-                <h1>{{ $appointment->client->client_name }}</h1>
 
+                <h1>{{ $appointment->client->client_name }}</h1>
+                <div class="card-footer">
                 <h2>شكرا لتسجيل الحجز وستصلك رسالة على رقم جوالك {{ $appointment->client->clienr_phone }} لتأكيد
                     موعد الحجز.</h2>
-            </div>
+
+                    </div>
+                    </div>
+                </div>
 
             <div class="footer">
 
             <span>Copyrights © <a class="afoot" href="https://wwww.ask-ar.com">Ask-ar T.S</a>all rights reserved © 2023</span>
             </div>
+
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        </div>
+
         <script type='text/javascript' src=''></script>
         <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js'>
         </script>
