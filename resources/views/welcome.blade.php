@@ -48,6 +48,11 @@
             text-transform: uppercase;
             font-weight: bold;
         }
+        .carousel-item img {
+  width: 100%;
+  height: 500px; /* adjust to the desired height */
+  object-fit:fill;
+}
 
         /* Style the form labels */
         .text-uppercase {
@@ -71,13 +76,7 @@
             resize: none;
         }
 
-        /* Set the image height */
-        .card-img {
 
-            max-height: 300px;
-
-
-        }
 
         /* Set the card body height */
         .card-body {
@@ -130,11 +129,12 @@
         <div class="row">
 
             <div class="col-md-6 col-lg-7 p-0">
-                <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="5000">
+
 
                     <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="{{ asset('img/slid1.webp') }}" class="d-block w-100"
+                    <div class="carousel-item active">
+                            <img src="{{ asset('img/slid6.png') }}" class="d-block w-100"
                                 alt="First slide">
                         </div>
                         <div class="carousel-item">
@@ -149,10 +149,15 @@
                             <img src="{{ asset('img/slid4.jpg') }}" class="d-block w-100"
                                 alt="Third slide">
                         </div>
+                        <div class="carousel-item">
+                            <img src="{{ asset('img/slid5.jpg') }}" class="d-block w-100"
+                                alt="Third slide">
+                            </div>
                     </div>
 
                 </div>
             </div>
+
 
 
             <div class="col-md-6 col-lg-5 p-0">
@@ -203,24 +208,28 @@
                             </div>
                         </form>
                     </div>
-
+                    </div>
 
 
                 </div>
-            </div>
             <div class="footer">
                         <span>Copyrights © <a class="afoot" href="https://wwww.ask-ar.com"> Ask-ar T.S </a>all rights reserved © 2023</span>
             </div>
 
-
+            </div>
+    </div>
 
 
 
     <!-- jQuery and JS bundle w/ Popper.js -->
-<!-- jQuery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+<script type='text/javascript' src=''></script>
+<script type='text/javascript' src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js'>
+</script>
+<script type='text/javascript'
+    src='https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js'></script>
+
 
 
     <script src="{{ URL::asset('assets/plugins/telephoneinput/telephoneinput.js') }}">

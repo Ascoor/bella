@@ -48,6 +48,12 @@
             font-weight: bold;
             color: white;
         }
+        .carousel-item img {
+  width: 100%;
+  height: 500px; /* adjust to the desired height */
+  object-fit:fill;
+}
+
 
         /* Style the calendar icon */
         .input-group-text {
@@ -65,12 +71,7 @@
         }
 
         /* Set the image height */
-        .card-img {
 
-            max-height: 300px;
-
-
-        }
 
         /* Set the card body height */
         .card-body {
@@ -146,12 +147,13 @@
     <div class="container-fluid">
         <div class="row">
 
-            <div class="col-md-6 col-lg-7 p-0">
-                <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <div class="col-md-6 col-md-7 p-0">
+            <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="5000">
+
 
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="{{ asset('img/slid1.webp') }}" class="d-block w-100"
+                            <img src="{{ asset('img/slid6.png') }}" class="d-block w-100"
                                 alt="First slide">
                         </div>
                         <div class="carousel-item">
@@ -164,6 +166,10 @@
                         </div>
                         <div class="carousel-item">
                             <img src="{{ asset('img/slid4.jpg') }}" class="d-block w-100"
+                                alt="Third slide">
+                            </div>
+                        <div class="carousel-item">
+                            <img src="{{ asset('img/slid5.jpg') }}" class="d-block w-100"
                                 alt="Third slide">
                             </div>
                         </div>
@@ -193,10 +199,10 @@
                     </div>
                     </div>
                 </div>
-
+            </div>
             <div class="footer">
 
-            <span>Copyrights © <a class="afoot" href="https://wwww.ask-ar.com">Ask-ar T.S</a>all rights reserved © 2023</span>
+            <span>Copyrights © <a class="afoot" href="https://wwww.ask-ar.com">Ask-ar T.S </a>all rights reserved © 2023</span>
         </div>
     </div>
 
