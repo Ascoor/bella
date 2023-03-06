@@ -27,7 +27,7 @@ class AppointmentFactory extends Factory
             'client_id' => Client::all()->random()->id,
             'created_at' => $this->faker->date(),
             'updated_at' => $this->faker->date(),
-            'remarks' => $this->faker->datetime('m-d-Y H:i:s'),
+
 
 
         ];
