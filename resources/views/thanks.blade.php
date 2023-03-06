@@ -11,20 +11,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <style>
         /* Center the form */
-        @media (max-width: 768px) {
-  .carousel-item img {
-    height: 300px;
-  }
-    .card-body {
-    height: auto;
-    background: #cc2b5e;
-            /* fallback for old browsers */
-            background: -webkit-linear-gradient(to right, #753a88, #cc2b5e);
-            /* Chrome 10-25, Safari 5.1-6 */
-            background: linear-gradient(to right, #753a88, #cc2b5e);
-            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  }
-}
         .container-fluid {
             font-family: 'Cairo', sans-serif;
             background: #cc2b5e;
@@ -158,9 +144,10 @@
 </head>
 
 <body>
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-6">
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-md-6 col-md-7 p-0">
             <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="5000">
 
 
@@ -189,7 +176,9 @@
                     </div>
                 </div>
 
-    <div class="col-md-6">
+
+
+            <div class="col-md-6 col-lg-5 p-0">
 
                 <div class="card border-0">
                     <div class="card-body">

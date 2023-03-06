@@ -18,20 +18,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
     <style>
         /* Center the form */
-        @media (max-width: 768px) {
-  .carousel-item img {
-    height: 300px;
-  }
-    .card-body {
-    height: auto;
-    background: #cc2b5e;
-            /* fallback for old browsers */
-            background: -webkit-linear-gradient(to right, #753a88, #cc2b5e);
-            /* Chrome 10-25, Safari 5.1-6 */
-            background: linear-gradient(to right, #753a88, #cc2b5e);
-            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  }
-}
         .container-fluid {
             font-family: 'Cairo', sans-serif;
             background: #cc2b5e;
@@ -85,12 +71,16 @@
             font-size: 1.2rem;
         }
 
+        /* Style the form message input */
+        textarea {
+            resize: none;
+        }
 
 
 
         /* Set the card body height */
         .card-body {
-            height: auto;
+            height: 100%;
 
             background: #cc2b5e;
             /* fallback for old browsers */
@@ -112,6 +102,10 @@
             padding: 0 !important;
         }
 
+        .carousel-item {
+            border-radius: 50% 50% 50% 50%;
+
+        }
 
         .footer {
             background: -webkit-linear-gradient(to right, #753a88, #cc2b5e);
@@ -131,85 +125,99 @@
 </head>
 
 <body>
+    <div class="container-fluid">
+        <div class="row">
 
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-6">
-      <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="5000">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img src="{{ asset('img/slid6.png') }}" class="d-block w-100" alt="First slide">
-          </div>
-          <div class="carousel-item">
-            <img src="{{ asset('img/slid2.jpg') }}" class="d-block w-100" alt="Second slide">
-          </div>
-          <div class="carousel-item">
-            <img src="{{ asset('img/slid3.jpg') }}" class="d-block w-100" alt="Third slide">
-          </div>
-          <div class="carousel-item">
-            <img src="{{ asset('img/slid4.jpg') }}" class="d-block w-100" alt="Third slide">
-          </div>
-          <div class="carousel-item">
-            <img src="{{ asset('img/slid5.jpg') }}" class="d-block w-100" alt="Third slide">
-          </div>
-        </div>
-      </div>
+            <div class="col-md-6 col-lg-7 p-0">
+            <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="5000">
+
+
+                    <div class="carousel-inner">
+                    <div class="carousel-item active">
+                            <img src="{{ asset('img/slid6.png') }}" class="d-block w-100"
+                                alt="First slide">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{{ asset('img/slid2.jpg') }}" class="d-block w-100"
+                                alt="Second slide">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{{ asset('img/slid3.jpg') }}" class="d-block w-100"
+                                alt="Third slide">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{{ asset('img/slid4.jpg') }}" class="d-block w-100"
+                                alt="Third slide">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{{ asset('img/slid5.jpg') }}" class="d-block w-100"
+                                alt="Third slide">
+                            </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+            <div class="col-md-6 col-lg-5 p-0">
+
+                <div class="card border-0">
+                    <div class="card-body">
+                        <h3 class="my-3 text-center text-light text-uppercase">سجل بياناتك</h3>
+                        <form method="post" action="{{ route('appointments.submitForm') }}">
+                            @csrf
+
+                            <div class="form-row">
+                                <label for="first-name" class="text-uppercase">الإسم</label>
+                                <input type="text" id="client_name" name="client_name" class="form-control"
+                                    placeholder="الإسم">
+                            </div>
+                            <div class="form-group mt-4">
+                                <label for="booking-date" class="text-uppercase">الطبيب</label>
+                                <select name="doctor_id" id="doctor_id"
+                                    class="form-control @error('doctor_id') is-invalid @enderror">
+                                    <option value="">إختر الطبيب</option>
+                                    @foreach($doctors as $doctor)
+                                        <option value="{{ $doctor->id }}">{{ $doctor->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            @error('doctor_id')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+
+
+                            <div class="form-group mt-4">
+
+                                <label for="email" class="text-uppercase">تاريخ وموعد الحجز</label>
+                                <input type="datetime-local" name="apt_datetime" id="apt_datetime"
+                                    class="form-control @error('apt_datetime') is-invalid @enderror">
+                            </div>
+                            <div class="form-group mt-4">
+                                <label for="phone" class="text-uppercase">رقم الجوال</label>
+                                <input type="tel" id="client_phone" name="client_phone" class="form-control"
+                                    placeholder="إدخل رقم الجوال">
+                            </div>
+
+
+
+                            <div class="form-group mt-5">
+                                <button type="submit" class="btn btn-danger-gradiant btn-block text-uppercase">إحجزك
+                                    الأن</button>
+                            </div>
+                        </form>
+                    </div>
+                    </div>
+
+
+                </div>
+            <div class="footer">
+                        <span>Copyrights © <a class="afoot" href="https://wwww.ask-ar.com"> Ask-ar T.S </a>all rights reserved © 2023</span>
+            </div>
+
+            </div>
     </div>
-
-
-    <div class="col-md-6">
-      <div class="card border-0">
-        <div class="card-body">
-          <h3 class="my-3 text-center text-light text-uppercase">سجل بياناتك</h3>
-          <form method="post" action="{{ route('appointments.submitForm') }}">
-            @csrf
-            <div class="form-group">
-
-              <input type="text" id="client_name" name="client_name" class="form-control text-center" placeholder="الإسم">
-
-            <div class="form-group mt-4">
-
-              <select name="doctor_id" id="doctor_id" class="form-select @error('doctor_id') is-invalid @enderror">
-                <option value="">إختر الطبيب</option>
-                @foreach($doctors as $doctor)
-                  <option value="{{ $doctor->id }}">{{ $doctor->name }}</option>
-                @endforeach
-              </select>
-              @error('doctor_id')
-                <div class="invalid-feedback">{{ $message }}</div>
-              @enderror
-            </div>
-            <div class="form-group mt-4">
-            <input type="datetime-local" id="apt_datetime" name="apt_datetime" class="form-control text-center" placeholder="تاريخ وموعد الحجز">
-
-
-            @error('apt_datetime')
-            <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
-        </div>
-        <div class="form-group mt-4">
-
-
-              <input type="tel" id="client_phone" name="client_phone" class="form-control" placeholder="إدخل رقم الجوال">
-            </div>
-            <div class="form-group mt-5">
-    <button type="submit" class="btn btn-danger-gradiant btn-block text-uppercase">إحجزك الأن</button>
-</div>
-</form>
-</div>
-</div>
-</div>
-  </div>
-
-<div class="footer">
-    <span>Copyrights ©
-        <a class="afoot" href="https://wwww.ask-ar.com"> Ask-ar T.S </a>
-        all rights reserved © 2023
-    </span>
-</div>
-</div>
-</div>
-</div>
 
 
 
