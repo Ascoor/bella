@@ -175,6 +175,10 @@ aria-hidden="true">
             <input type="text" class="form-control" id="specialization" name="specialization">
           </div>
           <div class="form-group">
+            <label for="specialization" class="col-form-label">الصورة الشخصية:</label>
+            <input type="file" class="form-control" id="photo" name="photo">
+          </div>
+          <div class="form-group">
             <label for="phone" class="col-form-label">رقم الجوال:</label>
             <input type="text" class="form-control" id="phone" name="phone">
           </div>
@@ -230,6 +234,10 @@ aria-hidden="true">
           <div class="form-group">
             <label for="specialization" class="col-form-label">التخصص:</label>
             <input type="text" class="form-control" id="specialization" name="specialization">
+          </div>
+          <div class="form-group">
+            <label for="specialization" class="col-form-label">الصورة الشخصية:</label>
+            <input type="file" class="form-control" id="photo" name="photo">
           </div>
           <div class="form-group">
             <label for="phone" class="col-form-label">رقم الجوال:</label>
@@ -321,7 +329,17 @@ aria-hidden="true">
 <!-- Internal Modal js-->
 <script src="{{ URL::asset('assets/js/modal.js') }}"></script>
 
-
+<script>
+$(document).ready(function() {
+    $('#exampleModal2').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget); // Button that triggered the modal
+        var id = button.data('id'); // Extract info from data-* attributes
+        var modal = $(this);
+        modal.find('.modal-body #id').val(id);
+        modal.find('form').attr('action', '/doctors/' + id);
+    });
+});
+</script>
 <script>
     $('#exampleModal2').on('show.bs.modal', function(event) {
         var button = $(event.relatedTarget)
