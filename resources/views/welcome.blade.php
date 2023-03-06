@@ -97,63 +97,90 @@ background: linear-gradient(to right, #753a88, #cc2b5e); /* W3C, IE 10+/ Edge, F
                             <div class="container-fluid">
   <div class="row">
 
-  <div class="col-md-6 col-lg-7 p-0">
-    <div class="card border-0">
-      <img src="{{ asset('img/slid1.webp') }}" class="card-img">
+    <div class="col-md-6 col-lg-7 p-0">
+      <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+          <li data-target="#myCarousel" data-slide-to="1"></li>
+          <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="{{ asset('img/slid1.webp') }}" class="d-block w-100" alt="First slide">
+          </div>
+          <div class="carousel-item">
+            <img src="{{ asset('img/slid2.jpg') }}" class="d-block w-100" alt="Second slide">
+          </div>
+          <div class="carousel-item">
+            <img src="{{ asset('img/slid3.jpg') }}" class="d-block w-100" alt="Third slide">
+          </div>
+          <div class="carousel-item">
+            <img src="{{ asset('img/slid4.jpg') }}" class="d-block w-100" alt="Third slide">
+          </div>
+        </div>
+        <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
     </div>
-      </div>
 
-  <div class="col-md-6 col-lg-5 p-0">
 
-      <div class="card border-0">
-        <div class="card-body">
-          <h3 class="my-3 text-center text-light text-uppercase">سجل بياناتك</h3>
-          <form method="post" action="{{ route('appointments.submitForm') }}">
-    @csrf
+    <div class="col-md-6 col-lg-5 p-0">
 
-            <div class="form-row">
-              <label for="first-name" class="text-uppercase">الإسم</label>
-              <input type="text" id="client_name" name="client_name" class="form-control" placeholder="الإسم">
+        <div class="card border-0">
+            <div class="card-body">
+            <h3 class="my-3 text-center text-light text-uppercase">سجل بياناتك</h3>
+            <form method="post" action="{{ route('appointments.submitForm') }}">
+        @csrf
+
+                <div class="form-row">
+                <label for="first-name" class="text-uppercase">الإسم</label>
+                <input type="text" id="client_name" name="client_name" class="form-control" placeholder="الإسم">
+                </div>
+                <div class="form-group mt-4">
+                <label for="booking-date" class="text-uppercase">الطبيب</label>
+                <select name="doctor_id" id="doctor_id" class="form-control @error('doctor_id') is-invalid @enderror">
+                <option value="">إختر الطبيب</option>
+                @foreach ($doctors as $doctor)
+                    <option value="{{ $doctor->id }}">{{ $doctor->name }}</option>
+                @endforeach
+            </select>
+                </div>
+            @error('doctor_id')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+
+
+                <div class="form-group mt-4">
+
+                <label for="email" class="text-uppercase">تاريخ وموعد الحجز</label>
+                <input type="datetime-local" name="apt_datetime" id="apt_datetime" class="form-control @error('apt_datetime') is-invalid @enderror">
+                </div>
+                <div class="form-group mt-4">
+                <label for="phone" class="text-uppercase">رقم الجوال</label>
+                <input type="tel" id="client_phone" name="client_phone"class="form-control" placeholder="إدخل رقم الجوال">
+                </div>
+
+
+
+                <div class="form-group mt-5">
+                <button type="submit" class="btn btn-danger-gradiant btn-block text-uppercase">إحجزك الأن</button>
+                </div>
+            </form>
             </div>
-            <div class="form-group mt-4">
-              <label for="booking-date" class="text-uppercase">الطبيب</label>
-              <select name="doctor_id" id="doctor_id" class="form-control @error('doctor_id') is-invalid @enderror">
-            <option value="">إختر الطبيب</option>
-            @foreach ($doctors as $doctor)
-                <option value="{{ $doctor->id }}">{{ $doctor->name }}</option>
-            @endforeach
-        </select>
             </div>
-        @error('doctor_id')
-            <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
-
-
-            <div class="form-group mt-4">
-
-              <label for="email" class="text-uppercase">تاريخ وموعد الحجز</label>
-              <input type="datetime-local" name="apt_datetime" id="apt_datetime" class="form-control @error('apt_datetime') is-invalid @enderror">
-            </div>
-            <div class="form-group mt-4">
-              <label for="phone" class="text-uppercase">رقم الجوال</label>
-              <input type="tel" id="client_phone" name="client_phone"class="form-control" placeholder="إدخل رقم الجوال">
             </div>
 
 
-
-            <div class="form-group mt-5">
-              <button type="submit" class="btn btn-danger-gradiant btn-block text-uppercase">إحجزك الأن</button>
-            </div>
-          </form>
         </div>
-        </div>
-        </div>
 
-
-      </div>
-
-                            </div>
-                            </div>
+                                </div>
+                                </div>
 
 
     <!-- jQuery and JS bundle w/ Popper.js -->
