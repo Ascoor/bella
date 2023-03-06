@@ -54,6 +54,7 @@
             border-radius: 0;
         }
 
+
         .fa-calendar {
             font-size: 1.2rem;
         }
@@ -73,7 +74,6 @@
 
         /* Set the card body height */
         .card-body {
-            height: 100%;
 
             background: #cc2b5e;
             /* fallback for old browsers */
@@ -165,11 +165,11 @@
                         <div class="carousel-item">
                             <img src="{{ asset('img/slid4.jpg') }}" class="d-block w-100"
                                 alt="Third slide">
+                            </div>
                         </div>
                     </div>
-
                 </div>
-            </div>
+
 
 
             <div class="col-md-6 col-lg-5 p-0">
@@ -197,7 +197,8 @@
             <div class="footer">
 
             <span>Copyrights © <a class="afoot" href="https://wwww.ask-ar.com">Ask-ar T.S</a>all rights reserved © 2023</span>
-            </div>
+        </div>
+    </div>
 
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
@@ -213,6 +214,7 @@
 
         <script src="{{ asset('js/app.js') }}"></script>
 
-</body>
+
+    </body>
 
 </html>
