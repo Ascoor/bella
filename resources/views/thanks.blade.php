@@ -135,7 +135,7 @@
             color: gold;
             text-shadow: silver;
             text-align: left;
-            padding-top: 70px;
+            padding-top: 30px;
 
 
         }
