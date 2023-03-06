@@ -45,7 +45,6 @@ background: linear-gradient(to right, #753a88, #cc2b5e); /* W3C, IE 10+/ Edge, F
 
 /* Style the form labels */
 .text-uppercase {
-
   text-transform: uppercase;
   font-weight: bold;
   color: white;
