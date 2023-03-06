@@ -1,46 +1,84 @@
-@extends('layouts.master')
+@extends('layouts.app')
 @section('css')
-@endsection
-@section('page-header')
-				<!-- breadcrumb -->
-				<div class="breadcrumb-header justify-content-between">
-					<div class="my-auto">
-						<div class="d-flex">
-							<h4 class="content-title mb-0 my-auto">Pages</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ Empty</span>
-						</div>
-					</div>
-					<div class="d-flex my-xl-auto right-content">
-						<div class="pr-1 mb-3 mb-xl-0">
-							<button type="button" class="btn btn-info btn-icon ml-2"><i class="mdi mdi-filter-variant"></i></button>
-						</div>
-						<div class="pr-1 mb-3 mb-xl-0">
-							<button type="button" class="btn btn-danger btn-icon ml-2"><i class="mdi mdi-star"></i></button>
-						</div>
-						<div class="pr-1 mb-3 mb-xl-0">
-							<button type="button" class="btn btn-warning  btn-icon ml-2"><i class="mdi mdi-refresh"></i></button>
-						</div>
-						<div class="mb-3 mb-xl-0">
-							<div class="btn-group dropdown">
-								<button type="button" class="btn btn-primary">14 Aug 2019</button>
-								<button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" id="dropdownMenuDate" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<span class="sr-only">Toggle Dropdown</span>
-								</button>
-								<div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuDate" data-x-placement="bottom-end">
-									<a class="dropdown-item" href="#">2015</a>
-									<a class="dropdown-item" href="#">2016</a>
-									<a class="dropdown-item" href="#">2017</a>
-									<a class="dropdown-item" href="#">2018</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- breadcrumb -->
+
 @endsection
 @section('content')
 				<!-- row -->
 				<div class="row">
-
+				<div class="col-xl-12">
+            <div class="card mg-b-20">
+                <div class="card-header pb-0">
+                    <div class="d-flex justify-content-between">
+                        <a class="modal-effect btn btn-outline-primary btn-block" data-effect="effect-scale"
+                            data-toggle="modal" href="#add_apt_modal">اضافة حجز</a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="example1" class="table key-buttons text-md-nowrap" data-page-length='50'
+                            style="text-align: center">
+                            <thead>
+                                <tr>
+                                    <th class="border-bottom-0">#</th>
+                                    <th class="border-bottom-0">إسم العميل</th>
+                                    <th class="border-bottom-0">تاريخ و موعد الحجز</th>
+                                    <th class="border-bottom-0">تأكيد موعد الحجز</th>
+                                    <th class="border-bottom-0">الدكتور</th>
+                                    <th class="border-bottom-0">حالة الحجز</th>
+                                    <th class="border-bottom-0">العمليات</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php $i = 0; ?> @foreach ($appointments as $item)
+                                <?php $i++; ?>
+                                <tr>
+                                    <td> {{ $i }} </td>
+                                    <td>
+                                        <a href="{{ route('appointments.show', $item->id) }}">
+                                            {{ $item->client->client_name }}</a>
+                                    </td>
+                                    <td> {{ $item->apt_datetime }} </td>
+                                    <td> {{ $item->remarks }} </td>
+                                    <td> {{ $item->doctor->name }} </td>
+                                    <td> {{ $item->status }} </td>
+                                    <td>
+                                        <a class="modal-effect btn btn-sm btn-success" data-effect="effect-scale"
+                                            data-id="{{ $item->id }}" data-doctor_name="{{ $item->doctor->name }}"
+                                            data-status="{{ $item->status }}"
+                                            data-client_name="{{ $item->client->client_name }}"
+                                            data-edited_by="{{ $item->edited_by }}"
+                                            data-client_phone="{{ $item->client->client_phone }}"
+                                            data-apt_datetime="{{ $item->apt_datetime }}"
+                                            data-remarks="{{ $item->remarks }}"
+                                            data-apt_time="{{ $item->apt_time }}" data-toggle="modal"
+                                            href="#show_apt_modal" title="مشاهدة">
+                                            <i class="las la-eye"></i>
+                                        </a>
+                                        <a class="modal-effect btn btn-sm btn-info" data-effect="effect-scale"
+                                            data-id="{{ $item->id }}" data-doctor_id="{{ $item->doctor->id }}"
+                                            data-doctor_name="{{ $item->doctor->name }}"
+                                            data-status="{{ $item->status }}"
+                                            data-client_name="{{ $item->client->client_name }}"
+                                            data-edited_by="{{ $item->edited_by }}"
+                                            data-client_phone="{{ $item->client->client_phone }}"
+                                            data-apt_datetime="{{ $item->apt_datetime }}"
+                                            data-remarks="{{ $item->remarks }}" data-toggle="modal"
+                                            href="#edit_apt_modal" title="تعديل">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
+                                            data-id="{{ $item->id }}"
+                                            data-client_name="{{ $item->client->client_name }}" data-toggle="modal"
+                                            href="#delete_apt_modal" title="حذف">
+                                            <i class="las la-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+@endforeach
+</tbody>
+</table>
+</div>
+</div>
 
 
 

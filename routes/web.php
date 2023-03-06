@@ -6,6 +6,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\AssestController;
 use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\DoctorAuthController;
 use App\Http\Controllers\DoctorDashboardController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\InvoicesDetailsController;
@@ -33,25 +34,6 @@ Route::get('/ww', function () {
     ]);
 
 });
-// define routes for doctor's dashboard
-Route::prefix('doctor')->group(function () {
-    // login route
-
-    Route::get('/doctor/login', [DoctorController::class, 'loginForm'])->name('doctor.login.form');
-    Route::post('/doctor/login', [DoctorController::class, 'login'])->name('doctor.login');
-
-
-    // logout route
-    Route::post('/logout', 'DoctorAuthController@logout')->name('doctor.logout');
-
-    // dashboard route (authenticated)
-    Route::middleware(['auth:doctor'])->group(function () {
-        Route::get('/',[DoctorDashboardController::class ,'index'])->name('doctor.dashboard');
-        Route::get('/appointments', 'DoctorDashboardController@appointments')->name('doctor.appointments');
-        Route::get('/clients', 'DoctorDashboardController@clients')->name('doctor.clients');
-    });
-});
-
 Route::post('/notifications/read', [NotificationController::class, 'read'])->name('notifications.read');
 
 Route::get('/notifications/count', [NotificationController::class, 'getNotificationsCount'])->middleware('auth')->name('notifications.count');
@@ -71,6 +53,25 @@ Route::get('/', function () {
 
 Route::post('/submit', [AppointmentController::class, 'submitForm'])->name('appointments.submitForm');
 Auth::routes();
+
+// define routes for doctor's dashboard
+Route::prefix('doctor')->group(function () {
+    // login route
+
+// Doctor login routes
+Route::get('/login', [DoctorAuthController::class, 'showLoginForm'])->name('doctor.login');
+Route::post('/login', [DoctorAuthController::class, 'login'])->name('doctor.login.post');
+    // logout route
+    Route::post('/logout', 'DoctorAuthController@logout')->name('doctor.logout');
+
+    // dashboard route (authenticated)
+    Route::middleware(['auth:doctor'])->group(function () {
+        Route::get('/dashboard',[DoctorDashboardController::class ,'index'])->name('doctor.dashboard');
+        Route::get('/appointments',[DoctorDashboardController::class ,'appointments'])->name('doctor.appointments');
+        Route::get('/clients',[DoctorDashboardController::class ,'clients'])->name('doctor.clients');
+    });
+});
+
 Route::get('/appointments', [AppointmentController::class, 'listAppointments'])->name('appointments.list');
 Route::get('/appointments/{id}/edit', [AppointmentController::class, 'edit'])->name('appointments.edit');
 Route::get('/appointments/{appointment}', [AppointmentController::class, 'show'])->name('appointments.show');

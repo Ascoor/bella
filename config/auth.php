@@ -34,17 +34,18 @@ return [
     | Supported: "session"
     |
     */
-
     'guards' => [
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
         'doctor' => [
             'driver' => 'session',
             'provider' => 'doctors',
         ],
     ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -62,20 +63,18 @@ return [
     | Supported: "database", "eloquent"
     |
     */
-
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
 
-
         'doctors' => [
             'driver' => 'eloquent',
             'model' => App\Models\Doctor::class,
         ],
-
     ],
+
 
     /*
     |--------------------------------------------------------------------------

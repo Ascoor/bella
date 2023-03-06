@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html dir="rtl" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -37,36 +37,15 @@
 @auth
 
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/home">Home</a>
+          <a class="nav-link active" aria-current="page" href="/dashboard">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/appointments">Appointments</a>
+          <a class="nav-link" href="/doctor/appointments">Appointments</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/clients">Clients</a>
+          <a class="nav-link" href="/doctor/clients">Clients</a>
         </li>
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Services
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="{{route('services.index')}}">Services List</a></li>
-            <li><a class="dropdown-item" href="{{route('services.create')}}">Add New Service</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Doctors
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" href="{{route('doctors.index')}}">Doctors List</a></li>
-            <li><a class="dropdown-item" href="{{route('doctors.create')}}">Add New Doctor</a></li>
-            <!-- <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li> -->
-          </ul>
-        </li>
+
 
                     </ul>
              <!-- Right Side Of Navbar -->
