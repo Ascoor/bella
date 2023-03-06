@@ -62,7 +62,7 @@
                                                        </div>
                                                    </div>
 												  </div>
-                                                    <button type="submit" class="btn btn-main-primary btn-block">
+                                                    <button type="submit" class="btn btn-main-dang btn-block">
                                                     {{ __('تسجيل الدخول') }}
                                                     </button>
 												</form>
