@@ -42,10 +42,7 @@ background: linear-gradient(to right, #753a88, #cc2b5e); /* W3C, IE 10+/ Edge, F
   text-transform: uppercase;
   font-weight: bold;
 }
-.iti__country-list {
 
-    text-align: revert;
-}
 /* Style the form labels */
 .text-uppercase {
 
