@@ -95,10 +95,7 @@
             padding: 0 !important;
         }
 
-        .carousel-item {
-            border-radius: 50% 50% 50% 50%;
 
-        }
 
         .footer {
             font-size: small;
@@ -196,7 +193,7 @@
                     </div>
                     </div>
                 </div>
-            </div>
+
             <div class="footer">
 
             <span>Copyrights © <a class="afoot" href="https://wwww.ask-ar.com">Ask-ar T.S</a>all rights reserved © 2023</span>
