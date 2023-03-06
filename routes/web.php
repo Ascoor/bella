@@ -9,6 +9,7 @@ use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\DoctorDashboardController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\InvoicesDetailsController;
+use App\Models\Appointment;
 use App\Models\Doctor;
 use App\Models\Service;
 use Illuminate\Support\Facades\Auth;
@@ -27,8 +28,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/ww', function () {
-    return view('ex.todotask', [
-        'doctors' => Doctor::all(),
+    return view('thanks', [
+        'appointments' => Appointment::all(),
     ]);
 
 });
