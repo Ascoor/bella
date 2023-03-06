@@ -11293,7 +11293,11 @@ body {
     font-size: 17px; }
 
 .font-weight-semibold {
-  font-weight: 500 !important; }
+  color: white;
+  font-weight: 500 !important;
+  text-align: center;
+  font-size: 32px;
+  }
 
 .bounceIn {
   -webkit-animation-duration: 0.75s;
@@ -25434,8 +25438,11 @@ input.parsley-error:focus, textarea.parsley-error:focus, input.parsley-success:f
 
 .main-signup-header h2 {
   font-weight: 500;
-  color: #0162e8;
-  letter-spacing: -1px; }
+  color: #fdee97;
+  letter-spacing: 1px;
+  text-align: center;
+  font-size: 34px;
+  }
 
 .main-signup-header h4 {
   font-size: 20px;
@@ -25444,7 +25451,8 @@ input.parsley-error:focus, textarea.parsley-error:focus, input.parsley-success:f
   margin-bottom: 25px; }
 
 .main-signup-header label {
-  color: #a5a0b1; }
+  color: #ffed4f;
+  }
 
 .main-signup-header .form-control {
   color: #14112d;
