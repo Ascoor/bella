@@ -113,6 +113,9 @@
             color: yellow;
             text-align: center;
         }
+    .afoot{
+            color: #e6e3e4;
+        }
     </style>
 
 </head>
@@ -196,7 +199,7 @@
                         </form>
                         <div class="footer">
 
-                        <span>Copyrights © <a href="https://wwww.ask-ar.com">Ask-ar T.S</a>all rights reserved © 2023</span>
+                        <span>Copyrights © <a class="afoot" href="https://wwww.ask-ar.com"> Ask-ar T.S </a>all rights reserved © 2023</span>
                     </div>
                     </div>
                 </div>
