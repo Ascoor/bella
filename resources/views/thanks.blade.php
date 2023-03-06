@@ -107,6 +107,7 @@
         }
     .afoot{
             color: #e6e3e4;
+            text-align: center;
         }
 
         h1,
@@ -137,6 +138,9 @@
             padding-top: 70px;
 
 
+        }
+        .d-block w-100{
+            border-radius: 50% 0 50% 0;
         }
     </style>
 </head>
@@ -192,7 +196,7 @@
                     </div>
                     </div>
                 </div>
-
+            </div>
             <div class="footer">
 
             <span>Copyrights © <a class="afoot" href="https://wwww.ask-ar.com">Ask-ar T.S</a>all rights reserved © 2023</span>
