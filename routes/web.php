@@ -33,14 +33,6 @@ Route::get('/ww', function () {
     ]);
 
 });
-Route::post('/notifications/read', [NotificationController::class, 'read'])->name('notifications.read');
-
-Route::get('/notifications/count', [NotificationController::class, 'getNotificationsCount'])->middleware('auth')->name('notifications.count');
-Route::get('/notifications/index', [NotificationController::class, 'getNotificationsCount'])->middleware('auth')->name('notifications.index');
-
-Route::put('/notifications/{id}/markAsRead', [NotificationController::class, 'markAsRead'])->middleware('auth')->name('notifications.markAsRead');
-Route::delete('/notifications/{id}', 'NotificationController@destroy');
-
 // define routes for doctor's dashboard
 Route::prefix('doctor')->group(function () {
     // login route
@@ -59,6 +51,15 @@ Route::prefix('doctor')->group(function () {
         Route::get('/clients', 'DoctorDashboardController@clients')->name('doctor.clients');
     });
 });
+
+Route::post('/notifications/read', [NotificationController::class, 'read'])->name('notifications.read');
+
+Route::get('/notifications/count', [NotificationController::class, 'getNotificationsCount'])->middleware('auth')->name('notifications.count');
+Route::get('/notifications/index', [NotificationController::class, 'getNotificationsCount'])->middleware('auth')->name('notifications.index');
+
+Route::put('/notifications/{id}/markAsRead', [NotificationController::class, 'markAsRead'])->middleware('auth')->name('notifications.markAsRead');
+Route::delete('/notifications/{id}', 'NotificationController@destroy');
+
 
 
 

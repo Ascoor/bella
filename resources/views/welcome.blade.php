@@ -6,9 +6,8 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <title>Bella Clinic</title>
     <!-- CSS -->
-    <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.5.3/css/bootstrap.min.css"
-        integrity="sha384-JvExCACAZcHNJEc7156QaHXTnQL3hQBixvj5RV5buE7vgnNEzzskDtx9NQ4p6BJe" crossorigin="anonymous">
-    <!--Internal Sumoselect css-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+        <!--Internal Sumoselect css-->
     <link rel="stylesheet"
         href="{{ URL::asset('assets/plugins/sumoselect/sumoselect-rtl.css') }}">
     <!--Internal  TelephoneInput css-->
@@ -55,6 +54,7 @@
             text-transform: uppercase;
             font-weight: bold;
             color: white;
+            width: -webkit-fill-available;
         }
 
         /* Style the calendar icon */
@@ -109,6 +109,11 @@
         }
 
         .footer {
+            background: -webkit-linear-gradient(to right, #753a88, #cc2b5e);
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #753a88, #cc2b5e);
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
             font-size: small;
             color: yellow;
             text-align: center;
@@ -197,30 +202,25 @@
                                     الأن</button>
                             </div>
                         </form>
-                        <div class="footer">
+                    </div>
 
-                        <span>Copyrights © <a class="afoot" href="https://wwww.ask-ar.com"> Ask-ar T.S </a>all rights reserved © 2023</span>
-                    </div>
-                    </div>
+
+
                 </div>
+            </div>
+            <div class="footer">
+                        <span>Copyrights © <a class="afoot" href="https://wwww.ask-ar.com"> Ask-ar T.S </a>all rights reserved © 2023</span>
+            </div>
 
 
-        </div>
-
-    </div>
-    </div>
-    </div>
 
 
 
     <!-- jQuery and JS bundle w/ Popper.js -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.rtlcss.com/bootstrap/v4.5.3/js/bootstrap.bundle.min.js"
-        integrity="sha384-40ix5a3dj6/qaC7tfz0Yr+p9fqWLzzAXiwxVLt9dw7UjQzGYw6rWRhFAnRapuQyK" crossorigin="anonymous">
-    </script>
+<!-- jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 
 
     <script src="{{ URL::asset('assets/plugins/telephoneinput/telephoneinput.js') }}">

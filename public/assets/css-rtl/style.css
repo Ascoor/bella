@@ -4,7 +4,7 @@
 Project        :   VALEX - HTML5 Bootstrap Admin Template
 Version        :   V.1
 Create Date    :   09/05/20
-Copyright      :   Spruko Technologies Private Limited 
+Copyright      :   Spruko Technologies Private Limited
 Author         :   SprukoSoft
 Author URL     :   https://themeforest.net/user/sprukosoft
 Support	       :   support@spruko.com
@@ -3277,11 +3277,12 @@ input[type="submit"].btn-block, input[type="reset"].btn-block, input[type="butto
 /* ###### 5.1 Buttons  ###### */
 .btn-main-primary {
   color: #fff;
-  background-color: #0162e8;
-  border-color: #025cd8; }
+  background-color: #cb3139;
+  border-color: #025cd8;
+  }
   .btn-main-primary:hover {
     color: #fff;
-    background-color: #025cd8;
+    background-color: #cd7277;
     border-color: #0162e8; }
   .btn-main-primary:focus, .btn-main-primary.focus {
     box-shadow: 0 0 0 0.2rem rgba(1, 98, 232, 0.5); }
@@ -26365,7 +26366,7 @@ button.bg-dark:hover, button.bg-dark:focus {
   background-color: #283143 !important; }
 
 .bg-white {
-  background-color: #fff0ee !important;
+  background: linear-gradient(to right, #cc2b5e, #cc8098);
   }
 
 .bg-transparent {
@@ -46555,7 +46556,11 @@ button.bg-dark:hover, button.bg-dark:focus {
   font-size: 26px !important; }
 
 .tx-28 {
-  font-size: 28px; }
+  font-size: 25px;
+  color: floralwhite;
+  font-family: cursive;
+  padding: inherit;
+  }
 
 .tx-28-f {
   font-size: 28px !important; }
