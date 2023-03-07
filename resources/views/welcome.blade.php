@@ -33,27 +33,28 @@
 
         <div class="container h-80">
           <div class="row h-80">
-          <div class="col-md-6 col-lg-6 p-0">
-            <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="5000">
-              <div class="carousel-inner">
-                <div class="carousel-item active">
-                  <img src="{{ asset('img/slid6.png') }}" class="d-block w-100" alt="First slide">
-                </div>
-                <div class="carousel-item">
-                  <img src="{{ asset('img/slid2.jpg') }}" class="d-block w-100" alt="Second slide">
-                </div>
-                <div class="carousel-item">
-                  <img src="{{ asset('img/slid3.jpg') }}" class="d-block w-100" alt="Third slide">
-                </div>
-                <div class="carousel-item">
-                  <img src="{{ asset('img/slid4.jpg') }}" class="d-block w-100" alt="Third slide">
-                </div>
-                <div class="carousel-item">
-                  <img src="{{ asset('img/slid5.jpg') }}" class="d-block w-100" alt="Third slide">
-                </div>
-              </div>
-            </div>
-          </div>
+          <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<div class="col-md-6 col-lg-6 p-0">
+  <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="5000">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="{{ asset('img/slid6.png') }}" class="d-block w-100" alt="First slide">
+      </div>
+      <div class="carousel-item">
+        <img src="{{ asset('img/slid2.jpg') }}" class="d-block w-100" alt="Second slide">
+      </div>
+      <div class="carousel-item">
+        <img src="{{ asset('img/slid3.jpg') }}" class="d-block w-100" alt="Third slide">
+      </div>
+      <div class="carousel-item">
+        <img src="{{ asset('img/slid4.jpg') }}" class="d-block w-100" alt="Fourth slide">
+      </div>
+      <div class="carousel-item">
+        <img src="{{ asset('img/slid5.jpg') }}" class="d-block w-100" alt="Fifth slide">
+      </div>
+    </div>
+  </div>
+</div>
 
 
           <div class="col-lg-6 col-xl-6 col-xxl-6 ms-md-0 me-md-5">
@@ -91,10 +92,10 @@
                 <input type="datetime-local" name="apt_datetime" id="apt_datetime" class="form-control @error('apt_datetime') is-invalid @enderror">
               </div>
               <div class="form-group mt-4">
-                <label for="phone" >رقم الجوال</label>
-                <input type="tel" id="client_phone" name="client_phone" class="form-control" placeholder="إدخل رقم الجوال">
-              </div>
-                <br/>
+                <label for="phone" class="text-uppercase">رقم الجوال</label>
+                <input type="tell" id="client_phone" name="client_phone"class="form-control" placeholder="إدخل رقم الجوال">
+                </div>
+
                 <button type="submit" class="btn btn-danger-gradiant btn-block text-uppercase">إحجزك
                   الأن</button>
             </form>
@@ -112,36 +113,39 @@
         </span></p>
 
     </div>
-  </footer>\
-
-<script>
-  $(function() {
+  </footer>
+  <script>
+$(document).ready(function() {
+    // Datepicker
     $('#dp').datepicker();
-  });
 
-  $(function() {
     // International Telephone Input
     var input = document.querySelector("#client_phone");
     window.intlTelInput(input, {
-      initialCountry: "auto",
-      separateDialCode: true,
-      utilsScript: "{{ URL::asset('assets/plugins/telephoneinput/utils.js') }}",
+        utilsScript: "assets/plugins/telephoneinput/utils.js",
     });
-  });
+});
 </script>
-<!-- Required JavaScript files for Bootstrap -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script type='text/javascript' src=''></script>
+<script type='text/javascript' src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js'>
+</script>
+<script type='text/javascript'
+    src='https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js'></script>
+
 <script src="{{ URL::asset('assets/plugins/telephoneinput/inttelephoneinput.js') }}"></script>
 <script src="{{ URL::asset('assets/plugins/telephoneinput/utils.js') }}"></script>
-<script src="{{ URL::asset('js/app.js') }}"></script>
+
+
 
 <script>
-  $(document).ready(function(){
-    // Activate the carousel
-    $("#myCarousel").carousel({interval: 5000});
-});
+  $(document).ready(function() {
+    $('#myCarousel').carousel();
+  });
+</script>
 
 </script>
 
