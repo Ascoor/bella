@@ -35,7 +35,8 @@
 	align-items: center;
 	height: 100%;
 	padding: 0 6px 0 8px;
-	border-left: 1px solid #e1e6f1;
+	border-left: 0px #e1e6f1;
+	justify-content: flex-end;
 }
 .iti__arrow {
 	margin-left: 6px;
@@ -98,7 +99,7 @@
 	margin-right: 6px;
 }
 .iti--allow-dropdown input, .iti--allow-dropdown input[type=text], .iti--allow-dropdown input[type=tel], .iti--separate-dial-code input, .iti--separate-dial-code input[type=text], .iti--separate-dial-code input[type=tel] {
-	padding-left: 6px;
+	padding-left: -71px;
 	padding-right: 52px;
 	margin-left: 0;
 	border-top-right-radius: 0;
@@ -152,7 +153,8 @@
 	line-height: 1.5em;
 }
 .iti__flag {
-	width: 20px;
+	margin-left: 23px;
+	width: 19px;
 }
 .iti__flag.iti__be {
 	width: 18px;
