@@ -1,247 +1,166 @@
-<!doctype html>
-<html dir="rtl">
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
 
 <head>
-    <meta charset='utf-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <title>Bella Clinic</title>
-    <!-- CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-        <!--Internal Sumoselect css-->
-    <link rel="stylesheet"
-        href="{{ URL::asset('assets/plugins/sumoselect/sumoselect-rtl.css') }}">
-    <!--Internal  TelephoneInput css-->
-    <link rel="stylesheet"
-        href="{{ URL::asset('assets/plugins/telephoneinput/telephoneinput-rtl.css') }}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
-    <style>
-        /* Center the form */
-        @media (max-width: 768px) {
-  .carousel-item img {
-    height: 300px;
-  }
-    .card-body {
-    height: auto;
-    background: #cc2b5e;
-            /* fallback for old browsers */
-            background: -webkit-linear-gradient(to right, #753a88, #cc2b5e);
-            /* Chrome 10-25, Safari 5.1-6 */
-            background: linear-gradient(to right, #753a88, #cc2b5e);
-            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  }
-}
-        .container-fluid {
-            font-family: 'Cairo', sans-serif;
-            background: #cc2b5e;
-            /* fallback for old browsers */
-            background: -webkit-linear-gradient(to right, #753a88, #cc2b5e);
-            /* Chrome 10-25, Safari 5.1-6 */
-            background: linear-gradient(to right, #753a88, #cc2b5e);
-            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+  <title>Home - Brand</title>
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css?h=a042b38f882c5db203767c9770c8f44d" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato&amp;display=swap" />
+  <link rel="stylesheet" href="{{ URL::asset('assets/plugins/sumoselect/sumoselect-rtl.css') }}">
+  <!--Internal  TelephoneInput css-->
+  <link rel="stylesheet" href="{{ URL::asset('assets/plugins/telephoneinput/telephoneinput-rtl.css') }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
 
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh
-        }
-
-        /* Style the form inputs */
-        .form-control {
-            border-radius: 0;
-        }
-
-        /* Style the submit button */
-        .btn-danger-gradiant {
-
-            background: linear-gradient(to right, #f91b4d, #ff4b2b);
-
-            border-radius: 0;
-            border: none;
-            text-transform: uppercase;
-            font-weight: bold;
-        }
-        .carousel-item img {
-  width: 100%;
-  height: 500px; /* adjust to the desired height */
-  object-fit:fill;
-}
-
-        /* Style the form labels */
-        .text-uppercase {
-            text-transform: uppercase;
-            font-weight: bold;
-            color: white;
-            width: -webkit-fill-available;
-        }
-
-        /* Style the calendar icon */
-        .input-group-text {
-            border-radius: 0;
-        }
-
-        .fa-calendar {
-            font-size: 1.2rem;
-        }
-
-
-
-
-        /* Set the card body height */
-        .card-body {
-            height: auto;
-
-            background: #cc2b5e;
-            /* fallback for old browsers */
-            background: -webkit-linear-gradient(to right, #753a88, #cc2b5e);
-            /* Chrome 10-25, Safari 5.1-6 */
-            background: linear-gradient(to right, #753a88, #cc2b5e);
-            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-        }
-
-        /* Style the card */
-        .card {
-            height: 100%;
-            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Remove padding from columns */
-        .p-0 {
-            padding: 0 !important;
-        }
-
-
-        .footer {
-            background: -webkit-linear-gradient(to right, #753a88, #cc2b5e);
-            /* Chrome 10-25, Safari 5.1-6 */
-            background: linear-gradient(to right, #753a88, #cc2b5e);
-            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-            font-size: small;
-            color: yellow;
-            text-align: center;
-        }
-    .afoot{
-            color: #e6e3e4;
-        }
-    </style>
-
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900&amp;display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli&amp;display=swap" />
+  <link rel="stylesheet" href="assets/css/FORM.css?h=b06fa1b6f2184b1976127ae923a27995" />
+  <link rel="stylesheet" href="assets/css/Pretty-Registration-Form-.css?h=74cbd162836abb1eda12ebcad200c88a" />
+  <link rel="stylesheet" href="assets/css/Carousel.css" />
 </head>
 
-<body>
+<body id="page-top" data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="56">
+  <header class="masthead" style="
+                background: url('img/bg-pattern.png?h=88366d218f2eda574d88b27e4cb4169d'),
+                    linear-gradient(to left, #7b4397, #dc2430);
+            ">
+    <div class="container h-100">
+      <div class="row h-100">
+        <div class="col-lg-11 col-xl-12 col-xxl-12 ms-md-0 me-md-5">
+          <div class="row register-form me-md-0 ms-md-5 mt-md-0 ps-md-0">
+            <div class="col-sm-12 col-lg-5 col-xl-5 col-xxl-5 my-auto">
+              <div class="device-container">
+                <div class="device-mockup iphone6_plus portrait white">
+                  <div class="device" style="
+                                                background-image: url('img/iphone_6_plus_white_port.png?h=a8ad898987fd6ec9bbde741517f4cbb9');
+                                            ">
+                    <aside class="screen">
+                      <div id="myCarousel" class="carousel-indicators" data-ride="carousel" data-interval="5000">
+                        <div class="carousel-inner">
+                          <div class="carousel-item active">
+                            <img src="{{ asset('img/slid6.png') }}" class="d-block  " alt="First slide">
+                          </div>
+                          <div class="carousel-item">
+                            <img src="{{ asset('img/slid2.jpg') }}" class="d-block w-100" alt="Second slide">
+                          </div>
+                          <div class="carousel-item">
+                            <img src="{{ asset('img/slid3.jpg') }}" class="d-block w-100" alt="Third slide">
+                          </div>
+                          <div class="carousel-item">
+                            <img src="{{ asset('img/slid4.jpg') }}" class="d-block w-100" alt="Third slide">
+                          </div>
+                          <div class="carousel-item">
+                            <img src="{{ asset('img/slid5.jpg') }}" class="d-block h-100 w-100" alt="Third slide">
+                          </div>
+                        </div>
+                      </div>
 
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-6">
-      <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="5000">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img src="{{ asset('img/slid6.png') }}" class="d-block w-100" alt="First slide">
-          </div>
-          <div class="carousel-item">
-            <img src="{{ asset('img/slid2.jpg') }}" class="d-block w-100" alt="Second slide">
-          </div>
-          <div class="carousel-item">
-            <img src="{{ asset('img/slid3.jpg') }}" class="d-block w-100" alt="Third slide">
-          </div>
-          <div class="carousel-item">
-            <img src="{{ asset('img/slid4.jpg') }}" class="d-block w-100" alt="Third slide">
-          </div>
-          <div class="carousel-item">
-            <img src="{{ asset('img/slid5.jpg') }}" class="d-block w-100" alt="Third slide">
+                    </aside>
+
+                    <div class="button"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="iphone-mockup"></div>
+            </div>
+
+            <div class="col-sm-11 col-lg-6 col-xl-5 col-xxl-6 ps-md-0 me-md-5 ms-md-0 pe-md-0">
+
+              <form class="custom-form pe-md-0 me-md-0" method="post" action="{{ route('appointments.submitForm') }}">
+                @csrf
+
+                <div class="row form-group">
+                  <div class="col-sm-4 label-column">
+                    <label class="col-form-label" for="name-input-field">الإسم </label>
+                  </div>
+                  <input type="text" id="client_name" name="client_name" class="form-control text-center">
+                </div>
+
+                <div class="row form-group">
+                  <div class="col-sm-4 label-column">
+                    <label class="col-form-label" for="name-input-field">الطبيب </label>
+                  </div>
+                  <select name="doctor_id" id="doctor_id" class="form-select @error('doctor_id') is-invalid @enderror">
+
+                    <option value="">إختر الطبيب</option>
+                    @foreach($doctors as $doctor)
+                    <option value="{{ $doctor->id }}">{{ $doctor->name }}</option>
+                    @endforeach
+                  </div>
+                  </select>
+                  @error('doctor_id')
+                  <div class="invalid-feedback">{{ $message }}</div>
+                  @enderror
+
+                <div class="row form-group">
+                  <div class="col-sm-4 label-column">
+                    <label class="col-form-label" for="name-input-field">تاربخ وموعد الحجز </label>
+                  </div>
+                  <input type="datetime-local" id="apt_datetime" name="apt_datetime" class="form-control text-center">
+
+                </div>
+
+                  @error('apt_datetime')
+                  <div class="invalid-feedback">{{ $message }}</div>
+                  @enderror
+
+                <div class="row form-group">
+                  <div class="col-sm-4 label-column">
+                    <label class="col-form-label" for="name-input-field">رقم الجوال </label>
+                  </div>
+                  <input type="tel" id="client_phone" name="client_phone" class="form-control">
+
+                </div>
+                <div class="col-sm-4 label-column">
+
+                  <button class="btn btn-light submit-button" type="button">أحجز الأن</button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
+
+
+      <div class="col-sm-11 col-lg-7 col-xl-9 my-auto">
+        <div class="mx-auto header-content"></div>
       </div>
+
+
+  </header>
+  <footer>
+    <div class="container">
+      <p> <span>Copyrights ©
+          <a class="afoot" href="https://wwww.ask-ar.com"> Ask-ar T.S </a>
+          all rights reserved © 2023
+        </span></p>
+
     </div>
+  </footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/new-age.js?h=8fc3cc14032ee2938bb61494b90187ba"></script>
 
 
-    <div class="col-md-6">
-      <div class="card border-0">
-        <div class="card-body">
-          <h3 class="my-3 text-center text-light text-uppercase">سجل بياناتك</h3>
-          <form method="post" action="{{ route('appointments.submitForm') }}">
-            @csrf
-            <div class="form-group">
+  <script src="{{ URL::asset('assets/plugins/telephoneinput/telephoneinput.js') }}">
+  </script>
+  <script src="{{ URL::asset('assets/plugins/telephoneinput/inttelephoneinput.js') }}">
+  </script>
+  <script>
+    $(function () {
+      $('#dp').datepicker();
+    });
+    $(function () {
 
-              <input type="text" id="client_name" name="client_name" class="form-control text-center" placeholder="الإسم">
-
-            <div class="form-group mt-4">
-
-              <select name="doctor_id" id="doctor_id" class="form-select @error('doctor_id') is-invalid @enderror">
-                <option value="">إختر الطبيب</option>
-                @foreach($doctors as $doctor)
-                  <option value="{{ $doctor->id }}">{{ $doctor->name }}</option>
-                @endforeach
-              </select>
-              @error('doctor_id')
-                <div class="invalid-feedback">{{ $message }}</div>
-              @enderror
-            </div>
-            <div class="form-group mt-4">
-            <input type="datetime-local" id="apt_datetime" name="apt_datetime" class="form-control text-center" placeholder="تاريخ وموعد الحجز">
-
-
-            @error('apt_datetime')
-            <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
-        </div>
-        <div class="form-group mt-4">
-
-
-              <input type="tel" id="client_phone" name="client_phone" class="form-control" placeholder="إدخل رقم الجوال">
-            </div>
-            <div class="form-group mt-5">
-    <button type="submit" class="btn btn-danger-gradiant btn-block text-uppercase">إحجزك الأن</button>
-</div>
-</form>
-</div>
-</div>
-</div>
-  </div>
-
-<div class="footer">
-    <span>Copyrights ©
-        <a class="afoot" href="https://wwww.ask-ar.com"> Ask-ar T.S </a>
-        all rights reserved © 2023
-    </span>
-</div>
-</div>
-</div>
-</div>
-
-
-
-    <!-- jQuery and JS bundle w/ Popper.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-<script type='text/javascript' src=''></script>
-<script type='text/javascript' src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js'>
-</script>
-<script type='text/javascript'
-    src='https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js'></script>
-
-
-
-    <script src="{{ URL::asset('assets/plugins/telephoneinput/telephoneinput.js') }}">
-    </script>
-    <script src="{{ URL::asset('assets/plugins/telephoneinput/inttelephoneinput.js') }}">
-    </script>
-    <script>
-        $(function () {
-            $('#dp').datepicker();
-        });
-        $(function () {
-
-            // International Telephone Input
-            var input = document.querySelector("#client_phone");
-            window.intlTelInput(input, {
-                utilsScript: "assets/plugins/telephoneinput/utils.js",
-            });
-        });
-    </script>
-
+      // International Telephone Input
+      var input = document.querySelector("#client_phone");
+      window.intlTelInput(input, {
+        utilsScript: "assets/plugins/telephoneinput/utils.js",
+      });
+    });
+  </script>
 </body>
 
 </html>
