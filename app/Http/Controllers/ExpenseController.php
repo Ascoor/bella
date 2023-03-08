@@ -11,7 +11,7 @@ class ExpenseController extends Controller
     {
         $expenses = Expense::all();
 
-        return view('expenses.index', ['expenses' => $expenses]);
+        return view('expense.index', ['expenses' => $expenses]);
     }
 
     public function create()
@@ -67,7 +67,7 @@ class ExpenseController extends Controller
         $expense = Expense::findOrFail($id);
         $expense->delete();
 
-        return redirect()->route('expenses.index')
+        return redirect()->route('expense.index')
             ->with('success', 'Expense deleted successfully.');
     }
 }

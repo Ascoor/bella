@@ -11,7 +11,7 @@ class RevenueController extends Controller
     {
         $revenues = Revenue::all();
 
-        return view('revenues.index', ['revenues' => $revenues]);
+        return view('revenue.index', ['revenues' => $revenues]);
     }
 
     public function create()
