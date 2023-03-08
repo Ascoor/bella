@@ -12,7 +12,8 @@ use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\InvoicesDetailsController;
 use App\Models\Appointment;
 use App\Models\Doctor;
-use App\Models\Service;
+use App\Http\Controllers\ExpenseRevenueController;
+use App\Http\Controllers\RevenueController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -87,6 +88,11 @@ Route::resource('sections', SectionController::class);
 Route::resource('doctors', DoctorController::class);
 Route::resource('assests', AssestController::class);
 Route::resource('services', ServiceController::class);
+Route::resource('expenses', ExpensesController::class);
+Route::resource('revenue', RevenueController::class);
+Route::get('expenses.revenues', [ExpenseRevenueController::class, 'index'])->name('expenses_revenues');
+
+
 Route::get('/section/services/{id}', function ($section_id) {
     $services = DB::table('services')->where('section_id', $section_id)->get();
     return response()->json($services);
