@@ -1,199 +1,38 @@
-<!doctype html>
-<html dir="rtl">
+<!DOCTYPE html>
+<html lang="ar">
 
 <head>
-    <meta charset='utf-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <title>Snippet - GoSNippets</title>
-    <link href='https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css' rel='stylesheet'>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-    <style>
-        /* Center the form */
-        @media (max-width: 768px) {
-  .carousel-item img {
-    height: 300px;
-  }
-    .card-body {
-    height: auto;
-    background: #cc2b5e;
-            /* fallback for old browsers */
-            background: -webkit-linear-gradient(to right, #753a88, #cc2b5e);
-            /* Chrome 10-25, Safari 5.1-6 */
-            background: linear-gradient(to right, #753a88, #cc2b5e);
-            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  }
-}
-        .container-fluid {
-            font-family: 'Cairo', sans-serif;
-            background: #cc2b5e;
-            /* fallback for old browsers */
-            background: -webkit-linear-gradient(to right, #753a88, #cc2b5e);
-            /* Chrome 10-25, Safari 5.1-6 */
-            background: linear-gradient(to right, #753a88, #cc2b5e);
-            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh
-        }
-
-        /* Style the form inputs */
-        .form-control {
-            border-radius: 0;
-        }
-
-        /* Style the submit button */
-        .btn-danger-gradiant {
-
-            background: linear-gradient(to right, #f91b4d, #ff4b2b);
-
-            border-radius: 0;
-            border: none;
-            text-transform: uppercase;
-            font-weight: bold;
-        }
-
-        /* Style the form labels */
-        .text-uppercase {
-            text-transform: uppercase;
-            font-weight: bold;
-            color: white;
-        }
-        .carousel-item img {
-  width: 100%;
-  height: 500px; /* adjust to the desired height */
-  object-fit:fill;
-}
-
-
-        /* Style the calendar icon */
-        .input-group-text {
-            border-radius: 0;
-        }
-
-
-        .fa-calendar {
-            font-size: 1.2rem;
-        }
-
-        /* Style the form message input */
-        textarea {
-            resize: none;
-        }
-
-        /* Set the image height */
-
-
-        /* Set the card body height */
-        .card-body {
-
-            background: #cc2b5e;
-            /* fallback for old browsers */
-            background: -webkit-linear-gradient(to right, #753a88, #cc2b5e);
-            /* Chrome 10-25, Safari 5.1-6 */
-            background: linear-gradient(to right, #753a88, #cc2b5e);
-            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-        }
-
-        /* Style the card */
-        .card {
-            height: 100%;
-            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Remove padding from columns */
-        .p-0 {
-            padding: 0 !important;
-        }
-
-
-
-        .footer {
-            font-size: small;
-            color: yellow;
-            text-align: center;
-        }
-    .afoot{
-            color: #e6e3e4;
-            text-align: center;
-        }
-
-        h1,
-        h1 {
-            font-size: calc(1.375rem + 1.5vw);
-            font-family: 'Cairo', sans-serif;
-
-            color: #ecff4d;
-            text-align: center;
-
-        }
-
-        .h2,
-        h2 {
-            font-family: 'Cairo', sans-serif;
-            font-family: 'Pacifico', cursive;
-            color: wheat;
-            font-size: calc(1.325rem + .9vw);
-            font-family: Cairo
-        }
-
-        p {
-            font-size: calc(1.375rem + 2.5vw);
-            font-family: 'Pacifico', cursive;
-            color: gold;
-            text-shadow: silver;
-            text-align: left;
-            padding-top: 30px;
-
-
-        }
-        .d-block w-100{
-            border-radius: 50% 0 50% 0;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+  <title>Home - Brand</title>
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css?h=a042b38f882c5db203767c9770c8f44d" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato&amp;display=swap" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900&amp;display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli&amp;display=swap" />
+  <link rel="stylesheet" href="assets/css/FORM.css?h=b06fa1b6f2184b1976127ae923a27995" />
+  <link rel="stylesheet" href="assets/css/Pretty-Registration-Form-.css?h=74cbd162836abb1eda12ebcad200c88a" />
 </head>
 
-<body>
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-6">
-            <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="5000">
+<body id="page-top" data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="56">
+  <header class="masthead" style="
+                background: url('img/bg-pattern.png?h=88366d218f2eda574d88b27e4cb4169d'),
+                    linear-gradient(to left, #7b4397, #dc2430);
+            ">
+    <div class="container h-100">
+      <div class="row h-100">
+        <div class="col-lg-11 col-xl-12 col-xxl-12 ms-md-0 me-md-5">
+          <div class="row register-form me-md-0 ms-md-5 mt-md-0 ps-md-0">
+            <div class="col-sm-12 col-lg-10 col-xl-10 col-xxl-10 my-auto">
+              <div class="device-container">
+                <div class="device-mockup iphone6_plus portrait white">
+                  <div class="device" style="
+                                                background-image: url('img/iphone_6_plus_white_port.png?h=a8ad898987fd6ec9bbde741517f4cbb9');
+                                            ">
+                    <aside class="screen">
+<center>
 
-
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="{{ asset('img/slid6.png') }}" class="d-block w-100"
-                                alt="First slide">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{ asset('img/slid2.jpg') }}" class="d-block w-100"
-                                alt="Second slide">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{ asset('img/slid3.jpg') }}" class="d-block w-100"
-                                alt="Third slide">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{ asset('img/slid4.jpg') }}" class="d-block w-100"
-                                alt="Third slide">
-                            </div>
-                        <div class="carousel-item">
-                            <img src="{{ asset('img/slid5.jpg') }}" class="d-block w-100"
-                                alt="Third slide">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-    <div class="col-md-6">
-
-                <div class="card border-0">
-                    <div class="card-body">
-                <p >
+    <p >
 
 
                     Thank You
@@ -203,35 +42,34 @@
                 </p>
 
                 <h1>{{ $appointment->client->client_name }}</h1>
-                <div class="card-footer">
-                <h2>شكرا لتسجيل الحجز وستصلك رسالة على رقم جوالك {{ $appointment->client->clienr_phone }} لتأكيد
-                    موعد الحجز.</h2>
 
-                    </div>
-                    </div>
+                    <h2>شكرا لتسجيل الحجز وستصلك رسالة على رقم جوالك {{ $appointment->client->clienr_phone }} لتأكيد
+                        موعد الحجز.</h2>
+
+                    </center>
+                    </aside>
+
+                    <div class="button"></div>
+                  </div>
                 </div>
+              </div>
+              <div class="iphone-mockup"></div>
             </div>
-            <div class="footer">
 
-            <span>Copyrights © <a class="afoot" href="https://wwww.ask-ar.com">Ask-ar T.S </a>all rights reserved © 2023</span>
-        </div>
+
+  </header>
+  <footer>
+    <div class="container">
+      <p>    <span>Copyrights ©
+        <a class="afoot" href="https://wwww.ask-ar.com"> Ask-ar T.S </a>
+        all rights reserved © 2023
+    </span></p>
+
     </div>
-
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-        <script type='text/javascript' src=''></script>
-        <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js'>
-        </script>
-        <script type='text/javascript'
-            src='https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js'></script>
-
-
-
-        <!-- ALL JS FILES -->
-
-        <script src="{{ asset('js/app.js') }}"></script>
-
-
-    </body>
+  </footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/new-age.js?h=8fc3cc14032ee2938bb61494b90187ba"></script>
+</body>
 
 </html>
