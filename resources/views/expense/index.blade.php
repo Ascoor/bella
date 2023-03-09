@@ -68,133 +68,187 @@
 
     <!-- row -->
     <div class="row">
-        <!--div-->
         <div class="col-xl-12">
             <div class="card mg-b-20">
                 <div class="card-header pb-0">
-                    ('اضافة فاتورة')
-                        <a href="invoices/create" class="modal-effect btn btn-sm btn-primary" style="color:white"><i
-                                class="fas fa-plus"></i>&nbsp; اضافة فاتورة</a>
-
-
-                    ('تصدير EXCEL')
-                        <a class="modal-effect btn btn-sm btn-primary" href="{{ url('export_invoices') }}"
-                            style="color:white"><i class="fas fa-file-download"></i>&nbsp;تصدير اكسيل</a>
-
-
+                    <div class="d-flex justify-content-between">
+                        <a class="modal-effect btn btn-outline-primary btn-block" data-effect="effect-scale"
+                            data-toggle="modal" href="#add_expense_modal">اضافة مصروف</a>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="example1" class="table key-buttons text-md-nowrap" data-page-length='50'style="text-align: center">
+                        <table id="example1" class="table key-buttons text-md-nowrap" data-page-length='50'
+                            style="text-align: center">
                             <thead>
                                 <tr>
-                                    <th class="border-bottom-0">#</th>
-                                    <th class="border-bottom-0">رقم الفاتورة</th>
-                                    <th class="border-bottom-0">تاريخ القاتورة</th>
-                                    <th class="border-bottom-0">تاريخ الاستحقاق</th>
-                                    <th class="border-bottom-0">الخدمة</th>
-                                    <th class="border-bottom-0">القسم</th>
-                                    <th class="border-bottom-0">الخصم</th>
-                                    <th class="border-bottom-0">نسبة الضريبة</th>
-                                    <th class="border-bottom-0">قيمة الضريبة</th>
-                                    <th class="border-bottom-0">الاجمالي</th>
-                                    <th class="border-bottom-0">الحالة</th>
-                                    <th class="border-bottom-0">ملاحظات</th>
-                                    <th class="border-bottom-0">العمليات</th>
+                                    <th>المبلغ</th>
+                                    <th>التصنيف</th>
+                                    <th>التاريخ</th>
+                                    <th>الخيارات</th>
                                 </tr>
                             </thead>
                             <tbody>
+
                                 @php
                                 $i = 0;
                                 @endphp
-                                @foreach ($invoices as $invoice)
+                                @foreach ($expenses as $expense)
                                     @php
                                     $i++
                                     @endphp
                                     <tr>
+
                                         <td>{{ $i }}</td>
-                                        <td>{{ $invoice->invoice_number }} </td>
-                                        <td>{{ $invoice->invoice_date }}</td>
-                                        <td>{{ $invoice->due_date }}</td>
-                                        <td>@foreach ($invoice->services as $service )
-                                            <br/>
-                                            {{$service->service_name}}
-                                            {{$service->price}}
-                                            <br/>
-                                        @endforeach</td>
-                                        <td>{{ $invoice->section->section_name }}</td>
-
-
-                                        <td>{{ $invoice->discount }}</td>
-                                        <td>{{ $invoice->rate_vat }}</td>
-                                        <td>{{ $invoice->value_vat }}</td>
-                                        <td>{{ $invoice->total }}</td>
+                                        <td>{{ $expense->amount }}</td>
+                                        <td>{{ $expense->category }}</td>
+                                        <td>{{ $expense->date }}</td>
                                         <td>
-                                            @if ($invoice->Value_Status == 1)
-                                                <span class="text-success">{{ $invoice->status }}</span>
-                                            @elseif($invoice->Value_Status == 2)
-                                                <span class="text-danger">{{ $invoice->status }}</span>
-                                            @else
-                                                <span class="text-warning">{{ $invoice->status }}</span>
-                                            @endif
-
-                                        </td>
-
-                                        <td>{{ $invoice->note }}</td>
-                                        <td>
-                                            <div class="dropdown">
-                                                <button aria-expanded="false" aria-haspopup="true"
-                                                    class="btn ripple btn-primary btn-sm" data-toggle="dropdown"
-                                                    type="button">العمليات<i class="fas fa-caret-down ml-1"></i></button>
-                                                <div class="dropdown-menu tx-13">
-                                                    ('تعديل الفاتورة')
-                                                        <a class="dropdown-item"
-                                                            href=" {{ route('invoices.edit',$invoice) }}">تعديل
-                                                            الفاتورة</a>
-
-
-                                                    ('حذف الفاتورة')
-                                                        <a class="dropdown-item" href="#" data-invoice_id="{{ $invoice->id }}"
-                                                            data-toggle="modal" data-target="#delete_invoice"><i
-                                                                class="text-danger fas fa-trash-alt"></i>&nbsp;&nbsp;حذف
-                                                            الفاتورة</a>
-
-
-                                                    ('تغير حالة الدفع')
-                                                        <a class="dropdown-item"
-                                                            ><i
-                                                                class=" text-success fas
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    fa-money-bill"></i>&nbsp;&nbsp;تغير
-                                                            حالة
-                                                            الدفع</a>
-
-
-                                                    ('ارشفة الفاتورة')
-                                                        <a class="dropdown-item" href="#" data-invoice_id="{{ $invoice->id }}"
-                                                            data-toggle="modal" data-target="#Transfer_invoice"><i
-                                                                class="text-warning fas fa-exchange-alt"></i>&nbsp;&nbsp;نقل الي
-                                                            الارشيف</a>
-
-
-                                                    ('طباعةالفاتورة')
-                                                        <a class="dropdown-item" href="Print_invoice/{{ $invoice->id }}"><i
-                                                                class="text-success fas fa-print"></i>&nbsp;&nbsp;طباعة
-                                                            الفاتورة
-                                                        </a>
-
-                                                </div>
-                                            </div>
-
+                                            <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#show_expense_modal{{ $expense->id }}">عرض</button>
+                                            <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#edit_expense_modal{{ $expense->id }}">تعديل</button>
+                                            <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteExpenseModal{{ $expense->id }}">حذف</button>
                                         </td>
                                     </tr>
-                                @endforeach
-
+                                    @endforeach
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+
+
+
+
+
+
+                                    <div class="modal fade" id="add_expense_modal" tabindex="-1" role="dialog" aria-labelledby="addExpenseModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addExpenseModalLabel">Add Expense</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="addExpenseForm"action="{{ route('expenses.store') }}" method="POST" enctype="form-data">
+                    @csrf
+                    @method('POST')
+
+          <div class="form-group">
+            <label for="expense_name" class="col-form-label">Expense Name:</label>
+            <input type="text" class="form-control" id="expense_name" name="expense_name">
+          </div>
+          <div class="form-group">
+            <label for="expense_amount" class="col-form-label">Amount:</label>
+            <input type="number" class="form-control" id="expense_amount" name="expense_amount">
+          </div>
+          <div class="form-group">
+            <label for="expense_date" class="col-form-label">Expense Date:</label>
+            <input type="date" class="form-control" id="expense_date" name="expense_date">
+          </div>
+        </div>
+        <div class="modal-footer">
+            <button type="submit"  class="btn btn-primary" id="addExpenseBtn">Add</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        </div>
+    </form>
+    </div>
+  </div>
+</div>
+
+                                    <!-- Show Expense Modal -->
+                                    <div class="modal fade" id="show_expense_modal" tabindex="-1" role="dialog" aria-labelledby="showExpenseModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="showExpenseModalLabel">عرض المصروف</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p><strong id="amount">المبلغ:</strong></p>
+                                                    <p><strong id="category">التصنيف:</strong></p>
+                                                    <p><strong id="date">التاريخ:</strong></p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">اغلاق</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="modal fade" id="edit_expense_modal" tabindex="-1" role="dialog" aria-labelledby="editExpenseModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="add_expense_modal">Edit Expense</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="editExpenseForm" action="expenses/update" method="POST" enctype="form-data">
+                    @csrf
+                    @method('PUT')
+          <div class="form-group">
+            <label for="edit_expense_name" class="col-form-label">Expense Name:</label>
+            <input type="text" class="form-control" id="edit_expense_name" name="expense_name">
+          </div>
+          <div class="form-group">
+            <label for="edit_expense_amount" class="col-form-label">Amount:</label>
+            <input type="number" class="form-control" id="edit_expense_amount" name="expense_amount">
+          </div>
+          <div class="form-group">
+            <label for="edit_expense_date" class="col-form-label">Expense Date:</label>
+            <input type="date" class="form-control" id="edit_expense_date" name="expense_date">
+          </div>
+          <input type="hidden" id="edit_expense_id" name="expense_id">
+        </form>
+      </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="updateExpenseBtn">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deleteExpenseModal" tabindex="-1" role="dialog" aria-labelledby="deleteExpenseModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteExpenseModalLabel">Delete Expense</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete this expense?
+                <form id="deleteExpenseForm"action="expenses/destroy" method="post">
+                {{ method_field('delete') }}
+                {{ csrf_field() }}
+
+                    @csrf
+                    <input type="hidden" name="expense_id" id="expense_id">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" id="deleteExpenseBtn">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
         <!--/div-->
     </div>
 
@@ -232,26 +286,48 @@
     <!--Internal  Notify js -->
     <script src="{{ URL::asset('assets/plugins/notify/js/notifIt.js') }}"></script>
     <script src="{{ URL::asset('assets/plugins/notify/js/notifit-custom.js') }}"></script>
+    <script>
+    $(document).on('click', '.delete-expense-btn', function() {
+        var expense_id = $(this).attr('data-id');
+        $('#deleteExpenseModal').find('#expense_id').val(expense_id);
+    });
+</script>
+
+<!-- Show Expense Modal Script -->
 
     <script>
-        $('#delete_invoice').on('show.bs.modal', function(event) {
-            var button = $(event.relatedTarget)
-            var invoice_id = button.data('invoice_id')
-            var modal = $(this)
-            modal.find('.modal-body #invoice_id').val(invoice_id);
-        })
+    function showExpenseModal(expenseId) {
+        $('#show_expense_modal' + expenseId).modal('show');
+    }
+</script>
+<script>
 
-    </script>
+    $('#add_expense_modal').on('show.bs.modal', function (event) {
+        var modal = $(this);
 
-    <script>
-        $('#Transfer_invoice').on('show.bs.modal', function(event) {
-            var button = $(event.relatedTarget)
-            var invoice_id = button.data('invoice_id')
-            var modal = $(this)
-            modal.find('.modal-body #invoice_id').val(invoice_id);
-        })
+        modal.find('.modal-body #expense_name').val('');
+        modal.find('.modal-body #expense_amount').val('');
+        modal.find('.modal-body #expense_date').val('');
+    });
 
-    </script>
+
+
+    $('#edit_expense_modal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var id = button.data('id');
+        var name = button.data('name');
+        var amount = button.data('amount');
+        var date = button.data('date');
+        var modal = $(this);
+
+        modal.find('.modal-body #id').val(id);
+        modal.find('.modal-body #expense_name').val(name);
+        modal.find('.modal-body #expense_amount').val(amount);
+        modal.find('.modal-body #expense_date').val(date);
+
+
+    });
+</script>
 
 
 

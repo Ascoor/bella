@@ -1,73 +1,59 @@
 <?php
-
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Expense;
+use Illuminate\Http\Request;
 
 class ExpenseController extends Controller
 {
     public function index()
     {
         $expenses = Expense::all();
-
-        return view('expense.index', ['expenses' => $expenses]);
+        return view('expenses.index', compact('expenses'));
     }
 
     public function create()
     {
-        return view('expenses.create');
+        // Return view to create a new expense
     }
 
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'description' => 'required|max:255',
-            'amount' => 'required|numeric',
-            'date' => 'required|date'
+        Expense::create([
+            'expense_date' => $request->expense_date,
+            'expense_value' => $request->expense_value,
+            'expense_notes' => $request->expense_notes,
+            'expense_type_id' => $request->expense_type_id
         ]);
 
-        $expense = Expense::create($validatedData);
-
-        return redirect()->route('expenses.show', $expense->id)
-            ->with('success', 'Expense created successfully.');
+        return redirect()->route('expenses.index');
     }
 
-    public function show($id)
+    public function show(Expense $expense)
     {
-        $expense = Expense::findOrFail($id);
-
-        return view('expenses.show', ['expense' => $expense]);
+        return view('expenses.show', compact('expense'));
     }
 
-    public function edit($id)
+    public function edit(Expense $expense)
     {
-        $expense = Expense::findOrFail($id);
-
-        return view('expenses.edit', ['expense' => $expense]);
+        return view('expenses.edit', compact('expense'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Expense $expense)
     {
-        $validatedData = $request->validate([
-            'description' => 'required|max:255',
-            'amount' => 'required|numeric',
-            'date' => 'required|date'
+        $expense->update([
+            'expense_date' => $request->expense_date,
+            'expense_value' => $request->expense_value,
+            'expense_notes' => $request->expense_notes,
+            'expense_type_id' => $request->expense_type_id
         ]);
 
-        $expense = Expense::findOrFail($id);
-        $expense->update($validatedData);
-
-        return redirect()->route('expenses.show', $expense->id)
-            ->with('success', 'Expense updated successfully.');
+        return redirect()->route('expenses.index');
     }
 
-    public function destroy($id)
+    public function destroy(Expense $expense)
     {
-        $expense = Expense::findOrFail($id);
         $expense->delete();
-
-        return redirect()->route('expense.index')
-            ->with('success', 'Expense deleted successfully.');
+        return redirect()->route('expenses.index');
     }
 }

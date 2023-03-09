@@ -94,6 +94,14 @@ Route::resource('revenues', RevenueController::class);
 Route::get('expenses_revenues', [ExpensesAndRevenuesController::class, 'index'])->name('expenses_revenues');
 
 
+Route::get('/expense_types', [\App\Http\Controllers\ExpenseTypeController::class, 'index']);
+Route::get('/expense_types/{id}', [\App\Http\Controllers\ExpenseTypeController::class, 'show']);
+Route::post('/expense_types', [\App\Http\Controllers\ExpenseTypeController::class, 'store']);
+Route::put('/expense_types/{id}', [\App\Http\Controllers\ExpenseTypeController::class, 'update']);
+Route::delete('/expense_types/{id}', [\App\Http\Controllers\ExpenseTypeController::class, 'destroy']);
+Route::resource('income-types', IncomeTypeController::class);
+
+
 Route::get('/section/services/{id}', function ($section_id) {
     $services = DB::table('services')->where('section_id', $section_id)->get();
     return response()->json($services);
