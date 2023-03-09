@@ -175,7 +175,7 @@
                         </svg><span class="side-menu__label">الاعدادات</span><i class="angle fe fe-chevron-down"></i></a>
                     <ul class="slide-menu">
 
-                            <li><a class="slide-item" href="{{ url('/' . ($page = 'sections')) }}">انواع المصروفات</a></li>
+                            <li><a class="slide-item" href="{{ url('/expense_types') }}">انواع المصروفات</a></li>
                             <li><a class="slide-item" href="{{ url('/' . ($page = 'products')) }}">انواع الإيرادات</a></li>
                             <li><a class="slide-item"href="{{ route('services.index') }}"> الخدمات</a></li>
                             <li><a class="slide-item" href="{{ route('clients.index') }}">العملاء</a></li>

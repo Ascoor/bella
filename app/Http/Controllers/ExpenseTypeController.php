@@ -10,7 +10,7 @@ class ExpenseTypeController extends Controller
     public function index()
     {
         $expenseTypes = ExpenseType::all();
-        return response()->json($expenseTypes);
+        return view('expense.expenses_type')->with('expenseTypes',$expenseTypes);
     }
 
     public function show($id)

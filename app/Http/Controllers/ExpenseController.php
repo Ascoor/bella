@@ -9,7 +9,7 @@ class ExpenseController extends Controller
     public function index()
     {
         $expenses = Expense::all();
-        return view('expenses.index', compact('expenses'));
+        return view('expense.index', compact('expenses'));
     }
 
     public function create()

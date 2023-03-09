@@ -14,6 +14,8 @@ use App\Models\Appointment;
 use App\Models\Doctor;
 use App\Http\Controllers\ExpensesAndRevenuesController;
 use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\ExpenseTypeController;
+use App\Http\Controllers\IncomeTypeController;
 use App\Http\Controllers\RevenueController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -94,11 +96,11 @@ Route::resource('revenues', RevenueController::class);
 Route::get('expenses_revenues', [ExpensesAndRevenuesController::class, 'index'])->name('expenses_revenues');
 
 
-Route::get('/expense_types', [\App\Http\Controllers\ExpenseTypeController::class, 'index']);
-Route::get('/expense_types/{id}', [\App\Http\Controllers\ExpenseTypeController::class, 'show']);
-Route::post('/expense_types', [\App\Http\Controllers\ExpenseTypeController::class, 'store']);
-Route::put('/expense_types/{id}', [\App\Http\Controllers\ExpenseTypeController::class, 'update']);
-Route::delete('/expense_types/{id}', [\App\Http\Controllers\ExpenseTypeController::class, 'destroy']);
+Route::get('/expense_types', [ExpenseTypeController::class, 'index']);
+Route::get('/expense_types/{id}', [ExpenseTypeController::class, 'show']);
+Route::post('/expense_types', [ExpenseTypeController::class, 'store']);
+Route::put('/expense_types/{id}', [ExpenseTypeController::class, 'update']);
+Route::delete('/expense_types/{id}', [ExpenseTypeController::class, 'destroy']);
 Route::resource('income-types', IncomeTypeController::class);
 
 
