@@ -11,7 +11,7 @@ class IncomeTypeController extends Controller
     {
         $incomeTypes = IncomeType::all();
 
-        return view('income-types.index', compact('incomeTypes'));
+        return view('revenue.income_type', compact('incomeTypes'));
     }
 
     public function create()
@@ -23,42 +23,38 @@ class IncomeTypeController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|max:255',
-            'value' => 'required|max:255',
+
             'description' => 'nullable|max:255'
         ]);
 
         IncomeType::create($validatedData);
 
-        return redirect('/income-types')->with('success', 'Income type created successfully!');
+        session()->flash('Add','تمت الإضافة بنجاح');
+        return redirect()->back();
     }
 
-    public function show(IncomeType $incomeType)
-    {
-        return view('income-types.show', compact('incomeType'));
-    }
 
-    public function edit(IncomeType $incomeType)
-    {
-        return view('income-types.edit', compact('incomeType'));
-    }
 
-    public function update(Request $request, IncomeType $incomeType)
+    public function update(Request $request)
     {
+        $id = $request->id;
         $validatedData = $request->validate([
             'name' => 'required|max:255',
-            'value' => 'required|max:255',
+
             'description' => 'nullable|max:255'
         ]);
-
+        $incomeType = IncomeType::findOrFail($id);
         $incomeType->update($validatedData);
-
-        return redirect('/income-types')->with('success', 'Income type updated successfully!');
+        session()->flash('edit','تم التعديل بنجاح');
+        return redirect()->back();
     }
 
-    public function destroy(IncomeType $incomeType)
+    public function destroy(Request $request)
     {
+        $id = $request->id;
+        $incomeType = IncomeType::findOrFail($id);
         $incomeType->delete();
-
-        return redirect('/income-types')->with('success', 'Income type deleted successfully!');
+        session()->flash('delete','تمت الحذف بنجاج');
+        return redirect()->back();
     }
 }

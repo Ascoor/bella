@@ -17,7 +17,7 @@ class CreateExpenseTypesTable extends Migration
         Schema::create('expense_types', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('value');
+
             $table->string('description');
             $table->timestamps();
         });

@@ -18,9 +18,12 @@ class CreateExpensesTable extends Migration
                 $table->id();
                 $table->date('expense_date');
                 $table->decimal('expense_value', 8, 2);
-                $table->string('expense_type');
+
+                $table->string('expense_to');
                 $table->text('expense_notes')->nullable();
                 $table->timestamps();
+                $table->unsignedBigInteger('add_id');
+$table->foreign('add_id')->references('id')->on('users');
                 $table->unsignedBigInteger('expense_type_id');
 $table->foreign('expense_type_id')->references('id')->on('expense_types');
 

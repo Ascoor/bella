@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ExpenseType;
+use Laravel\Ui\Presets\React;
 
 class ExpenseTypeController extends Controller
 {
@@ -23,33 +24,38 @@ class ExpenseTypeController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
-            'value' => 'required|string|max:255',
+
             'description' => 'required|string|max:255',
         ]);
 
         $expenseType = ExpenseType::create($validatedData);
-        return response()->json($expenseType, 201);
+        session()->flash('Add','تمت الإضافة بنجاح');
+        return redirect()->back();
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
+        $id = $request->id;
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
-            'value' => 'required|string|max:255',
+
             'description' => 'required|string|max:255',
         ]);
 
         $expenseType = ExpenseType::findOrFail($id);
         $expenseType->update($validatedData);
+        session()->flash('edit','تم التعديل بنجاح');
+        return redirect()->back();
 
-        return response()->json($expenseType);
     }
 
-    public function destroy($id)
+    public function destroy( Request $request )
     {
+        $id=$request->id;
         $expenseType = ExpenseType::findOrFail($id);
         $expenseType->delete();
+        session()->flash('delete','تمت الحذف بنجاح');
+        return redirect()->back();
 
-        return response()->json(null, 204);
     }
 }

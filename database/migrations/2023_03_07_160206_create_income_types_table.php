@@ -16,7 +16,7 @@ class CreateIncomeTypesTable extends Migration
         Schema::create('income_types', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('value');
+
             $table->string('description');
             $table->timestamps();
         });

@@ -2,14 +2,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Expense;
+use App\Models\ExpenseType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ExpenseController extends Controller
 {
     public function index()
     {
+        $expenseTypes = ExpenseType::all();
         $expenses = Expense::all();
-        return view('expense.index', compact('expenses'));
+        return view('expense.index', compact('expenses'))->with('expenseTypes',$expenseTypes);
     }
 
     public function create()
@@ -19,14 +22,18 @@ class ExpenseController extends Controller
 
     public function store(Request $request)
     {
-        Expense::create([
+             Expense::create([
             'expense_date' => $request->expense_date,
             'expense_value' => $request->expense_value,
             'expense_notes' => $request->expense_notes,
-            'expense_type_id' => $request->expense_type_id
+            'expense_to' => $request->expense_to,
+            'expense_type_id' => $request->expense_type_id,
+            'add_id' => Auth::user()->id,
+
         ]);
 
-        return redirect()->route('expenses.index');
+        session()->flash('Add','تمت اللإضافة بنجاج');
+        return redirect()->back();
     }
 
     public function show(Expense $expense)
@@ -45,15 +52,18 @@ class ExpenseController extends Controller
             'expense_date' => $request->expense_date,
             'expense_value' => $request->expense_value,
             'expense_notes' => $request->expense_notes,
-            'expense_type_id' => $request->expense_type_id
+            'expense_to' => $request->expense_to,
+            'expense_type_id' => $request->expense_type_id,
+            'add_id' => $request->Auth::id()
         ]);
 
         return redirect()->route('expenses.index');
     }
 
-    public function destroy(Expense $expense)
+    public function destroy(Request $request)
     {
-        $expense->delete();
-        return redirect()->route('expenses.index');
+        $id = $request->id;
+        Expense::find($id)->delete();
+        return redirect()->back()->session('delete');
     }
 }

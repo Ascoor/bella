@@ -12,7 +12,7 @@ class ExpenseType extends Model
 
     protected $fillable = [
         'name',
-        'value',
+
         'description'
     ];
 

@@ -12,14 +12,20 @@ class Expense extends Model
     protected $fillable = [
         'expense_date',
         'expense_value',
-        'expense_type',
+
+        'expense_to',
         'expense_notes',
-        'expense_type_id'
+        'expense_type_id',
+        'add_id'
     ];
 
     public function expenseType()
     {
         return $this->belongsTo(ExpenseType::class);
+    }
+    public function users()
+    {
+        return $this->hasMany(User::class);
     }
 
 }

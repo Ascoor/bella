@@ -4,12 +4,14 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\AppointmentController;
+
 use App\Http\Controllers\AssestController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\DoctorAuthController;
 use App\Http\Controllers\DoctorDashboardController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\InvoicesDetailsController;
+use App\Http\Controllers\NotificationController;
 use App\Models\Appointment;
 use App\Models\Doctor;
 use App\Http\Controllers\ExpensesAndRevenuesController;
@@ -38,37 +40,22 @@ Route::get('/ww', function () {
     ]);
 
 });
-Route::post('/notifications/read', [NotificationController::class, 'read'])->name('notifications.read');
 
-Route::get('/notifications/count', [NotificationController::class, 'getNotificationsCount'])->middleware('auth')->name('notifications.count');
-Route::get('/notifications/index', [NotificationController::class, 'getNotificationsCount'])->middleware('auth')->name('notifications.index');
-
-Route::put('/notifications/{id}/markAsRead', [NotificationController::class, 'markAsRead'])->middleware('auth')->name('notifications.markAsRead');
-Route::delete('/notifications/{id}', 'NotificationController@destroy');
-
-
-
-
-Route::get('/', function () {
-    return view('welcome', [
-        'doctors' => Doctor::all(),
-    ]);
-});
 
 Route::post('/submit', [AppointmentController::class, 'submitForm'])->name('appointments.submitForm');
-Auth::routes();
 
 // define routes for doctor's dashboard
 Route::prefix('doctor')->group(function () {
     // login route
 
-// Doctor login routes
-Route::get('/login', [DoctorAuthController::class, 'showLoginForm'])->name('doctor.login');
-Route::post('/login', [DoctorAuthController::class, 'login'])->name('doctor.login.post');
+    // Doctor login routes
+    Route::get('/login', [DoctorAuthController::class, 'showLoginForm'])->name('doctor.login');
+    Route::post('/login', [DoctorAuthController::class, 'login'])->name('doctor.login.post');
     // logout route
     Route::post('/logout', 'DoctorAuthController@logout')->name('doctor.logout');
 
     // dashboard route (authenticated)
+    Auth::routes();
     Route::middleware(['auth:doctor'])->group(function () {
         Route::get('/dashboard',[DoctorDashboardController::class ,'index'])->name('doctor.dashboard');
         Route::get('/appointments',[DoctorDashboardController::class ,'appointments'])->name('doctor.appointments');
@@ -95,13 +82,17 @@ Route::resource('expenses', ExpenseController::class);
 Route::resource('revenues', RevenueController::class);
 Route::get('expenses_revenues', [ExpensesAndRevenuesController::class, 'index'])->name('expenses_revenues');
 
+Route::post('/notifications/read', [NotificationController::class, 'read'])->name('notifications.read');
 
-Route::get('/expense_types', [ExpenseTypeController::class, 'index']);
-Route::get('/expense_types/{id}', [ExpenseTypeController::class, 'show']);
-Route::post('/expense_types', [ExpenseTypeController::class, 'store']);
-Route::put('/expense_types/{id}', [ExpenseTypeController::class, 'update']);
-Route::delete('/expense_types/{id}', [ExpenseTypeController::class, 'destroy']);
-Route::resource('income-types', IncomeTypeController::class);
+Route::get('/notifications/count', [NotificationController::class, 'getNotificationsCount'])->middleware('auth')->name('notifications.count');
+Route::get('/notifications/index', [NotificationController::class, 'getNotificationsCount'])->middleware('auth')->name('notifications.index');
+
+Route::put('/notifications/{id}/markAsRead', [NotificationController::class, 'markAsRead'])->middleware('auth')->name('notifications.markAsRead');
+Route::delete('/notifications/{id}', [NotificationController::class,'destroy'])->name('notifications.destroy');
+
+
+Route::resource('income_types', IncomeTypeController::class);
+Route::resource('expense_types', ExpenseTypeController::class);
 
 
 Route::get('/section/services/{id}', function ($section_id) {
