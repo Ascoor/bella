@@ -46,6 +46,8 @@ use HasFactory;
         return $this->morphMany(DatabaseNotification::class, 'notifiable')->orderBy('created_at', 'desc');
     }
 
+
+
 }
 
 
