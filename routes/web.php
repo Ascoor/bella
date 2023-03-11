@@ -47,23 +47,28 @@ Route::get('/', function () {
 Route::post('/submit', [AppointmentController::class, 'submitForm'])->name('appointments.submitForm');
 
 // define routes for doctor's dashboard
-Route::prefix('doctor')->group(function () {
-    // login route
+    Route::prefix('doctor')->group(function () {
+        // login route
 
-    // Doctor login routes
-    Route::get('/login', [DoctorAuthController::class, 'showLoginForm'])->name('doctor.login');
-    Route::post('/login', [DoctorAuthController::class, 'login'])->name('doctor.login.post');
-    // logout route
-    Route::post('/logout', [DoctorAuthController::class, 'logout'])->name('doctor.logout');
+        // Doctor login routes
+        Route::get('/login', [DoctorAuthController::class, 'showLoginForm'])->name('doctor.login');
+        Route::post('/login', [DoctorAuthController::class, 'login'])->name('doctor.login.post');
+        // logout route
+        Route::post('/logout', [DoctorAuthController::class, 'logout'])->name('doctor.logout');
 
 
-    // dashboard route (authenticated)
-    Route::middleware(['auth:doctor'])->group(function () {
-        Route::get('/dashboard',[DoctorDashboardController::class ,'index'])->name('doctor.dashboard');
-        Route::get('/appointments',[DoctorDashboardController::class ,'appointments'])->name('doctor.appointments');
-        Route::get('/clients',[DoctorDashboardController::class ,'clients'])->name('doctor.clients');
+        // dashboard route (authenticated)
+        Route::middleware(['auth:doctor'])->group(function () {
+            Route::get('/dashboard',[DoctorDashboardController::class ,'index'])->name('doctor.dashboard');
+            Route::get('/appointments',[DoctorDashboardController::class ,'appointments'])->name('doctor.appointments');
+            Route::get('/clients',[DoctorDashboardController::class ,'clients'])->name('doctor.clients');
+
+            Route::put('/doctor/complete_appointment/{id}', [DoctorDashboardController::class, 'completeAppointment'])->name('doctor_dashboard.complete_appointment');
+
+            Route::put('/doctor/reject_appointment/{id}', [DoctorDashboardController::class, 'rejectAppointment'])->name('doctor_dashboard.reject_appointment');
+    Route::get('/doctor_dashboard/show_appointment/{id}', [DoctorDashboardController::class, 'showAppointment'])->name('doctor_dashboard.show_appointment');
+        });
     });
-});
 
 Auth::routes();
 

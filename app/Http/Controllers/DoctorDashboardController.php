@@ -33,6 +33,31 @@ public function clients()
     $clients = Client::all();
     return view('doctor.clients')->with('clients',$clients);
 }
+public function showAppointment($id)
+{
+    $appointment = Appointment::find($id);
+    // Do any additional processing you need with the appointment data
+    return view('doctor.appointment_show', compact('appointment'));
+}
 
 
+public function completeAppointment($id)
+{
+    $appointment = Appointment::find($id);
+    $appointment->status = 'complete';
+
+    $appointment->save();
+    session()->flash('complete','تم اتمام الحجز');
+    return redirect()->back();
+}
+
+public function rejectAppointment($id)
+{
+    $appointment = Appointment::find($id);
+    $appointment->status = 'rejected';
+
+    $appointment->save();
+    session()->flash('rejected','تم إلغاء الحجز');
+    return redirect()->back();
+}
 }
