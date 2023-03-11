@@ -73,8 +73,8 @@
                             <tr>
                                 <td> {{ $i }} </td>
                                 <td>
-                                    <a href="{{ route('appointments.show', $item->id) }}">
-                                        {{ $item->client->client_name }}</a>
+
+                                        {{ $item->client->client_name }}
                                 </td>
                                 <td> {{ $item->apt_datetime }} </td>
                                 <td> {{ $item->remarks }} </td>
@@ -83,7 +83,7 @@
 
                                 <td>
                                     <a href="{{ route('doctor_dashboard.show_appointment', ['id' => $item->id]) }}"
-                                        class="btn btn-primary">View</a>
+                                        class="btn btn-primary">View</>
                                 </td>
                                 <td>
                                     @if($item->status === 'processing')
