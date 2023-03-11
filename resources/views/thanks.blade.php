@@ -61,13 +61,13 @@
             <br />
             <h2 class="text-nav" style="
               font-family: cursive;
-              font-size: 32px;
+              font-size: 24px;
             ">Bella Online Appointment</h2>
             <!-- Add your appointment form code here -->
             <img src="{{ asset('img/loog.png') }}" width="200" height="150">
           </div>
         </div>
-        <div class="row h-80 p-8 justify-content-center align-items-center">
+        <div class="row h-100 p-8 justify-content-center align-items-center">
           <div class="device-container">
             <div class="device-mockup iphone6_plus portrait white">
               <div class="device" style="
