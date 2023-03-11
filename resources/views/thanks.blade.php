@@ -69,7 +69,7 @@
         </div>
         <div class="row h-100 p-8 justify-content-center align-items-center">
           <div class="device-container">
-            <div class="device-mockup iphone6_plus portrait white" style=" style="padding-bottom: 180.76%;">
+            <div class="device-mockup iphone6_plus portrait white" >
               <div class="device" style="
                 background-image: url('img/iphone_6_plus_white_port.png?h=a8ad898987fd6ec9bbde741517f4cbb9');
               ">
