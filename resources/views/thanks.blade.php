@@ -64,7 +64,7 @@
               font-size: 24px;
             ">Bella Online Appointment</h2>
             <!-- Add your appointment form code here -->
-            <img src="{{ asset('img/loog.png') }}" width="200" height="150">
+            <img src="{{ asset('img/loog.png') }}" width="200" height="100">
           </div>
         </div>
         <div class="row h-100 p-8 justify-content-center align-items-center">
