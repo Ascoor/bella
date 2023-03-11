@@ -83,7 +83,7 @@ font-weight: bold;
 
 </head>
 
-<body class="d-flex h-100 text-center text-white " style="
+<body class=" h-100 text-center text-white " style="
 background: url('img/bg-pattern.png?h=88366d218f2eda574d88b27e4cb4169d'),
 linear-gradient(to left, #7b4397, #dc2430);">
 <div class="container">
