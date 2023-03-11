@@ -14,11 +14,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
 
 
-  <!-- International Telephone Input -->
-  <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.min.css"
-    integrity="sha512-eU5QbU6AtJy1VzSjBn+H45uJnOdZD7QMKj3q4Hbf4lztmEd/fmOWVJXrZq3q/8D8jv19TnFtRsl28tHLsQmtCg=="
-    crossorigin="anonymous">
+
 
   <!-- Internal CSS -->
   <link rel="stylesheet" href="{{ URL::asset('assets/plugins/telephoneinput/telephoneinput-rtl.css') }}">
@@ -197,11 +193,12 @@ font-size: calc(1.9rem + 2.12vw);">
     </footer>
 </div>
 
-    <!-- Optional JavaScript; choose one of the two! -->
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 
 
-    <!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="{{ URL::asset('js/jquery-3.1.1.min.js') }}"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
     <!-- Option 2: Separate Popper and Bootstrap JS -->
