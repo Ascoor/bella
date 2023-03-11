@@ -58,7 +58,7 @@
       <div class="container">
         <div class="row justify-content-center align-items-center">
           <div class="col-md-8 col-lg-6 text-center">
-            <br />
+
             <h2 class="text-nav" style="
               font-family: cursive;
               font-size: 24px;
