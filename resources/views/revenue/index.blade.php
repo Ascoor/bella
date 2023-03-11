@@ -1,72 +1,81 @@
 @extends('layouts.master')
-@section('css')
-<!-- Internal Data table css -->
-<link
-    href="{{ URL::asset('assets/plugins/datatable/css/dataTables.bootstrap4.min.css') }}"
-    rel="stylesheet" />
-<link href="{{ URL::asset('assets/plugins/datatable/css/buttons.bootstrap4.min.css') }}"
-    rel="stylesheet">
-<link
-    href="{{ URL::asset('assets/plugins/datatable/css/responsive.bootstrap4.min.css') }}"
-    rel="stylesheet" />
-<link href="{{ URL::asset('assets/plugins/datatable/css/jquery.dataTables.min.css') }}"
-    rel="stylesheet">
-<link
-    href="{{ URL::asset('assets/plugins/datatable/css/responsive.dataTables.min.css') }}"
-    rel="stylesheet">
-<link href="{{ URL::asset('assets/plugins/select2/css/select2.min.css') }}"
-    rel="stylesheet">
 @section('title')
-الحجوزات
+قائمة الإيرادات
 @stop
+    @section('css')
+    <!-- Internal Data table css -->
+    <link
+        href="{{ URL::asset('assets/plugins/datatable/css/dataTables.bootstrap4.min.css') }}"
+        rel="stylesheet" />
+    <link
+        href="{{ URL::asset('assets/plugins/datatable/css/buttons.bootstrap4.min.css') }}"
+        rel="stylesheet">
+    <link
+        href="{{ URL::asset('assets/plugins/datatable/css/responsive.bootstrap4.min.css') }}"
+        rel="stylesheet" />
+    <link
+        href="{{ URL::asset('assets/plugins/datatable/css/jquery.dataTables.min.css') }}"
+        rel="stylesheet">
+    <link
+        href="{{ URL::asset('assets/plugins/datatable/css/responsive.dataTables.min.css') }}"
+        rel="stylesheet">
+    <link href="{{ URL::asset('assets/plugins/select2/css/select2.min.css') }}"
+        rel="stylesheet">
+    <!--Internal   Notify -->
+    <link href="{{ URL::asset('assets/plugins/notify/css/notifIt.css') }}"
+        rel="stylesheet" />
     @endsection
     @section('page-header')
     <!-- breadcrumb -->
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">قائمة الحجوزات</h4>
-                <span class="text-muted mt-1 tx-13 mr-2 mb-0">/
-                    جميع الحجوزات</span>
+                <h4 class="content-title mb-0 my-auto">الإيرادات</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
+                    قائمةالإيرادات</span>
             </div>
         </div>
+
     </div>
     <!-- breadcrumb -->
     @endsection
     @section('content')
+
     @if($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-    @if(session()->has('Add'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>{{ session()->get('Add') }}</strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    @endif
-    @if(session()->has('delete'))
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>{{ session()->get('delete') }}</strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    @endif
-    @if(session()->has('edit'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>{{ session()->get('edit') }}</strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    @endif
+    <div class="alert alert-danger">
+        <ul>
+            @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+@if(session()->has('Add'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>{{ session()->get('Add') }}</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+@endif
+@if(session()->has('delete'))
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>{{ session()->get('delete') }}</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+@endif
+@if(session()->has('edit'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>{{ session()->get('edit') }}</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+@endif
+
+
+
     <!-- row -->
     <div class="row">
         <div class="col-xl-12">
@@ -74,7 +83,7 @@
                 <div class="card-header pb-0">
                     <div class="d-flex justify-content-between">
                         <a class="modal-effect btn btn-outline-primary btn-block" data-effect="effect-scale"
-                            data-toggle="modal" href="#addModal">اضافة حجز</a>
+                            data-toggle="modal" href="#add_revenues_modal">اضافة إيراد</a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -83,166 +92,246 @@
                             style="text-align: center">
                             <thead>
                                 <tr>
-
-                                <th>#</th>
-                                <th>التاريخ</th>
-                                <th>المبلغ</th>
-                                <th>التصنيف</th>
-                                <th>الخيارات</th>
-                            </tr>
+                                    <td>#</td>
+                                    <th>نوع الإيراد</th>
+                                    <th>التاريخ</th>
+                                    <th>المبلغ</th>
+                                    <th>المستلم منه</th>
+                                    <th>الخيارات</th>
+                                </tr>
                             </thead>
                             <tbody>
+
                                 @php
-                                $i = 0;
+                                    $i = 0;
                                 @endphp
-                                @foreach ($revenues as $revenue)
+                                @foreach($revenues as $item)
                                     @php
-                                    $i++
+                                        $i++
                                     @endphp
+                                    <tr>
 
-
-                            <tr>
-                                <td>{{ $revenue->i }}</td>
-                                <td>{{ $revenue->date }}</td>
-                                <td>{{ $revenue->amount }}</td>
-                                <td>{{ $revenue->category }}</td>
-                                <td>
-                                <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#showRevenueModal{{ $revenue->id }}">عرض</button>
-                                <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#editRevenueModal{{ $revenue->id }}">تعديل</button>
-
-                                <!-- Button to trigger Revenue delete modal -->
-<button class="btn btn-danger" data-toggle="modal" data-target="#revenue-delete-modal">حذف</button>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
+                                        <td>{{ $i }}</td>
+                                        <td>{{ $item->incomeType->name }}</td>
+                                        <td>{{ $item->revenue_date }}</td>
+                                        <td>{{ $item->revenue_value }}</td>
+                                        <td>{{ $item->revenue_from }}</td>
+                                        <td>
+                                            <button type="button" class="btn btn-sm btn-info"
+                                            data-id="{{ $item->id }}"
+                                                data-revenue_type_name="{{ $item->incomeType->name }}"
+                                                data-revenue_type_id="{{ $item->incomeType->id }}"
+                                                data-revenue_value="{{ $item->revenue_value }}"
+                                                data-revenue_notes="{{ $item->revenue_notes }}"
+                                                data-revenue_from="{{ $item->revenue_from }}"
+                                                data-revenue_date="{{ $item->revenue_date }}" data-toggle="modal"
+                                                data-target="#show_revenues_modal">عرض</button>
+                                            <button type="button" class="btn btn-sm btn-warning" data-toggle="modal"
+                                            data-id="{{ $item->id }}"
+                                            data-revenue_type_name="{{ $item->incomeType->name }}"
+                                            data-revenue_type_id="{{ $item->incomeType->id }}"
+                                            data-revenue_value="{{ $item->revenue_value }}"
+                                            data-revenue_notes="{{ $item->revenue_notes }}"
+                                            data-revenue_from="{{ $item->revenue_from }}"
+                                            data-revenue_date="{{ $item->revenue_date }}"
+                                                data-target="#edit_revenues_modal">تعديل</button>
+                                            <button type="button" class="btn btn-sm btn-danger" data-toggle="modal"
+                                            data-id="{{ $item->id }}"     data-revenue_from="{{ $item->revenue_from }}"
+                                                data-target="#delete_revenues_modal">حذف</button>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
                         </table>
                     </div>
                 </div>
             </div>
         </div>
-        <!--/div-->
+    </div>
     </div>
 
-
-
-<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <form id="addForm">
+    <!--- Add Expense Model--->
+    <div class="modal fade" id="add_revenues_modal" tabindex="-1" role="dialog" aria-labelledby="addExpenseModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addModalLabel">إضافة إيراد جديد</h5>
+                    <h5 class="modal-title" id="addExpenseModalLabel">إضافة إيراد</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label for="date">التاريخ:</label>
-                        <input type="date" class="form-control" id="date" name="date">
-                    </div>
-                    <div class="form-group">
-                        <label for="amount">المبلغ:</label>
-                        <input type="number" class="form-control" id="amount" name="amount">
-                    </div>
-                    <div class="form-group">
-                        <label for="details">التفاصيل:</label>
-                        <textarea class="form-control" id="details" name="details"></textarea>
-                    </div>
+                    <form id="addExpenseForm" action="revenues" method="POST" enctype="form-data">
+                        @csrf
+                        @method('POST')
+                        <div class="form-group">
+                            <label for="revenue_name" class="col-form-label">نوع الإيراد</label>
+                            <select name="income_type_id" id="income_type_id">
+                                <option selected>إختر</option>
+                               @foreach ($incomeTypes as $item1)
+                                <option value="{{ $item1->id }}"> {{ $item1->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="revenue_name" class="col-form-label">المستلم منه</label>
+                            <input type="text" class="form-control" id="revenue_from" name="revenue_from">
+                        </div>
+                        <div class="form-group">
+                            <label for="revenue_amount" class="col-form-label">المبلغ</label>
+                            <input type="number" class="form-control" id="revenue_value" name="revenue_value">
+                        </div>
+                        <div class="form-group">
+                            <label for="revenue_date" class="col-form-label">تاريخ الصرف</label>
+                            <input type="date" class="form-control" id="revenue_date" name="revenue_date">
+                        </div>
+                        <div class="form-group">
+                            <label for="revenue_date" class="col-form-label">ملاخظات</label>
+                            <textarea type="text" class="form-control" id="revenue_notes" name="revenue_notes"></textarea>
+                        </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">إغلاق</button>
-                    <button type="submit" class="btn btn-primary">حفظ</button>
+                    <button type="submit" class="btn btn-primary"  >إضافة</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">إلغاء</button>
                 </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 
- <!-- Show Modal -->
- <div class="modal fade" id="showModal{{ $revenue->id }}" tabindex="-1" role="dialog"
-                                aria-labelledby="showModal{{ $revenue->id }}" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalCenterTitle">تفاصيل الإيراد</h5>
-                                            <button type="button" class="close" data-dismiss="modal"
-                                                aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <p>التاريخ: {{ $revenue->date }}</p>
-                                            <p>التصنيف: {{ $revenue->category }}</p>
-                                            <p>القيمة: {{ $revenue->value }}</p>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-dismiss="modal">إغلاق</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-<!-- Edit Revenue Modal -->
-<div class="modal fade" id="editRevenueModal{{ $revenue->id }}" tabindex="-1" role="dialog" aria-labelledby="editRevenueModal{{ $revenue->id }}Label" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <!-- Show Expense Modal -->
+    <div class="modal fade" id="show_revenues_modal" tabindex="-1" role="dialog" aria-labelledby="showExpenseModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="showExpenseModalLabel">عرض الإيراد</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                        <div class="form-group">
+                            <label for="revenue_name" class="col-form-label">نوع الإيراد</label>
+
+                            <input type="text" class="form-control"  readonly id="revenue_type_name">
+
+                        </div>
+                        <div class="form-group">
+                            <label for="revenue_name" class="col-form-label">المنصرف له</label>
+                            <input type="text" class="form-control" readonly id="revenue_from" name="revenue_from">
+                        </div>
+                        <div class="form-group">
+                            <label for="revenue_amount" class="col-form-label">المبلغ</label>
+                            <input type="number" class="form-control" readonly id="revenue_value" name="revenue_value">
+                        </div>
+                        <div class="form-group">
+                            <label for="revenue_date" class="col-form-label">تاريخ الصرف</label>
+                            <input type="date" class="form-control" readonly id="revenue_date" name="revenue_date">
+                        </div>
+                        <div class="form-group">
+                            <label for="revenue_date" class="col-form-label">ملاخظات</label>
+                            <textarea type="text" class="form-control" readonly id="revenue_notes" name="revenue_notes"></textarea>
+                        </div>
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">إلغاء</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="edit_revenues_modal" tabindex="-1" role="dialog" aria-labelledby="editExpenseModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="add_revenue_modal">تعديل بيانات اللإيراد</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="editExpenseForm" action="revenues/update" method="POST" enctype="form-data">
+                        @csrf
+                        @method('PUT')
+                        <div class="form-group">
+
+                            <label for="revenue_name" class="col-form-label">نوع الإيراد</label>
+                            <select name="income_type_id" id="income_type_id">
+
+                               @foreach ($incomeTypes as $item1)
+                                <option selected value="{{ $item1->id }}"> {{ $item1->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="revenue_name" class="col-form-label">المنصرف له</label>
+                            <input type="text" class="form-control" id="revenue_from" name="revenue_from">
+                        </div>
+                        <div class="form-group">
+                            <label for="revenue_amount" class="col-form-label">المبلغ</label>
+                            <input type="number" class="form-control" id="revenue_value" name="revenue_value">
+                        </div>
+                        <div class="form-group">
+                            <label for="revenue_date" class="col-form-label">تاريخ الصرف</label>
+                            <input type="date" class="form-control" id="revenue_date" name="revenue_date">
+                        </div>
+                        <div class="form-group">
+                            <label for="revenue_date" class="col-form-label">ملاخظات</label>
+                            <textarea type="text" class="form-control" id="revenue_notes" name="revenue_notes"></textarea>
+                        </div>
+                        <input type="hidden" id="id" name="id">
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</submit>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+
+<div class="modal fade" id="delete_revenues_modal" tabindex="-1" role="dialog" aria-labelledby="deleteExpenseModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editRevenueModal{{ $revenue->id }}Label">تعديل بيانات الإيراد</h5>
+                <h5 class="modal-title" id="deleteExpenseModalLabel">حذف  الإيراد</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" action="{{ route('revenues.update', $revenue->id) }}">
-                @csrf
-                @method('PUT')
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="revenue_date" class="col-form-label">تاريخ الإيراد:</label>
-                        <input type="date" class="form-control" id="revenue_date" name="revenue_date" value="{{ $revenue->revenue_date }}">
+                <form id="deleteExpenseForm"action="revenues/destroy" method="post">
+                    {{ method_field('delete') }}
+                    {{ csrf_field() }}
+                    <div class="modal-body">
+                        <p>هل انت متاكد من عملية الحذف ؟</p>
+                        <br>
+                        <input type="hidden" name="id" id="id" value="">
+                        <input class="form-control mg-b-20" id="revenue_from" type="text" readonly>
                     </div>
-                    <div class="form-group">
-                        <label for="description" class="col-form-label">الوصف:</label>
-                        <input type="text" class="form-control" id="description" name="description" value="{{ $revenue->description }}">
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
+                        <button type="submit" class="btn btn-danger">تاكيد</button>
                     </div>
-                    <div class="form-group">
-                        <label for="amount" class="col-form-label">المبلغ:</label>
-                        <input type="number" class="form-control" id="amount" name="amount" value="{{ $revenue->amount }}">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">إغلاق</button>
-                    <button type="submit" class="btn btn-primary">حفظ التعديلات</button>
-                </div>
-            </form>
         </div>
     </div>
 </div>
 
-<!-- Revenue delete modal -->
-<div class="modal fade" id="revenue-delete-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="myModalLabel">Delete Revenue</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>Are you sure you want to delete this revenue?</p>
-      </div>
-      <div class="modal-footer">
-        <form method="POST" action="{{ route('revenues.destroy', $revenue->id) }}">
-          @csrf
-          @method('DELETE')
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-          <button type="submit" class="btn btn-danger">Delete</button>
-        </form>
-      </div>
+
+    <!--/div-->
     </div>
-  </div>
-</div>
+
+    <!-- حذف الفاتورة -->
+
+
 
     </div>
     <!-- row closed -->
@@ -250,65 +339,120 @@
     <!-- Container closed -->
     </div>
     <!-- main-content closed -->
-@endsection
-@section('js')
+    @endsection
+    @section('js')
     <!-- Internal Data tables -->
-    <script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.dataTables.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/responsive.dataTables.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.bootstrap4.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.buttons.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.bootstrap4.min.js') }}"></script>
+    <script
+        src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js') }}">
+    </script>
+    <script
+        src="{{ URL::asset('assets/plugins/datatable/js/dataTables.dataTables.min.js') }}">
+    </script>
+    <script
+        src="{{ URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js') }}">
+    </script>
+    <script
+        src="{{ URL::asset('assets/plugins/datatable/js/responsive.dataTables.min.js') }}">
+    </script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/jquery.dataTables.js') }}">
+    </script>
+    <script
+        src="{{ URL::asset('assets/plugins/datatable/js/dataTables.bootstrap4.js') }}">
+    </script>
+    <script
+        src="{{ URL::asset('assets/plugins/datatable/js/dataTables.buttons.min.js') }}">
+    </script>
+    <script
+        src="{{ URL::asset('assets/plugins/datatable/js/buttons.bootstrap4.min.js') }}">
+    </script>
     <script src="{{ URL::asset('assets/plugins/datatable/js/jszip.min.js') }}"></script>
     <script src="{{ URL::asset('assets/plugins/datatable/js/pdfmake.min.js') }}"></script>
     <script src="{{ URL::asset('assets/plugins/datatable/js/vfs_fonts.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.html5.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.print.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.colVis.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/responsive.bootstrap4.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.html5.min.js') }}">
+    </script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.print.min.js') }}">
+    </script>
+    <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.colVis.min.js') }}">
+    </script>
+    <script
+        src="{{ URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js') }}">
+    </script>
+    <script
+        src="{{ URL::asset('assets/plugins/datatable/js/responsive.bootstrap4.min.js') }}">
+    </script>
     <!--Internal  Datatable js -->
     <script src="{{ URL::asset('assets/js/table-data.js') }}"></script>
     <!--Internal  Notify js -->
     <script src="{{ URL::asset('assets/plugins/notify/js/notifIt.js') }}"></script>
     <script src="{{ URL::asset('assets/plugins/notify/js/notifit-custom.js') }}"></script>
-    <script>
-    $(document).ready(function() {
-        // Show Revenue Modal
-        $('#showRevenueModal{{ $revenue->id }}').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget) // Button that triggered the modal
-            var revenueId = button.data('revenueid') // Extract info from data-* attributes
-            var revenueName = button.data('revenuename')
-            var revenueAmount = button.data('revenueamount')
-            var revenueDate = button.data('revenuedate')
 
-            var modal = $(this)
-            modal.find('.modal-title').text('Revenue Details')
-            modal.find('.revenue-name').text(revenueName)
-            modal.find('.revenue-amount').text(revenueAmount)
-            modal.find('.revenue-date').text(revenueDate)
-        })
+
+
+    <script>
+    $('#delete_revenues_modal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var id = button.data('id');
+        var revenue_from = button.data('revenue_from');
+        var modal = $(this);
+
+        modal.find('.modal-body #id').val(id);
+        modal.find('.modal-body #revenue_from').val(revenue_from);
     });
-</script>
+
+        $('#show_revenues_modal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var id = button.data('id');
+            var revenue_type_name = button.data('revenue_type_name');
+            var revenue_type_id = button.data('revenue_type_id');
+            var  revenue_value = button.data('revenue_value');
+            var revenue_date = button.data('revenue_date');
+            var revenue_from = button.data('revenue_from');
+            var revenue_notes = button.data('revenue_notes');
+            var modal = $(this);
+
+            modal.find('.modal-body #id').val(id);
+            modal.find('.modal-body #revenue_type_name').val(revenue_type_name);
+            modal.find('.modal-body #revenue_value').val(revenue_value);
+            modal.find('.modal-body #revenue_date').val(revenue_date);
+            modal.find('.modal-body #revenue_from').val(revenue_from);
+            modal.find('.modal-body #revenue_notes').val(revenue_notes);
 
 
-
-    <script>
-    $(document).ready(function() {
-        $('#editRevenueModal{{ $revenue->id }}').on('shown.bs.modal', function() {
-            $(this).find('#revenue_date').focus();
         });
+        $('#edit_revenues_modal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var id = button.data('id');
+            var income_type_name = button.data('income_type_name');
+            var income_type_id = button.data('income_type_id');
+            var  revenue_value = button.data('revenue_value');
+            var revenue_date = button.data('revenue_date');
+            var revenue_from = button.data('revenue_from');
+            var revenue_notes = button.data('revenue_notes');
+            var modal = $(this);
+
+            modal.find('.modal-body #id').val(id);
+            modal.find('.modal-body #income_type_name').val(income_type_name);
+            modal.find('.modal-body #revenue_value').val(revenue_value);
+            modal.find('.modal-body #revenue_date').val(revenue_date);
+            modal.find('.modal-body #revenue_from').val(revenue_from);
+            modal.find('.modal-body #revenue_notes').val(revenue_notes);
+            $('#delete_revenues_modal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var id = button.data('id');
+        var revenue_from = button.data('revenue_from');
+        var modal = $(this);
+
+        modal.find('.modal-body #id').val(id);
+        modal.find('.modal-body #revenue_from').val(revenue_from);
     });
 
-
-</script>
-
-
+        });
+    </script>
 
 
 
 
 
-@endsection
+
+
+    @endsection

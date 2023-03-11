@@ -296,34 +296,33 @@
         </div>
     </div>
 
-    <div class="modal fade" id="delete_expenses_modal" tabindex="-1" role="dialog"
-        aria-labelledby="deleteExpenseModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="deleteExpenseModalLabel">Delete Expense</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    Are you sure you want to delete this expense?
-                    <form id="deleteExpenseForm" action="expenses/destroy" method="post">
-                        {{ method_field('delete') }}
-                        {{ csrf_field() }}
 
-                        @csrf
-                        <input type="hidden" name="expense_id" id="expense_id">
-                        <input type="text" name="expense_to" id="expense_to" readonly>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-danger" id="deleteExpenseBtn">Delete</button>
-                </div>
+<div class="modal fade" id="delete_expenses_modal" tabindex="-1" role="dialog" aria-labelledby="deleteExpenseModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteExpenseModalLabel">حذف  المصروف</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
+                <form id="deleteExpenseForm"action="expenses/destroy" method="post">
+                    {{ method_field('delete') }}
+                    {{ csrf_field() }}
+                    <div class="modal-body">
+                        <p>هل انت متاكد من عملية الحذف ؟</p>
+                        <br>
+                        <input type="hidden" name="id" id="id" value="">
+                        <input class="form-control mg-b-20" id="expense_to" type="text" readonly>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
+                        <button type="submit" class="btn btn-danger">تاكيد</button>
+                    </div>
         </div>
     </div>
+</div>
 
 
     <!--/div-->
@@ -385,22 +384,19 @@
     <!--Internal  Notify js -->
     <script src="{{ URL::asset('assets/plugins/notify/js/notifIt.js') }}"></script>
     <script src="{{ URL::asset('assets/plugins/notify/js/notifit-custom.js') }}"></script>
-    <script>
-        $(document).on('click', '.delete-expense-btn', function () {
-            var expense_id = $(this).attr('data-id');
-            $('#deleteExpenseModal').find('#expense_id').val(expense_id);
-        });
-    </script>
 
-    <!-- Show Expense Modal Script -->
+
 
     <script>
-        function showExpenseModal(expenseId) {
-            $('#show_expense_modal' + expenseId).modal('show');
-        }
-    </script>
-    <script>
+    $('#delete_expenses_modal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var id = button.data('id');
+        var expense_to = button.data('expense_to');
+        var modal = $(this);
 
+        modal.find('.modal-body #id').val(id);
+        modal.find('.modal-body #expense_to').val(expense_to);
+    });
 
         $('#show_expenses_modal').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget);
@@ -414,7 +410,7 @@
             var modal = $(this);
 
             modal.find('.modal-body #id').val(id);
-            modal.find('.modal-body #expense_typename').val(name);
+            modal.find('.modal-body #expense_type_name').val(expense_type_name);
             modal.find('.modal-body #expense_value').val(expense_value);
             modal.find('.modal-body #expense_date').val(expense_date);
             modal.find('.modal-body #expense_to').val(expense_to);

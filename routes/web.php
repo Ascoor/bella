@@ -42,26 +42,13 @@ Route::get('/ww', function () {
 });
 
 
-Route::post('/submit', [AppointmentController::class, 'submitForm'])->name('appointments.submitForm');
-
-// define routes for doctor's dashboard
-Route::prefix('doctor')->group(function () {
-    // login route
-
-    // Doctor login routes
-    Route::get('/login', [DoctorAuthController::class, 'showLoginForm'])->name('doctor.login');
-    Route::post('/login', [DoctorAuthController::class, 'login'])->name('doctor.login.post');
-    // logout route
-    Route::post('/logout', 'DoctorAuthController@logout')->name('doctor.logout');
-
-    // dashboard route (authenticated)
-    Auth::routes();
-    Route::middleware(['auth:doctor'])->group(function () {
-        Route::get('/dashboard',[DoctorDashboardController::class ,'index'])->name('doctor.dashboard');
-        Route::get('/appointments',[DoctorDashboardController::class ,'appointments'])->name('doctor.appointments');
-        Route::get('/clients',[DoctorDashboardController::class ,'clients'])->name('doctor.clients');
-    });
+Route::get('/', function () {
+    return view('welcome', [
+        'doctors' => Doctor::all(),
+    ]);
 });
+
+Route::post('/submit', [AppointmentController::class, 'submitForm'])->name('appointments.submitForm');
 
 Route::get('/appointments', [AppointmentController::class, 'listAppointments'])->name('appointments.list');
 Route::get('/appointments/{id}/edit', [AppointmentController::class, 'edit'])->name('appointments.edit');
@@ -81,6 +68,7 @@ Route::resource('services', ServiceController::class);
 Route::resource('expenses', ExpenseController::class);
 Route::resource('revenues', RevenueController::class);
 Route::get('expenses_revenues', [ExpensesAndRevenuesController::class, 'index'])->name('expenses_revenues');
+Route::get('/expenses_revenues/search', [ExpensesRevenuesController::class, 'search'])->name('expenses_revenues.search');
 
 Route::post('/notifications/read', [NotificationController::class, 'read'])->name('notifications.read');
 
@@ -112,3 +100,22 @@ Route::resource('invoices', InvoiceController::class);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/{page}', [App\Http\Controllers\AdminController::class, 'index'])->name('{page}');
 
+
+// define routes for doctor's dashboard
+Route::prefix('doctor')->group(function () {
+    // login route
+
+    // Doctor login routes
+    Route::get('/login', [DoctorAuthController::class, 'showLoginForm'])->name('doctor.login');
+    Route::post('/login', [DoctorAuthController::class, 'login'])->name('doctor.login.post');
+    // logout route
+    Route::post('/logout', 'DoctorAuthController@logout')->name('doctor.logout');
+
+    // dashboard route (authenticated)
+    Auth::routes();
+    Route::middleware(['auth:doctor'])->group(function () {
+        Route::get('/dashboard',[DoctorDashboardController::class ,'index'])->name('doctor.dashboard');
+        Route::get('/appointments',[DoctorDashboardController::class ,'appointments'])->name('doctor.appointments');
+        Route::get('/clients',[DoctorDashboardController::class ,'clients'])->name('doctor.clients');
+    });
+});

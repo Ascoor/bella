@@ -10,15 +10,22 @@ class Revenue extends Model
     use HasFactory;
 
     protected $fillable = [
-        'collection_date',
+
         'revenue_value',
-        'revenue_type',
+
+        'revenue_date',
         'revenue_notes',
-        'income_type_id'
+        'revenue_from',
+        'income_type_id',
+        'add_id'
     ];
 
     public function incomeType()
     {
         return $this->belongsTo(IncomeType::class);
+    }
+    public function users()
+    {
+        return $this->hasMany(User::class);
     }
 }

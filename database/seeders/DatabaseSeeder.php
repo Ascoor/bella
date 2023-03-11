@@ -6,6 +6,8 @@ use App\Models\Appointment;
 use App\Models\Assest;
 use App\Models\Client;
 use App\Models\Doctor;
+use App\Models\ExpenseType;
+use App\Models\IncomeType;
 use App\Models\Section;
 use App\Models\Service;
 use App\Models\User;
@@ -27,5 +29,7 @@ class DatabaseSeeder extends Seeder
         Assest::factory(10)->create();
          Client::factory(10)->create();
         Appointment::factory(20)->create();
+        ExpenseType::factory(20)->create();
+        IncomeType::factory(20)->create();
     }
 }

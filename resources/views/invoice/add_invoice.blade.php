@@ -237,23 +237,24 @@ $(document).ready(function() {
 
   // Update amount collection based on selected services
   function updateAmountCollection() {
-    var selectedServices = $(".service-checkbox:checked");
-    var total = 0;
-    selectedServices.each(function() {
-      total += parseFloat($(this).data("price"));
-    });
+  var selectedServices = $(".service-checkbox:checked");
+  var total = 0;
+  selectedServices.each(function() {
+    total += parseFloat($(this).data("price"));
+  });
 
-    var discountValue = parseFloat($("#discount").val()) || 0;
-    total -= discountValue;
+  var discountValue = parseFloat($("#discount").val()) || 0;
+  var vatRate = parseFloat($("#rate_vat").val()) || 0;
+  var vatValue = (total * (vatRate/100));
+  var totalAmount = total - discountValue + vatValue;
 
-    var vatRate = parseFloat($("#rate_vat").val()) || 0;
-    var vatValue = (total * (vatRate/100));
-    $("#value_vat").val(vatValue.toFixed(2));
-
-    total += vatValue;
-    $("#amount_collection").val(total.toFixed(2));
-    $("#total").val(total.toFixed(2));
-  }
+  $("#value_vat").val(vatValue.toFixed(2));
+  $("#amount_collection").val((total + vatValue).toFixed(2));
+  $("#total").val(totalAmount.toFixed(2));
+}
+var amountCollection = total + vatValue;
+var vatAmount = (amountCollection * (vatRate/100));
+$("#amount_collection").val((amountCollection + vatAmount).toFixed(2));
 
   // On click of add service button
   $("#add-service-btn").on("click", function() {
