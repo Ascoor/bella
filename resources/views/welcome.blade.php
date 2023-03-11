@@ -86,7 +86,7 @@ font-weight: bold;
 <body class="d-flex h-100 text-center text-white " style="
 background: url('img/bg-pattern.png?h=88366d218f2eda574d88b27e4cb4169d'),
 linear-gradient(to left, #7b4397, #dc2430);">
-<div class="container-fluid">
+<div class="container">
 
 <header class="mb-auto p-3" style="    font-family: monospace;
 font-size: calc(1.9rem + 2.12vw);">
@@ -185,14 +185,17 @@ font-size: calc(1.9rem + 2.12vw);">
 
     </div>
 
-    <footer class="mt-auto text-white-50">
-        <p> <span>Copyrights ©
+    <footer>
+      <div class="container">
+        <p>
+          <span>Copyrights ©
             <a class="afoot" href="https://wwww.ask-ar.com"> Ask-ar T.S </a>
             all rights reserved © 2023
-        </span></p>
+          </span>
+        </p>
+      </div>
     </footer>
 </div>
-
 
 
 <script src="{{ URL::asset('js/jquery-3.1.1.min.js') }}"></script>
