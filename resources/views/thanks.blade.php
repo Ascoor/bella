@@ -67,7 +67,7 @@
             <img src="{{ asset('img/loog.png') }}" width="200" height="150">
           </div>
         </div>
-        <div class="row h-75 p-8 justify-content-center align-items-center">
+        <div class="row h-100 p-8 justify-content-center align-items-center">
           <div class="device-container">
             <div class="device-mockup iphone6_plus portrait white" style=" style="padding-bottom: 180.76%;">
               <div class="device" style="
