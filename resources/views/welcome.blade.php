@@ -185,6 +185,7 @@ font-size: calc(1.9rem + 2.12vw);">
 
     </div>
 
+</div>
     <footer>
       <div class="container">
         <p>
@@ -195,7 +196,6 @@ font-size: calc(1.9rem + 2.12vw);">
         </p>
     </div>
 </footer>
-</div>
 
 
 <script src="{{ URL::asset('js/jquery-3.1.1.min.js') }}"></script>
