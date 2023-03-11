@@ -82,10 +82,10 @@
                     {{ $appointment->client->clienr_phone }} لتأكيد
                     موعد الحجز.</h2>
                 </aside>
+                <div class="button"></div>
             </div>
-            <div class="button"></div>
+            <div class="iphone-mockup"></div>
         </div>
-        <div class="iphone-mockup"></div>
           </div>
         </div>
 
