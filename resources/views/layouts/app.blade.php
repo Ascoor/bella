@@ -23,66 +23,74 @@
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-lg navbar-dark " style="
-background: url('img/bg-pattern.png?h=88366d218f2eda574d88b27e4cb4169d'),
-linear-gradient(to left, #7b4397, #dc2430);">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/doctor/dashboard') }}">
-                    <img src="/img/logo.png" alt="" width="150" height="80" class="d-inline-block align-text-top">
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        @auth
-                            <li>
-                                <form class="d-flex">
-                                    <input class="form-control me-1" type="search" placeholder="Search"
-                                        aria-label="Search">
-                                    <button class="btn btn-outline-success" type="submit">Search</button>
-                                </form>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="/doctor/dashboard">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/doctor/appointments">Appointments</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/doctor/clients">Clients</a>
-                            </li>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" href="{{ url('/doctor/dashboard') }}">
+      <img src="/img/logo.png" alt="" width="150" height="80" class="d-inline-block align-text-top">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mr-auto">
+        @auth
+        <li class="nav-item">
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/doctor/dashboard">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/doctor/appointments">Appointments</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/doctor/clients">Clients</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Notifications
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            @forelse(auth()->guard('doctor')->user()->unreadNotifications as $notification)
+            <a class="dropdown-item" href="{{ route('appointments.show', $notification->data['appointment_id']) }}"
+              data-id="{{ $notification->id }}">
+              تم تسجيل جديد من {{ $notification->data['client_name'] }} في يوم {{ $notification->data['appointment_date'] }}
+              @if(isset($notification->data['doctor_name']))
+              مع الطبيب {{ $notification->data['doctor_name'] }}
+              @endif
+            </a>
+            @empty
+            <div class="dropdown-item">لا يوجد إشعارات جديدة</div>
+            @endforelse
+          </div>
+        </li>
+        @endauth
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        <!-- Authentication Links -->
+        @guest
+        @if(Route::has('login'))
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+        </li>
+        @endif
 
-
-                    </ul>
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
-
-
-                        @endauth
-                        <!-- Authentication Links -->
-                        @guest
-                            @if(Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link"
-                                        href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
-
-                            @if(Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link"
-                                        href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
+        @if(Route::has('register'))
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+        </li>
+        @endif
+        @else
+        <li class="nav-item dropdown">
+          <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false" v-pre>
+            {{ Auth::user()->name }}
+          </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();

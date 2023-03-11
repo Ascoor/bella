@@ -11,12 +11,12 @@ use Illuminate\Support\Facades\Auth;
 class DoctorDashboardController extends Controller
 {
     public function index()
-{
+    {
+        $doctor = auth('doctor')->user();
+        $notifications = $doctor->notifications()->orderBy('created_at', 'desc')->get();
+        return view('doctor.dashboard', compact('notifications'));
+           }
 
-
-return view('doctor.dashboard');
-
-}
 public function appointments()
 {
     $doctorId = Auth::guard('doctor')->user()->id; // get the currently authenticated doctor's ID
