@@ -144,6 +144,9 @@ $clients = Client::all();
         // تحقق من أن حقل remarks ليس فارغًا
         if (!empty($appointment->remarks)) {
             $appointment->status = 'processing';
+            $doctor = Doctor::find($appointment->doctor_id);
+Notification::send($doctor, new AppointmentCreated($appointment));
+
         }
 
         $appointment->edited_by = Auth::id();
