@@ -71,7 +71,7 @@
             <!-- Add your appointment form code here -->
             <img src="{{ asset('img/loog.png') }}" width="200" height="150">
           </div>
-
+        </div>
         <div class="row h-100 p-8 justify-content-center align-items-center">
           <div class="device-container">
             <div class="device-mockup iphone6_plus portrait white">
@@ -87,10 +87,10 @@
                     {{ $appointment->client->clienr_phone }} لتأكيد
                     موعد الحجز.</h2>
                 </aside>
-                <div class="button"></div>
             </div>
-            <div class="iphone-mockup"></div>
-            </div>
+            <div class="button"></div>
+        </div>
+        <div class="iphone-mockup"></div>
           </div>
         </div>
       </div>
