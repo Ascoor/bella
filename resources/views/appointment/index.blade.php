@@ -411,6 +411,7 @@
                         <select class="form-control select2-no-search" id="status" name="status">
                             <option label="Choose one">
                             <option value="pending" selected>Pending</option>
+                            <option value="processing" >Processing</option>
 
                             <option value="Complete">Complete</option>
                             <option value="cancelled">cancelled</option>
@@ -558,12 +559,12 @@
 
         // Set the selected value for the status field
         modal.find('.modal-body #status').val(status);
-
         var status_text = '';
         if (status === 'pending') {
             status_text = 'pending';
 
-
+        } else if (status === 'processing') {
+            status_text = 'processing';
         } else if (status === 'Complete') {
             status_text = 'completed';
         } else if (status === 'cancelled') {
@@ -603,6 +604,8 @@
         if (status === 'pending') {
             status_text = 'pending';
 
+        } else if (status === 'processing') {
+            status_text = 'processing';
         } else if (status === 'Complete') {
             status_text = 'completed';
         } else if (status === 'cancelled') {

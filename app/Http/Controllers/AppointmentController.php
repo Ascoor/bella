@@ -136,19 +136,22 @@ $clients = Client::all();
     }
     public function update(Request $request)
     {
-        $appointment = Appointment::findOrFail($request-> id);;
+        $appointment = Appointment::findOrFail($request->id);
         $appointment->apt_datetime = $request->input('apt_datetime');
-
-        $appointment->status = $request->input('status');
-
         $appointment->doctor_id = $request->input('doctor_id');
+        $appointment->remarks = $request->input('remarks');
+
+        // تحقق من أن حقل remarks ليس فارغًا
+        if (!empty($appointment->remarks)) {
+            $appointment->status = 'processing';
+        }
 
         $appointment->edited_by = Auth::id();
-        $appointment->remarks = $request->input('remarks');
         $appointment->save();
 
         return redirect()->back();
     }
+
     public function store(Request $request)
     {
         // Validate the form input.
