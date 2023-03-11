@@ -69,9 +69,8 @@
               font-size: 45px;
             ">Bella Online Appointment</h2>
             <!-- Add your appointment form code here -->
-            <img src="{{ asset('img/loog.png') }}" width="250" height="200">
+            <img src="{{ asset('img/loog.png') }}" width="200" height="150">
           </div>
-        </div>
 
         <div class="row h-100 p-8 justify-content-center align-items-center">
           <div class="device-container">
@@ -89,12 +88,13 @@
                     موعد الحجز.</h2>
                 </aside>
                 <div class="button"></div>
-                <div class="iphone-mockup"></div>
-              </div>
+            </div>
+            <div class="iphone-mockup"></div>
             </div>
           </div>
         </div>
       </div>
+
     </header>
 
     <footer>
