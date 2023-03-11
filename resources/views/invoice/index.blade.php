@@ -97,7 +97,6 @@
                                     <th class="border-bottom-0">الخصم</th>
                                     <th class="border-bottom-0">نسبة الضريبة</th>
                                     <th class="border-bottom-0">قيمة الضريبة</th>
-                                    <th class="border-bottom-0"> الاجمالي قبل الخصم</th>
                                     <th class="border-bottom-0">الاجمالي</th>
                                     <th class="border-bottom-0">الحالة</th>
                                     <th class="border-bottom-0">ملاحظات</th>
@@ -129,7 +128,6 @@
                                         <td>{{ $invoice->discount }}</td>
                                         <td>{{ $invoice->rate_vat }}</td>
                                         <td>{{ $invoice->value_vat }}</td>
-                                        <td>{{ $invoice->amount_collection }}</td>
                                         <td>{{ $invoice->total }}</td>
                                         <td>
                                             @if ($invoice->Value_Status == 1)
