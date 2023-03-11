@@ -279,33 +279,33 @@
                     <input type="hidden" id="edited_by" name="edited_by" value="">
                     <input type="hidden" id="id" name="id" value="">
                     <label for="recipient-name" class="col-form-label">إسم العميل</label>
-                    <input class="form-control mg-b-20" name="client_name" id="client_name" type="text">
+                    <input class="form-control mg-b-20" name="client_name" id="client_name" type="text" readonly>
 
                 </div>
                 <div class="form-group">
                     <label for="recipient-name" class="col-form-label">رقم الجوال</label>
-                    <input type="tell" class="form-control" id="client_phone" name="client_phone">
+                    <input type="tell" class="form-control" id="client_phone" name="client_phone"readonly>
 
                 </div>
                 <div class="form-group">
                     <label for="recipient-name" class="col-form-label">الطبيب</label>
-                    <input type="text" class="form-control" id="doctor_name" name="doctor_name">
+                    <input type="text" class="form-control" id="doctor_name" name="doctor_name"readonly>
 
                 </div>
                 <div class="form-group">
                     <label for="recipient-name" class="col-form-label">العنوان</label>
-                    <input type="text" class="form-control" id="address" name="address">
+                    <input type="text" class="form-control" id="address" name="address"readonly>
 
                 </div>
                 <div class="form-group">
                     <label for="recipient-name" class="col-form-label">البريد الإلكترونى للعميل</label>
-                    <input class="form-control mg-b-15" name="email" type="email">
+                    <input class="form-control mg-b-15" name="email" type="email"readonly>
 
                 </div>
                 <div class="form-group">
                     <label for="recipient-name" class="col-form-label">تاريخ وموعد الحجز</label>
                     <input type="text" name="apt_datetime" id="apt_datetime"
-                        class="form-control @error('apt_datetime') is-invalid @enderror">
+                        class="form-control @error('apt_datetime') is-invalid @enderror"readonly>
 
                 </div>
 
@@ -313,7 +313,7 @@
 
                     <p class="mg-b-10">حالة الحجز</p>
                     <input type="text" name="status" id="status"
-                        class="form-control @error('status') is-invalid @enderror">
+                        class="form-control @error('status') is-invalid @enderror"readonly>
 
                 </div>
 
@@ -322,7 +322,7 @@
                 <div class="form-group">
                     <label for="recipient-name" class="col-form-label">تاريخ وموعد الحجز</label>
                     <input type="text" name="remarks" id="remarks"
-                        class="form-control @error('remarks') is-invalid @enderror">
+                        class="form-control @error('remarks') is-invalid @enderror"readonly>
 
                 </div>
             </div>

@@ -148,7 +148,7 @@ $clients = Client::all();
 
         $appointment->edited_by = Auth::id();
         $appointment->save();
-
+        session()->flash('edit','تم التعديل بنجاح');
         return redirect()->back();
     }
 
@@ -193,7 +193,7 @@ $clients = Client::all();
 
         Appointment::find($id)->delete();
 
-        session()->flash('delete','تم حذف القسم بنجاح');
+        session()->flash('delete','تم حذف الحجز بنجاح');
 
         return redirect()->back();
     }

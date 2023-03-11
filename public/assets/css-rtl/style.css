@@ -26374,7 +26374,8 @@ button.bg-dark:hover, button.bg-dark:focus {
   background-color: #283143 !important; }
 
 .bg-white {
-  background: linear-gradient(to right, #cc2b5e, #99163f);
+  background: url('img/bg-pattern.png?h=88366d218f2eda574d88b27e4cb4169d'),
+                linear-gradient(to left, #7b4397, #dc2430);
   }
 
 .bg-transparent {

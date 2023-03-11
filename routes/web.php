@@ -40,12 +40,8 @@ Route::get('/ww', function () {
     ]);
 
 });
-
-
 Route::get('/', function () {
-    return view('welcome', [
-        'doctors' => Doctor::all(),
-    ]);
+    return view('welcome', [        'doctors' => Doctor::all(),    ]);
 });
 
 Route::post('/submit', [AppointmentController::class, 'submitForm'])->name('appointments.submitForm');
@@ -58,7 +54,8 @@ Route::prefix('doctor')->group(function () {
     Route::get('/login', [DoctorAuthController::class, 'showLoginForm'])->name('doctor.login');
     Route::post('/login', [DoctorAuthController::class, 'login'])->name('doctor.login.post');
     // logout route
-    Route::post('/logout', 'DoctorAuthController@logout')->name('doctor.logout');
+    Route::post('/logout', [DoctorAuthController::class, 'logout'])->name('doctor.logout');
+
 
     // dashboard route (authenticated)
     Route::middleware(['auth:doctor'])->group(function () {
@@ -69,16 +66,18 @@ Route::prefix('doctor')->group(function () {
 });
 
 Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 Route::get('/appointments', [AppointmentController::class, 'listAppointments'])->name('appointments.list');
 Route::get('/appointments/{id}/edit', [AppointmentController::class, 'edit'])->name('appointments.edit');
 Route::get('/appointments/{appointment}', [AppointmentController::class, 'show'])->name('appointments.show');
 Route::post('/appointments/store', [App\Http\Controllers\AppointmentController::class, 'store'])->name('appointments.store');
-Route::delete('/appointments/{id}', 'App\Http\Controllers\AppointmentController@destroy')->name('appointments.destroy');
-
+Route::delete('/appointments/{id}', [AppointmentController::class, 'destroy'])->name('appointments.destroy');
 Route::put('/appointments/{appointment}', [AppointmentController::class, 'update'])->name('appointments.update');
-
 Route::get('/appointments', [AppointmentController::class, 'sort'])->name('appointments.sort');
-
+Route::resource('clients', ClientController::class);
+Route::resource('invoices', InvoiceController::class);
 Route::resource('invoicedetails', InvoicesDetailsController::class);
 Route::resource('sections', SectionController::class);
 Route::resource('doctors', DoctorController::class);
@@ -86,8 +85,8 @@ Route::resource('assests', AssestController::class);
 Route::resource('services', ServiceController::class);
 Route::resource('expenses', ExpenseController::class);
 Route::resource('revenues', RevenueController::class);
+
 Route::get('expenses_revenues', [ExpensesAndRevenuesController::class, 'index'])->name('expenses_revenues');
-Route::get('/expenses_revenues/search', [ExpensesRevenuesController::class, 'search'])->name('expenses_revenues.search');
 
 Route::post('/notifications/read', [NotificationController::class, 'read'])->name('notifications.read');
 
@@ -100,22 +99,7 @@ Route::delete('/notifications/{id}', [NotificationController::class,'destroy'])-
 
 Route::resource('income_types', IncomeTypeController::class);
 Route::resource('expense_types', ExpenseTypeController::class);
-
-
 Route::get('/section/services/{id}', function ($section_id) {
     $services = DB::table('services')->where('section_id', $section_id)->get();
     return response()->json($services);
-    return json_encode($services);
-
 });
-
-
-
-
-
-Route::resource('clients', ClientController::class);
-// Route::resource('appointments', AppointmentController::class);
-Route::resource('invoices', InvoiceController::class);
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/{page}', [App\Http\Controllers\AdminController::class, 'index'])->name('{page}');
-
