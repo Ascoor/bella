@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use CreateClientsTable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
@@ -63,6 +64,10 @@ protected $fillable = [
     protected $hidden = [
         'password',
     ];
+    public function clients()
+    {
+        return $this->hasMany(Client::class);
+    }
 
 }
 

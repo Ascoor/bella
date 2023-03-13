@@ -64,6 +64,7 @@ Route::post('/submit', [AppointmentController::class, 'submitForm'])->name('appo
             Route::get('/clients',[DoctorDashboardController::class ,'clients'])->name('doctor.clients');
 
             Route::put('/doctor/complete_appointment/{id}', [DoctorDashboardController::class, 'completeAppointment'])->name('doctor_dashboard.complete_appointment');
+            Route::get('/doctor/mark-notifications-as-read', [DoctorDashboardController::class, 'markNotificationsAsRead'])->name('doctor.markNotificationsAsRead');
 
             Route::put('/doctor/reject_appointment/{id}', [DoctorDashboardController::class, 'rejectAppointment'])->name('doctor_dashboard.reject_appointment');
     Route::get('/doctor_dashboard/show_appointment/{id}', [DoctorDashboardController::class, 'showAppointment'])->name('doctor_dashboard.show_appointment');

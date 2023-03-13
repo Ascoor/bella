@@ -1,51 +1,45 @@
 @extends('layouts.app')
 @section('css')
+<link href="{{URL::asset('/css/dash.css')}}" rel="stylesheet">
+<link rel="stylesheet" href="{{ asset('node_modules/@fortawesome/fontawesome-free/css/all.min.css') }}">
+
+
 @endsection
 @section('page-header')
-				<!-- breadcrumb -->
-			 		</div>
-						<div class="pr-1 mb-3 mb-xl-0">
-							<button type="button" class="btn btn-danger btn-icon ml-2"><i class="mdi mdi-star"></i></button>
-						</div>
-						<div class="pr-1 mb-3 mb-xl-0">
-							<button type="button" class="btn btn-warning  btn-icon ml-2"><i class="mdi mdi-refresh"></i></button>
-						</div>
-						<div class="mb-3 mb-xl-0">
-							<div class="btn-group dropdown">
-								<button type="button" class="btn btn-primary">14 Aug 2019</button>
-								<button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" id="dropdownMenuDate" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<span class="sr-only">Toggle Dropdown</span>
-								</button>
-								<div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuDate" data-x-placement="bottom-end">
-									<a class="dropdown-item" href="#">2015</a>
-									<a class="dropdown-item" href="#">2016</a>
-									<a class="dropdown-item" href="#">2017</a>
-									<a class="dropdown-item" href="#">2018</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- breadcrumb -->
+				<
 @endsection
 @section('content')
 				<!-- row -->
-				<div class="row">
+                <div class="container">
+    <div class="row">
+        <div class="col-md-4 col-sm-6">
+            <div class="counter">
+                <span class="counter-value text-primary"><i class="fas fa-users"></i> {{ $clientCount }}</span>
+                <h3>Clients</h3>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-6">
+            <div class="counter green">
+                <span class="counter-value text-primary"><i class="fas fa-calendar-check"></i> {{ $processedAppointmentCount }}</span>
+                <h3>Processed</h3>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-6">
+            <div class="counter green">
+                <span class="counter-value text-success"><i class="fas fa-calendar-check"></i> {{ $completedAppointmentCount }}</span>
+                <h3>Completed</h3>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-6">
+            <div class="counter green">
+                <span class="counter-value text-danger"><i class="fas fa-calendar-check"></i> {{ $rejectedAppointmentCount }}</span>
+                <h3>Rejected</h3>
+            </div>
+        </div>
+    </div>
+</div>
 
-
-
-
-
-
-
-
-
-				</div>
-				<!-- row closed -->
-			</div>
-			<!-- Container closed -->
-		</div>
-		<!-- main-content closed -->
 @endsection
 @section('js')
+
 @endsection

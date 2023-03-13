@@ -17,12 +17,13 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.rtl.min.css" integrity="sha384-gXt9imSW0VcJVHezoNQsP+TNrjYXoGcrqBZJpry9zJt8PCQjobwmhMGaDHTASo9N" crossorigin="anonymous">
+    <link href="{{URL::asset('/css/dash.css')}}" rel="stylesheet">
+
 
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="
-background: url('img/bg-pattern.png?h=88366d218f2eda574d88b27e4cb4169d'),
-linear-gradient(to left, #7b4397, #dc2430);">
+background: url('../img/bg-pattern.png?h=88366d218f2eda574d88b27e4cb4169d'), linear-gradient(to left, #7b4397, #130e2d)">
     <div class="container-fluid">
       <a class="navbar-brand" href="{{ url('/doctor/dashboard') }}">
         <img src="/img/logo.png" alt="" width="150" height="80" class="d-inline-block align-text-top">
@@ -34,12 +35,7 @@ linear-gradient(to left, #7b4397, #dc2430);">
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           @auth
-          <li class="nav-item">
-            <form class="d-flex">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
-          </li>
+  >
           <li class="nav-item">
             <a class="nav-link" href="/doctor/dashboard">Home</a>
           </li>
@@ -49,32 +45,49 @@ linear-gradient(to left, #7b4397, #dc2430);">
           <li class="nav-item">
             <a class="nav-link" href="/doctor/clients">Clients</a>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
-              Notifications
+<ul></ul>
+<ul></ul>
+<ul></ul>
+
+<li>
+
+    <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+
+</li>
+<ul></ul>
+<ul></ul>
+                    <li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <i class="fas fa-bell"></i>
+    <span class="badge bg-danger">{{ auth()->guard('doctor')->user()->unreadNotifications()->count() }}</span>
+  </a>
+  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+    <div class="card" style="width: 18rem;">
+      <div class="card-header">
+        الإشعارات
+      </div>
+      <ul class="list-group list-group-flush text-center">
+        @forelse(auth()->guard('doctor')->user()->unreadNotifications as $notification)
+          <li class="list-group-item">
+            <a href="{{ route('appointments.show', $notification->data['appointment_id']) }}" data-id="{{ $notification->id }}">
+              تم تسجيل جديد من {{ $notification->data['client_name'] }} في يوم {{ $notification->data['appointment_date'] }}
+              @if(isset($notification->data['doctor_name']))
+                مع الطبيب {{ $notification->data['doctor_name'] }}
+              @endif
             </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <div class="card" style="width: 18rem;">
-                  <div class="card-header">
-                    الإشعارات
-                  </div>
-                  <ul class="list-group list-group-flush">
-                    @forelse(auth()->guard('doctor')->user()->unreadNotifications as $notification)
-                      <li class="list-group-item">
-                        <a href="{{ route('appointments.show', $notification->data['appointment_id']) }}" data-id="{{ $notification->id }}">
-                          تم تسجيل جديد من {{ $notification->data['client_name'] }} في يوم {{ $notification->data['appointment_date'] }}
-                          @if(isset($notification->data['doctor_name']))
-                            مع الطبيب {{ $notification->data['doctor_name'] }}
-                          @endif
-                        </a>
-                      </li>
-                    @empty
-                      <li class="list-group-item">لا يوجد إشعارات جديدة</li>
-                    @endforelse
-                  </ul>
-                </div>
-              </div>
+          </li>
+        @empty
+          <li class="list-group-item">لا يوجد إشعارات جديدة</li>
+        @endforelse
+      </ul>
+    </div>
+  </div>
+
+
+
 
           @endauth
         </ul>
@@ -118,7 +131,7 @@ linear-gradient(to left, #7b4397, #dc2430);">
         </main>
     </div>
     <!-- Optional JavaScript; choose one of the two! -->
-
+    <script src="{{URL::asset('js/dash.js')}}"></script>
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <!--
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

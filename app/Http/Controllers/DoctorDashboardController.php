@@ -12,9 +12,39 @@ class DoctorDashboardController extends Controller
 {
     public function index()
     {
-        $doctor = auth('doctor')->user();
-        $notifications = $doctor->notifications()->orderBy('created_at', 'desc')->get();
-        return view('doctor.dashboard', compact('notifications'));
+
+        $doctor = Auth::guard('doctor')->user();
+
+if (!$doctor) {
+    abort(403, 'Unauthorized action.');
+}
+
+$notifications = $doctor->notifications()->orderBy('created_at', 'desc')->get();
+$clientCount = Appointment::selectRaw('count(distinct(client_id)) as count')
+    ->where('doctor_id', $doctor->id)
+    ->get()
+    ->first()
+    ->count;
+$appointmentCount = Appointment::where('doctor_id', $doctor->id)->count();
+
+return view('doctor.dashboard', [
+    'notifications' => $notifications,
+    'clientCount' => $clientCount,
+    'appointmentCount' => $appointmentCount
+]);$processedCount = Appointment::where('doctor_id', $doctor->id)
+->where('status', 'processed')
+->count();
+
+$completedCount = Appointment::where('doctor_id', $doctor->id)
+->where('status', 'completed')
+->count();
+
+$rejectedCount = Appointment::where('doctor_id', $doctor->id)
+->where('status', 'rejected')
+->count();
+
+
+
            }
 
 public function appointments()
@@ -60,4 +90,10 @@ public function rejectAppointment($id)
     session()->flash('rejected','تم إلغاء الحجز');
     return redirect()->back();
 }
+public function markNotificationsAsRead(Request $request)
+{
+    Auth::guard('doctor')->user()->unreadNotifications->markAsRead();
+    return redirect()->back();
+}
+
 }
