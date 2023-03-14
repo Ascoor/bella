@@ -42,9 +42,6 @@ $completedCount = Appointment::where('doctor_id', $doctor->id)
 $rejectedCount = Appointment::where('doctor_id', $doctor->id)
 ->where('status', 'rejected')
 ->count();
-
-
-
            }
 
 public function appointments()
