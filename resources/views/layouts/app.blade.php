@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
   <head>
+    <!-- Title -->
+<title> @yield("title") </title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,8 +18,9 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/carousel/">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.rtl.min.css" integrity="sha384-gXt9imSW0VcJVHezoNQsP+TNrjYXoGcrqBZJpry9zJt8PCQjobwmhMGaDHTASo9N" crossorigin="anonymous">
-    <link href="{{URL::asset('/css/dash.css')}}" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.rtl.min.css" integrity="sha384-+qdLaIRZfNu4cVPK/PxJJEy0B0f3Ugv8i482AKY7gwXwhaCroABd086ybrVKTa0q" crossorigin="anonymous">
+  <link href="{{URL::asset('/css/dash.css')}}" rel="stylesheet">
 
 
 </head>
@@ -35,7 +38,8 @@ background: url('../img/bg-pattern.png?h=88366d218f2eda574d88b27e4cb4169d'), lin
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           @auth
-  >
+
+
           <li class="nav-item">
             <a class="nav-link" href="/doctor/dashboard">Home</a>
           </li>
@@ -59,35 +63,46 @@ background: url('../img/bg-pattern.png?h=88366d218f2eda574d88b27e4cb4169d'), lin
 </li>
 <ul></ul>
 <ul></ul>
-                    <li class="nav-item dropdown">
-  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    <i class="fas fa-bell"></i>
-    <span class="badge bg-danger">{{ auth()->guard('doctor')->user()->unreadNotifications()->count() }}</span>
-  </a>
+<div class="menu-header-content  text-right">
+<a class="dropdown-item" href="{{ route('doctor_notifications') }}">
+    <i class="feather icon-bell"></i> الإشعارات
+    <span class="badge badge-pill badge-primary">{{ auth()->guard('doctor')->user()->unreadNotifications->count() }}</span>
+</a>
+
+
   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
     <div class="card" style="width: 18rem;">
       <div class="card-header">
         الإشعارات
       </div>
-      <ul class="list-group list-group-flush text-center">
+        <ul class="list-group list-group-flush text-center">
         @forelse(auth()->guard('doctor')->user()->unreadNotifications as $notification)
           <li class="list-group-item">
             <a href="{{ route('appointments.show', $notification->data['appointment_id']) }}" data-id="{{ $notification->id }}">
               تم تسجيل جديد من {{ $notification->data['client_name'] }} في يوم {{ $notification->data['appointment_date'] }}
               @if(isset($notification->data['doctor_name']))
                 مع الطبيب {{ $notification->data['doctor_name'] }}
-              @endif
+    @endif
             </a>
           </li>
         @empty
           <li class="list-group-item">لا يوجد إشعارات جديدة</li>
         @endforelse
-      </ul>
+        </ul>
+      </form>
     </div>
   </div>
+</li>
+
+</div>
+@endauth
+</ul>
+      @if(auth()->guard('doctor')->check())
 
 
-
+          <li class="nav-item">
+              <a class="nav-link">دكتور /{{ auth()->guard('doctor')->user()->name }}</a>
+            </li>
 
           @endauth
         </ul>
@@ -130,7 +145,7 @@ background: url('../img/bg-pattern.png?h=88366d218f2eda574d88b27e4cb4169d'), lin
             @yield('content')
         </main>
     </div>
-    <!-- Optional JavaScript; choose one of the two! -->
+     <!-- Optional JavaScript; choose one of the two! -->
     <script src="{{URL::asset('js/dash.js')}}"></script>
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <!--
