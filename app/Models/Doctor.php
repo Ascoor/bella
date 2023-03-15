@@ -67,10 +67,6 @@ protected $fillable = [
     public function clients()
     {
         return $this->hasMany(Client::class);
-    }
-    public function events()
-    {
-        return $this->hasMany(Event::class);
-    }
+        }
 }
 
