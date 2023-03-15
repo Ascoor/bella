@@ -26,12 +26,10 @@ $clientCount = Appointment::selectRaw('count(distinct(client_id)) as count')
     ->first()
     ->count;
 $appointmentCount = Appointment::where('doctor_id', $doctor->id)->count();
-$processedCount = Appointment::where('doctor_id', $doctor->id)
-->where('status', 'processed')
-->count();
+
 
 $completedCount = Appointment::where('doctor_id', $doctor->id)
-->where('status', 'completed')
+->where('status', 'complete')
 ->count();
 
 $rejectedCount = Appointment::where('doctor_id', $doctor->id)
@@ -41,7 +39,7 @@ return view('doctor.dashboard', [
     'notifications' => $notifications,
     'clientCount' => $clientCount,
     'appointmentCount' => $appointmentCount,
-    'processedCount' => $processedCount,
+
     'completedCount' => $completedCount,
     'rejectedCount' => $rejectedCount
 ]);

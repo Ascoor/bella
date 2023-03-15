@@ -58,27 +58,21 @@ body {
 				<!-- row -->
 <div class="container">
     <div class="row">
-        <div class="col-md-3 col-sm-6">
-            <div class="counter">
-                <span class="counter-value text-primary"><i class="fas fa-users"></i> {{ $clientCount }}</span>
+        <div class="col-md-4 col-sm-6">
+            <div class="counter green">
+                <span class="counter-value text-light"><i class="fas fa-users"></i> {{ $clientCount }}</span>
                 <h3>Clients</h3>
             </div>
         </div>
-        <div class="col-md-3 col-sm-6">
-    <div class="counter green">
-        <span class="counter-value text-primary"><i class="fas fa-calendar-check"></i> {{ $processedCount }}</span>
-        <h3>Processed</h3>
-    </div>
-</div>
 
-        <div class="col-md-3 col-sm-6">
-            <div class="counter green">
-                <span class="counter-value text-success"><i class="fas fa-calendar-check"></i> {{ $completedCount }}</span>
+        <div class="col-md-4 col-sm-6">
+            <div class="counter blue">
+                <span class="counter-value text-light"><i class="fas fa-calendar-check"></i> {{ $completedCount }}</span>
                 <h3>Completed</h3>
             </div>
         </div>
-        <div class="col-md-3 col-sm-6">
-            <div class="counter green">
+        <div class="col-md-4 col-sm-6">
+            <div class="counter ">
                 <span class="counter-value text-danger"><i class="fas fa-calendar-check"></i> {{ $rejectedCount }}</span>
                 <h3>Rejected</h3>
             </div>
