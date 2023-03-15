@@ -50,8 +50,6 @@ background: url('../img/bg-pattern.png?h=88366d218f2eda574d88b27e4cb4169d'), lin
             <a class="nav-link" href="/doctor/clients">Clients</a>
           </li>
 <ul></ul>
-<ul></ul>
-<ul></ul>
 
 <li>
 

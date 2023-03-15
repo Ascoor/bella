@@ -6,7 +6,50 @@
 <link href="{{URL::asset('/css/dash.css')}}" rel="stylesheet">
 <link rel="stylesheet" href="{{ asset('node_modules/@fortawesome/fontawesome-free/css/all.min.css') }}">
 
+<style>
 
+    /*
+*
+* ==========================================
+* CUSTOM UTIL CLASSES
+* ==========================================
+*
+*/
+.collapsible-link {
+    width: 100%;
+    position: relative;
+    text-align: left;
+}
+
+.collapsible-link::before {
+    content: '\f107';
+    position: absolute;
+    top: 50%;
+    right: 0.8rem;
+    transform: translateY(-50%);
+    display: block;
+    font-family: 'FontAwesome';
+    font-size: 1.1rem;
+}
+
+.collapsible-link[aria-expanded='true']::before {
+    content: '\f106';
+}
+
+/*
+*
+* ==========================================
+* FOR DEMO PURPOSES
+* ==========================================
+*
+*/
+body {
+    background: #654ea3;
+    background: -webkit-linear-gradient(to left, #654ea3, #eaafc8);
+    background: linear-gradient(to left, #654ea3, #eaafc8);
+    min-height: 100vh;
+}
+</style>
 @endsection
 @section('page-header')
 
@@ -41,6 +84,13 @@
             </div>
         </div>
     </div>
+
+
+
+
+
+
+        </div>
 
 
 

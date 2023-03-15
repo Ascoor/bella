@@ -1,4 +1,3 @@
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
 
 $(document).ready(function(){
     $('.counter-value').each(function(){
