@@ -61,38 +61,34 @@ background: url('../img/bg-pattern.png?h=88366d218f2eda574d88b27e4cb4169d'), lin
 </li>
 <ul></ul>
 <ul></ul>
-<div class="menu-header-content  text-right">
-<a class="dropdown-item" href="{{ route('doctor_notifications') }}">
-    <i class="feather icon-bell"></i> الإشعارات
-    <span class="badge badge-pill badge-primary">{{ auth()->guard('doctor')->user()->unreadNotifications->count() }}</span>
-</a>
 
 
+<li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <i class="fas fa-bell"></i>
+    <span class="badge bg-danger">{{ auth()->guard('doctor')->user()->unreadNotifications()->count() }}</span>
+  </a>
   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
     <div class="card" style="width: 18rem;">
       <div class="card-header">
         الإشعارات
       </div>
-        <ul class="list-group list-group-flush text-center">
+      <ul class="list-group list-group-flush text-center">
         @forelse(auth()->guard('doctor')->user()->unreadNotifications as $notification)
           <li class="list-group-item">
-            <a href="{{ route('appointments.show', $notification->data['appointment_id']) }}" data-id="{{ $notification->id }}">
-              تم تسجيل جديد من {{ $notification->data['client_name'] }} في يوم {{ $notification->data['appointment_date'] }}
-              @if(isset($notification->data['doctor_name']))
-                مع الطبيب {{ $notification->data['doctor_name'] }}
-    @endif
+            <a href="{{ route('doctor_dashboard.show_appointment', $notification->data['appointment_id']) }}" data-id="{{ $notification->id }}">
+              تم تأكيد حجز جديد من {{ $notification->data['client_name'] }} في يوم {{ $notification->data['appointment_date'] }}
+
             </a>
           </li>
         @empty
           <li class="list-group-item">لا يوجد إشعارات جديدة</li>
         @endforelse
-        </ul>
-      </form>
+
     </div>
   </div>
-</li>
 
-</div>
+
 @endauth
 </ul>
       @if(auth()->guard('doctor')->check())
