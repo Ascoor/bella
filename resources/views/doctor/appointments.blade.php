@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('title')
+الحجوزات
+@stop
 @section('content')
 
 @if($errors->any())
@@ -23,29 +25,32 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 @endif
+<div class="container">
 
-<div class="row">
-    <div class="col-12">
+    <div class="row">
+        <div class="col-12">
         <div class="card mb-3">
             <div class="card-header">
 
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-striped table-hover">
-                        <thead class="table-dark">
-                            <tr>
+                    <table class="table  table-hover">
+                        <thead class="table-danger text-center">
+                            <tr >
                                 <th>#</th>
                                 <th>إسم العميل</th>
-                                <th>تاريخ و موعد الحجز</th>
-                                <th>تأكيد موعد الحجز</th>
-                                <th>الدكتور</th>
+
+                                <th> موعد الحجز</th>
+
                                 <th>حالة الحجز</th>
                                 <th>مشاهدة</th>
-                                <th>العمليات</th>
+
+                                <th>تم</th>
+                                <th>إلغاء</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="text-center">
                             <?php $i = 0; ?> @foreach ($appointments as $item)
                             <?php $i++; ?>
                             <tr>
@@ -54,9 +59,8 @@
 
                                         {{ $item->client->client_name }}
                                 </td>
-                                <td> {{ $item->apt_datetime }} </td>
-                                <td> {{ $item->remarks }} </td>
-                                <td> {{ $item->doctor->name }} </td>
+                                                                <td> {{ $item->remarks }} </td>
+
                                 <td> {{ $item->status }} </td>
 
                                 <td>
@@ -72,7 +76,8 @@
                                             <button type="submit" class="btn btn-primary">Complete</button>
                                         </form>
                                     @endif
-
+                                </td>
+                                <td>
                                     @if($item->status === 'processing')
                                         <form method="POST"
                                             action="{{ route('doctor_dashboard.reject_appointment', ['id' => $item->id]) }}">
@@ -93,6 +98,7 @@
     </div>
 </div>
 
+</div>
 @endsection
 @section('js')
 

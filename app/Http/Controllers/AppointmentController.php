@@ -82,13 +82,15 @@ class AppointmentController extends Controller
      */
     public function listAppointments()
     {
-        // Get all appointments with their associated clients and doctors.
-        $appointments = Appointment::all();
-$doctors = Doctor::all();
-$clients = Client::all();
-        // You can pass data to the appointments list view here, such as the list of appointments.
-        return view('appointment.index',compact('appointments'))->with('doctors',$doctors)->with('clients',$clients);
+        // Get the last appointment with its associated client and doctor.
+        $appointment = Appointment::latest()->first();
+        $doctor = $appointment->doctor;
+        $client = $appointment->client;
+
+        // You can pass data to the appointments list view here, such as the last appointment, doctor, and client.
+        return view('appointment.index',compact('appointment', 'doctor', 'client'));
     }
+
     public function show($id)
     {
         $appointment = Appointment::findOrFail($id);
