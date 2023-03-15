@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Appointment;
 use App\Models\Client;
 use App\Models\Doctor;
+use App\Models\Event;
 use App\Models\Invoice;
 use App\Models\User;
 use App\Notifications\AppointmentCreated;
@@ -143,12 +144,18 @@ $clients = Client::all();
         $appointment->doctor_id = $request->input('doctor_id');
         $appointment->remarks = $request->input('remarks');
 
-        // تحقق من أن حقل remarks ليس فارغًا
+        // Check if the remarks field is not empty
         if (!empty($appointment->remarks)) {
             $appointment->status = 'processing';
             $doctor = Doctor::find($appointment->doctor_id);
-Notification::send($doctor, new AppointmentCreated($appointment));
+            Notification::send($doctor, new AppointmentCreated($appointment));
 
+            // Create a new event
+            $event = new Event();
+            $event->doctor_id = $appointment->doctor_id;
+            $event->client_id = $appointment->client_id;
+            $event->start_datetime = $appointment->apt_datetime;
+             $event->save();
         }
 
         $appointment->edited_by = Auth::id();
@@ -156,6 +163,7 @@ Notification::send($doctor, new AppointmentCreated($appointment));
         session()->flash('edit','تم التعديل بنجاح');
         return redirect()->back();
     }
+
 
     public function store(Request $request)
     {

@@ -18,7 +18,10 @@ class Client extends Model
         return $this->hasMany(Appointment::class);
     }
 
-
+    public function events()
+    {
+        return $this->hasMany(Event::class);
+    }
     // public function routeNotificationForAppointment()
     // {
     //     return $this->phone;

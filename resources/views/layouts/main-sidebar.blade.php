@@ -42,13 +42,8 @@
                 <li class="side-item side-item-category">الحجوزات والفواتير</li>
 
                 <li class="slide">
-                    <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . ($page = '#')) }}"><svg
-                            xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
-                            <path d="M0 0h24v24H0V0z" fill="none" />
-                            <path d="M19 5H5v14h14V5zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z" opacity=".3" />
-                            <path
-                                d="M3 5v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2zm2 0h14v14H5V5zm2 5h2v7H7zm4-3h2v10h-2zm4 6h2v4h-2z" />
-                        </svg><span class="side-menu__label">الحجوزات</span><i class="angle fe fe-chevron-down"></i></a>
+                    <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . ($page = '#')) }}"><svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24" fill="#FFFFFF"><path d="M0 0h24v24H0z" fill="none"/><path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"/></svg>
+<span class="side-menu__label">الحجوزات</span><i class="angle fe fe-chevron-down"></i></a>
                     <ul class="slide-menu">
 
                             <li><a class="slide-item" href="{{ url('/appointments') }}">قائمة الحجوزات</a></li>
@@ -77,9 +72,13 @@
 
                     </ul>
 
-					<li class="slide">
-						<a class="side-menu__item" data-toggle="slide""><svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M19 5H5v14h14V5zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z" opacity=".3"/><path d="M3 5v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2zm2 0h14v14H5V5zm2 5h2v7H7zm4-3h2v10h-2zm4 6h2v4h-2z"/></svg><span class="side-menu__label">الفواتير</span><i class="angle fe fe-chevron-down"></i></a>
-						<ul class="slide-menu">
+                    <li class="slide">
+                    <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . ($page = '#')) }}"><svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
+  <path d="M0 0h24v24H0V0z" fill="none" />
+  <path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 16H6V6h12v12zm-8-8H8v2h2v-2zm0-4H8v2h2V6zm4 4h-2v2h2v-2zm0-4h-2v2h2V6z" />
+</svg>
+<span class="side-menu__label">الفواتير</span><i class="angle fe fe-chevron-down"></i></a>
+      	<ul class="slide-menu">
 							<li><a class="slide-item" href="{{route('invoices.index')}}">قائمة الفواتير</a></li>
 							<li><a class="slide-item" href="{{ url('/' . $page='chart-chartjs') }}">الفواتير المسددة</a></li>
 							<li><a class="slide-item" href="{{ url('/' . $page='chart-echart') }}">الفواتير المسددة جزئيا</a></li>
@@ -91,13 +90,8 @@
 
                 <li class="side-item side-item-category"> إدارة الحسابات</li>
                 <li class="slide">
-                    <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . ($page = '#')) }}"><svg
-                            xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
-                            <path d="M0 0h24v24H0V0z" fill="none" />
-                            <path d="M4 12c0 4.08 3.06 7.44 7 7.93V4.07C7.05 4.56 4 7.92 4 12z" opacity=".3" />
-                            <path
-                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93s3.05-7.44 7-7.93v15.86zm2-15.86c1.03.13 2 .45 2.87.93H13v-.93zM13 7h5.24c.25.31.48.65.68 1H13V7zm0 3h6.74c.08.33.15.66.19 1H13v-1zm0 9.93V19h2.87c-.87.48-1.84.8-2.87.93zM18.24 17H13v-1h5.92c-.2.35-.43.69-.68 1zm1.5-3H13v-1h6.93c-.04.34-.11.67-.19 1z" />
-                        </svg><span class="side-menu__label">المصروفات والإيرادات</span><i class="angle fe fe-chevron-down"></i></a>
+                    <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . ($page = '#')) }}"><svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" width="21" height="21" fill="#ffff" viewBox="0 0 640 512"><path d="M320 144c-53.02 0-96 50.14-96 112 0 61.85 42.98 112 96 112 53 0 96-50.13 96-112 0-61.86-42.98-112-96-112zm40 168c0 4.42-3.58 8-8 8h-64c-4.42 0-8-3.58-8-8v-16c0-4.42 3.58-8 8-8h16v-55.44l-.47.31a7.992 7.992 0 0 1-11.09-2.22l-8.88-13.31a7.992 7.992 0 0 1 2.22-11.09l15.33-10.22a23.99 23.99 0 0 1 13.31-4.03H328c4.42 0 8 3.58 8 8v88h16c4.42 0 8 3.58 8 8v16zM608 64H32C14.33 64 0 78.33 0 96v320c0 17.67 14.33 32 32 32h576c17.67 0 32-14.33 32-32V96c0-17.67-14.33-32-32-32zm-16 272c-35.35 0-64 28.65-64 64H112c0-35.35-28.65-64-64-64V176c35.35 0 64-28.65 64-64h416c0 35.35 28.65 64 64 64v160z"/></svg>
+<span class="side-menu__label">الحسابات</span><i class="angle fe fe-chevron-down"></i></a>
                     <ul class="slide-menu">
 							<li><a class="slide-item" href="{{url('expenses_revenues')}}">قائمة المصروفات والإيرادات</a></li>
 							<li><a class="slide-item" href="{{ route('expenses.index') }}">المصروفات</a></li>
@@ -105,16 +99,29 @@
 
                     </ul>
                 </li>
+                <li class="side-item side-item-category"> إدارة العملاء</li>
+                <li class="slide">
+                    <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . ($page = '#')) }}"><svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
+  <path d="M0 0h24v24H0V0z" fill="none"/>
+  <path d="M19.6 4H4.4C3.17 4 2.16 5.01 2.16 6.24v11.52c0 1.23 1.01 2.24 2.24 2.24h15.12c1.23 0 2.24-1.01 2.24-2.24V6.24c0-1.23-1.01-2.24-2.24-2.24zM12 7.5c1.38 0 2.5 1.12 2.5 2.5s-1.12 2.5-2.5 2.5-2.5-1.12-2.5-2.5 1.12-2.5 2.5-2.5zm6.6 10.24c0 .69-.56 1.24-1.24 1.24H6.64c-.69 0-1.24-.56-1.24-1.24V8.76c0-.69.56-1.24 1.24-1.24h10.72c.69 0 1.24.56 1.24 1.24v8.98z"/>
+</svg>
+<span class="side-menu__label">العملاء</span><i class="angle fe fe-chevron-down"></i></a>
+                    <ul class="slide-menu">
+							<li><a class="slide-item" href="{{url('clients')}}">قائمة العملاء</a></li>
+
+
+                    </ul>
+                </li>
 
                 <li class="side-item side-item-category"> إدارة شئون العاملين</li>
                 <li class="slide">
-                    <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . ($page = '#')) }}"><svg
-                            xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
-                            <path d="M0 0h24v24H0V0z" fill="none" />
-                            <path d="M4 12c0 4.08 3.06 7.44 7 7.93V4.07C7.05 4.56 4 7.92 4 12z" opacity=".3" />
-                            <path
-                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93s3.05-7.44 7-7.93v15.86zm2-15.86c1.03.13 2 .45 2.87.93H13v-.93zM13 7h5.24c.25.31.48.65.68 1H13V7zm0 3h6.74c.08.33.15.66.19 1H13v-1zm0 9.93V19h2.87c-.87.48-1.84.8-2.87.93zM18.24 17H13v-1h5.92c-.2.35-.43.69-.68 1zm1.5-3H13v-1h6.93c-.04.34-.11.67-.19 1z" />
-                        </svg><span class="side-menu__label"> الفريق الطبي</span><i class="angle fe fe-chevron-down"></i></a>
+                    <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . ($page = '#')) }}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="side-menu__icon">
+  <path d="M0 0h24v24H0V0z" fill="none"/>
+  <path d="M13 11v-3h3v-2h-3V3h-2v3H8v2h3v3zm9 9h-6v-2h6v-6h-2V8.08A3.92 3.92 0 0 0 16.08 4H7.92A3.92 3.92 0 0 0 4 8.08v7.84A3.92 3.92 0 0 0 7.92 20h7.84A3.92 3.92 0 0 0 20 16.08V14h2v6z"/>
+
+  <circle cx="22.5" cy="8.5" r="1.5"/>
+</svg>
+<span class="side-menu__label"> الفريق الطبي</span><i class="angle fe fe-chevron-down"></i></a>
 
 					<ul class="slide-menu">
 							<li><a class="slide-item" href="{{route('doctors.index')}}">قائمة الأطباء </a></li>
@@ -148,37 +155,18 @@
 
                 <li class="side-item side-item-category">الاعدادات</li>
                 <li class="slide">
-                    <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . ($page = '#')) }}"><svg
-                            xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" class="side-menu__icon"
-                            viewBox="0 0 24 24">
-                            <g>
-                                <rect fill="none" />
-                            </g>
-                            <g>
-                                <g />
-                                <g>
-                                    <path
-                                        d="M21,5c-1.11-0.35-2.33-0.5-3.5-0.5c-1.95,0-4.05,0.4-5.5,1.5c-1.45-1.1-3.55-1.5-5.5-1.5S2.45,4.9,1,6v14.65 c0,0.25,0.25,0.5,0.5,0.5c0.1,0,0.15-0.05,0.25-0.05C3.1,20.45,5.05,20,6.5,20c1.95,0,4.05,0.4,5.5,1.5c1.35-0.85,3.8-1.5,5.5-1.5 c1.65,0,3.35,0.3,4.75,1.05c0.1,0.05,0.15,0.05,0.25,0.05c0.25,0,0.5-0.25,0.5-0.5V6C22.4,5.55,21.75,5.25,21,5z M3,18.5V7 c1.1-0.35,2.3-0.5,3.5-0.5c1.34,0,3.13,0.41,4.5,0.99v11.5C9.63,18.41,7.84,18,6.5,18C5.3,18,4.1,18.15,3,18.5z M21,18.5 c-1.1-0.35-2.3-0.5-3.5-0.5c-1.34,0-3.13,0.41-4.5,0.99V7.49c1.37-0.59,3.16-0.99,4.5-0.99c1.2,0,2.4,0.15,3.5,0.5V18.5z" />
-                                    <path
-                                        d="M11,7.49C9.63,6.91,7.84,6.5,6.5,6.5C5.3,6.5,4.1,6.65,3,7v11.5C4.1,18.15,5.3,18,6.5,18 c1.34,0,3.13,0.41,4.5,0.99V7.49z"
-                                        opacity=".3" />
-                                </g>
-                                <g>
-                                    <path
-                                        d="M17.5,10.5c0.88,0,1.73,0.09,2.5,0.26V9.24C19.21,9.09,18.36,9,17.5,9c-1.28,0-2.46,0.16-3.5,0.47v1.57 C14.99,10.69,16.18,10.5,17.5,10.5z" />
-                                    <path
-                                        d="M17.5,13.16c0.88,0,1.73,0.09,2.5,0.26V11.9c-0.79-0.15-1.64-0.24-2.5-0.24c-1.28,0-2.46,0.16-3.5,0.47v1.57 C14.99,13.36,16.18,13.16,17.5,13.16z" />
-                                    <path
-                                        d="M17.5,15.83c0.88,0,1.73,0.09,2.5,0.26v-1.52c-0.79-0.15-1.64-0.24-2.5-0.24c-1.28,0-2.46,0.16-3.5,0.47v1.57 C14.99,16.02,16.18,15.83,17.5,15.83z" />
-                                </g>
-                            </g>
-                        </svg><span class="side-menu__label">الاعدادات</span><i class="angle fe fe-chevron-down"></i></a>
+                    <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . ($page = '#')) }}"><svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
+  <path d="M0 0h24v24H0V0z" fill="none"/>
+  <path d="M19.9 12c0-.6-.1-1.1-.2-1.6l1.7-1.3c.2-.2.3-.5.1-.8l-1.7-3c-.2-.4-.6-.6-1-.6H17c-.4 0-.7.2-.9.5L15 6.8c-.2.2-.5.3-.8.1L12.6 5c-.5-.2-1-.2-1.5-.2v2.1c0 .4-.2.8-.5 1L9 9.9c-.2.2-.3.5-.1.8l1.7 3c.2.4.6.6 1 .6h.2c.1.5.2 1 .2 1.6l-1.7 1.3c-.2.2-.3.5-.1.8l1.7 3c.2.4.6.6 1 .6h.2c.4 0 .7-.2.9-.5l1.1-1.6c.2-.2.5-.3.8-.1l2.4 1.7c.4.3.9.3 1.4.3v-2.1c0-.4.2-.8.5-1l1.5-1.1c.2-.2.3-.5.1-.8l-1.7-3c-.3-.3-.7-.5-1.1-.5h-.1z"/>
+  <path d="M12 15.5c1.9 0 3.5-1.6 3.5-3.5s-1.6-3.5-3.5-3.5-3.5 1.6-3.5 3.5 1.6 3.5 3.5 3.5zm0-5.5c1 0 1.9.8 1.9 1.9S13 14.9 12 14.9 10.1 14.1 10.1 13s.8-1.4 1.9-1.4z"/>
+</svg>
+<span class="side-menu__label">الاعدادات</span><i class="angle fe fe-chevron-down"></i></a>
                     <ul class="slide-menu">
 
                             <li><a class="slide-item" href="{{ url('/expense_types') }}">انواع المصروفات</a></li>
                             <li><a class="slide-item" href="{{ url('/income_types') }}">انواع الإيرادات</a></li>
                             <li><a class="slide-item"href="{{ route('services.index') }}"> الخدمات</a></li>
-                            <li><a class="slide-item" href="{{ route('clients.index') }}">العملاء</a></li>
+
                             <li><a class="slide-item" href="{{ route('sections.index') }}">الأقسام </a></li>
 
 

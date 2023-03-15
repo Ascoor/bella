@@ -79,36 +79,7 @@ $(function() {
 				titleFormat: 'MMMM YYYY'
 			}
 		},
-		eventSources: [azCalendarEvents, azBirthdayEvents, azHolidayEvents, azOtherEvents],
-		eventAfterAllRender: function(view) {
-			if (view.name === 'listMonth' || view.name === 'listWeek') {
-				var dates = view.el.find('.fc-list-heading-main');
-				dates.each(function() {
-					var text = $(this).text().split(' ');
-					var now = moment().format('DD');
-					$(this).html(text[0] + '<span>' + text[1] + '</span>');
-					if (now === text[1]) {
-						$(this).addClass('now');
-					}
-				});
-			}
-			console.log(view.el);
-		},
-		eventRender: function(event, element) {
-			if (event.description) {
-				element.find('.fc-list-item-title').append('<span class="fc-desc">' + event.description + '</span>');
-				element.find('.fc-content').append('<span class="fc-desc">' + event.description + '</span>');
-			}
-			var eBorderColor = (event.source.borderColor) ? event.source.borderColor : event.borderColor;
-			element.find('.fc-list-item-time').css({
-				color: eBorderColor,
-				borderColor: eBorderColor
-			});
-			element.find('.fc-list-item-title').css({
-				borderColor: eBorderColor
-			});
-			element.css('borderLeftColor', eBorderColor);
-		},
+
 	});
 	var azCalendar = $('#calendar').fullCalendar('getCalendar');
 	// change view to week when in tablet
