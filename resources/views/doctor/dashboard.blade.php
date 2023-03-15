@@ -3,7 +3,7 @@
 لوحة التحكم الرئيسية
 @stop
 @section('css')
-<link href="{{URL::asset('/css/dash.css')}}" rel="stylesheet">
+
 <link rel="stylesheet" href="{{ asset('node_modules/@fortawesome/fontawesome-free/css/all.min.css') }}">
 
 <style>
@@ -82,14 +82,21 @@ body {
 
 
 
+				<!-- row opened -->
+				<div class="row row-sm row-deck">
+
+							<div class="main-content-body main-content-body-calendar card p-4">
+								<div class="main-calendar" id="calendar"></div>
+							</div>
+						</div>
+					</div>
 
 
-        </div>
 
 
 
 @endsection
 @section('js')
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+
 
 @endsection

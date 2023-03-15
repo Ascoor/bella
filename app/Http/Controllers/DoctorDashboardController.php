@@ -7,6 +7,7 @@ use App\Models\Client;
 use App\Models\Doctor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 
 class DoctorDashboardController extends Controller
 {
@@ -93,5 +94,7 @@ public function markNotificationsAsRead(Request $request)
     Auth::guard('doctor')->user()->unreadNotifications->markAsRead();
     return redirect()->back();
 }
+
+
 
 }

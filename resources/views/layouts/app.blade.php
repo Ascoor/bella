@@ -18,10 +18,12 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/carousel/">
 
     <!-- CSS -->
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.rtl.min.css" integrity="sha384-+qdLaIRZfNu4cVPK/PxJJEy0B0f3Ugv8i482AKY7gwXwhaCroABd086ybrVKTa0q" crossorigin="anonymous">
+    <link href="{{URL::asset('/css/app.css')}}" rel="stylesheet">
   <link href="{{URL::asset('/css/dash.css')}}" rel="stylesheet">
+  <link href="{{URL::asset('assets/plugins/fullcalendar/fullcalendar.min.css')}}" rel="stylesheet">
 
+<!-- Maps css -->
+<link href="{{URL::asset('assets/plugins/jqvmap/jqvmap.min.css')}}" rel="stylesheet">
 
 </head>
 <body>
@@ -89,13 +91,13 @@ background: url('../img/bg-pattern.png?h=88366d218f2eda574d88b27e4cb4169d'), lin
   </div>
 
 
-@endauth
 </ul>
+@endauth
       @if(auth()->guard('doctor')->check())
 
 
           <li class="nav-item">
-              <a class="nav-link">دكتور /{{ auth()->guard('doctor')->user()->name }}</a>
+              <a class="nav-link text-light">دكتور /{{ auth()->guard('doctor')->user()->name }}</a>
             </li>
 
           @endauth
@@ -139,16 +141,33 @@ background: url('../img/bg-pattern.png?h=88366d218f2eda574d88b27e4cb4169d'), lin
             @yield('content')
         </main>
     </div>
-     <!-- Optional JavaScript; choose one of the two! -->
-    <script src="{{URL::asset('js/dash.js')}}"></script>
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <!--
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
--->
-    <!-- Option 2: Separate Popper and Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+     <!-- Optional JavaScript; choose one of the two! -->
+     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Moment js -->
+<script src="{{URL::asset('assets/plugins/raphael/raphael.min.js')}}"></script>
+
+
+<!--Internal Apexchart js-->
+<script src="{{URL::asset('assets/js/apexcharts.js')}}"></script>
+<!-- moomet min js -->
+<script src="{{URL::asset('assets/plugins/moment/min/moment.min.js')}}"></script>
+<!--Internal  Date picker js -->
+<script src="{{URL::asset('assets/plugins/jquery-ui/ui/widgets/datepicker.js')}}"></script>
+<!--Internal  Fullcalendar js -->
+<script src="{{URL::asset('assets/plugins/fullcalendar/fullcalendar.min.js')}}"></script>
+<!-- Internal Select2.full.min js -->
+<script src="{{URL::asset('assets/plugins/select2/js/select2.full.min.js')}}"></script>
+<!--Internal App calendar js -->
+<script src="{{URL::asset('assets/js/app-calendar-events.js')}}"></script>
+<script src="{{URL::asset('assets/js/doc-calendar.js')}}"></script>
+<script src="{{URL::asset('assets/js/modal-popup.js')}}"></script>
+<!--Internal  index js -->
+
+    <script src="{{URL::asset('js/app.js')}}"></script>
+    <script src="{{URL::asset('js/dash.js')}}"></script>
+
 
 </body>
 

@@ -9,6 +9,7 @@ use App\Http\Controllers\AssestController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\DoctorAuthController;
 use App\Http\Controllers\DoctorDashboardController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\InvoicesDetailsController;
 use App\Http\Controllers\NotificationController;
@@ -67,9 +68,10 @@ Route::post('/submit', [AppointmentController::class, 'submitForm'])->name('appo
             Route::get('/doctor/mark-notifications-as-read', [DoctorDashboardController::class, 'markNotificationsAsRead'])->name('doctor.markNotificationsAsRead');
 
             Route::put('/doctor/reject_appointment/{id}', [DoctorDashboardController::class, 'rejectAppointment'])->name('doctor_dashboard.reject_appointment');
-    Route::get('/doctor_dashboard/show_appointment/{id}', [DoctorDashboardController::class, 'showAppointment'])->name('doctor_dashboard.show_appointment');
+            Route::get('/doctor_dashboard/show_appointment/{id}', [DoctorDashboardController::class, 'showAppointment'])->name('doctor_dashboard.show_appointment');
         });
     });
+    Route::get('/events', [EventController::class, 'index']);
 
 Auth::routes();
 
