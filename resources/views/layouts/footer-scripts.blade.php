@@ -1,10 +1,5 @@
 <a href="#top" id="back-to-top"><i class="las la-angle-double-up"></i></a>
 
-<!-- PerfectScrollbar CSS -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.5.2/css/perfect-scrollbar.min.css" />
-
-<!-- Select2 CSS -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" />
 
 <!-- jQuery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
