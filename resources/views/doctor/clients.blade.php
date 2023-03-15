@@ -13,9 +13,6 @@
             <div class="card-header pb-0">
                 <div class="d-flex justify-content-between">
 
-                        <a class="modal-effect btn btn-outline-primary btn-block" data-effect="effect-scale"
-                            data-toggle="modal" href="#modaldemo8">اضافة عميل</a>
-
                 </div>
 
             </div>
@@ -42,11 +39,11 @@
                                     <td>{{ $x->address }}</td>
                                     <td>{{ $x->client_phone }}</td>
                                     <td>
-
+<!--
                                             <a class="modal-effect btn btn-sm btn-info" data-effect="effect-scale"
                                                 data-id="{{ $x->id }}" data-client_name="{{ $x->client_name }}"
                                                 data-address="{{ $x->address }}"    data-client_phone="{{ $x->client_phone }}"  data-email="{{ $x->email }}"      data-note="{{ $x->note }}" data-toggle="modal"
-                                                href="#exampleModal2" title="تعديل"><i class="las la-pen"></i></a>
+                                                href="#exampleModal2" title="تعديل"><i class="las la-pen"></i></a> -->
 
 
                                     </td>
