@@ -1,18 +1,7 @@
-<a href="#top" id="back-to-top"><i class="las la-angle-double-up"></i></a>
-
-
-<!-- jQuery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
-<!-- PerfectScrollbar JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.5.2/perfect-scrollbar.min.js"></script>
-
-<!-- Select2 JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-
 <!-- Back-to-top -->
+<a href="#top" id="back-to-top"><i class="las la-angle-double-up"></i></a>
 <!-- JQuery min js -->
-<!-- <script src="{{URL::asset('assets/plugins/jquery/jquery.min.js')}}"></script> -->
+<script src="{{URL::asset('assets/plugins/jquery/jquery.min.js')}}"></script>
 <!-- Bootstrap Bundle js -->
 <script src="{{URL::asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- Ionicons js -->
@@ -25,7 +14,7 @@
 <script src="{{URL::asset('assets/plugins/rating/jquery.barrating.js')}}"></script>
 
 <!--Internal  Perfect-scrollbar js -->
-<!-- <script src="{{URL::asset('assets/plugins/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script> -->
+<script src="{{URL::asset('assets/plugins/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>
 <script src="{{URL::asset('assets/plugins/perfect-scrollbar/p-scroll.js')}}"></script>
 <!--Internal Sparkline js -->
 <script src="{{URL::asset('assets/plugins/jquery-sparkline/jquery.sparkline.min.js')}}"></script>
