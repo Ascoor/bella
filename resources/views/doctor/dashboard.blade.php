@@ -4,7 +4,7 @@
 @stop
 @section('css')
 
-<link rel="stylesheet" href="{{ asset('node_modules/@fortawesome/fontawesome-free/css/all.min.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/@fortawesome/fontawesome-free/css/all.min.css') }}">
 
 <style>
 

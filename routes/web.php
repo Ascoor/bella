@@ -3,6 +3,7 @@
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ClientHistoryController;
 use App\Http\Controllers\AppointmentController;
 
 use App\Http\Controllers\AssestController;
@@ -35,17 +36,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/ww', function () {
-    return view('thanks', [
-        'appointments' => Appointment::all(),
-    ]);
+// Route::get('/ww', function () {
+//     return view('thanks', [
+//         'appointments' => Appointment::all(),
+//     ]);
 
-});
+// });
 Route::get('/', function () {
     return view('welcome', [        'doctors' => Doctor::all(),    ]);
 });
 
-Route::post('/submit', [AppointmentController::class, 'submitForm'])->name('appointments.submitForm');
+Route::post('/submit', [ClientAppointmentController::class, 'submitForm'])->name('appointments.submitForm');
 
 // define routes for doctor's dashboard
     Route::prefix('doctor')->group(function () {
@@ -63,12 +64,15 @@ Route::post('/submit', [AppointmentController::class, 'submitForm'])->name('appo
             Route::get('/dashboard',[DoctorDashboardController::class ,'index'])->name('doctor.dashboard');
             Route::get('/appointments',[DoctorDashboardController::class ,'appointments'])->name('doctor.appointments');
             Route::get('/clients',[DoctorDashboardController::class ,'clients'])->name('doctor.clients');
+            Route::get('/clients/history',[ClientHistoryController::class ,'show'])->name('client.history');
+            Route::resource('client-history', ClientHistoryController::class);
 
             Route::put('/doctor/complete_appointment/{id}', [DoctorDashboardController::class, 'completeAppointment'])->name('doctor_dashboard.complete_appointment');
             Route::get('/doctor/mark-notifications-as-read', [DoctorDashboardController::class, 'markNotificationsAsRead'])->name('doctor.markNotificationsAsRead');
 
             Route::put('/doctor/reject_appointment/{id}', [DoctorDashboardController::class, 'rejectAppointment'])->name('doctor_dashboard.reject_appointment');
             Route::get('/doctor_dashboard/show_appointment/{id}', [DoctorDashboardController::class, 'showAppointment'])->name('doctor_dashboard.show_appointment');
+            Route::post('/doctor_dashboard/update_appointment/{id}', [DoctorDashboardController::class, 'updateAppointment'])->name('doctor.appointment.update');
         });
     });
     Route::get('/events', [EventController::class, 'index']);

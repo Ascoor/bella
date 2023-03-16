@@ -6,7 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\IncomeType;
 
 class IncomeTypeController extends Controller
-{
+{   public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         $incomeTypes = IncomeType::all();

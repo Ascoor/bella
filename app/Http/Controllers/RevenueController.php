@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Auth;
 
 class RevenueController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         $revenues = Revenue::all();

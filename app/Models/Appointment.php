@@ -21,7 +21,10 @@ use Notifiable;
         return $this->belongsTo(Doctor::class);
     }
 
-
+    public function services()
+    {
+        return $this->belongsToMany(Service::class);
+    }
 
 }
 

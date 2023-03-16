@@ -10,6 +10,7 @@ use PhpParser\Node\Expr\Eval_;
 
 class EventController extends Controller
 {
+
 public function index(Request $request)
 {
     $doctor_id = $request->input('doctor_id');

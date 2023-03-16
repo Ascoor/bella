@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Http;
 
 class DoctorDashboardController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
 
@@ -64,11 +68,39 @@ public function clients()
 }
 public function showAppointment($id)
 {
-    $appointment = Appointment::find($id);
-    // Do any additional processing you need with the appointment data
-    return view('doctor.appointment_show', compact('appointment'));
+    $appointment = Appointment::findOrFail($id);
+    $doctor = $appointment->doctor;
+    $section = $doctor->section;
+
+    // Get the services that belong to the doctor's section
+    $services = $section->services;
+
+    return view('doctor.appointment_show', compact('appointment', 'services'));
 }
 
+
+public function updateAppointment(Request $request, $id)
+{
+    $appointment = Appointment::findOrFail($id);
+
+
+
+    $validatedData = $request->validate([
+        'services' => 'nullable|array',
+        'services.*' => 'exists:services,id',
+        // Other validation rules for other appointment attributes here
+    ]);
+
+    $appointment->update($validatedData);
+
+    // Attach the selected services to the appointment
+    if (!empty($request->services)) {
+        $appointment->services()->sync($request->services);
+    }
+
+    session()->flash('success', 'Appointment updated successfully.');
+    return redirect()->back();
+}
 
 public function completeAppointment($id)
 {

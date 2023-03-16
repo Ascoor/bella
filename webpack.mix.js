@@ -11,9 +11,11 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
+
+    mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/dash.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
     .css('resources/css/app.css', 'public/css')
     .css('resources/css/dashboard.css', 'public/css')
+    .css('resources/css/client-history.css', 'public/css')
     .sourceMaps();
