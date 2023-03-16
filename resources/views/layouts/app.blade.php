@@ -94,8 +94,8 @@ background: url('../img/bg-pattern.png?h=88366d218f2eda574d88b27e4cb4169d'), lin
   </div>
 
 
+  @endauth
 </ul>
-@endauth
       @if(auth()->guard('doctor')->check())
 
 
