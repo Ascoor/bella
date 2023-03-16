@@ -72,6 +72,7 @@ Route::post('/submit', [AppointmentController::class, 'submitForm'])->name('appo
         });
     });
     Route::get('/events', [EventController::class, 'index']);
+    Route::get('/events/list', [EventController::class, 'list']);
 
 Auth::routes();
 

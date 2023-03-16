@@ -153,7 +153,7 @@ $clients = Client::all();
               $event = new Event();
               $event->doctor_id = $appointment->doctor_id;
               $event->client_id = $appointment->client_id;
-              $event->start_datetime = $appointment->apt_datetime;
+              $event->start_datetime = $appointment->remarks;
                $event->save();
 
         }

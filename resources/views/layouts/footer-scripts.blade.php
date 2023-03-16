@@ -1,18 +1,28 @@
 <!-- Back-to-top -->
 <a href="#top" id="back-to-top"><i class="las la-angle-double-up"></i></a>
 <!-- JQuery min js -->
-<script src="{{URL::asset('assets/plugins/jquery/jquery.min.js')}}"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- Bootstrap Bundle js -->
 <script src="{{URL::asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- Ionicons js -->
 <script src="{{URL::asset('assets/plugins/ionicons/ionicons.js')}}"></script>
-<!-- Moment js -->
-<script src="{{URL::asset('assets/plugins/moment/moment.js')}}"></script>
 
+    <!-- moomet min js -->
+    <script src="{{ URL::asset('assets/plugins/moment/min/moment.min.js') }}"></script>
+    <!--Internal  Date picker js -->
+    <script src="{{ URL::asset('assets/plugins/jquery-ui/ui/widgets/datepicker.js') }}">
+    </script>
+    <!--Internal  Fullcalendar js -->
+    <script src="{{ URL::asset('assets/plugins/fullcalendar/fullcalendar.min.js') }}">
+    </script>
 <!-- Rating js-->
 <script src="{{URL::asset('assets/plugins/rating/jquery.rating-stars.js')}}"></script>
 <script src="{{URL::asset('assets/plugins/rating/jquery.barrating.js')}}"></script>
 
+    <!--Internal App calendar js -->
+    <script src="{{ URL::asset('assets/js/app-calendar-events.js') }}"></script>
+    <script src="{{ URL::asset('assets/js/doc-calendar.js') }}"></script>
+    <script src="{{ URL::asset('assets/js/modal-popup.js') }}"></script>
 <!--Internal  Perfect-scrollbar js -->
 <script src="{{URL::asset('assets/plugins/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>
 <script src="{{URL::asset('assets/plugins/perfect-scrollbar/p-scroll.js')}}"></script>

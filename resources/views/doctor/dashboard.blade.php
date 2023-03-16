@@ -78,10 +78,7 @@ body {
             </div>
         </div>
     </div>
-
-
-
-
+</div>
 				<!-- row opened -->
 				<div class="row row-sm row-deck">
 

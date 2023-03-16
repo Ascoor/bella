@@ -114,11 +114,7 @@
 								<div class="main-calendar" id="calendar"></div>
 							</div>
 						</div>
-					</div>
-				<!-- /row -->
-			</div>
-		</div>
-		<!-- Container closed -->
+
 @endsection
 @section('js')
 <!--Internal  Chart.bundle js -->
@@ -142,7 +138,7 @@
 <!-- Internal Select2.full.min js -->
 <script src="{{URL::asset('assets/plugins/select2/js/select2.full.min.js')}}"></script>
 <!--Internal App calendar js -->
-<script src="{{URL::asset('assets/js/app-calendar-events.js')}}"></script>
+
 <script src="{{URL::asset('assets/js/app-calendar.js')}}"></script>
 <script src="{{URL::asset('assets/js/modal-popup.js')}}"></script>
 <!--Internal  index js -->

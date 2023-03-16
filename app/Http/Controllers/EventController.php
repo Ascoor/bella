@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Doctor;
 use App\Models\Client;
 use App\Models\Event;
+use PhpParser\Node\Expr\Eval_;
 
 class EventController extends Controller
 {
@@ -28,5 +29,13 @@ public function index(Request $request)
     return response()->json(['events' => $events]);
 }
 
+
+public function list(Request $request)
+{
+    $events = Event::all();
+
+    // Return the events data as JSON
+    return response()->json(['events' => $events]);
+}
 }
 
