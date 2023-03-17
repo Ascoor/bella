@@ -27,61 +27,62 @@
 <link href="{{URL::asset('assets/plugins/jqvmap/jqvmap.min.css')}}" rel="stylesheet">
 
 </head>
-<body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="
-background: url('../img/bg-pattern.png?h=88366d218f2eda574d88b27e4cb4169d'), linear-gradient(to left, #7b4397, #130e2d)">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="{{ url('/doctor/dashboard') }}">
-        <img src="/img/logo.png" alt="" width="150" height="80" class="d-inline-block align-text-top">
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          @auth
-
-
-          <li class="nav-item">
-            <a class="nav-link" href="/doctor/dashboard">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/doctor/appointments">Appointments</a>
-          </li>
-          <li class="nav-item dropdown">
-  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Clients
+<body><nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background: url('../img/bg-pattern.png?h=88366d218f2eda574d88b27e4cb4169d'), linear-gradient(to left, #7b4397, #130e2d)">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{{ url('/doctor/dashboard') }}">
+      <img src="/img/logo.png" alt="" width="150" height="80" class="d-inline-block align-text-top">
     </a>
-    <div class="dropdown-menu text-center bg-gray" aria-labelledby="clientsDropdown">
-        <a class="dropdown-item" href="/doctor/clients">Your Clients</a>
-        <a class="dropdown-item" href="{{ route('client-history.index') }}">Bella Client</a>
-    </div>
+
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse " id="navbarNav">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        @auth
+        <li class="nav-item">
+          <a class="nav-link text-bold" href="/doctor/dashboard">Home</a>
+        </li>
+        <li class="nav-item text-bold">
+          <a class="nav-link" href="/doctor/appointments">Appointments</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-bold" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Clients
+          </a>
+          <div class="dropdown-menu text-center bg-gray" aria-labelledby="clientsDropdown">
+            <a class="dropdown-item" href="/doctor/clients">Your Clients</a>
+            <a class="dropdown-item" href="{{ route('client-history.index') }}">Bella Client</a>
+          </div>
+        </li>
+
+
+        </ul>
+
+
+
 </li>
 
+<ul>
+<form class="d-flex ms-auto"> <!-- Move the form to the right side -->
+          <input class="form-control me-5" type="search"  aria-label="search">
 
 
-<li>
+          <button class="btn btn-outline-warning" type="submit">Search</button>
+        </form>
+</ul>
+<ul>
 
-    <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-warning" type="submit">Search</button>
-    </form>
-
-</li>
-<ul></ul>
-<ul></ul>
-
-
-<li class="nav-item dropdown">
-  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    <i class="fas fa-bell"></i>
-    <span class="badge bg-danger">{{ auth()->guard('doctor')->user()->unreadNotifications()->count() }}</span>
-  </a>
+    </ul>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-bell"></i>
+            <span class="badge bg-danger">{{ auth()->guard('doctor')->user()->unreadNotifications()->count() }}</span>
+        </a>
   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-    <div class="card" style="width: 18rem;">
-      <div class="card-header">
-        الإشعارات
+      <div class="card" style="width: 18rem;">
+        <div class="card-header">
+            الإشعارات
       </div>
       <ul class="list-group list-group-flush text-center">
       @foreach (auth()->guard('doctor')->user()->unreadNotifications as $notification) <a class="d-flex p-3 border-bottom notification-item" href="{{ route('doctor_dashboard.show_appointment', $notification->data['appointment_id']) }}" data-id="{{ $notification->id }}">
@@ -108,11 +109,11 @@ background: url('../img/bg-pattern.png?h=88366d218f2eda574d88b27e4cb4169d'), lin
 
 
           <li class="nav-item">
-              <a class="nav-link text-light">دكتور /{{ auth()->guard('doctor')->user()->name }}</a>
+              <a class="nav-link text-bold text-light">دكتور /{{ auth()->guard('doctor')->user()->name }}</a>
             </li>
 
           @endauth
-        </ul>
+
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <!-- Authentication Links -->
           @guest
