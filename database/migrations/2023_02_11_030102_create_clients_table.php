@@ -17,6 +17,9 @@ class CreateClientsTable extends Migration
             $table->bigIncrements('id');
             $table->string('client_name');
             $table->string('email')->nullable();
+            $table->enum('gender', ['male', 'female'])->nullable();
+            $table->string('pid')->nullable();
+            $table->date('birthdate')->nullable();
             $table->string('client_phone');
             $table->string('note')->nullable();
             $table->string('address')->nullable();;

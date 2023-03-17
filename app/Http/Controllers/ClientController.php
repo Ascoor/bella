@@ -42,32 +42,27 @@ class ClientController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        $validatedData = $request->validate([
-            'client_name' => 'required',
-            'client_phone' => 'required',
+{
+    $validatedData = $request->validate([
+        'client_name' => 'required',
+        'client_phone' => 'required',
+    ]);
 
-        ]);
-        $client = Client::create([
+    $client = Client::create([
+        'client_name' => $request->client_name,
+        'email' => $request->email,
+        'client_phone' => $request->client_phone,
+        'note' => $request->note,
+        'address' => $request->address,
+        'pid' => $request->pid,
+        'gender' => $request->gender,
+        'birthdate' => $request->birthdate,
+    ]);
 
-            'client_name' => $request->client_name,
+    session()->flash('Add','تم إضافة العميل بنجاح');
+    return redirect()->back();
 
-
-            'email' => $request->email,
-            'client_phone' => $request->client_phone,
-            'note' => $request->note,
-            'address' => $request->address,
-
-
-
-
-        ]);
-
-
-
-        session()->flash('Add','تم إضافة العميل بنجاح');
-        return redirect()->route('clients.index');
-    }
+}
 
     /**
      * Display the specified resource.
@@ -97,16 +92,16 @@ class ClientController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Client  $client
      * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        $id = $request->input('id');
-        $client = Client::find($id);
-        $client->update($request->all());
-        session()->flash('edit','تم تحديث بيانات العميل بنجاح');
-            return redirect()->route('clients.index');
+     */public function update(Request $request, $id)
+{        $id = $request->input('id');
+    $client = Client::find($id);
+    $client->update($request->all());
 
-    }
+
+    session()->flash('edit','تم تحديث بيانات العميل بنجاح');
+    return redirect()->back();
+}
+
 
     /**
      * Remove the specified resource from storage.

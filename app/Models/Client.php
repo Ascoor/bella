@@ -10,7 +10,7 @@ class Client extends Model
     use HasFactory;
     use Notifiable;
     protected $fillable = [
-        'client_name', 'email', 'client_phone','note','address','note'
+        'client_name','gender','birthdate','pid', 'email', 'client_phone','note','address','note'
     ];
 
     public function appointments()

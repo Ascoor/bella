@@ -95,24 +95,38 @@
                             @foreach ($clients as $x)
                                 <?php $i++; ?>
                                 <tr>
-                                    <td>{{ $i }}</td>
-                                    <td>{{ $x->client_name }}</td>
-                                    <td>{{ $x->address }}</td>
-                                    <td>{{ $x->client_phone }}</td>
+                                <td>{{ $i }}</td>
+                                <td><a href="#" data-id="{{ $x->id }}" data-client_name="{{ $x->client_name }}" data-birthdate="{{ $x->birthdate }}"
+    data-gender="{{ $x->gender }}" data-address="{{ $x->address }}" data-client_phone="{{ $x->client_phone }}"
+    data-email="{{ $x->email }}" data-note="{{ $x->note }}"   data-pid="{{ $x->pid }}"
+    data-toggle="modal" data-target="#showModal" class="client-name-btn">{{ $x->client_name }}</a>
+</td>
+
+            <td>{{ $x->address }}</td>
+            <td>{{ $x->client_phone }}</td>
+
+
                                     <td>
+                                    <a class="modal-effect btn btn-sm btn-info" data-effect="effect-scale"
+   data-id="{{ $x->id }}"
+   data-client_name="{{ $x->client_name }}"
+   data-birthdate="{{ $x->birthdate }}"
+   data-address="{{ $x->address }}"
+   data-client_phone="{{ $x->client_phone }}"
+   data-email="{{ $x->email }}"
+   data-note="{{ $x->note }}"
+   data-pid="{{ $x->pid }}"
+   data-gender="{{ $x->gender }}"
+   data-toggle="modal" href="#exampleModal2" title="تعديل">
+   <i class="las la-pen"></i> تعديل
+</a>
 
-                                            <a class="modal-effect btn btn-sm btn-info" data-effect="effect-scale"
-                                                data-id="{{ $x->id }}" data-client_name="{{ $x->client_name }}"
-                                                data-address="{{ $x->address }}"    data-client_phone="{{ $x->client_phone }}"  data-email="{{ $x->email }}"      data-note="{{ $x->note }}" data-toggle="modal"
-                                                href="#exampleModal2" title="تعديل"><i class="las la-pen"></i></a>
-
-
-
-                                            <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
-                                                data-id="{{ $x->id }}" data-client_name="{{ $x->client_name }}"
-                                                data-toggle="modal" href="#modaldemo9" title="حذف"><i
-                                                    class="las la-trash"></i></a>
-
+                </a>
+                <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
+                   data-id="{{ $x->id }}" data-client_name="{{ $x->client_name }}"
+                   data-toggle="modal" href="#modaldemo9" title="حذف">
+                   <i class="las la-trash"></i>
+                </a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -123,52 +137,116 @@
         </div>
     </div>
 
-
-    <div class="modal" id="modaldemo8">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content modal-content-demo">
-                <div class="modal-header">
-                    <h6 class="modal-title">اضافة عميل</h6><button aria-label="Close" class="close" data-dismiss="modal"
-                        type="button"><span aria-hidden="true">&times;</span></button>
+    <div class="modal fade" id="showModal" tabindex="-1" role="dialog" aria-labelledby="showModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="showModalLabel">عرض بيانات العميل</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="client_name">اسم العميل</label>
+                    <input type="text" class="form-control" id="client_name" name="client_name" disabled>
                 </div>
-                <div class="modal-body">
-                    <form action="{{ route('clients.store') }}" method="post">
-                        {{ csrf_field() }}
-
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">اسم العميل</label>
-                            <input type="text" class="form-control" id="client_name" name="client_name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">البريد الإلكتروني</label>
-                            <input type="text" class="form-control" id="email" name="email">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">العنوان</label>
-                            <input type="text" class="form-control" id="address" name="address">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">رقم الجوال</label>
-                            <input type="text" class="form-control" id="client_phone" name="client_phone" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="exampleFormControlTextarea1">ملاحظات</label>
-                            <textarea class="form-control" id="note" name="note" rows="3"></textarea>
-                        </div>
-
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-success">تاكيد</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">اغلاق</button>
-                        </div>
-                    </form>
+                <div class="form-group">
+                    <label for="email">البريد الإلكتروني</label>
+                    <input type="text" class="form-control" id="email" name="email" disabled>
                 </div>
+                <div class="form-group">
+                    <label for="address">العنوان</label>
+                    <input type="text" class="form-control" id="address" name="address" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="client_phone">رقم الجوال</label>
+                    <input type="tel" class="form-control" id="client_phone" name="client_phone" disabled>
+                </div>
+                <div class="form-group">
+                        <label for="pid">رقم الهوية / الإقامة</label>
+                        <input type="text" class="form-control" id="pid" name="pid" readonly>
+                    </div>
+                <div class="form-group">
+                    <label for="client_phone">السن</label>
+                    <input type="number" class="form-control" id="age"  disabled>
+                </div>
+                <div class="form-group">
+                    <label for="note">ملاحظات</label>
+                    <textarea class="form-control" id="note" name="note" rows="3" disabled></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">اغلاق</button>
             </div>
         </div>
     </div>
 </div>
 
+    <div class="modal" id="modaldemo8">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content modal-content-demo">
+            <div class="modal-header">
+                <h6 class="modal-title">اضافة عميل</h6><button aria-label="Close" class="close" data-dismiss="modal"
+                    type="button"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('clients.store') }}" method="post">
+                    {{ csrf_field() }}
+
+                    <div class="form-group">
+                        <label for="client_name">اسم العميل</label>
+                        <input type="text" class="form-control" id="client_name" name="client_name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">البريد الإلكتروني</label>
+                        <input type="text" class="form-control" id="email" name="email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address">العنوان</label>
+                        <input type="text" class="form-control" id="address" name="address">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="client_phone">رقم الجوال</label>
+                        <input type="tel" class="form-control" id="client_phone" name="client_phone" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pid">رقم الهوية / الإقامة</label>
+                        <input type="text" class="form-control" id="pid" name="pid">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="gender">الجنس</label>
+                        <select class="form-control" id="gender" name="gender">
+                            <option value="male">ذكر</option>
+                            <option value="female">أنثى</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="birthdate">تاريخ الميلاد</label>
+                        <input type="date" class="form-control" id="birthdate" name="birthdate">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="note">ملاحظات</label>
+                        <textarea class="form-control" id="note" name="note" rows="3"></textarea>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">تاكيد</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">اغلاق</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
+
         <!-- End Basic modal -->
 
 
@@ -178,18 +256,20 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">تعديل القسم</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">تعديل ييانات العميل</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
 
-                    <form action="clients/update" method="post" autocomplete="off">
-                        {{ method_field('patch') }}
-                        {{ csrf_field() }}
+                <div class="modal-body">
+                <form action="/clients/update" method="post">
+    {{ method_field('patch') }}
+    {{ csrf_field() }}
                         <div class="form-group">
                             <input type="hidden" name="id" id="id" value="">
+
                                       <label for="exampleInputEmail1">اسم العميل</label>
                             <input type="text" class="form-control" id="client_name" name="client_name" required>
                         </div>
@@ -207,6 +287,24 @@
                         </div>
 
                         <div class="form-group">
+                        <label for="pid">رقم الهوية / الإقامة</label>
+                        <input type="number" class="form-control" id="pid" name="pid">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="gender">الجنس</label>
+                        <select class="form-control" id="gender" name="gender">
+                            <option value="male">ذكر</option>
+                            <option value="female">أنثى</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="birthdate">تاريخ الميلاد</label>
+                        <input type="date" class="form-control" id="birthdate" name="birthdate">
+                    </div>
+
+                        <div class="form-group">
                             <label for="exampleFormControlTextarea1">ملاحظات</label>
                             <textarea class="form-control" id="note" name="note" rows="3"></textarea>
                         </div>
@@ -220,6 +318,8 @@
             </div>
         </div>
     </div>
+    </div>
+
     <!-- delete -->
     <div class="modal" id="modaldemo9">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -245,7 +345,7 @@
         </div>
     </div>
     </div>
-</div>
+
 
 
 
@@ -278,26 +378,69 @@
 <script src="{{ URL::asset('assets/js/table-data.js') }}"></script>
 <script src="{{ URL::asset('assets/js/modal.js') }}"></script>
 
+
 <script>
     $('#exampleModal2').on('show.bs.modal', function(event) {
-        var button = $(event.relatedTarget)
-        var id = button.data('id')
-        var client_name = button.data('client_name')
-        var client_phone = button.data('client_phone')
-        var address = button.data('address')
-        var note = button.data('note')
-        var email = button.data('email')
-        var modal = $(this)
+    var button = $(event.relatedTarget);
+    var id = button.data('id');
+    var client_name = button.data('client_name');
+    var client_phone = button.data('client_phone');
+    var address = button.data('address');
+    var note = button.data('note');
+    var email = button.data('email');
+    var gender = button.data('gender');
+    var birthdate = button.data('birthdate');
+    var pid = button.data('pid');
+    var modal = $(this);
+    modal.find('.modal-body #id').val(id);
+    modal.find('.modal-body #client_name').val(client_name);
+    modal.find('.modal-body #note').val(note);
+    modal.find('.modal-body #client_phone').val(client_phone);
+    modal.find('.modal-body #email').val(email);
+    modal.find('.modal-body #address').val(address);
+    modal.find('.modal-body #gender').val(gender);
+    modal.find('.modal-body #birthdate').val(birthdate);
+    modal.find('.modal-body #pid').val(pid);
+});
+
+$('#exampleModal2').on('hidden.bs.modal', function() {
+    $(this).find('#edit-form').trigger('reset');
+});
+
+</script><script>
+    $('#showModal').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget);
+        var id = button.data('id');
+        var client_name = button.data('client_name');
+        var client_phone = button.data('client_phone');
+        var address = button.data('address');
+        var note = button.data('note');
+        var email = button.data('email');
+        var gender = button.data('gender');
+        var birthdate = new Date(button.data('birthdate'));
+        var pid = button.data('pid');
+        var modal = $(this);
+
+        // Calculate age
+        var today = new Date();
+        var age = today.getFullYear() - birthdate.getFullYear();
+        var m = today.getMonth() - birthdate.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthdate.getDate())) {
+            age--;
+        }
+
         modal.find('.modal-body #id').val(id);
         modal.find('.modal-body #client_name').val(client_name);
         modal.find('.modal-body #note').val(note);
         modal.find('.modal-body #client_phone').val(client_phone);
         modal.find('.modal-body #email').val(email);
         modal.find('.modal-body #address').val(address);
-    })
-
+        modal.find('.modal-body #gender').val(gender);
+        modal.find('.modal-body #birthdate').val(birthdate.toISOString().split('T')[0]); // Set birthdate in ISO format
+        modal.find('.modal-body #age').val(age);
+        modal.find('.modal-body #pid').val(pid);
+    });
 </script>
-
 <script>
     $('#modaldemo9').on('show.bs.modal', function(event) {
         var button = $(event.relatedTarget)
@@ -309,5 +452,4 @@
     })
 
 </script>
-
 @endsection
