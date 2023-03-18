@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Appointment;
 use App\Models\Client;
-use App\Models\Notification;
+use Illuminate\Support\Facades\Notification;
 use App\Models\User;
 use App\Notifications\AppointmentCreated;
 use Illuminate\Http\Request;
