@@ -14,15 +14,8 @@ use Illuminate\Support\Facades\Storage;
 use InvoiceAttachment;
 
 class InvoiceController extends Controller
-{  
-    
-    
-    
-    
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+{
+
     /**
      * Display a listing of the invoices.
      *
