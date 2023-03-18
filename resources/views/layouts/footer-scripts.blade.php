@@ -1,8 +1,10 @@
 <!-- Back-to-top -->
 <a href="#top" id="back-to-top"><i class="las la-angle-double-up"></i></a>
 <!-- JQuery min js -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- Bootstrap Bundle js -->
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+<!-- Bootstrap Bundle js --><script src="{{ URL::asset('assets/plugins/select2/js/select2.min.js') }}"></script>
+
 <script src="{{URL::asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- Ionicons js -->
 <script src="{{URL::asset('assets/plugins/ionicons/ionicons.js')}}"></script>

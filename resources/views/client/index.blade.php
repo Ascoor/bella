@@ -1,5 +1,7 @@
 @extends('layouts.master')
 @section('css')
+<link href="{{ URL::asset('assets/plugins/select2/css/select2.min.css') }}"
+    rel="stylesheet">
 <!-- Internal Data table css -->
 <link
     href="{{ URL::asset('assets/plugins/datatable/css/dataTables.bootstrap4.min.css') }}"
@@ -13,8 +15,6 @@
     rel="stylesheet">
 <link
     href="{{ URL::asset('assets/plugins/datatable/css/responsive.dataTables.min.css') }}"
-    rel="stylesheet">
-<link href="{{ URL::asset('assets/plugins/select2/css/select2.min.css') }}"
     rel="stylesheet">
 @section('title')
 العملاء
@@ -105,13 +105,14 @@
                                     <?php $i++; ?>
                                     <tr>
                                         <td>{{ $i }}</td>
-                                        <td><a href="#" data-id="{{ $x->id }}"
-                                                data-client_name="{{ $x->client_name }}"
-                                                data-birthdate="{{ $x->birthdate }}" data-gender="{{ $x->gender }}"
-                                                data-address="{{ $x->address }}"
-                                                data-client_phone="{{ $x->client_phone }}"
-                                                data-email="{{ $x->email }}" data-note="{{ $x->note }}"
-                                                data-pid="{{ $x->pid }}" data-toggle="modal" data-target="#showModal"
+                                        <td><a href="#showModal" data-effect="effect-scale"
+                                            data-id="{{ $x->id }}" data-client_name="{{ $x->client_name }}"
+                                            data-birthdate="{{ $x->birthdate }}"
+                                            data-address="{{ $x->address }}"
+                                            data-client_phone="{{ $x->client_phone }}"
+                                            data-email="{{ $x->email }}" data-note="{{ $x->note }}"
+                                            data-pid="{{ $x->pid }}" data-gender="{{ $x->gender }}"
+                                            data-toggle="modal" "
                                                 class="client-name-btn">{{ $x->client_name }}</a>
                                         </td>
 
@@ -128,10 +129,9 @@
                                                 data-email="{{ $x->email }}" data-note="{{ $x->note }}"
                                                 data-pid="{{ $x->pid }}" data-gender="{{ $x->gender }}"
                                                 data-toggle="modal" href="#exampleModal2" title="تعديل">
-                                                <i class="las la-pen"></i> تعديل
+                                                <i class="las la-pen"></i>
                                             </a>
 
-                                            </a>
                                             <a class="modal-effect btn btn-sm btn-danger" data-effect="effect-scale"
                                                 data-id="{{ $x->id }}" data-client_name="{{ $x->client_name }}"
                                                 data-toggle="modal" href="#modaldemo9" title="حذف">
@@ -146,6 +146,8 @@
                 </div>
             </div>
         </div>
+        </div>
+
 
         <div class="modal fade" id="showModal" tabindex="-1" role="dialog" aria-labelledby="showModalLabel"
             aria-hidden="true">
@@ -258,6 +260,7 @@
             </div>
         </div>
 
+
         <!-- End Basic modal -->
 
 
@@ -358,7 +361,17 @@
             </div>
         </div>
     <!-- row closed -->
-    </div>
+<script>
+    try {
+  const date = new Date(dateString);
+  const isoString = date.toISOString();
+  // use isoString in your code
+} catch (error) {
+  console.error('Invalid date:', error);
+  // handle the error gracefully, e.g. by using a default value
+}
+</script>
+
 
     <!-- main-content closed -->
     @endsection
