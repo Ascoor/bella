@@ -5,6 +5,7 @@ use App\Http\Controllers\SectionController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ClientHistoryController;
 use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\ClientAppointmentController;
 
 use App\Http\Controllers\AssestController;
 use App\Http\Controllers\DoctorController;
@@ -45,7 +46,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome', [        'doctors' => Doctor::all(),    ]);
 });
-
 Route::post('/submit', [ClientAppointmentController::class, 'submitForm'])->name('appointments.submitForm');
 
 // define routes for doctor's dashboard
