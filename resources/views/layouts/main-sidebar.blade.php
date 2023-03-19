@@ -58,17 +58,17 @@
                         </li>
 
 
-                            <li><a class="slide-item" href="{{ url('/' . ($page = 'Invoice_UnPaid')) }}">الحجوزات قيد التنفيذ</a>
+                            <li><a class="slide-item"  href="{{ route('appointments.sort', ['status' => 'processing']) }}">الحجوزات قيد التنفيذ</a>
                             </li>
 
 
 
-                            <li><a class="slide-item" href="{{ url('/' . ($page = 'Invoice_Partial')) }}">
-                                    الحجوزات المنتهية</a>
-                            </li>
 
+                            <li><a class="slide-item" href="{{ route('appointments.sort', ['status' => 'Complete']) }}"> الحجوزات المنفذه</a></li>
 
-                            <li><a class="slide-item" href="{{ url('/' . ($page = 'Archive')) }}">ارشيف الحجوزات</a></li>
+                                                        <li><a class="slide-item" href="{{ route('appointments.sort', ['status' => 'cancelled']) }}">
+                                                                الحجوزات الملغاه</a>
+                                                        </li>
 
                     </ul>
 

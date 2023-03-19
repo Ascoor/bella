@@ -7,6 +7,7 @@ use App\Models\Client;
 use App\Models\Doctor;
 use App\Models\Event;
 use App\Models\Invoice;
+use App\Models\Section;
 use App\Models\User;
 use App\Notifications\AppointmentCreated;
 use Illuminate\Http\Request;
@@ -48,8 +49,10 @@ class AppointmentController extends Controller
      */
     public function listAppointments()
     {
+
         // Get the last appointment with its associated client and doctor.
         $appointment = Appointment::latest()->first();
+
         $doctor = $appointment->doctor;
         $client = $appointment->client;
 
@@ -73,6 +76,21 @@ $doctors = Doctor::all();
             'doctors'=> $doctors
         ]);
     }
+public function addInvoice($id)
+{
+    $appointment = Appointment::find($id);
+    $services =  $appointment->services;
+
+
+    return view('invoice.new_invoice', [
+        'client_id' => $appointment->client_id,
+        'section_id' => $appointment->section_id,
+
+    ])->with('appointment',$appointment);
+
+
+}
+
 
     /**
      * Update the specified resource in storage.
@@ -102,6 +120,9 @@ $clients = Client::all();
             'appointments' => $appointments,
         ])->with('doctors', $doctors)->with('clients', $clients);
     }
+
+
+
     public function update(Request $request)
     {
         $appointment = Appointment::findOrFail($request->id);
@@ -129,17 +150,19 @@ $clients = Client::all();
         return redirect()->back();
     }
 
-
     public function store(Request $request)
     {
         // Validate the form input.
         $validatedData = $request->validate([
             'doctor_id' => 'required',
-
             'apt_datetime' => 'required',
             'client_name' => 'required',
             'client_phone' => 'required',
         ]);
+
+        // Get the selected doctor and their section ID
+        $doctor = Doctor::findOrFail($validatedData['doctor_id']);
+        $section_id = $doctor->section->id;
 
         // Create the client.
         $client = Client::create([
@@ -150,12 +173,13 @@ $clients = Client::all();
         // Create the appointment.
         $appointment = Appointment::create([
             'doctor_id' => $validatedData['doctor_id'],
-
+            'section_id' => $section_id,
             'apt_datetime' => $validatedData['apt_datetime'],
             'client_id' => $client->id,
-
         ]);
 
+
+        session()->flash('A','تم إضافة الحجز بنجاح');
         // Redirect the user to a page with a success message
         return redirect()->back();
     }

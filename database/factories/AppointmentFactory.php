@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Client;
 use App\Models\Doctor;
+use App\Models\Section;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -20,11 +21,12 @@ class AppointmentFactory extends Factory
             'apt_datetime' => $this->faker->datetime('m-d-Y H:i:s'),
 
 
-            'status' => $this->faker->randomElement(['pending','Complete', 'confirmed', 'cancelled']),
+            'status' => $this->faker->randomElement(['pending','Completed', 'confirmed', 'cancelled']),
 
 
             'doctor_id' => Doctor::all()->random()->id,
             'client_id' => Client::all()->random()->id,
+            'section_id' => Section::all()->random()->id,
             'created_at' => $this->faker->date(),
             'updated_at' => $this->faker->date(),
 

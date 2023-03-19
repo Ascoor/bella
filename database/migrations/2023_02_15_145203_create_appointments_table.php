@@ -23,6 +23,10 @@ class CreateAppointmentsTable extends Migration
             $table->foreign('doctor_id')
             ->references('id')->on('doctors')
             ->onDelete('cascade');
+            $table->unsignedBigInteger('section_id');
+            $table->foreign('section_id')
+            ->references('id')->on('sections')
+            ->onDelete('cascade');
 
             $table->datetime('remarks')->nullable();
             $table->datetime('apt_datetime');

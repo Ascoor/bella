@@ -24,4 +24,8 @@ class Section extends Model
     {
         return $this->hasMany('App\Models\Assest');
     }
+    public function Appointment()
+    {
+        return $this->hasMany('App\Models\Assest');
+    }
 }

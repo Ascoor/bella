@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Appointment;
 use App\Models\Client;
+use App\Models\Doctor;
 use Illuminate\Support\Facades\Notification;
 use App\Models\User;
 use App\Notifications\AppointmentCreated;
@@ -40,12 +41,15 @@ class ClientAppointmentController extends Controller
         }
 
         // Create the appointment.
-        $appointment = Appointment::create([
-            'doctor_id' => $validatedData['doctor_id'],
-            'apt_datetime' => $validatedData['apt_datetime'],
-            'client_id' => $client->id,
-        ]);
+        $doctor = Doctor::find($validatedData['doctor_id']);
+$section_id = $doctor->section->id;
 
+$appointment = Appointment::create([
+    'doctor_id' => $validatedData['doctor_id'],
+    'apt_datetime' => $validatedData['apt_datetime'],
+    'client_id' => $client->id,
+    'section_id' => $section_id,
+]);
         // Send notification to users and doctors associated with the appointment
         $users = User::all();
         Notification::send($users, new AppointmentCreated($appointment));

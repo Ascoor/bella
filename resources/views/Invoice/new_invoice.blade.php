@@ -68,28 +68,27 @@
                     </div>
                     <div class="row">
                         <div class="col">
-                            <label for="client" class="control-label">Choose client:</label>
-                            <select id="client_id" name="client_id">
-                                <option value="">Choose</option>
-                                @foreach ($clients as $client)
-                                <option value="{{ $client->id }}">{{ $client->client_name }}</option>
-                                @endforeach
-                            </select>
+                        <div class="form-group">
+                <label for="client_name">Client Name</label>
+                <input type="text" class="form-control" value="{{ $appointment->client->client_name }}" readonly>
+                <input  name="client_id" type="hidden" class="form-control" value="{{ $appointment->client_id }}" >
+            </div>
                         </div>
                     </div>
                     <br/>
                     {{-- 2 --}}
                     <div class="row">
   <div class="col">
-    <label for="section" class="control-label">Choose Section:</label>
-    <select id="section" name="section_id">
-      <option value="">Choose</option>
-      @foreach ($sections as $section)
-      <option value="{{ $section->id }}">{{ $section->section_name }}</option>
-      @endforeach
-    </select>
+  <div class="form-group">
+                <label for="section_name">Section Name</label>
+                <input type="text" id="section_name" class="form-control" value="{{ $appointment->section->section_name }}" readonly>
+                <input type="hidden" name="section_id" id="section_id" class="form-control" value="{{ $appointment->section_id }}" >
+            </div>
   </div>
-</div>
+</div>@php
+    $amountCollection = collect($appointment->services)->sum('price');
+@endphp
+
 <div class="row">
   <div class="col">
     <label for="services" class="control-label">Choose Services:</label>
@@ -100,11 +99,12 @@
 </div>
 
 <div class="row">
-  <div class="col">
-    <label for="amount_collection" class="control-label">Amount Collection:</label>
-    <input type="text" id="amount_collection" name="amount_collection" class="form-control" value="0.00" readonly>
-  </div>
-  <div class="col">
+    <div class="col">
+        <label for="amount_collection" class="control-label">Amount Collection:</label>
+        <input type="text" id="amount_collection" name="amount_collection" class="form-control" value="{{ $amountCollection }}" readonly>
+    </div>
+
+    <div class="col">
     <label for="discount" class="control-label">Discount:</label>
     <input type="text" id="discount" name="discount" class="form-control" value="0.00">
   </div>
@@ -150,7 +150,6 @@
 
 
                 </form>
-            </div>
         </div>
     </div>
 </div>
@@ -198,104 +197,49 @@
 
     </script>
 
-<script>$(document).ready(function() {
-  var amountCollection = 0;
+<script>
 
-  // On section change
-  $("#section").on("change", function() {
-    var sectionId = $(this).val();
-    if (sectionId) {
-      $.ajax({
-        url: "{{ URL::to('section/services') }}/" + sectionId,
-        type: "GET",
-        dataType: "json",
-        success: function(data) {
-          $("#services").empty();
-          $.each(data, function(key, value) {
-            $("#services").append('<div><input type="checkbox" name ="services[]" class="service-checkbox" value="' + value.id + '" data-price="' + value.price + '">' + value.service_name + ' - $' + value.price + '</div>');
-          });
-        },
-      });
-    } else {
-      $("#services").empty();
-    }
-  });
 
-  // On click of service checkbox
-  $(document).on("click", ".service-checkbox", function() {
-    var servicePrice = parseFloat($(this).data("price"));
-    if ($(this).is(":checked")) {
-      amountCollection += servicePrice;
-    } else {
-      amountCollection -= servicePrice;
-    }
-    updateAmountCollection();
-  });
-
-  // On change of discount input
-  $("#discount").on("input", function() {
-    updateAmountCollection();
-  });
-
-  // On change of rate VAT input
-  $("#rate_vat").on("change", function() {
-    updateAmountCollection();
-  });
-
-  // Update amount collection based on selected services
-  function updateAmountCollection() {
-    var total = amountCollection;
-
-    var discountValue = parseFloat($("#discount").val()) || 0;
-    total -= discountValue;
-
-    var vatRate = parseFloat($("#rate_vat").val()) || 0;
-    var vatValue = amountCollection * (vatRate/100);
-    $("#value_vat").val(vatValue.toFixed(2));
-
-    total += vatValue;
-    $("#amount_collection").val(amountCollection.toFixed(2));
-    $("#total").val(total.toFixed(2));
-  }
-
-  // On click of add service button
-  $("#add-service-btn").on("click", function() {
-    var selectedServices = $(".service-checkbox:checked");
-    selectedServices.each(function() {
-      var serviceId = $(this).val();
-      var serviceName = $(this).parent().text().trim();
-      var servicePrice = parseFloat($(this).data("price"));
-      var listItem = '<li data-price="' + servicePrice + '">' + serviceName + '<button type="button" class="remove-service-btn btn btn-danger btn-sm ml-3">Remove</button></li>';
-      $("#selectedServices").append(listItem);
-      amountCollection += servicePrice;
+$("#section").on("change", function() {
+  var sectionId = $("#section_id").val();
+  if (sectionId) {
+    $.ajax({
+      url: "{{ URL::to('section/services') }}/" + sectionId,
+      type: "GET",
+      dataType: "json",
+      success: function(data) {
+        $("#services").empty();
+        $.each(data, function(key, value) {
+          $("#services").append('<div><input type="checkbox" name ="services[]" class="service-checkbox" value="' + value.id + '" data-price="' + value.price + '">' + value.service_name + ' - $' + value.price + '</div>');
+        });
+      },
     });
-
-    // Update amount collection after adding new services
-    updateAmountCollection();
-  });
-
-  // On click of selected services
-  if ($("#selectedServices").length) {
-    $("#selectedServices").on("click", "li", function() {
-      $(this).toggleClass("active");
-      var servicePrice = parseFloat($(this).data("price"));
-      if ($(this).hasClass("active")) {
-        amountCollection += servicePrice;
-      } else {
-        amountCollection -= servicePrice;
-      }
-      updateAmountCollection();
-    });
-
-    // On click of selected services remove button
-    $("#selectedServices").on("click", ".remove-service-btn", function() {
-      var servicePrice = parseFloat($(this).parent().data("price"));
-      amountCollection -= servicePrice;
-      $(this).parent().remove();
-      updateAmountCollection();
-    });
+  } else {
+    $("#services").empty();
   }
 });
+
+$(document).ready(function() {
+  // get the initial value of amountCollection
+  var amountCollection = parseFloat($('#amount_collection').val());
+
+  // listen for changes to the discount field
+  $('#discount').on('change', function() {
+    var discount = parseFloat($(this).val());
+    var newTotal = amountCollection - discount;
+    $('#total').val(newTotal.toFixed(2));
+  });
+
+  // listen for changes to the rate_vat field
+  $('#rate_vat').on('change', function() {
+    var rateVat = parseFloat($(this).val());
+    var valueVat = amountCollection * (rateVat / 100);
+    $('#value_vat').val(valueVat.toFixed(2));
+    var newTotal = amountCollection + valueVat;
+    $('#total').val(newTotal.toFixed(2));
+  });
+});
+
 
 </script>
 

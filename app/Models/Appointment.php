@@ -9,7 +9,7 @@ class Appointment extends Model
 {
     use HasFactory;
 use Notifiable;
-    protected $fillable = ['client_id','doctor_id','apt_datetime','remarks','edited_by','status'];
+    protected $fillable = ['client_id','section_id','doctor_id','apt_datetime','remarks','edited_by','status'];
 
 
     public function client()
@@ -24,6 +24,10 @@ use Notifiable;
     public function services()
     {
         return $this->belongsToMany(Service::class);
+    }
+    public function section()
+    {
+        return $this->belongsTo(Section::class);
     }
 
 }
