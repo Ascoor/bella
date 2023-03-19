@@ -179,7 +179,7 @@ $clients = Client::all();
         ]);
 
 
-        session()->flash('A','تم إضافة الحجز بنجاح');
+        session()->flash('Add','تم إضافة الحجز بنجاح');
         // Redirect the user to a page with a success message
         return redirect()->back();
     }
