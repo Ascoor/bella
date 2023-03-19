@@ -31,6 +31,7 @@ class CreateAppointmentsTable extends Migration
             $table->datetime('remarks')->nullable();
             $table->datetime('apt_datetime');
 
+            $table->unsignedBigInteger('invoice_id')->nullable();
             $table->unsignedBigInteger('edited_by')->nullable();
 
 

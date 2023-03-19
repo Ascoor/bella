@@ -42,6 +42,9 @@
             </button>
         </div>
     @endif
+    @error('field_name')
+<div class="alert alert-danger">{{ $message }}</div>
+@enderror
 
     <!-- row -->
     <div class="row">
@@ -50,57 +53,76 @@
         <div class="col-lg-12 col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <form action="{{ route('invoices.store') }}" method="post"
-                        enctype="multipart/form-data" autocomplete="off">
-                        {{ csrf_field() }}
-                        {{-- 1 --}}
+                <form action="{{ route('appointments.invoice') }}" method="post" enctype="multipart/form-data" autocomplete="off">
+    @csrf
+    @method('POST')
+    <div class="row">
+        <div class="col">
+            <label for="invoice_number" class="control-label">رقم الفاتورة</label>
+            <input type="text" class="form-control @error('invoice_number') is-invalid @enderror" id="invoice_number" name="invoice_number" title="يرجي ادخال رقم الفاتورة" required value="{{ old('invoice_number') }}">
+            @error('invoice_number')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
 
-                        <div class="row">
-                            <div class="col">
-                                <label for="inputName" class="control-label">رقم الفاتورة</label>
-                                <input type="text" class="form-control" id="inputName" name="invoice_number"
-                                    title="يرجي ادخال رقم الفاتورة" required>
-                            </div>
+        <div class="col">
+            <label for="invoice_date">تاريخ الفاتورة</label>
+            <input class="form-control fc-datepicker @error('invoice_date') is-invalid @enderror" id="invoice_date" name="invoice_date" placeholder="YYYY-MM-DD" type="text" value="{{ old('invoice_date', date('Y-m-d')) }}" required>
+            @error('invoice_date')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
 
-                            <div class="col">
-                                <label>تاريخ الفاتورة</label>
-                                <input class="form-control fc-datepicker" name="invoice_date" placeholder="YYYY-MM-DD"
-                                    type="text" value="{{ date('Y-m-d') }}" required>
-                            </div>
-                            <div class="col">
-                                <label>تاريخ الفاتورة</label>
-                                <input class="form-control fc-datepicker" name="due_date" placeholder="YYYY-MM-DD"
-                                    type="text" required> </div>
+        <div class="col">
+            <label for="due_date">تاريخ الاستحقاق</label>
+            <input class="form-control fc-datepicker @error('due_date') is-invalid @enderror" id="due_date" name="due_date" placeholder="YYYY-MM-DD" type="text" value="{{ old('due_date') }}" required>
+            @error('due_date')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+    </div>
 
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                <label for="client_name">Client Name</label>
+                <input type="text" class="form-control" value="{{ $appointment->client->client_name }}" readonly>
+                <input name="client_id" type="hidden" class="form-control @error('client_id') is-invalid @enderror" value="{{ $appointment->client_id }}" required>
+                <input name="appointment_id" type="hidden" class="form-control @error('client_id') is-invalid @enderror" value="{{ $appointment->id }}" required>
+                @error('client_id')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+        </div>
 
+        <div class="col">
+            <div class="form-group">
+                <label for="section_name">Section Name</label>
+                <input type="text" id="section_name" class="form-control" value="{{ $appointment->section->section_name }}" readonly>
+                <input type="hidden" name="section_id" id="section_id" class="form-control @error('section_id') is-invalid @enderror" value="{{ $appointment->section_id }}" required>
+                @error('section_id')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+        </div>
+    </div>
 
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="client_name">Client Name</label>
-                                    <input type="text" class="form-control"
-                                        value="{{ $appointment->client->client_name }}" readonly>
-                                    <input name="client_id" type="hidden" class="form-control"
-                                        value="{{ $appointment->client_id }}">
-                                </div>
-                            </div>
-                        </div>
-                        <br />
-                        {{-- 2 --}}
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="section_name">Section Name</label>
-                                    <input type="text" id="section_name" class="form-control"
-                                        value="{{ $appointment->section->section_name }}" readonly>
-                                    <input type="hidden" name="section_id" id="section_id" class="form-control"
-                                        value="{{ $appointment->section_id }}">
-                                </div>
-                            </div>
-                        </div>@php
-                        $amountCollection = collect($appointment->services)->sum('price');
-@endphp
+    @php
+        $amountCollection = collect($appointment->services)->sum('price');
+    @endphp
+
+    <div class="form-group">
+        <label for="services">Choose Services:</label>
+        <select id="services" name="services[]" class="form-control @error('services') is-invalid @enderror" multiple required data-error="Please select at least one service">
+            @foreach ($appointment->services as $service)
+
+            <option value="{{ $service->id }}" @if(in_array($service->id, old('services', $appointment->services->pluck('id')->toArray()))) selected @endif>{{ $service->service_name }}</option>
+@endforeach
+</select>
+@error('services')
+<div class="invalid-feedback">{{ $message }}</div>
+@enderror
+</div>
 
 <div class="row">
     <div class="col">
@@ -138,7 +160,7 @@
     </div>
     <div class="col">
         <label for="total" class="control-label">Total:</label>
-        <input type="text" id="total" name="total" class="form-control" value="0.00" readonly>
+        <input type="text" id="total" name="total" class="form-control" value="{{  $amountCollection }}" readonly>
     </div>
 </div>
 
@@ -157,13 +179,16 @@
 <div class="col-sm-12 col-md-12">
     <input type="file" name="attached_files[]" class="dropify" accept=".pdf,.jpg, .png, image/jpeg, image/png"
         data-height="70" />
-</div><br>
-
-<div class="d-flex justify-content-center">
-    <button type="submit" class="btn btn-primary">حفظ البيانات</button>
+</div>
+<div class="form-group">
+<label for="notes">Notes:</label>
+<textarea id="notes" name="notes" class="form-control @error('notes') is-invalid @enderror" rows="3" data-error="Please enter valid notes">{{ old('notes', $appointment->notes) }}</textarea>
+@error('notes')
+<div class="invalid-feedback">{{ $message }}</div>
+@enderror
 </div>
 
-
+<button type="submit" class="btn btn-primary">Submit</button>
 </form>
 </div>
 </div>
@@ -216,27 +241,7 @@
 </script>
 
 <script>
-    $("#section").on("change", function () {
-        var sectionId = $("#section_id").val();
-        if (sectionId) {
-            $.ajax({
-                url: "{{ URL::to('section/services') }}/" + sectionId,
-                type: "GET",
-                dataType: "json",
-                success: function (data) {
-                    $("#services").empty();
-                    $.each(data, function (key, value) {
-                        $("#services").append(
-                            '<div><input type="checkbox" name ="services[]" class="service-checkbox" value="' +
-                            value.id + '" data-price="' + value.price + '">' + value
-                            .service_name + ' - $' + value.price + '</div>');
-                    });
-                },
-            });
-        } else {
-            $("#services").empty();
-        }
-    });
+
 
 
     $(document).ready(function () {

@@ -86,6 +86,7 @@ Route::get('/appointments', [AppointmentController::class, 'listAppointments'])-
 Route::get('/appointments/{id}/edit', [AppointmentController::class, 'edit'])->name('appointments.edit');
 Route::get('/appointments/{appointment}', [AppointmentController::class, 'show'])->name('appointments.show');
 Route::get('/appointments/{id}/new-invoice', [AppointmentController::class, 'addInvoice'])->name('appointments.new-invoice');
+Route::post('/appointments/new-invoice', [AppointmentController::class, 'Invoicestore'])->name('appointments.invoice');
 
 
 Route::post('/appointments/store', [App\Http\Controllers\AppointmentController::class, 'store'])->name('appointments.store');

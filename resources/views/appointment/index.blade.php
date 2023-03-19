@@ -124,14 +124,15 @@
                                             <i class="las la-trash"></i>
                                         </a>
                                     </td>
-                                    @if ($item->status == 'complete')
-                                        <td>
-                                            <a id="" class="btn btn-sm btn-primary"
-                                                href="{{ route('appointments.new-invoice', $item->id) }}"
-                                                role="button" title="إضافة فاتورة للحجز" role="button">إضافة
-                                                فاتورة</a>
-                                        </td>
-                                    @endif
+                                    @if ($item->status == 'complete' && empty($item->invoice_id))
+    <td>
+        <a id="" class="btn btn-sm btn-primary"
+            href="{{ route('appointments.new-invoice', $item->id) }}"
+            role="button" title="إضافة فاتورة للحجز" role="button">إضافة
+            فاتورة</a>
+    </td>
+@endif
+
                                 </tr>
                             @endforeach
                         </tbody>
