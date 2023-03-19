@@ -431,28 +431,8 @@
         allowClear: true
     });
 
-    // Handle the change event of the section dropdown
-    $('#section_id').change(function() {
-        var section_id = $(this).val();
-        if (section_id) {
-            // Make an AJAX request to fetch the doctors of the selected section
-            $.ajax({
-                url: "{{ route('sections.doctors', ':section_id') }}".replace(':section_id', section_id),
-                type: "GET",
-                dataType: "json",
-                success: function(data) {
-                    // Clear the doctor dropdown and add the fetched doctors as options
-                    $('#doctor_id').empty();
-                    $.each(data, function(key, value) {
-                        $('#doctor_id').append('<option value="' + key + '">' + value + '</option>');
-                    });
-                }
-            });
-        } else {
-            // If no section is selected, clear the doctor dropdown
-            $('#doctor_id').empty();
-        }
-    });
+
+
 });
     $('#edit_apt_modal').on('show.bs.modal', function(event) {
         var button = $(event.relatedTarget);
