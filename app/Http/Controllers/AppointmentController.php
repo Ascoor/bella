@@ -190,15 +190,23 @@ $clients = Client::all();
      * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request)
-    {
-        $id = intval($request->id);
+{
+    $id = $request->input('id');
 
-        Appointment::find($id)->delete();
+    $appointment = Appointment::find($id);
 
-        session()->flash('delete','تم حذف الحجز بنجاح');
-
-        return redirect()->back();
+    if (!$appointment) {
+        return redirect()->back()->with('error', 'Appointment not found');
     }
+
+    // Delete the associated services
+    $appointment->services()->detach();
+   // Delete the appointment
+   $appointment->delete();
+    session()->flash('delete','تم حذف    الحجز بنجاح');
+    return redirect()->back();
+}
+
 
 
 
