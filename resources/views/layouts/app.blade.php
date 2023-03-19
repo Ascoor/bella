@@ -174,7 +174,7 @@
 <!-- Internal Select2.full.min js -->
 <script src="{{URL::asset('assets/plugins/select2/js/select2.full.min.js')}}"></script>
 <!--Internal App calendar js -->
-<script src="{{URL::asset('assets/js/app-calendar-events.js')}}"></script>
+
 <script src="{{URL::asset('assets/js/doc-calendar.js')}}"></script>
 <script src="{{URL::asset('assets/js/modal-popup.js')}}"></script>
 <!--Internal  index js -->

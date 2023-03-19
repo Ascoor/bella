@@ -60,24 +60,26 @@
             <label for="recipient-name" class="col-form-label">تأكيد الحجز</label>
             <input class="form-control mb-3" readonly placeholder="{{ $appointment->remarks }}" type="text">
           </div>
-          <form method="POST" action="{{ route('doctor.appointment.update', $appointment->id) }}">
-  @csrf
-  @method('POST')
+          @if ($appointment->status == 'processing')
+  <form method="POST" action="{{ route('doctor.appointment.update', $appointment->id) }}">
+    @csrf
+    @method('POST')
 
-  <div class="mb-3">
-    <label class="form-label">Services</label>
-    @foreach ($services as $service)
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" name="services[]" value="{{ $service->id }}" id="service_{{ $service->id }}" {{ $appointment->services->contains($service) ? 'checked' : '' }}>
-      <label class="form-check-label" for="service_{{ $service->id }}">{{ $service->service_name }}</label>
+    <div class="mb-3">
+      <label class="form-label">Services</label>
+      @foreach ($services as $service)
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="services[]" value="{{ $service->id }}" id="service_{{ $service->id }}" {{ $appointment->services->contains($service) ? 'checked' : '' }}>
+        <label class="form-check-label" for="service_{{ $service->id }}">{{ $service->service_name }}</label>
+      </div>
+      @endforeach
     </div>
-    @endforeach
-  </div>
 
-  <!-- Other input fields for other appointment attributes here -->
+    <!-- Add your form fields here -->
 
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+    <button type="submit" class="btn btn-primary">Save</button>
+  </form>
+@endif
 
 
         </div>

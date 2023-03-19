@@ -94,6 +94,6 @@ body {
 
 @endsection
 @section('js')
-
+<script src="{{URL::asset('assets/js/app-calendar-events.js')}}"></script>
 
 @endsection
