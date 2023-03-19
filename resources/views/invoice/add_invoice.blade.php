@@ -198,9 +198,8 @@
 
     </script>
 
-<script>$(document).ready(function() {
-  var amountCollection = 0;
-
+<script>
+$(document).ready(function() {
   // On section change
   $("#section").on("change", function() {
     var sectionId = $(this).val();
@@ -223,12 +222,6 @@
 
   // On click of service checkbox
   $(document).on("click", ".service-checkbox", function() {
-    var servicePrice = parseFloat($(this).data("price"));
-    if ($(this).is(":checked")) {
-      amountCollection += servicePrice;
-    } else {
-      amountCollection -= servicePrice;
-    }
     updateAmountCollection();
   });
 
@@ -244,17 +237,21 @@
 
   // Update amount collection based on selected services
   function updateAmountCollection() {
-    var total = amountCollection;
+    var selectedServices = $(".service-checkbox:checked");
+    var total = 0;
+    selectedServices.each(function() {
+      total += parseFloat($(this).data("price"));
+    });
 
     var discountValue = parseFloat($("#discount").val()) || 0;
     total -= discountValue;
 
     var vatRate = parseFloat($("#rate_vat").val()) || 0;
-    var vatValue = amountCollection * (vatRate/100);
+    var vatValue = (total * (vatRate/100));
     $("#value_vat").val(vatValue.toFixed(2));
 
     total += vatValue;
-    $("#amount_collection").val(amountCollection.toFixed(2));
+    $("#amount_collection").val(total.toFixed(2));
     $("#total").val(total.toFixed(2));
   }
 
@@ -267,7 +264,6 @@
       var servicePrice = parseFloat($(this).data("price"));
       var listItem = '<li data-price="' + servicePrice + '">' + serviceName + '<button type="button" class="remove-service-btn btn btn-danger btn-sm ml-3">Remove</button></li>';
       $("#selectedServices").append(listItem);
-      amountCollection += servicePrice;
     });
 
     // Update amount collection after adding new services
@@ -278,25 +274,20 @@
   if ($("#selectedServices").length) {
     $("#selectedServices").on("click", "li", function() {
       $(this).toggleClass("active");
-      var servicePrice = parseFloat($(this).data("price"));
-      if ($(this).hasClass("active")) {
-        amountCollection += servicePrice;
-      } else {
-        amountCollection -= servicePrice;
-      }
       updateAmountCollection();
     });
 
     // On click of selected services remove button
     $("#selectedServices").on("click", ".remove-service-btn", function() {
       var servicePrice = parseFloat($(this).parent().data("price"));
-      amountCollection -= servicePrice;
+      var total = parseFloat($("#amount_collection").val());
+      total -= servicePrice;
       $(this).parent().remove();
+      $("#amount_collection").val(total.toFixed(2));
       updateAmountCollection();
     });
   }
 });
-
 </script>
 
 
