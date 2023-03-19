@@ -237,6 +237,7 @@
         }
     });
 
+
     $(document).ready(function () {
         // get the initial value of amountCollection
         var amountCollection = parseFloat($('#amount_collection').val());
