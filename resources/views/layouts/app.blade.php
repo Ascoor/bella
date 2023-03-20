@@ -52,7 +52,7 @@
           </a>
           <div class="dropdown-menu text-center bg-gray" aria-labelledby="clientsDropdown">
             <a class="dropdown-item" href="/doctor/clients">Your Clients</a>
-            <a class="dropdown-item" href="{{ route('client-history.index') }}">Bella Client</a>
+            <!-- <a class="dropdown-item" href="{{ route('client-history.index') }}">Bella Client</a> -->
           </div>
         </li>
 
