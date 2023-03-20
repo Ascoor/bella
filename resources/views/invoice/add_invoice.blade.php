@@ -234,61 +234,34 @@ $(document).ready(function() {
   $("#rate_vat").on("change", function() {
     updateAmountCollection();
   });
-
-  // Update amount collection based on selected services
   function updateAmountCollection() {
-    var selectedServices = $(".service-checkbox:checked");
-    var total = 0;
-    selectedServices.each(function() {
-      total += parseFloat($(this).data("price"));
-    });
-
-    var discountValue = parseFloat($("#discount").val()) || 0;
-    total -= discountValue;
-
-    var vatRate = parseFloat($("#rate_vat").val()) || 0;
-    var vatValue = (total * (vatRate/100));
-    $("#value_vat").val(vatValue.toFixed(2));
-
-    total += vatValue;
-    $("#amount_collection").val(total.toFixed(2));
-    $("#total").val(total.toFixed(2));
-  }
-
-  // On click of add service button
-  $("#add-service-btn").on("click", function() {
-    var selectedServices = $(".service-checkbox:checked");
-    selectedServices.each(function() {
-      var serviceId = $(this).val();
-      var serviceName = $(this).parent().text().trim();
-      var servicePrice = parseFloat($(this).data("price"));
-      var listItem = '<li data-price="' + servicePrice + '">' + serviceName + '<button type="button" class="remove-service-btn btn btn-danger btn-sm ml-3">Remove</button></li>';
-      $("#selectedServices").append(listItem);
-    });
-
-    // Update amount collection after adding new services
-    updateAmountCollection();
+  var selectedServices = $(".service-checkbox:checked");
+  var genTotal = 0;
+  selectedServices.each(function() {
+    genTotal += parseFloat($(this).data("price"));
   });
 
-  // On click of selected services
-  if ($("#selectedServices").length) {
-    $("#selectedServices").on("click", "li", function() {
-      $(this).toggleClass("active");
-      updateAmountCollection();
-    });
+  var discountValue = parseFloat($("#discount").val()) || 0;
+  var vatRate = parseFloat($("#rate_vat").val()) || 0;
+  var vatValue = ((genTotal - discountValue) * (vatRate/100));
+  var tempTotal = (genTotal - discountValue) + vatValue;
 
-    // On click of selected services remove button
-    $("#selectedServices").on("click", ".remove-service-btn", function() {
-      var servicePrice = parseFloat($(this).parent().data("price"));
-      var total = parseFloat($("#amount_collection").val());
-      total -= servicePrice;
-      $(this).parent().remove();
-      $("#amount_collection").val(total.toFixed(2));
-      updateAmountCollection();
-    });
+  var amountCollection = genTotal.toFixed(2);
+  var ratePercentage = 0;
+  if(amountCollection > 0) {
+    ratePercentage = ((tempTotal - amountCollection) / amountCollection) * 100;
   }
-});
-</script>
+  var valueRate = ratePercentage.toFixed(2);
+  var total = tempTotal.toFixed(2);
 
+  $("#value_vat").val(vatValue.toFixed(2));
+  $("#amount_collection").val(amountCollection);
+  $("#value_rate").val(valueRate);
+  $("#total").val(total);
+}
+
+});
+
+</script>
 
 @endsection

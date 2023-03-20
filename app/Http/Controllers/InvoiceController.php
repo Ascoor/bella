@@ -6,12 +6,14 @@ use App\Models\Client;
 use App\Models\Invoice;
 use App\Models\Invoice_details;
 use App\Models\InvoiceAttachment as ModelsInvoiceAttachment;
+use App\Models\InvoiceDetail;
 use App\Models\Service;
 use App\Models\Section;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use InvoiceAttachment;
+use InvoiceAttachments;
 
 class InvoiceController extends Controller
 {
@@ -136,9 +138,10 @@ $services = Service::all();
 $invoice =  Invoice::find($id);
         return view('invoice.edit_invoice', compact('invoice', 'clients', 'services', 'sections'));
     }
-    public function update(Request $request,  $id)
+    public function update(Request $request)
     {
-        $invoice = Invoice::find($id);
+
+        $invoice = Invoice::findOrFail($request->invoice_id);
         $validatedData = $request->validate([
             'invoice_number' => 'required',
             'invoice_date' => 'required',
@@ -174,7 +177,7 @@ $invoice =  Invoice::find($id);
 
         $invoice->services()->sync($validatedData['services'], ['section_id' => $validatedData['section_id']]);
 
-        $invoice_details = new Invoice_details();
+        $invoice_details = new InvoiceDetail();
         $invoice_details->invoice_id = $invoice->id;
         $invoice_details->note = $validatedData['note'];
         $invoice_details->user_id = Auth::id();
@@ -189,7 +192,7 @@ $invoice =  Invoice::find($id);
         foreach ($request->attached_files as $file) {
             $filename = time() . '-' . $file->getClientOriginalName();
             $file->move(public_path('storage/' . $folderName), $filename);
-            $attachment = new ModelsInvoiceAttachment();
+            $attachment = new InvoiceAttachments();
             $attachment->invoice_id = $invoice->id;
             $attachment->filename = $filename;
             $attachment->save();
