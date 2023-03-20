@@ -46,7 +46,14 @@ use HasFactory;
         return $this->morphMany(DatabaseNotification::class, 'notifiable')->orderBy('created_at', 'desc');
     }
 
-
+    public function profile()
+    {
+        return $this->hasOne('App\Models\Profile');
+    }
+    public function getFeaturedAttribute($photo)
+    {
+        return asset($photo);
+    }
 
 }
 

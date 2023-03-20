@@ -7,6 +7,7 @@ use App\Http\Controllers\ClientHistoryController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\ClientAppointmentController;
 
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AssestController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\DoctorAuthController;
@@ -81,6 +82,10 @@ Route::post('/submit', [ClientAppointmentController::class, 'submitForm'])->name
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::put('profile',[ProfileController::class ,'update'])->name('profile.update');
+Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
+        Route::get('/profile',[ProfileController::class ,'edit'])->name('profile.edit');
 
 Route::get('/appointments', [AppointmentController::class, 'listAppointments'])->name('appointments.list');
 Route::get('/appointments/{id}/edit', [AppointmentController::class, 'edit'])->name('appointments.edit');

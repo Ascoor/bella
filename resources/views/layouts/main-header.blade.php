@@ -34,7 +34,7 @@
 									</div>
 								</form>
 							</div>
-							<div class="dropdown nav-item main-header-message ">
+							<!-- <div class="dropdown nav-item main-header-message ">
 								<a class="new nav-link" href="#"><svg xmlns="http://www.w3.org/2000/svg" class="header-icon-svgs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg><span class=" pulse-danger"></span></a>
 								<div class="dropdown-menu">
 									<div class="menu-header-content bg-primary text-right">
@@ -46,7 +46,8 @@
 									</div>
 
 								</div>
-							</div><div class="dropdown nav-item main-header-notification">
+							</div> -->
+                            <div class="dropdown nav-item main-header-notification">
     <a class="new nav-link" href="#">
         <svg xmlns="http://www.w3.org/2000/svg" class="header-icon-svgs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell">
             <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
@@ -97,7 +98,7 @@
 								<a class="new nav-link full-screen-link" href="#"><svg xmlns="http://www.w3.org/2000/svg" class="header-icon-svgs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-maximize"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg></a>
 							</div>
 							<div class="dropdown main-profile-menu nav nav-item nav-link">
-								<a class="profile-user d-flex" href=""><img alt="" src="{{URL::asset('assets/img/faces/6.jpg')}}"></a>
+								<a class="profile-user d-flex" href=""><img alt="" src="{{URL::asset('uploads/users/'.Auth()->user()->photo)}}"></a>
 								<div class="dropdown-menu">
 									<div class="main-header-profile bg-primary p-3">
 										<div class="d-flex wd-100p">
@@ -107,11 +108,11 @@
 											</div>
 										</div>
 									</div>
-									<a class="dropdown-item" href=""><i class="bx bx-user-circle"></i>Profile</a>
-									<a class="dropdown-item" href=""><i class="bx bx-cog"></i> Edit Profile</a>
-									<a class="dropdown-item" href=""><i class="bx bxs-inbox"></i>Inbox</a>
+									<!-- <a class="dropdown-item" href=""><i class="bx bx-user-circle"></i>Profile</a> -->
+									<a class="dropdown-item" href="{{ route('profile.edit') }}"><i class="bx bx-cog"></i> Edit Profile</a>
+									<!-- <a class="dropdown-item" href=""><i class="bx bxs-inbox"></i>Inbox</a>
 									<a class="dropdown-item" href=""><i class="bx bx-envelope"></i>Messages</a>
-									<a class="dropdown-item" href=""><i class="bx bx-slider-alt"></i> Account Settings</a>
+									<a class="dropdown-item" href=""><i class="bx bx-slider-alt"></i> Account Settings</a> -->
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                      onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i
                                      class="bx bx-log-out"></i>تسجيل خروج</a>
@@ -123,11 +124,11 @@
 
 								</div>
 							</div>
-							<div class="dropdown main-header-message right-toggle">
+							<!-- <div class="dropdown main-header-message right-toggle">
 								<a class="nav-link pr-0" data-toggle="sidebar-left" data-target=".sidebar-left">
 									<svg xmlns="http://www.w3.org/2000/svg" class="header-icon-svgs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
 								</a>
-							</div>
+							</div> -->
 						</div>
 					</div>
 				</div>

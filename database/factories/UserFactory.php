@@ -14,11 +14,13 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+
         return [
-            'name' => 'Abd El-hamed',
-            'email' => 'askar@ask-ar.com',
+            'name' => 'Akram jaber',
+            'email' => 'akram@bella.com',
             'email_verified_at' => now(),
-            'password' => bcrypt('Ask@123456'), // password
+            'photo' => 'akram.jpg',
+            'password' => bcrypt('Ak@123456'), // password
             'remember_token' => Str::random(10),
         ];
     }
