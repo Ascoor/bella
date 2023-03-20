@@ -180,8 +180,23 @@ $invoice =  Invoice::find($id);
         $invoice_details->user_id = Auth::id();
         $invoice_details->save();
 
+    // Create a folder for the invoice
+    $folderName = 'invoices/' . $invoice->invoice_number;
+    Storage::makeDirectory($folderName);
+
+    // Handle file upload and update attached_files column
+    if ($request->hasFile('attached_files')) {
+        foreach ($request->attached_files as $file) {
+            $filename = time() . '-' . $file->getClientOriginalName();
+            $file->move(public_path('storage/' . $folderName), $filename);
+            $attachment = new ModelsInvoiceAttachment();
+            $attachment->invoice_id = $invoice->id;
+            $attachment->filename = $filename;
+            $attachment->save();
+        }
         return redirect()->route('invoices.index')
             ->with('success', 'Invoice updated successfully.');
     }
 
+}
 }

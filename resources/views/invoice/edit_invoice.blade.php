@@ -110,7 +110,7 @@
 </div>
 <div class="col">
     <label for="total_amount" class="control-label">Total Amount:</label>
-    <input type="text" id="total_amount" name="total_amount" class="form-control" value="{{ $invoice->total_amount }}" readonly>
+    <input type="text" id="total_amount" name="total_amount" class="form-control" value="0.00" readonly>
 </div>
 <div class="col">
     <label for="amount_collection" class="control-label">Amount Collected:</label>
@@ -120,9 +120,27 @@
     <label for="remaining_balance" class="control-label">Remaining Balance:</label>
     <input type="text" id="remaining_balance" name="remaining_balance" class="form-control" value="{{ $invoice->total_amount - $invoice->amount_collection }}" readonly>
 </div>
+    </div>
+<div class="row">
+                        <div class="col">
+                            <label for="exampleTextarea">ملاحظات</label>
+                            <textarea class="form-control" id="exampleTextarea" name="note" rows="3"></textarea>
+                        </div>
+                    </div><br>
+
+                    <p class="text-danger">* صيغة المرفق pdf, jpeg ,.jpg , png </p>
+                    <h5 class="card-title">المرفقات</h5>
+
+                    <div class="col-sm-12 col-md-12">
+                        <input type="file" name="attached_files[]" class="dropify" accept=".pdf,.jpg, .png, image/jpeg, image/png" data-height="70" />
+                    </div><br>
+
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary">حفظ البيانات</button>
+                    </div>
 
 
-
+                </form>
                 </div>
             </div>
         </div>

@@ -91,54 +91,59 @@
                                                     <tbody>
                                                         <tr>
                                                             <th scope="row">رقم الفاتورة</th>
-                                                            <td>{{ $invoices->invoice_number }}</td>
+                                                            <td>{{ $invoice->invoice_number }}</td>
                                                             <th scope="row">تاريخ الاصدار</th>
-                                                            <td>{{ $invoices->invoice_Date }}</td>
+                                                            <td>{{ $invoice->invoice_date }}</td>
                                                             <th scope="row">تاريخ الاستحقاق</th>
-                                                            <td>{{ $invoices->Due_date }}</td>
+                                                            <td>{{ $invoice->due_date }}</td>
                                                             <th scope="row">القسم</th>
-                                                            <td>{{ $invoices->Section->section_name }}</td>
+                                                            <td>{{ $invoice->Section->section_name }}</td>
                                                         </tr>
 
                                                         <tr>
-                                                            <th scope="row">المنتج</th>
-                                                            <td>{{ $invoices->product }}</td>
+                                                            <th scope="row">الخدمات</th>
+                                                            <td>@foreach ($invoice->services as $service )
+                                            <br/>
+                                            {{$service->service_name}}
+                                            {{$service->price}}
+                                            <br/>
+                                        @endforeach</td>
+                                                            <th scope="row">قيمة الخدمات قبل الخصم والضريبة</th>
+                                                            <td>{{ $invoice->amount_collection }}</td>
                                                             <th scope="row">مبلغ التحصيل</th>
-                                                            <td>{{ $invoices->Amount_collection }}</td>
-                                                            <th scope="row">مبلغ العمولة</th>
-                                                            <td>{{ $invoices->Amount_Commission }}</td>
+                                                            <td>{{ $invoice->total_amount }}</td>
                                                             <th scope="row">الخصم</th>
-                                                            <td>{{ $invoices->Discount }}</td>
+                                                            <td>{{ $invoice->discount }}</td>
                                                         </tr>
 
 
                                                         <tr>
                                                             <th scope="row">نسبة الضريبة</th>
-                                                            <td>{{ $invoices->Rate_VAT }}</td>
+                                                            <td>{{ $invoice->rate_vat }}</td>
                                                             <th scope="row">قيمة الضريبة</th>
-                                                            <td>{{ $invoices->Value_VAT }}</td>
+                                                            <td>{{ $invoice->value_vat }}</td>
                                                             <th scope="row">الاجمالي مع الضريبة</th>
-                                                            <td>{{ $invoices->Total }}</td>
+                                                            <td>{{ $invoice->total }}</td>
                                                             <th scope="row">الحالة الحالية</th>
 
-                                                            @if ($invoices->Value_Status == 1)
+                                                            @if ($invoice->value_status == 1)
                                                                 <td><span
-                                                                        class="badge badge-pill badge-success">{{ $invoices->Status }}</span>
+                                                                        class="badge badge-pill badge-success">{{ $invoice->status }}</span>
                                                                 </td>
-                                                            @elseif($invoices->Value_Status ==2)
+                                                            @elseif($invoice->value_status ==2)
                                                                 <td><span
-                                                                        class="badge badge-pill badge-danger">{{ $invoices->Status }}</span>
+                                                                        class="badge badge-pill badge-danger">{{ $invoice->status }}</span>
                                                                 </td>
                                                             @else
                                                                 <td><span
-                                                                        class="badge badge-pill badge-warning">{{ $invoices->Status }}</span>
+                                                                        class="badge badge-pill badge-warning">{{ $invoice->status }}</span>
                                                                 </td>
                                                             @endif
                                                         </tr>
 
                                                         <tr>
                                                             <th scope="row">ملاحظات</th>
-                                                            <td>{{ $invoices->note }}</td>
+                                                            <td>{{ $invoice->note }}</td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -153,25 +158,39 @@
                                                     <thead>
                                                         <tr class="text-dark">
                                                             <th>#</th>
-                                                            <th>رقم الفاتورة</th>
-                                                            <th>نوع المنتج</th>
-                                                            <th>القسم</th>
-                                                            <th>حالة الدفع</th>
-                                                            <th>تاريخ الدفع </th>
-                                                            <th>ملاحظات</th>
-                                                            <th>تاريخ الاضافة </th>
-                                                            <th>المستخدم</th>
+                                                            <th class="border-bottom-0">رقم الفاتورة</th>
+                                    <th class="border-bottom-0">تاريخ القاتورة</th>
+                                    <th class="border-bottom-0">تاريخ الاستحقاق</th>
+                                    <th class="border-bottom-0">الخدمة</th>
+                                    <th class="border-bottom-0">القسم</th>
+                                    <th class="border-bottom-0">الخصم</th>
+                                    <th class="border-bottom-0">نسبة الضريبة</th>
+                                    <th class="border-bottom-0">قيمة الضريبة</th>
+                                    <th class="border-bottom-0">الاجمالي</th>
+                                    <th class="border-bottom-0">الاجمالي المدفوع</th>
+                                    <th class="border-bottom-0">الحالة</th>
+                                    <th class="border-bottom-0">ملاحظات</th>
+                                    <th class="border-bottom-0">العمليات</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody>
-                                                        <?php $i = 0; ?>
-                                                        @foreach ($details as $x)
-                                                            <?php $i++; ?>
-                                                            <tr>
-                                                                <td>{{ $i }}</td>
-                                                                <td>{{ $x->invoice_number }}</td>
-                                                                <td>{{ $x->product }}</td>
-                                                                <td>{{ $invoices->Section->section_name }}</td>
+
+
+                                                             <tbody>
+                                @php
+                                $i = 0;
+                                @endphp
+                                @foreach ($details as $x)
+                                    @php
+                                    $i++
+                                    @endphp
+                                    <tr>
+                                        <td>{{ $i }}</td>
+                                        <td>{{ $x->status }}</td>
+
+                                        <td>{{ $x->payment_date }}</td>
+
+
+
                                                                 @if ($x->Value_Status == 1)
                                                                     <td><span
                                                                             class="badge badge-pill badge-success">{{ $x->Status }}</span>
@@ -304,7 +323,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="{{ route('delete_file') }}" method="post">
+                <form action="#" method="post">
 
                     {{ csrf_field() }}
                     <div class="modal-body">

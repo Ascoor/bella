@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Invoice;
 use Illuminate\Http\Request;
 use App\Models\Invoice_details;
+use App\Models\InvoiceAttachment;
+use App\Models\InvoiceDetail;
 
 class InvoicesDetailsController extends Controller
 {
@@ -61,9 +64,15 @@ class InvoicesDetailsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
+
     {
-        //
+        $invoice = Invoice::where('id',$id)->first();
+        $details  = InvoiceDetail::where('invoice_id',$id)->get();
+        $attachments  = InvoiceAttachment::where('invoice_id',$id)->get();
+
+        return view('invoice.details_invoice',compact('invoice','details','attachments'));
     }
+
 
     /**
      * Update the specified resource in storage.
