@@ -101,6 +101,9 @@ Route::get('/appointments', [AppointmentController::class, 'sort'])->name('appoi
 Route::resource('clients', ClientController::class);
 Route::resource('invoices', InvoiceController::class);
 Route::resource('invoicedetails', InvoicesDetailsController::class);
+Route::put('/invoices/{id}', 'InvoiceController@update')->name('invoices.update');
+
+
 Route::resource('sections', SectionController::class);
 Route::resource('doctors', DoctorController::class);
 Route::resource('assests', AssestController::class);

@@ -243,7 +243,7 @@ $(document).ready(function() {
 
   var discountValue = parseFloat($("#discount").val()) || 0;
   var vatRate = parseFloat($("#rate_vat").val()) || 0;
-  var vatValue = ((genTotal - discountValue) * (vatRate/100));
+  var vatValue = ((genTotal ) * (vatRate/100));
   var tempTotal = (genTotal - discountValue) + vatValue;
 
   var amountCollection = genTotal.toFixed(2);
