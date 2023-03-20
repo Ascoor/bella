@@ -94,11 +94,9 @@
   <div class="col">
     <label for="services" class="control-label">Choose Services:</label>
     <div id="services">
-
     </div>
   </div>
 </div>
-
 <div class="row">
   <div class="col">
     <label for="amount_collection" class="control-label">Amount Collection:</label>

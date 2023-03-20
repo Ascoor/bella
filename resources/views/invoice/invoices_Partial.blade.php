@@ -23,7 +23,6 @@
                 </span>
             </div>
         </div>
-
     </div>
     <!-- breadcrumb -->
 @endsection

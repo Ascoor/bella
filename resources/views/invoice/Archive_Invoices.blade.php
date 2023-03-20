@@ -36,7 +36,6 @@
                     type: "success"
                 })
             }
-
         </script>
     @endif
 

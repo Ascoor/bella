@@ -180,7 +180,6 @@
     const remainingBalance = totalAmount - amountCollected;
     remainingBalanceInput.value = isNaN(remainingBalance) ? '' : remainingBalance.toFixed(2);
   }
-
   totalAmountInput.addEventListener('input', updateRemainingBalance);
   amountCollectionInput.addEventListener('input', updateRemainingBalance);
 </script>

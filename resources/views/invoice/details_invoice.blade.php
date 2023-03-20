@@ -19,7 +19,6 @@
                     تفاصيل الفاتورة</span>
             </div>
         </div>
-
     </div>
     <!-- breadcrumb -->
 @endsection

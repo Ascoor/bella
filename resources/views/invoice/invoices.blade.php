@@ -36,11 +36,8 @@
                     type: "success"
                 })
             }
-
         </script>
     @endif
-
-
     @if (session()->has('Status_Update'))
         <script>
             window.onload = function() {

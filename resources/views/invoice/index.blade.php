@@ -49,7 +49,6 @@
                     type: "success"
                 })
             }
-
         </script>
     @endif
 

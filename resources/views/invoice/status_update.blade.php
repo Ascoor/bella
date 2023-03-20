@@ -13,8 +13,9 @@
                     تغير حالة الدفع</span>
             </div>
         </div>
-
     </div>
+
+
     <!-- breadcrumb -->
 @endsection
 @section('content')
