@@ -13,7 +13,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
-use InvoiceAttachments;
 
 class InvoiceController extends Controller
 {
@@ -124,24 +123,24 @@ $services = Service::all();
     return redirect()->route('invoices.index')->with('success', 'Invoice created successfully!');
 }
 
+
+
+public function edit($id)
+{
+    $clients = Client::all();
+    $services = Service::all();
+    $sections = Section::all();
+$invoice =  Invoice::find($id);
+    return view('invoice.edit_invoice', compact('invoice', 'clients', 'services', 'sections'));
+}
     /**
      * Display the specified invoice.
      *
      * @param  \App\Models\Invoice  $invoice
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function update(Request $request, $id)
     {
-        $clients = Client::all();
-        $services = Service::all();
-        $sections = Section::all();
-$invoice =  Invoice::find($id);
-        return view('invoice.edit_invoice', compact('invoice', 'clients', 'services', 'sections'));
-    }
-    public function update(Request $request)
-    {
-
-        $invoice = Invoice::findOrFail($request->invoice_id);
         $validatedData = $request->validate([
             'invoice_number' => 'required',
             'invoice_date' => 'required',
@@ -155,11 +154,11 @@ $invoice =  Invoice::find($id);
             'rate_vat' => 'required',
             'value_vat' => 'required',
             'total' => 'required',
-            'total_amount' => 'required',
             'note' => 'nullable|string',
-
+            'attached_files.*' => 'nullable|mimes:pdf,jpeg,jpg,png|max:2048',
         ]);
 
+        $invoice = Invoice::findOrFail($id);
         $invoice->invoice_number = $validatedData['invoice_number'];
         $invoice->invoice_date = $validatedData['invoice_date'];
         $invoice->due_date = $validatedData['due_date'];
@@ -170,60 +169,32 @@ $invoice =  Invoice::find($id);
         $invoice->rate_vat = $validatedData['rate_vat'];
         $invoice->value_vat = $validatedData['value_vat'];
         $invoice->total = $validatedData['total'];
-        $invoice->total_amount = $validatedData['total_amount'];
         $invoice->note = $validatedData['note'];
-        $invoice->created_by = Auth::id();
+
         $invoice->save();
 
         $invoice->services()->sync($validatedData['services'], ['section_id' => $validatedData['section_id']]);
 
-        $invoice_details = new InvoiceDetail();
-        $invoice_details->invoice_id = $invoice->id;
+        $invoice_details = Invoice_details::where('invoice_id', $id)->firstOrFail();
         $invoice_details->note = $validatedData['note'];
         $invoice_details->user_id = Auth::id();
         $invoice_details->save();
 
-    // Create a folder for the invoice
-    $folderName = 'invoices/' . $invoice->invoice_number;
-    Storage::makeDirectory($folderName);
-
-    // Handle file upload and update attached_files column
-    if ($request->hasFile('attached_files')) {
-        foreach ($request->attached_files as $file) {
-            $filename = time() . '-' . $file->getClientOriginalName();
-            $file->move(public_path('storage/' . $folderName), $filename);
-            $attachment = new InvoiceAttachment();
-            $attachment->invoice_id = $invoice->id;
-            $attachment->filename = $filename;
-            $attachment->save();
-        }
-        return redirect()->route('invoices.index')
-            ->with('success', 'Invoice updated successfully.');
-    }
-    }public function addAttachments(Request $request)
-    {
-        $this->validate($request, [
-            'filename' => 'mimes:pdf,jpeg,png,jpg',
-        ], [
-            'filename.mimes' => 'صيغة المرفق يجب ان تكون pdf, jpeg, png, jpg',
-        ]);
-
-        // Retrieve existing attachments
-        $attachments = InvoiceAttachment::where('invoice_id', $request->invoice_id)->get();
-
-        // Upload and save new attachments
-        $folderName = 'invoices/' . $request->invoice_number;
+        // Create a folder for the invoice if it doesn't exist
+        $folderName = 'invoices/' . $invoice->invoice_number;
         Storage::makeDirectory($folderName);
-        if ($request->hasFile('filename')) {
-            $file = $request->file('filename');
-            $filename = time() . '-' . $file->getClientOriginalName();
-            $file->move(public_path('storage/' . $folderName), $filename);
-            $attachment = new InvoiceAttachment();
-            $attachment->invoice_id = $request->invoice_id;
-            $attachment->filename = $filename;
-            $attachment->save();
-        }
 
-        return redirect()->back();
+        // Handle file attachments
+        if ($request->hasFile('attached_files')) {
+            foreach ($request->attached_files as $file) {
+                $filename = time() . '-' . $file->getClientOriginalName();
+                $file->move(public_path('storage/' . $folderName), $filename);
+                $attachment = new InvoiceAttachment();
+                $attachment->invoice_id = $invoice->id;
+                $attachment->filename = $filename;
+                $attachment->save();
+            }
+        }
+        return redirect()->route('invoices.index')->with('success', 'Invoice created successfully!');
     }
-}
+    }
