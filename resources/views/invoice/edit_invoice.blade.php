@@ -45,11 +45,10 @@
             <div class="card">
                 <div class="card-body">
 
-                <form action="{{ route('invoices.update', ['id' => $invoice->id]) }}" method="post" enctype="multipart/form-data" autocomplete="off">
-
-    {{ csrf_field() }}
-    {{ method_field('PUT') }}
-
+                <form action="{{ route('invoices.update', $invoice->id) }}" method="POST" enctype="multipart/form-data" autocomplete="off">
+    @csrf
+    @method('PUT')
+    <input type="hidden" name="invoice_id" value="{{ $invoice->id }}">
     {{-- 1 --}}
     <div class="row">
         <div class="col">
@@ -128,18 +127,6 @@
   <div class="row mt-4">
   <div class="col">
                                 <label for="inputName" class="control-label">قيمة ضريبة القيمة المضافة</label>
-                                <input type="text" class="form-control" id="value_vat" name="value_vat"  value="{{$invoice->value_vat}}" readonly>
-                            </div>
-  <div class="col">
-    <label for="total" class="control-label">Total:</label>
-    <input type="text" id="total" name="total" class="form-control" value="{{$invoice->total}}" readonly>
-  </div>
-  <div class="col">
-    <label for="total" class="control-label">Amount Total:</label>
-    <input type="text" id="total" name="total" class="form-control" value="0.00" readonly>
-  </div>
-</div>
-<br>
                                 <input type="text" class="form-control" id="value_vat" name="value_vat"   value="{{$invoice->value_vat}}" readonly>
                             </div>
   <div class="col">

@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
+use InvoiceAttachments;
 
 class InvoiceController extends Controller
 {
@@ -197,4 +198,34 @@ $invoice =  Invoice::find($id);
         }
         return redirect()->route('invoices.index')->with('success', 'Invoice created successfully!');
     }
+
+
+
+    public function addAttachments(Request $request)
+    {
+        $this->validate($request, [
+            'filename' => 'mimes:pdf,jpeg,png,jpg',
+        ], [
+            'filename.mimes' => 'صيغة المرفق يجب ان تكون pdf, jpeg, png, jpg',
+        ]);
+
+        // Retrieve existing attachments
+        $attachments = InvoiceAttachment::where('invoice_id', $request->invoice_id)->get();
+
+        // Upload and save new attachments
+        $folderName = 'invoices/' . $request->invoice_number;
+        Storage::makeDirectory($folderName);
+        if ($request->hasFile('filename')) {
+            $file = $request->file('filename');
+            $filename = time() . '-' . $file->getClientOriginalName();
+            $file->move(public_path('storage/' . $folderName), $filename);
+            $attachment = new InvoiceAttachment();
+            $attachment->invoice_id = $request->invoice_id;
+            $attachment->filename = $filename;
+            $attachment->save();
+        }
+
+        return redirect()->back();
     }
+
+}
