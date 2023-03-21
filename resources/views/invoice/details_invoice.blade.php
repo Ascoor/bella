@@ -221,28 +221,28 @@
                                         <div class="tab-pane" id="tab6">
                                             <!--المرفقات-->
                                             <div class="card card-statistics">
-                                                @can('اضافة مرفق')
+
                                                     <div class="card-body">
                                                         <p class="text-danger">* صيغة المرفق pdf, jpeg ,.jpg , png </p>
                                                         <h5 class="card-title">اضافة مرفقات</h5>
-                                                        <form method="post" action="{{ url('/InvoiceAttachments') }}"
+                                                        <form method="post" action="{{ url('/invoices/add-attachments') }}"
                                                             enctype="multipart/form-data">
                                                             {{ csrf_field() }}
                                                             <div class="custom-file">
                                                                 <input type="file" class="custom-file-input" id="customFile"
-                                                                    name="file_name" required>
+                                                                    name="filename" required>
                                                                 <input type="hidden" id="customFile" name="invoice_number"
-                                                                    value="{{ $invoices->invoice_number }}">
-                                                                <input type="hidden" id="invoice_id" name="invoice_id"
-                                                                    value="{{ $invoices->id }}">
+                                                                    value="{{ $invoice->invoice_number }}">
+                                                                <input type="hidden" id="invoiceId" name="invoice_id"
+                                                                    value="{{ $invoice->id }}">
                                                                 <label class="custom-file-label" for="customFile">حدد
                                                                     المرفق</label>
                                                             </div><br><br>
                                                             <button type="submit" class="btn btn-primary btn-sm "
-                                                                name="uploadedFile">تاكيد</button>
+                                                                name="uploadedFile">إضافة</button>
                                                         </form>
                                                     </div>
-                                                @endcan
+
                                                 <br>
 
                                                 <div class="table-responsive mt-15">
@@ -258,41 +258,14 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <?php $i = 0; ?>
-                                                            @foreach ($attachments as $attachment)
-                                                                <?php $i++; ?>
-                                                                <tr>
-                                                                    <td>{{ $i }}</td>
-                                                                    <td>{{ $attachment->file_name }}</td>
-                                                                    <td>{{ $attachment->Created_by }}</td>
-                                                                    <td>{{ $attachment->created_at }}</td>
-                                                                    <td colspan="2">
+            @foreach($attachments as $attachment)
+                <tr>
+                    <td>{{ $attachment->filename }}</td>
+                    <td><a href="{{ route('download.attachment', ['filename' => $attachment->filename, 'invoice_number' => $invoice->invoice_number]) }}">Download</a></td>
+                    <td><a href="#" class="view-attachment" data-filename="{{ $attachment->filename }}" data-invoice-id="{{ $invoice->id }}">View</a></td>
 
-                                                                        <a class="btn btn-outline-success btn-sm"
-                                                                            href="{{ url('View_file') }}/{{ $invoices->invoice_number }}/{{ $attachment->file_name }}"
-                                                                            role="button"><i class="fas fa-eye"></i>&nbsp;
-                                                                            عرض</a>
-
-                                                                        <a class="btn btn-outline-info btn-sm"
-                                                                            href="{{ url('download') }}/{{ $invoices->invoice_number }}/{{ $attachment->file_name }}"
-                                                                            role="button"><i
-                                                                                class="fas fa-download"></i>&nbsp;
-                                                                            تحميل</a>
-
-                                                                        @can('حذف المرفق')
-                                                                            <button class="btn btn-outline-danger btn-sm"
-                                                                                data-toggle="modal"
-                                                                                data-file_name="{{ $attachment->file_name }}"
-                                                                                data-invoice_number="{{ $attachment->invoice_number }}"
-                                                                                data-id_file="{{ $attachment->id }}"
-                                                                                data-target="#delete_file">حذف</button>
-                                                                        @endcan
-
-                                                                    </td>
-                                                                </tr>
-                                                            @endforeach
-                                                        </tbody>
-                                                        </tbody>
+            @endforeach
+        </tbody>
                                                     </table>
 
                                                 </div>
@@ -311,6 +284,8 @@
 
     </div>
     <!-- /row -->
+
+
 
     <!-- delete -->
     <div class="modal fade" id="delete_file" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -366,6 +341,31 @@
     <script src="{{ URL::asset('assets/plugins/clipboard/clipboard.js') }}"></script>
     <!-- Internal Prism js-->
     <script src="{{ URL::asset('assets/plugins/prism/prism.js') }}"></script>
+<script>
+    $(document).ready(function() {
+        $('.view-attachment').on('click', function(e) {
+            e.preventDefault();
+
+            var filename = $(this).data('filename');
+            var invoiceId = $(this).data('invoice-id');
+
+            $.ajax({
+                url: '{{ route("view.attachment", ["invoice_number" => $invoice->invoice_number, "filename" => ":filename", "id" => ":invoiceId"]) }}'.replace(':filename', filename).replace(':invoiceId', invoiceId),
+                type: 'GET',
+                xhrFields: {
+                    responseType: 'blob'
+                },
+                success: function(response) {
+                    var fileURL = URL.createObjectURL(response);
+                    window.open(fileURL, '_blank');
+                },
+                error: function(xhr, status, error) {
+                    console.log(xhr.responseText); // Log any error messages to the console
+                }
+            });
+        });
+    });
+</script>
 
     <script>
         $('#delete_file').on('show.bs.modal', function(event) {

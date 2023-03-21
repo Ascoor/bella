@@ -23,6 +23,7 @@ use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\ExpenseTypeController;
 use App\Http\Controllers\IncomeTypeController;
 use App\Http\Controllers\RevenueController;
+use App\Models\InvoiceAttachment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -107,6 +108,13 @@ Route::resource('assests', AssestController::class);
 Route::resource('services', ServiceController::class);
 Route::resource('expenses', ExpenseController::class);
 Route::resource('revenues', RevenueController::class);
+
+
+Route::get('/invoice/{id}/attachments', 'InvoiceController@showAttachments')->name('invoice.attachments');
+Route::get('invoices/{invoice_number}/attachments/{filename}', 'App\Http\Controllers\InvoicesDetailsController@download')->name('download.attachment');
+Route::get('invoices/{invoice_number}/attachments/{filename}/view', 'App\Http\Controllers\InvoicesDetailsController@view')->name('view.attachment');
+Route::post('invoices/add-attachments', [InvoiceController::class,'addAttachments'])->name('invoices.addAttachments');
+Route::put('/invoices/{invoice}', [InvoiceController::class,'update'])->name('invoices.update');
 
 Route::get('expenses_revenues', [ExpensesAndRevenuesController::class, 'index'])->name('expenses_revenues');
 

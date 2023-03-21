@@ -86,6 +86,21 @@ class InvoicesDetailsController extends Controller
         //
     }
 
+
+
+    public function download($invoice_number, $filename)
+        {
+            $attachmentPath = storage_path("app/public/invoices/$invoice_number/$filename");
+            return response()->download($attachmentPath);
+        }
+
+        public function view($invoice_number, $filename)
+        {
+            $attachmentPath = storage_path("app/public/invoices/$invoice_number/$filename");
+            return response()->file($attachmentPath);
+        }
+
+
     /**
      * Remove the specified resource from storage.
      *

@@ -5,14 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Client;
 use App\Models\Invoice;
 use App\Models\Invoice_details;
-use App\Models\InvoiceAttachment as ModelsInvoiceAttachment;
+use App\Models\InvoiceAttachment;
 use App\Models\InvoiceDetail;
 use App\Models\Service;
 use App\Models\Section;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use InvoiceAttachment;
+
 use InvoiceAttachments;
 
 class InvoiceController extends Controller
@@ -114,7 +114,7 @@ $services = Service::all();
         foreach ($request->attached_files as $file) {
             $filename = time() . '-' . $file->getClientOriginalName();
             $file->move(public_path('storage/' . $folderName), $filename);
-            $attachment = new ModelsInvoiceAttachment();
+            $attachment = new InvoiceAttachment();
             $attachment->invoice_id = $invoice->id;
             $attachment->filename = $filename;
             $attachment->save();
@@ -192,7 +192,7 @@ $invoice =  Invoice::find($id);
         foreach ($request->attached_files as $file) {
             $filename = time() . '-' . $file->getClientOriginalName();
             $file->move(public_path('storage/' . $folderName), $filename);
-            $attachment = new InvoiceAttachments();
+            $attachment = new InvoiceAttachment();
             $attachment->invoice_id = $invoice->id;
             $attachment->filename = $filename;
             $attachment->save();
@@ -200,6 +200,30 @@ $invoice =  Invoice::find($id);
         return redirect()->route('invoices.index')
             ->with('success', 'Invoice updated successfully.');
     }
+    }public function addAttachments(Request $request)
+    {
+        $this->validate($request, [
+            'filename' => 'mimes:pdf,jpeg,png,jpg',
+        ], [
+            'filename.mimes' => 'صيغة المرفق يجب ان تكون pdf, jpeg, png, jpg',
+        ]);
 
-}
+        // Retrieve existing attachments
+        $attachments = InvoiceAttachment::where('invoice_id', $request->invoice_id)->get();
+
+        // Upload and save new attachments
+        $folderName = 'invoices/' . $request->invoice_number;
+        Storage::makeDirectory($folderName);
+        if ($request->hasFile('filename')) {
+            $file = $request->file('filename');
+            $filename = time() . '-' . $file->getClientOriginalName();
+            $file->move(public_path('storage/' . $folderName), $filename);
+            $attachment = new InvoiceAttachment();
+            $attachment->invoice_id = $request->invoice_id;
+            $attachment->filename = $filename;
+            $attachment->save();
+        }
+
+        return redirect()->back();
+    }
 }

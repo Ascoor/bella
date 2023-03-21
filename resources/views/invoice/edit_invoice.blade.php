@@ -45,15 +45,17 @@
             <div class="card">
                 <div class="card-body">
 
-                <form action="{{ route('invoices.update', $invoice->id) }}" method="post" enctype="multipart/form-data" autocomplete="off">
-    {{ csrf_field() }}
-    {{ method_field('PUT') }}
-
+                <form action="{{ route('invoices.update', $invoice->id) }}" method="POST" enctype="multipart/form-data" autocomplete="off">
+    @csrf
+    @method('PUT')
+    <input type="hidden" name="invoice_id" value="{{ $invoice->id }}">
     {{-- 1 --}}
     <div class="row">
         <div class="col">
+
             <label for="inputName" class="control-label">رقم الفاتورة</label>
             <input type="text" class="form-control" id="inputName" name="invoice_number" title="يرجي ادخال رقم الفاتورة" value="{{ $invoice->invoice_number }}" required>
+
         </div>
 
         <div class="col">
@@ -104,29 +106,38 @@
     </div>
 
     <div class="row">
-        <div class="col">
-            <label for="amount_collection" class="control-label">Amount Collection:</label>
-            <input type="text" id="amount_collection" name="amount_collection" class="form-control" value="{{ $invoice->amount_collection }}" readonly>
+  <div class="col">
+    <label for="amount_collection" class="control-label">Amount Collection:</label>
+    <input type="text" id="amount_collection" name="amount_collection" class="form-control" value="{{$invoice->amount_collection}}" readonly>
+  </div>
+  <div class="col">
+    <label for="discount" class="control-label">Discount:</label>
+    <input type="text" id="discount" name="discount" class="form-control" value="{{ $invoice->discount }}">
+  </div>
+  <div class="col">
+    <label for="rate_vat" class="control-label">Rate VAT:</label>
+    <select id="rate_vat" name="rate_vat" class="form-control" value="{{ $invoice->rate_vat }}">
+      <option value="0">0%</option>
+      <option value="5">5%</option>
+      <option value="10">10%</option>
+    </select>
+  </div>
 </div>
-<div class="col">
-    <label for="total_amount" class="control-label">Total Amount:</label>
-    <input type="text" id="total_amount" name="total_amount" class="form-control" value="0.00" readonly>
+  <div class="row mt-4">
+  <div class="col">
+                                <label for="inputName" class="control-label">قيمة ضريبة القيمة المضافة</label>
+                                <input type="text" class="form-control" id="value_vat" name="value_vat"  value="{{$invoice->value_vat}}" readonly>
+                            </div>
+  <div class="col">
+    <label for="total" class="control-label">Total:</label>
+    <input type="text" id="total" name="total" class="form-control" value="{{$invoice->total}}" readonly>
+  </div>
+  <div class="col">
+    <label for="total" class="control-label">Amount Total:</label>
+    <input type="text" id="total" name="total" class="form-control" value="0.00" readonly>
+  </div>
 </div>
-<div class="col">
-    <label for="amount_collection" class="control-label">Amount Collected:</label>
-    <input type="text" id="amount_collection" name="amount_collection" class="form-control" value="{{ $invoice->amount_collection }}" readonly>
-</div>
-<div class="col">
-    <label for="remaining_balance" class="control-label">Remaining Balance:</label>
-    <input type="text" id="remaining_balance" name="remaining_balance" class="form-control" value="{{ $invoice->total_amount - $invoice->amount_collection }}" readonly>
-</div>
-    </div>
-<div class="row">
-                        <div class="col">
-                            <label for="exampleTextarea">ملاحظات</label>
-                            <textarea class="form-control" id="exampleTextarea" name="note" rows="3"></textarea>
-                        </div>
-                    </div><br>
+<br>
 
                     <p class="text-danger">* صيغة المرفق pdf, jpeg ,.jpg , png </p>
                     <h5 class="card-title">المرفقات</h5>
