@@ -176,7 +176,7 @@ $invoice =  Invoice::find($id);
 
         $invoice->services()->sync($validatedData['services'], ['section_id' => $validatedData['section_id']]);
 
-        $invoice_details = Invoice_details::where('invoice_id', $id)->firstOrFail();
+        $invoice_details = InvoiceDetail::where('invoice_id', $id)->firstOrFail();
         $invoice_details->note = $validatedData['note'];
         $invoice_details->user_id = Auth::id();
         $invoice_details->save();
