@@ -99,7 +99,7 @@ $services = Service::all();
 
          $invoice->services()->attach($validatedData['services'], ['section_id' => $validatedData['section_id']]);
 
-         $invoice_details = new Invoice_details();
+         $invoice_details = new InvoiceDetail();
          $invoice_details->invoice_id = $invoice_id;
          $invoice_details->note = $validatedData['note'];
          $invoice_details->user_id = Auth::id();
