@@ -24,6 +24,7 @@ class InvoiceDetails extends Migration
             $table->unsignedTinyInteger('value_status')->default(2);
             $table->string('status', 50)->default('غير مدفوعة');
             $table->string('payment_date')->nullable();
+            $table->decimal('payment_amount', 8, 2)->default('0')->nullable();
             $table->text('note')->nullable();
             $table->string('user_id', 300);
             $table->timestamps();

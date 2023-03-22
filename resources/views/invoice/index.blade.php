@@ -98,6 +98,7 @@
                                     <th class="border-bottom-0">نسبة الضريبة</th>
                                     <th class="border-bottom-0">قيمة الضريبة</th>
                                     <th class="border-bottom-0">الاجمالي</th>
+                                    <th class="border-bottom-0">المسدد</th>
                                     <th class="border-bottom-0">الحالة</th>
                                     <th class="border-bottom-0">ملاحظات</th>
                                     <th class="border-bottom-0">العمليات</th>
@@ -130,10 +131,11 @@
                                         <td>{{ $invoice->rate_vat }}</td>
                                         <td>{{ $invoice->value_vat }}</td>
                                         <td>{{ $invoice->total }}</td>
+                                        <td>{{ $invoice->total_amount }}</td>
                                         <td>
-                                            @if ($invoice->Value_Status == 1)
+                                            @if ($invoice->value_status == 1)
                                                 <span class="text-success">{{ $invoice->status }}</span>
-                                            @elseif($invoice->Value_Status == 2)
+                                            @elseif($invoice->value_status == 2)
                                                 <span class="text-danger">{{ $invoice->status }}</span>
                                             @else
                                                 <span class="text-warning">{{ $invoice->status }}</span>
@@ -148,36 +150,33 @@
                                                     class="btn ripple btn-primary btn-sm" data-toggle="dropdown"
                                                     type="button">العمليات<i class="fas fa-caret-down ml-1"></i></button>
                                                 <div class="dropdown-menu tx-13">
-                                                    ('تعديل الفاتورة')
+
                                                         <a class="dropdown-item"
                                                             href=" {{ route('invoices.edit',$invoice) }}">تعديل
                                                             الفاتورة</a>
 
+                                                            <a class="dropdown-item"
+                                                            href="{{ URL::route('status_show', [$invoice->id]) }}"><i
+                                                                class=" text-success fas
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    fa-money-bill"></i>&nbsp;&nbsp;سداد
 
-                                                    ('حذف الفاتورة')
+                                                            الفاتورة</a>
+
                                                         <a class="dropdown-item" href="#" data-invoice_id="{{ $invoice->id }}"
                                                             data-toggle="modal" data-target="#delete_invoice"><i
                                                                 class="text-danger fas fa-trash-alt"></i>&nbsp;&nbsp;حذف
                                                             الفاتورة</a>
 
 
-                                                    ('تغير حالة الدفع')
-                                                        <a class="dropdown-item"
-                                                            ><i
-                                                                class=" text-success fas
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    fa-money-bill"></i>&nbsp;&nbsp;تغير
-                                                            حالة
-                                                            الدفع</a>
 
 
-                                                    ('ارشفة الفاتورة')
-                                                        <a class="dropdown-item" href="#" data-invoice_id="{{ $invoice->id }}"
+                      <a class="dropdown-item" href="#" data-invoice_id="{{ $invoice->id }}"
                                                             data-toggle="modal" data-target="#Transfer_invoice"><i
                                                                 class="text-warning fas fa-exchange-alt"></i>&nbsp;&nbsp;نقل الي
                                                             الارشيف</a>
 
 
-                                                    ('طباعةالفاتورة')
+
                                                         <a class="dropdown-item" href="Print_invoice/{{ $invoice->id }}"><i
                                                                 class="text-success fas fa-print"></i>&nbsp;&nbsp;طباعة
                                                             الفاتورة

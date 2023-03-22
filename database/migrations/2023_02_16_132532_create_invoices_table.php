@@ -23,9 +23,9 @@ class CreateInvoicesTable extends Migration
             $table->decimal('value_vat', 8, 2)->default(0);
             $table->decimal('rate_vat', 8, 2)->default(0);
             $table->decimal('total', 8, 2);
-            $table->decimal('total_amount', 8, 2)->nullable();
+            $table->decimal('total_amount', 8, 2)->default('0.00')->nullable();
             $table->unsignedTinyInteger('value_status')->default(2);
-            $table->enum('status', ['تم السداد', 'مسدده جزئياً', 'غير مدفوعة'])->default('غير مدفوعة');
+            $table->enum('status', ['تم السداد', 'غير مسدده', 'مسدده جزئياً'])->default('غير مسدده');
             $table->unsignedBigInteger('section_id');
             $table->foreign('section_id')->references('id')->on('sections')->onDelete('cascade');
             $table->text('note')->nullable();

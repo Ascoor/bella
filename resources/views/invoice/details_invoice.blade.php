@@ -15,7 +15,7 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">قائمة الفواتير</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
+              <a href="/invoices">  <h4  class="content-title mb-0 my-auto">قائمة الفواتير</h4></a><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
                     تفاصيل الفاتورة</span>
             </div>
         </div>
@@ -91,41 +91,51 @@
                                                     <tbody>
                                                         <tr>
                                                             <th scope="row">رقم الفاتورة</th>
-                                                            <td>{{ $invoice->invoice_number }}</td>
                                                             <th scope="row">تاريخ الاصدار</th>
-                                                            <td>{{ $invoice->invoice_date }}</td>
                                                             <th scope="row">تاريخ الاستحقاق</th>
-                                                            <td>{{ $invoice->due_date }}</td>
                                                             <th scope="row">القسم</th>
-                                                            <td>{{ $invoice->Section->section_name }}</td>
-                                                        </tr>
-
-                                                        <tr>
                                                             <th scope="row">الخدمات</th>
+                                                            <th scope="row">قيمة الخدمات قبل الخصم والضريبة</th>
+
+                                                            <th scope="row">الخصم</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>{{ $invoice->invoice_number }}</td>
+                                                            <td>{{ $invoice->invoice_date }}</td>
+                                                            <td>{{ $invoice->due_date }}</td>
+                                                            <td>{{ $invoice->Section->section_name }}</td>
+
                                                             <td>@foreach ($invoice->services as $service )
                                             <br/>
                                             {{$service->service_name}}
                                             {{$service->price}}
                                             <br/>
                                         @endforeach</td>
-                                                            <th scope="row">قيمة الخدمات قبل الخصم والضريبة</th>
                                                             <td>{{ $invoice->amount_collection }}</td>
-                                                            <th scope="row">مبلغ التحصيل</th>
-                                                            <td>{{ $invoice->total_amount }}</td>
-                                                            <th scope="row">الخصم</th>
+
                                                             <td>{{ $invoice->discount }}</td>
                                                         </tr>
 
 
                                                         <tr>
-                                                            <th scope="row">نسبة الضريبة</th>
-                                                            <td>{{ $invoice->rate_vat }}</td>
-                                                            <th scope="row">قيمة الضريبة</th>
-                                                            <td>{{ $invoice->value_vat }}</td>
-                                                            <th scope="row">الاجمالي مع الضريبة</th>
-                                                            <td>{{ $invoice->total }}</td>
-                                                            <th scope="row">الحالة الحالية</th>
 
+                                                            <th scope="row">الاجمالي بعد الخصم</th>
+                                                            <th scope="row">نسبة الضريبة</th>
+                                                            <th scope="row">قيمة الضريبة</th>
+                                                            <th scope="row">الاجمالي المطلوب سداده شامل الضريبة</th>
+
+                                                            <th scope="row">ما تم سداده</th>
+                                                            <th scope="row">المبلغ المتبقي</th>
+
+                                                            <th scope="row">حالة السداد </th>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>{{ $invoice->amount_collection - $invoice->discount }}</td>
+                                                            <td>{{ $invoice->rate_vat }}%</td>
+                                                            <td>{{ $invoice->value_vat }}</td>
+                                                            <td>{{ $invoice->total }}</td>
+                                                            <td>{{ $invoice->total_amount }}</td>
+                                                            <td>{{ $invoice->total - $invoice->total_amount }}</td>
                                                             @if ($invoice->value_status == 1)
                                                                 <td><span
                                                                         class="badge badge-pill badge-success">{{ $invoice->status }}</span>
@@ -204,7 +214,8 @@
                                                                             class="badge badge-pill badge-warning">{{ $x->Status }}</span>
                                                                     </td>
                                                                 @endif
-                                                                <td>{{ $x->Payment_Date }}</td>
+                                                                <td>{{ $x->payment_date }}</td>
+                                                                <td>{{ $x->payment_amount }}</td>
                                                                 <td>{{ $x->note }}</td>
                                                                 <td>{{ $x->created_at }}</td>
                                                                 <td>{{ $x->user }}</td>
@@ -212,6 +223,10 @@
                                                         @endforeach
                                                     </tbody>
                                                 </table>
+                                                <a class="btn btn-success"
+                                                            href="{{ URL::route('status_show', [$invoice->id]) }}">
+
+                                                            سداد الفاتورة </a>
 
 
                                             </div>

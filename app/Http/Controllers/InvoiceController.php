@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 use InvoiceAttachments;
+use InvoiceDetails;
 
 class InvoiceController extends Controller
 {
@@ -199,6 +200,56 @@ $invoice =  Invoice::find($id);
         return redirect()->route('invoices.index')->with('success', 'Invoice created successfully!');
     }
 
+    public function show($id)
+    {
+        $invoice = invoice::where('id', $id)->first();
+        return view('invoice.status_update', compact('invoice'));
+    }
+public function statusUpdate($id, Request $request)
+{
+    $invoice = Invoice::findOrFail($id);
+
+    $validatedData = $request->validate([
+        'invoice_id' => 'required',
+
+        'payment_amount' => 'required'
+    ]);
+
+    $payment_amount = $request->payment_amount;
+
+    // Calculate the new amount paid
+    $new_amount_paid = $invoice->total_amount + $payment_amount;
+// Check if new amount paid is greater than or equal to the invoice total
+if ($new_amount_paid > $invoice->total) {
+    return redirect()->back()->withErrors(['total_amount' => 'The total amount paid must be greater than or equal to the invoice total.']);
+}
+    // Check if the new amount paid is less than the invoice total
+    if ($new_amount_paid < $invoice->total) {
+        $invoice->status = 'مسدده جزئياً';
+        $invoice->value_status = 3;
+    }
+    // Check if the new amount paid is equal to the invoice total
+    else if ($new_amount_paid == $invoice->total) {
+        $invoice->status = 'تم السداد';
+        $invoice->value_status = 1;
+    }
+
+    $invoice->total_amount = $new_amount_paid;
+    $invoice->save();
+
+    InvoiceDetail::create([
+        'invoice_id' => $request->invoice_id,
+        'status' => $invoice->status,
+        'value_status' => $invoice->value_status,
+        'payment_amount' => $request->payment_amount,
+        'note' => $request->note,
+        'payment_date' => $request->payment_date,
+        'user_id' => Auth::id(),
+    ]);
+
+    session()->flash('status_update');
+    return redirect('/invoices');
+}
 
 
     public function addAttachments(Request $request)

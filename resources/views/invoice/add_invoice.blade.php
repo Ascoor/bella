@@ -68,7 +68,7 @@
                     </div>
                     <div class="row">
                         <div class="col">
-                            <label for="client" class="control-label">Choose client:</label>
+                            <label for="client" class="control-label">حدد العميل</label>
                             <select id="client_id" name="client_id">
                                 <option value="">Choose</option>
                                 @foreach ($clients as $client)
@@ -81,7 +81,7 @@
                     {{-- 2 --}}
                     <div class="row">
   <div class="col">
-    <label for="section" class="control-label">Choose Section:</label>
+    <label for="section" class="control-label">إختيار القسم</label>
     <select id="section" name="section_id">
       <option value="">Choose</option>
       @foreach ($sections as $section)
@@ -92,7 +92,7 @@
 </div>
 <div class="row">
   <div class="col">
-    <label for="services" class="control-label">Choose Services:</label>
+    <label for="services" class="control-label">حدد الخدمات</label>
     <div id="services">
 
     </div>
@@ -101,16 +101,16 @@
 
 <div class="row">
   <div class="col">
-    <label for="amount_collection" class="control-label">Amount Collection:</label>
+    <label for="amount_collection" class="control-label">قيمة الخدمات</label>
     <input type="text" id="amount_collection" name="amount_collection" class="form-control" value="0.00" readonly>
   </div>
   <div class="col">
-    <label for="discount" class="control-label">Discount:</label>
+    <label for="discount" class="control-label">الخضم</label>
     <input type="text" id="discount" name="discount" class="form-control" value="0.00">
   </div>
   <div class="col">
-    <label for="rate_vat" class="control-label">Rate VAT:</label>
-    <select id="rate_vat" name="rate_vat" class="form-control" value="0.00">
+    <label for="rate_vat" class="control-label">نسبة الضريبة</label>
+    <select id="rate_vat" name="rate_vat" class="form-control" value="0">
       <option value="0">0%</option>
       <option value="5">5%</option>
       <option value="10">10%</option>
@@ -123,7 +123,7 @@
                                 <input type="text" class="form-control" id="value_vat" name="value_vat"  value="0.00" readonly>
                             </div>
   <div class="col">
-    <label for="total" class="control-label">Total:</label>
+    <label for="total" class="control-label">الإجمالي</label>
     <input type="text" id="total" name="total" class="form-control" value="0.00" readonly>
   </div>
 </div>

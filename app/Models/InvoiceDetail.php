@@ -13,6 +13,7 @@ class InvoiceDetail extends Model
         'status',
         'value_status',
         'payment_date',
+        'payment_amount',
         'note',
         'user_id',
     ];

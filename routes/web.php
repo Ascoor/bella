@@ -118,6 +118,8 @@ Route::get('invoices/{invoice_number}/attachments/{filename}', 'App\Http\Control
 Route::get('invoices/{invoice_number}/attachments/{filename}/view', 'App\Http\Controllers\InvoicesDetailsController@view')->name('view.attachment');
 Route::post('invoices/add-attachments', [InvoiceController::class,'addAttachments'])->name('invoices.addAttachments');
 Route::put('/invoices/{invoice}', [InvoiceController::class,'update'])->name('invoices.update');
+Route::get('/status_show/{id}', [InvoiceController::class,'show'])->name('status_show');
+Route::post('/status_update/{id}', [InvoiceController::class,'statusUpdate'])->name('status_update');
 
 Route::get('expenses_revenues', [ExpensesAndRevenuesController::class, 'index'])->name('expenses_revenues');
 
