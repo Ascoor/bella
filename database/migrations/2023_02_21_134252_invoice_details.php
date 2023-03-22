@@ -13,7 +13,7 @@ class InvoiceDetails extends Migration
      */
     public function up()
     {
-        Schema::create('Invoice_details', function (Blueprint $table) {
+        Schema::create('invoice_details', function (Blueprint $table) {
             $table->id();
 
 
