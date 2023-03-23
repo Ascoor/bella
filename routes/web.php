@@ -23,7 +23,7 @@ use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\ExpenseTypeController;
 use App\Http\Controllers\IncomeTypeController;
 use App\Http\Controllers\RevenueController;
-use App\Models\InvoiceAttachment;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -40,7 +40,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Route::get('/ww', function () {
-//     return view('thanks', [
+//     return view('index', [
 //         'appointments' => Appointment::all(),
 //     ]);
 
@@ -100,9 +100,19 @@ Route::delete('/appointments/{id}', [AppointmentController::class, 'destroy'])->
 Route::put('/appointments/{appointment}', [AppointmentController::class, 'update'])->name('appointments.update');
 Route::get('/appointments', [AppointmentController::class, 'sort'])->name('appointments.sort');
 Route::resource('clients', ClientController::class);
-Route::resource('invoices', InvoiceController::class);
 Route::resource('invoicedetails', InvoicesDetailsController::class);
-Route::put('/invoices/{id}', 'InvoiceController@update')->name('invoices.update');
+
+
+Route::post('/status_update/{id}', [InvoiceController::class,'statusUpdate'])->name('status_update');
+Route::get('/invoice/{id}/attachments', [InvoiceController::class,'showAttachments'])->name('invoice. attachments');
+Route::resource('invoices', InvoiceController::class);
+Route::delete('invoices/{invoice}', [InvoiceController::class, 'destroy'])->name('invoices.destroy');
+Route::post('invoices/add-attachments', [InvoiceController::class,'addAttachments'])->name('invoices.addAttachments');
+Route::get('/status_show/{id}', [InvoiceController::class,'show'])->name('status_show');
+Route::put('/invoices/{id}', [InvoiceController::class,'shupdateow'])->name('invoices.update');
+
+
+
 
 
 Route::resource('sections', SectionController::class);
@@ -112,15 +122,12 @@ Route::resource('services', ServiceController::class);
 Route::resource('expenses', ExpenseController::class);
 Route::resource('revenues', RevenueController::class);
 
-Route::delete('invoices/{invoice}', [InvoiceController::class, 'destroy'])->name('invoices.destroy');
 
-Route::get('/invoice/{id}/attachments', 'InvoiceController@showAttachments')->name('invoice.attachments');
 Route::get('invoices/{invoice_number}/attachments/{filename}', 'App\Http\Controllers\InvoicesDetailsController@download')->name('download.attachment');
 Route::get('invoices/{invoice_number}/attachments/{filename}/view', 'App\Http\Controllers\InvoicesDetailsController@view')->name('view.attachment');
-Route::post('invoices/add-attachments', [InvoiceController::class,'addAttachments'])->name('invoices.addAttachments');
-Route::put('/invoices/{invoice}', [InvoiceController::class,'update'])->name('invoices.update');
-Route::get('/status_show/{id}', [InvoiceController::class,'show'])->name('status_show');
-Route::post('/status_update/{id}', [InvoiceController::class,'statusUpdate'])->name('status_update');
+
+
+
 
 Route::get('expenses_revenues', [ExpensesAndRevenuesController::class, 'index'])->name('expenses_revenues');
 
