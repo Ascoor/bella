@@ -152,7 +152,8 @@ aria-hidden="true">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-            <form action="{{ route('doctors.store') }}" method="POST">
+      <form action="{{ route('doctors.store') }}" method="POST" enctype="multipart/form-data">
+
                 @method('POST')
                 @csrf
         <div class="modal-body">
@@ -180,7 +181,7 @@ aria-hidden="true">
           </div>
           <div class="form-group">
             <label for="phone" class="col-form-label">رقم الجوال:</label>
-            <input type="text" class="form-control" id="phone" name="phone">
+            <input type="tell" class="form-control" id="phone" name="phone">
           </div>
           <div class="form-group">
             <label for="username" class="col-form-label">اسم المستخدم:</label>

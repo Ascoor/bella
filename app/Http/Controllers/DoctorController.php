@@ -51,31 +51,31 @@ public function create()
 {
     $data = $request->validate([
         'name' => 'required',
-        'username' => ['required', Rule::unique('doctors')],
+        'username' => ['nullable', Rule::unique('doctors')],
         'password' => 'required',
-        'specialization' => 'nullable',
-        'phone' => 'nullable',
+        'specialization' => 'nullable|required_if:photo,null',
+        'phone' => 'nullable|required_if:photo,null',
         'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         'section_id' => 'required|exists:sections,id',
     ]);
-    $doctor->fill($data);
+
+    $doctor = Doctor::create($data);
 
     if ($request->hasFile('photo')) {
         $image = $request->file('photo');
         $filename = time() . '.' . $image->getClientOriginalExtension();
         $location = public_path('uploads/doctors/' . $filename);
         Image::make($image)->resize(300, 300)->save($location);
-        $doctor->photo = $filename; // set the "photo" attribute directly on the model
+        $doctor->update(['photo' => $filename]);
     } else {
         // set default image if no photo is uploaded
-        $doctor->photo = 'logo.png'; // set the "photo" attribute directly on the model
+        $doctor->update(['photo' => 'logo.png']);
     }
-
-    $doctor->save();
 
     session()->flash('Add', 'تمت الإضافة بنجاح.');
     return redirect()->back();
 }
+
 
 
 /**
