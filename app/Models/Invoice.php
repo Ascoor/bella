@@ -53,11 +53,11 @@ class Invoice extends Model
 
         public function attachments()
         {
-            return $this->hasMany(Attachment::class);
+            return $this->hasMany(InvoiceAttachment::class);
         }
         public function invoice_detail()
         {
-            return $this->belongsTo(InvoiceDetail::class);
+            return $this->hasMany(InvoiceDetail::class);
         }
 
     }

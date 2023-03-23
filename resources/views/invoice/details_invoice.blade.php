@@ -99,7 +99,7 @@
 
                                                             <th scope="row">الخصم</th>
                                                         </tr>
-                                                        <tr>
+                                                        <tr style="background-color: #f1fdee;">
                                                             <td>{{ $invoice->invoice_number }}</td>
                                                             <td>{{ $invoice->invoice_date }}</td>
                                                             <td>{{ $invoice->due_date }}</td>
@@ -108,7 +108,7 @@
                                                             <td>@foreach ($invoice->services as $service )
                                             <br/>
                                             {{$service->service_name}}
-                                            {{$service->price}}
+
                                             <br/>
                                         @endforeach</td>
                                                             <td>{{ $invoice->amount_collection }}</td>
@@ -117,7 +117,7 @@
                                                         </tr>
 
 
-                                                        <tr>
+                                                        <tr >
 
                                                             <th scope="row">الاجمالي بعد الخصم</th>
                                                             <th scope="row">نسبة الضريبة</th>
@@ -129,13 +129,13 @@
 
                                                             <th scope="row">حالة السداد </th>
                                                         </tr>
-                                                        <tr>
+                                                        <tr style="background-color: #f1fdee;">
                                                             <td>{{ $invoice->amount_collection - $invoice->discount }}</td>
                                                             <td>{{ $invoice->rate_vat }}%</td>
                                                             <td>{{ $invoice->value_vat }}</td>
                                                             <td>{{ $invoice->total }}</td>
                                                             <td>{{ $invoice->total_amount }}</td>
-                                                            <td>{{ $invoice->total - $invoice->total_amount }}</td>
+                                                            <td >{{ $invoice->total - $invoice->total_amount }}</td>
                                                             @if ($invoice->value_status == 1)
                                                                 <td><span
                                                                         class="badge badge-pill badge-success">{{ $invoice->status }}</span>
@@ -150,10 +150,11 @@
                                                                 </td>
                                                             @endif
                                                         </tr>
+<tr>
 
-                                                        <tr>
-                                                            <th scope="row">ملاحظات</th>
-                                                            <td>{{ $invoice->note }}</td>
+    <th scope="row">ملاحظات</th>
+
+                                                            <td><textarea style="background-color: #f1fdee;width:fit-content"readonly rows="2" >{{ $invoice->note }}</textarea></td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -166,21 +167,20 @@
                                                 <table class="table center-aligned-table mb-0 table-hover"
                                                     style="text-align:center">
                                                     <thead>
-                                                        <tr class="text-dark">
+                                                        <tr class="text-dark text-lg-center bg-warning">
                                                             <th>#</th>
                                                             <th class="border-bottom-0">رقم الفاتورة</th>
-                                    <th class="border-bottom-0">تاريخ القاتورة</th>
-                                    <th class="border-bottom-0">تاريخ الاستحقاق</th>
-                                    <th class="border-bottom-0">الخدمة</th>
-                                    <th class="border-bottom-0">القسم</th>
-                                    <th class="border-bottom-0">الخصم</th>
-                                    <th class="border-bottom-0">نسبة الضريبة</th>
-                                    <th class="border-bottom-0">قيمة الضريبة</th>
-                                    <th class="border-bottom-0">الاجمالي</th>
-                                    <th class="border-bottom-0">الاجمالي المدفوع</th>
+                                    <th class="border-bottom-0">تاريخ السداد </th>
+
+
+                                    <th class="border-bottom-0"> القيمة المسدده</th>
+
+
+
+                                    <th class="border-bottom-0">المحصل</th>
+                                    <th class="border-bottom-0">وقت التحصيل</th>
                                     <th class="border-bottom-0">الحالة</th>
-                                    <th class="border-bottom-0">ملاحظات</th>
-                                    <th class="border-bottom-0">العمليات</th>
+
                                                         </tr>
                                                     </thead>
 
@@ -195,30 +195,29 @@
                                     @endphp
                                     <tr>
                                         <td>{{ $i }}</td>
-                                        <td>{{ $x->status }}</td>
+                                        <td>{{ $x->invoice->invoice_number }}</td>
 
                                         <td>{{ $x->payment_date }}</td>
+                    <td>{{ $x->payment_amount }}</td>
 
 
+                    <td>{{ $x->user->name }}</td>
+                                                                <td>{{ $x->created_at }}</td>
 
-                                                                @if ($x->Value_Status == 1)
+                                                                @if ($x->value_status == 1)
                                                                     <td><span
-                                                                            class="badge badge-pill badge-success">{{ $x->Status }}</span>
+                                                                            class="badge badge-pill badge-success">{{ $x->status }}</span>
                                                                     </td>
-                                                                @elseif($x->Value_Status ==2)
+                                                                @elseif($x->value_status ==2)
                                                                     <td><span
-                                                                            class="badge badge-pill badge-danger">{{ $x->Status }}</span>
+                                                                            class="badge badge-pill badge-danger">{{ $x->status }}</span>
                                                                     </td>
                                                                 @else
                                                                     <td><span
-                                                                            class="badge badge-pill badge-warning">{{ $x->Status }}</span>
+                                                                            class="badge badge-pill badge-warning">{{ $x->status }}</span>
                                                                     </td>
                                                                 @endif
-                                                                <td>{{ $x->payment_date }}</td>
-                                                                <td>{{ $x->payment_amount }}</td>
-                                                                <td>{{ $x->note }}</td>
-                                                                <td>{{ $x->created_at }}</td>
-                                                                <td>{{ $x->user }}</td>
+
                                                             </tr>
                                                         @endforeach
                                                     </tbody>
@@ -252,32 +251,47 @@
                                                                     value="{{ $invoice->id }}">
                                                                 <label class="custom-file-label" for="customFile">حدد
                                                                     المرفق</label>
-                                                            </div><br><br>
+                                                            </div><br>
+                                                            <div class="col">
+                            <label for="exampleTextarea">تفاصيل المرفقات</label>
+
+                            <textarea class="form-control"  name="fileinfo" rows="1" ></textarea>
+                        </div>
+                        <br>
+                        <div class="d-flex justify-content-center">
+
                                                             <button type="submit" class="btn btn-primary btn-sm "
                                                                 name="uploadedFile">إضافة</button>
                                                         </form>
                                                     </div>
+                                                    <br/>
 
-                                                <br>
 
                                                 <div class="table-responsive mt-15">
                                                     <table class="table center-aligned-table mb-0 table table-hover"
                                                         style="text-align:center">
-                                                        <thead>
+                                                        <thead class="bg-light text-bg-dark text-lg-center">
                                                             <tr class="text-dark">
-                                                                <th scope="col">م</th>
-                                                                <th scope="col">اسم الملف</th>
-                                                                <th scope="col">قام بالاضافة</th>
+
+
+                                                                <th scope="col">اسم الملف </th>
+                                                                <th scope="col">بيان الملف </th>
+                                                                <th scope="col">القائم بالاضافة</th>
                                                                 <th scope="col">تاريخ الاضافة</th>
-                                                                <th scope="col">العمليات</th>
+                                                                <th scope="col">مشاهدة</th>
+                                                                <th scope="col">تحميل</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
             @foreach($attachments as $attachment)
                 <tr>
+
                     <td>{{ $attachment->filename }}</td>
-                    <td><a href="{{ route('download.attachment', ['filename' => $attachment->filename, 'invoice_number' => $invoice->invoice_number]) }}">Download</a></td>
+                    <td>{{ $attachment->fileinfo }}</td>
+                    <td>{{ $attachment->user->name }}</td>
+                    <td>{{ $attachment->created_at }}</td>
                     <td><a href="#" class="view-attachment" data-filename="{{ $attachment->filename }}" data-invoice-id="{{ $invoice->id }}">View</a></td>
+                    <td><a href="{{ route('download.attachment', ['filename' => $attachment->filename, 'invoice_number' => $invoice->invoice_number]) }}">Download</a></td>
 
             @endforeach
         </tbody>
@@ -340,6 +354,24 @@
     <!-- main-content closed -->
 @endsection
 @section('js')
+<script>
+    // Get the file input element
+    var fileInput = document.querySelector('input[type=file]');
+
+    // Get the file note input element
+    var fileNoteInput = document.querySelector('textarea[name=fileinfo]');
+
+    // Add an event listener to the file input element to check if a file is selected
+    fileInput.addEventListener('change', function() {
+        if (fileInput.files.length > 0) {
+            // File is selected, make the file note input required
+            fileNoteInput.setAttribute('required', true);
+        } else {
+            // No file is selected, remove the required attribute from the file note input
+            fileNoteInput.removeAttribute('required');
+        }
+    });
+</script>
     <!--Internal  Datepicker js -->
     <script src="{{ URL::asset('assets/plugins/jquery-ui/ui/widgets/datepicker.js') }}"></script>
     <!-- Internal Select2 js-->

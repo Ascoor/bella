@@ -18,6 +18,8 @@ class InvoiceAttachments extends Migration
             $table->unsignedBigInteger('invoice_id');
             $table->foreign('invoice_id')->references('id')->on('invoices')->onDelete('cascade');
             $table->string('filename');
+            $table->text('fileinfo');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
         });
     }

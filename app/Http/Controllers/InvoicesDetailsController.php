@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Invoice_details;
 use App\Models\InvoiceAttachment;
 use App\Models\InvoiceDetail;
+use Facade\FlareClient\Http\Exceptions\InvalidData;
 
 class InvoicesDetailsController extends Controller
 {
@@ -53,7 +54,7 @@ class InvoicesDetailsController extends Controller
      */
     public function show($id)
     {
-        $invoice_details = Invoice_details::all();
+        $invoice_details = InvoiceDetail::all();
         return view('invoice.details_invoice')->with('invoice_details',$invoice_details);
     }
 

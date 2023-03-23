@@ -50,6 +50,14 @@ use HasFactory;
     {
         return $this->hasOne('App\Models\Profile');
     }
+    public function invoice_attachments()
+    {
+        return $this->belongsToMany(InvoiceAttachment::class);
+    }
+    public function invoice_detail()
+    {
+        return $this->belongsTo(InvoiceDetail::class);
+    }
     public function getFeaturedAttribute($photo)
     {
         return asset($photo);

@@ -149,7 +149,11 @@
                     <div class="col-sm-12 col-md-12">
                         <input type="file" name="attached_files[]" class="dropify" accept=".pdf,.jpg, .png, image/jpeg, image/png" data-height="70" />
                     </div><br>
-
+                    <div class="col">
+                            <label for="exampleTextarea">تفاصيل المرفقات</label>
+                            <textarea class="form-control" id="exampleTextarea" name="fileinfo" rows="1"></textarea>
+                        </div>
+                    </div><br>
                     <div class="d-flex justify-content-center">
                         <button type="submit" class="btn btn-primary">حفظ البيانات</button>
                     </div>
@@ -170,6 +174,24 @@
     <!-- main-content closed -->
 @endsection
 @section('js')
+<script>
+    // Get the file input element
+    var fileInput = document.querySelector('input[type=file]');
+
+    // Get the file note input element
+    var fileNoteInput = document.querySelector('textarea[name=fileinfo]');
+
+    // Add an event listener to the file input element to check if a file is selected
+    fileInput.addEventListener('change', function() {
+        if (fileInput.files.length > 0) {
+            // File is selected, make the file note input required
+            fileNoteInput.setAttribute('required', true);
+        } else {
+            // No file is selected, remove the required attribute from the file note input
+            fileNoteInput.removeAttribute('required');
+        }
+    });
+</script>
     <!-- Internal Select2 js-->
     <script src="{{ URL::asset('assets/plugins/select2/js/select2.min.js') }}"></script>
     <!--Internal Fileuploads js-->

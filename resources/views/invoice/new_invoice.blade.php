@@ -180,17 +180,16 @@
     <input type="file" name="attached_files[]" class="dropify" accept=".pdf,.jpg, .png, image/jpeg, image/png"
         data-height="70" />
 </div>
-<div class="form-group">
-<label for="notes">Notes:</label>
-<textarea id="notes" name="notes" class="form-control @error('notes') is-invalid @enderror" rows="3" data-error="Please enter valid notes">{{ old('notes', $appointment->notes) }}</textarea>
-@error('notes')
-<div class="invalid-feedback">{{ $message }}</div>
-@enderror
-</div>
+<div class="col">
+                            <label for="exampleTextarea">تفاصيل المرفقات</label>
+                            <textarea class="form-control"  name="fileinfo" rows="1" ></textarea>
+                        </div>
+                        <br>
+                        <div class="d-flex justify-content-center">
+                            <button type="submit" class="btn btn-primary">حفظ البيانات</button>
+                        </div>
+                    </div>
 
-<button type="submit" class="btn btn-primary">Submit</button>
-</form>
-</div>
 </div>
 </div>
 
@@ -233,6 +232,25 @@
 <script src="{{ URL::asset('assets/plugins/spectrum-colorpicker/spectrum.js') }}"></script>
 <!-- Internal form-elements js -->
 <script src="{{ URL::asset('assets/js/form-elements.js') }}"></script>
+
+<script>
+    // Get the file input element
+    var fileInput = document.querySelector('input[type=file]');
+
+    // Get the file note input element
+    var fileNoteInput = document.querySelector('textarea[name=fileinfo]');
+
+    // Add an event listener to the file input element to check if a file is selected
+    fileInput.addEventListener('change', function() {
+        if (fileInput.files.length > 0) {
+            // File is selected, make the file note input required
+            fileNoteInput.setAttribute('required', true);
+        } else {
+            // No file is selected, remove the required attribute from the file note input
+            fileNoteInput.removeAttribute('required');
+        }
+    });
+</script>
 
 <script>
     var date = $('.fc-datepicker').datepicker({

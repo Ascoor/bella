@@ -112,6 +112,7 @@ Route::resource('services', ServiceController::class);
 Route::resource('expenses', ExpenseController::class);
 Route::resource('revenues', RevenueController::class);
 
+Route::delete('invoices/{invoice}', [InvoiceController::class, 'destroy'])->name('invoices.destroy');
 
 Route::get('/invoice/{id}/attachments', 'InvoiceController@showAttachments')->name('invoice.attachments');
 Route::get('invoices/{invoice_number}/attachments/{filename}', 'App\Http\Controllers\InvoicesDetailsController@download')->name('download.attachment');

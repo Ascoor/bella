@@ -7,8 +7,9 @@ use App\Models\Client;
 use App\Models\Doctor;
 use App\Models\Event;
 use App\Models\Invoice;
-use App\Models\Invoice_details;
+use App\Models\InvoiceDetails;
 use App\Models\InvoiceAttachment;
+use App\Models\InvoiceDetail;
 use App\Models\Section;
 use App\Models\User;
 use App\Notifications\AppointmentCreated;
@@ -138,7 +139,7 @@ public function Invoicestore(Request $request)
 
     $invoice->services()->attach($validatedData['services'], ['section_id' => $validatedData['section_id']]);
 
-    $invoice_details = new Invoice_details();
+    $invoice_details = new InvoiceDetail();
     $invoice_details->invoice_id = $invoice_id;
     $invoice_details->note = $validatedData['note'];
     $invoice_details->user_id = Auth::id();

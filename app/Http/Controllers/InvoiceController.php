@@ -118,6 +118,8 @@ $services = Service::all();
             $attachment = new InvoiceAttachment();
             $attachment->invoice_id = $invoice->id;
             $attachment->filename = $filename;
+            $attachment->fileinfo = $request->fileinfo;
+            $attachment->user_id = Auth::id();
             $attachment->save();
         }
     }
@@ -194,6 +196,8 @@ $invoice =  Invoice::find($id);
                 $attachment = new InvoiceAttachment();
                 $attachment->invoice_id = $invoice->id;
                 $attachment->filename = $filename;
+                $attachment->fileinfo = $request->fileinfo;
+                $attachment->user_id = Auth::id();
                 $attachment->save();
             }
         }
@@ -273,10 +277,36 @@ if ($new_amount_paid > $invoice->total) {
             $attachment = new InvoiceAttachment();
             $attachment->invoice_id = $request->invoice_id;
             $attachment->filename = $filename;
+            $attachment->fileinfo = $request->fileinfo;
+            $attachment->user_id = Auth::id();
             $attachment->save();
         }
 
         return redirect()->back();
+    }
+    public function destroy(Request $request)
+    {
+        $id = $request->input('invoice_id');
+
+        $invoice = Invoice::find($id);
+
+        if ($invoice) {
+            // Delete the attached files from storage
+            foreach ($invoice->attachments as $attachment) {
+                Storage::delete('invoices/' . $invoice->invoice_number . '/' . $attachment->filename);
+                $attachment->delete();
+            }
+
+            // Delete the invoice details
+            $invoice->invoice_detail()->delete();
+
+            // Delete the invoice
+            $invoice->delete();
+
+            return redirect()->route('invoices.index')->with('success', 'Invoice deleted successfully!');
+        } else {
+            return redirect()->back()->with('error', 'Invoice not found!');
+        }
     }
 
 }
