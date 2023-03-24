@@ -80,8 +80,10 @@
                                 <tr>
 
                                     <th>#</th>
+
                                     <th>نوع الإيراد</th>
-                                    <th>الوصف</th>
+                                    <th>المستلم منه</th>
+                                    <th>المحصل</th>
 
                                     <th>الخيارات</th>
                                 </tr>
@@ -100,6 +102,8 @@
                                         <td>{{ $i }}</td>
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->description }}</td>
+                                        <td>{{ $item->user->name }}</td>
+                                        <td>{{ $item->created_at }}</td>
 
                                         <td>
                                               <a class="modal-effect btn btn-sm btn-success" data-effect="effect-scale"

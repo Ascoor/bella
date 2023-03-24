@@ -58,6 +58,10 @@ use HasFactory;
     {
         return $this->belongsTo(InvoiceDetail::class);
     }
+    public function revenue()
+    {
+        return $this->belongsTo(Revenue::class);
+    }
     public function getFeaturedAttribute($photo)
     {
         return asset($photo);
