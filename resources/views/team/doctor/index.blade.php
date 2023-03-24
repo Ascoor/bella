@@ -91,7 +91,7 @@
                 <div class="card-header pb-0">
                     <div class="d-flex justify-content-between">
                         <a class="modal-effect btn btn-outline-primary btn-block" data-effect="effect-scale"
-                            data-toggle="modal" href="#modaldemo8">اضافة طبيب</a>
+                            data-toggle="modal" href="#Add_Modal">اضافة طبيب</a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -124,7 +124,7 @@
                                         <td>{{ $x->specialization }}</td>
                                         <td>
                                             <img src="{{ asset('uploads/doctors/' . $x->photo) }}"
-                                                class="img-tumbnail" width="50" height="50">
+       width="50" height="50">
 
                                         </td>
                                         <td>{{ $x->phone }}</td>
@@ -135,7 +135,7 @@
                                                 data-username="{{ $x->username }}"
                                                 data-password="{{ $x->password }}"
                                                 data-specialization="{{ $x->specialization }}"
-                                                data-phone="{{ $x->phone }}" href="#exampleModal2" title="تعديل">
+                                                data-phone="{{ $x->phone }}" href="#Edit_Modal" title="تعديل">
                                                 <i class="las la-pen"></i>
                                             </a>
 
@@ -157,12 +157,12 @@
     </div>
 
     <!-- add -->
-    <div class="modal fade" id="modaldemo8" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="Add_Modal" tabindex="-1" role="dialog" aria-labelledby="ex_Add_Modal"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">تعديل طبيب</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">إضافة طبيب</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -221,7 +221,7 @@
 
     <!-- edit -->
     <!-- edit -->
-    <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="Edit_Modal" tabindex="-1" role="dialog" aria-labelledby="ex_Edit_modal"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -231,9 +231,9 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action=" doctors/update" method="post" autocomplete="off">
-                    {{ method_field('patch') }}
-                    {{ csrf_field() }}
+                <form action=" doctors/update" method="post"                     enctype="multipart/form-data">
+                    @method('PATCH')
+                    @csrf
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="name" class="col-form-label">الاسم:</label>
@@ -371,24 +371,13 @@
     <script src="{{ URL::asset('assets/js/modal.js') }}"></script>
 
     <script>
-        $(document).ready(function () {
-            $('#exampleModal2').on('show.bs.modal', function (event) {
-                var button = $(event.relatedTarget); // Button that triggered the modal
-                var id = button.data('id'); // Extract info from data-* attributes
-                var modal = $(this);
-                modal.find('.modal-body #id').val(id);
-                modal.find('form').attr('action', '/doctors/' + id);
-            });
-        });
-    </script>
-    <script>
-        $('#exampleModal2').on('show.bs.modal', function (event) {
+        $('#Edit_Modal').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget)
             var name = button.data('name')
             var section_id = button.data('section_id')
             var specialization = button.data('specialization')
             var phone = button.data('phone')
-            var photo = button.data('photo')
+
             var id = button.data('id')
             var username = button.data('username')
             var password = button.data('password')
@@ -398,7 +387,7 @@
             modal.find('.modal-body #section_id').val(section_id)
             modal.find('.modal-body #specialization').val(specialization)
             modal.find('.modal-body #phone').val(phone)
-            modal.find('.modal-body #photo').val(photo)
+
             modal.find('.modal-body #id').val(id)
             modal.find('.modal-body #username').val(username)
             modal.find('.modal-body #password').val(password)

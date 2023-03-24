@@ -107,60 +107,60 @@ public function edit(Doctor $doctor)
  * @param  \App\doctors  $doctors
  * @return \Illuminate\Http\Response
  */
+public function update(Request $request)
+{
+    $id = $request->input('id');
+    $data = $request->validate([
+        'name' => ['required', 'max:255', Rule::unique('doctors')->ignore($id)],
+        'username' => ['required', Rule::unique('doctors')->ignore($id)],
+        'specialization' => 'nullable',
+        'phone' => 'nullable',
+        'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'section_id' => 'required|exists:sections,id',
+    ], [
+        'name.required' =>'يرجي ادخال اسم الطبيب',
+        'name.unique' =>'اسم الطبيب مسجل مسبقا',
+        'username.required' =>'يرجي ادخال اسم المستخدم',
+        'username.unique' =>'اسم المستخدم مسجل مسبقا',
+        'section_id.required' =>'يرجي ادخال القسم المرتبط بالطبيب',
+        'section_id.exists' =>'القسم غير موجود',
+    ]);
 
- public function update(Request $request, $id)
- {
-     $data = $request->validate([
-         'name' => ['required', 'max:255', Rule::unique('doctors')->ignore($id)],
-         'username' => ['required', Rule::unique('doctors')->ignore($id)],
-         'specialization' => 'nullable',
-         'phone' => 'nullable',
-         'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-         'section_id' => 'required|exists:sections,id',
-     ], [
-         'name.required' =>'يرجي ادخال اسم الطبيب',
-         'name.unique' =>'اسم الطبيب مسجل مسبقا',
-         'username.required' =>'يرجي ادخال اسم المستخدم',
-         'username.unique' =>'اسم المستخدم مسجل مسبقا',
-         'section_id.required' =>'يرجي ادخال القسم المرتبط بالطبيب',
-         'section_id.exists' =>'القسم غير موجود',
-     ]);
+    $doctor = Doctor::findOrFail($id);
+    $doctor->name = $request->input('name');
+    $doctor->username = $request->input('username');
+    $doctor->specialization = $request->input('specialization');
+    $doctor->phone = $request->input('phone');
+    $doctor->section_id = $request->input('section_id');
 
-     $doctor = Doctor::findOrFail($id);
-     $doctor->update([
-         'name' => $request->name,
-         'username' => $request->username,
-         'specialization' => $request->specialization,
-         'phone' => $request->phone,
-         'section_id' => $request->section_id,
-     ]);
-     if ($request->hasFile('photo')) {
+    if ($request->hasFile('photo')) {
         // delete the old photo from the server
         if ($doctor->photo !== 'logo.png') {
             Storage::delete('uploads/doctors/' . $doctor->photo);
         }
 
         $image = $request->file('photo');
-        $filename = time() . '.' . $image->getClientOriginalExtension();
+        $filename = $doctor->name . '-' . time() . '.' . $image->getClientOriginalExtension();
         $location = public_path('uploads/doctors/' . $filename);
         Image::make($image)->resize(300, 300)->save($location);
         $doctor->photo = $filename;
-        $doctor->save();
+    } elseif ($doctor->photo === 'logo.png') {
+        // do nothing, because there's no new photo uploaded and the doctor's photo is still the default one
     } else {
-        // set default image if no photo is uploaded
-        $doctor->photo = 'logo.png'; // or any other default image filename
-        $doctor->save();
+        // delete the old photo from the server
+        Storage::delete('uploads/doctors/' . $doctor->photo);
+        $doctor->photo = 'logo.png';
     }
 
+    if ($request->has('password')) {
+        $doctor->password = Hash::make($request->input('password'));
+    }
 
-     if ($request->has('password')) {
-         $doctor->password = Hash::make($request->password);
-         $doctor->save();
-     }
+    $doctor->save();
 
-     session()->flash('Edit', 'تم التعديل بنجاح ');
-     return redirect()->back();
- }
+    session()->flash('Edit', 'تم التعديل بنجاح ');
+    return redirect()->back();
+}
 
 
 /**
@@ -171,13 +171,16 @@ public function edit(Doctor $doctor)
  */
 public function destroy(Request $request)
 {
-$id = intval($request->id);
+    $id = intval($request->id);
+    $doctor = Doctor::find($id);
 
-Doctor::find($id)->delete();
+    if (Storage::exists($doctor->photo_path)) {
+        Storage::delete($doctor->photo_path);
+    }
 
-session()->flash('delete','تم حذف الطبيب بنجاح');
-
-return redirect()->back();
+    $doctor->delete();
+    session()->flash('delete', 'تم حذف الطبيب بنجاح');
+    return redirect()->back();
 }
 
 
