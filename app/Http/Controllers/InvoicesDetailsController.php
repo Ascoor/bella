@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Invoice;
 use Illuminate\Http\Request;
-use App\Models\Invoice_details;
+
 use App\Models\InvoiceAttachment;
 use App\Models\InvoiceDetail;
 use Facade\FlareClient\Http\Exceptions\InvalidData;

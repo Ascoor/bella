@@ -30,6 +30,6 @@ class DatabaseSeeder extends Seeder
          Client::factory(10)->create();
         Appointment::factory(20)->create();
         ExpenseType::factory(20)->create();
-        IncomeType::factory(20)->create();
+
     }
 }

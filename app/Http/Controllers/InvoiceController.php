@@ -7,6 +7,7 @@ use App\Models\Invoice;
 use App\Models\Invoice_details;
 use App\Models\InvoiceAttachment;
 use App\Models\InvoiceDetail;
+use App\Models\Revenue;
 use App\Models\Service;
 use App\Models\Section;
 use Illuminate\Http\Request;
@@ -201,7 +202,7 @@ $invoice =  Invoice::find($id);
                 $attachment->save();
             }
         }
-        return redirect()->route('invoices.index')->with('success', 'Invoice created successfully!');
+        return redirect()->back()->with('success', 'Invoice created successfully!');
     }
 
     public function show($id)
@@ -209,52 +210,64 @@ $invoice =  Invoice::find($id);
         $invoice = invoice::where('id', $id)->first();
         return view('invoice.status_update', compact('invoice'));
     }
-public function statusUpdate($id, Request $request)
-{
-    $invoice = Invoice::findOrFail($id);
 
-    $validatedData = $request->validate([
-        'invoice_id' => 'required',
 
-        'payment_amount' => 'required'
-    ]);
+    public function statusUpdate($id, Request $request)
+    {
+        $invoice = Invoice::findOrFail($id);
 
-    $payment_amount = $request->payment_amount;
+        $validatedData = $request->validate([
+            'invoice_id' => 'required',
+            'payment_amount' => 'required'
+        ]);
 
-    // Calculate the new amount paid
-    $new_amount_paid = $invoice->total_amount + $payment_amount;
-// Check if new amount paid is greater than or equal to the invoice total
-if ($new_amount_paid > $invoice->total) {
-    return redirect()->back()->withErrors(['total_amount' => 'The total amount paid must be greater than or equal to the invoice total.']);
-}
-    // Check if the new amount paid is less than the invoice total
-    if ($new_amount_paid < $invoice->total) {
-        $invoice->status = 'مسدده جزئياً';
-        $invoice->value_status = 3;
+        $payment_amount = $request->payment_amount;
+
+        // Calculate the new amount paid
+        $new_amount_paid = $invoice->total_amount + $payment_amount;
+
+        // Check if new amount paid is greater than or equal to the invoice total
+        if ($new_amount_paid > $invoice->total) {
+            return redirect()->back()->withErrors(['total_amount' => 'The total amount paid must be greater than or equal to the invoice total.']);
+        }
+
+        // Check if the new amount paid is less than the invoice total
+        if ($new_amount_paid < $invoice->total) {
+            $invoice->status = 'مسدده جزئياً';
+            $invoice->value_status = 3;
+        }
+        // Check if the new amount paid is equal to the invoice total
+        else if ($new_amount_paid == $invoice->total) {
+            $invoice->status = 'تم السداد';
+            $invoice->value_status = 1;
+        }
+
+        $invoice->total_amount = $new_amount_paid;
+        $invoice->save();
+
+        $invoiceDetail = InvoiceDetail::create([
+            'invoice_id' => $request->invoice_id,
+            'status' => $invoice->status,
+            'value_status' => $invoice->value_status,
+            'payment_amount' => $request->payment_amount,
+            'note' => $request->note,
+            'payment_date' => $request->payment_date,
+            'user_id' => Auth::id(),
+        ]);
+
+        // Create a new revenue row
+        $revenue = new Revenue();
+        $revenue->revenue_date = $request->payment_date;
+        $revenue->revenue_value = $request->payment_amount;
+        $revenue->revenue_from = $invoice->client->client_name;
+        $revenue->revenue_notes = $invoiceDetail->note;
+        $revenue->add_id = Auth::id();
+        $revenue->income_type_id = 1; // Assuming the income type id for 'فاتورة' is 1
+        $revenue->save();
+
+        session()->flash('status_update');
+        return redirect('/invoices');
     }
-    // Check if the new amount paid is equal to the invoice total
-    else if ($new_amount_paid == $invoice->total) {
-        $invoice->status = 'تم السداد';
-        $invoice->value_status = 1;
-    }
-
-    $invoice->total_amount = $new_amount_paid;
-    $invoice->save();
-
-    InvoiceDetail::create([
-        'invoice_id' => $request->invoice_id,
-        'status' => $invoice->status,
-        'value_status' => $invoice->value_status,
-        'payment_amount' => $request->payment_amount,
-        'note' => $request->note,
-        'payment_date' => $request->payment_date,
-        'user_id' => Auth::id(),
-    ]);
-
-    session()->flash('status_update');
-    return redirect('/invoices');
-}
-
 
     public function addAttachments(Request $request)
     {

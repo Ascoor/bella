@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Hash;
-
+use Illuminate\Support\Facades\Storage;
 
 class DoctorController extends Controller
 {
@@ -134,19 +134,24 @@ public function edit(Doctor $doctor)
          'phone' => $request->phone,
          'section_id' => $request->section_id,
      ]);
-
      if ($request->hasFile('photo')) {
-         $image = $request->file('photo');
-         $filename = time() . '.' . $image->getClientOriginalExtension();
-         $location = public_path('uploads/doctors/' . $filename);
-         Image::make($image)->resize(300, 300)->save($location);
-         $doctor->photo = $filename;
-         $doctor->save();
-     } else {
-         // set default image if no photo is uploaded
-         $doctor->photo = 'logo.png'; // or any other default image filename
-         $doctor->save();
-     }
+        // delete the old photo from the server
+        if ($doctor->photo !== 'logo.png') {
+            Storage::delete('uploads/doctors/' . $doctor->photo);
+        }
+
+        $image = $request->file('photo');
+        $filename = time() . '.' . $image->getClientOriginalExtension();
+        $location = public_path('uploads/doctors/' . $filename);
+        Image::make($image)->resize(300, 300)->save($location);
+        $doctor->photo = $filename;
+        $doctor->save();
+    } else {
+        // set default image if no photo is uploaded
+        $doctor->photo = 'logo.png'; // or any other default image filename
+        $doctor->save();
+    }
+
 
      if ($request->has('password')) {
          $doctor->password = Hash::make($request->password);
