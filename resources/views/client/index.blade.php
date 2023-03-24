@@ -105,16 +105,18 @@
                                     <?php $i++; ?>
                                     <tr>
                                         <td>{{ $i }}</td>
-                                        <td><a href="#showModal" data-effect="effect-scale"
-                                            data-id="{{ $x->id }}" data-client_name="{{ $x->client_name }}"
-                                            data-birthdate="{{ $x->birthdate }}"
-                                            data-address="{{ $x->address }}"
-                                            data-client_phone="{{ $x->client_phone }}"
-                                            data-email="{{ $x->email }}" data-note="{{ $x->note }}"
-                                            data-pid="{{ $x->pid }}" data-gender="{{ $x->gender }}"
-                                            data-toggle="modal" "
-                                                class="client-name-btn">{{ $x->client_name }}</a>
-                                        </td>
+                                        <td>
+                                        <a class="modal-effect" data-effect="effect-scale"
+                                                data-id="{{ $x->id }}" data-client_name="{{ $x->client_name }}"
+                                                data-birthdate="{{ $x->birthdate }}"
+                                                data-address="{{ $x->address }}"
+                                                data-client_phone="{{ $x->client_phone }}"
+                                                data-email="{{ $x->email }}" data-note="{{ $x->note }}"
+                                                data-pid="{{ $x->pid }}" data-gender="{{ $x->gender }}"
+                                                data-toggle="modal" href="#showModal" title="مشاهدة">{{ $x->client_name }}</a>
+
+
+</td>
 
                                         <td>{{ $x->address }}</td>
                                         <td>{{ $x->client_phone }}</td>
@@ -128,7 +130,7 @@
                                                 data-client_phone="{{ $x->client_phone }}"
                                                 data-email="{{ $x->email }}" data-note="{{ $x->note }}"
                                                 data-pid="{{ $x->pid }}" data-gender="{{ $x->gender }}"
-                                                data-toggle="modal" href="#exampleModal2" title="تعديل">
+                                                data-toggle="modal" href="#editModel" title="تعديل">
                                                 <i class="las la-pen"></i>
                                             </a>
 
@@ -149,9 +151,8 @@
         </div>
 
 
-        <div class="modal fade" id="showModal" tabindex="-1" role="dialog" aria-labelledby="showModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
+        <div class="modal fade" id="showModal" tabindex="-1" role="dialog" aria-labelledby="showModalLabel{{ $x->id }}"
+    aria-hidden="true">       <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="showModalLabel">عرض بيانات العميل</h5>
@@ -180,6 +181,13 @@
                             <label for="pid">رقم الهوية / الإقامة</label>
                             <input type="text" class="form-control" id="pid" name="pid" readonly>
                         </div>
+                        <div class="form-group">
+                                    <label for="gender">الجنس</label>
+                                    <select class="form-control" id="gender" name="gender" readonly>
+                                        <option value="male">ذكر</option>
+                                        <option value="female">أنثى</option>
+                                    </select>
+                                </div>
                         <div class="form-group">
                             <label for="client_phone">السن</label>
                             <input type="number" class="form-control" id="age" disabled>
@@ -265,7 +273,7 @@
 
 
         <!-- edit -->
-        <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        <div class="modal fade" id="editModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -361,16 +369,7 @@
             </div>
         </div>
     <!-- row closed -->
-<script>
-    try {
-  const date = new Date(dateString);
-  const isoString = date.toISOString();
-  // use isoString in your code
-} catch (error) {
-  console.error('Invalid date:', error);
-  // handle the error gracefully, e.g. by using a default value
-}
-</script>
+
 
 
     <!-- main-content closed -->
@@ -418,10 +417,40 @@
     <!--Internal  Datatable js -->
     <script src="{{ URL::asset('assets/js/table-data.js') }}"></script>
     <script src="{{ URL::asset('assets/js/modal.js') }}"></script>
+    <script>
+  $(document).ready(function() {
+    $(document).on('click', '.modal-effect', function(e) {
+      e.preventDefault();
+      var id = $(this).data('id');
+      var client_name = $(this).data('client_name');
+      var birthdate = $(this).data('birthdate');
+      var address = $(this).data('address');
+      var client_phone = $(this).data('client_phone');
+      var email = $(this).data('email');
+      var note = $(this).data('note');
+      var pid = $(this).data('pid');
+      var gender = $(this).data('gender');
+      var age = moment().diff(moment(birthdate, 'YYYY-MM-DD'), 'years');
+
+      $('#showModalLabel').text('عرض بيانات العميل: ' + client_name);
+      $('#client_name').val(client_name);
+      $('#birthdate').val(birthdate);
+      $('#address').val(address);
+      $('#client_phone').val(client_phone);
+      $('#email').val(email);
+      $('#note').val(note);
+      $('#pid').val(pid);
+      $('#gender').val(gender);
+      $('#age').val(age);
+
+      $('#showModal').modal('show');
+    });
+  });
+</script>
 
 
     <script>
-        $('#exampleModal2').on('show.bs.modal', function (event) {
+        $('#editModel').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget);
             var id = button.data('id');
             var client_name = button.data('client_name');
@@ -444,45 +473,11 @@
             modal.find('.modal-body #pid').val(pid);
         });
 
-        $('#exampleModal2').on('hidden.bs.modal', function () {
+        $('#editModel').on('hidden.bs.modal', function () {
             $(this).find('#edit-form').trigger('reset');
         });
     </script>
-    <script>
-        $('#showModal').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget);
-            var id = button.data('id');
-            var client_name = button.data('client_name');
-            var client_phone = button.data('client_phone');
-            var address = button.data('address');
-            var note = button.data('note');
-            var email = button.data('email');
-            var gender = button.data('gender');
-            var birthdate = new Date(button.data('birthdate'));
-            var pid = button.data('pid');
-            var modal = $(this);
 
-            // Calculate age
-            var today = new Date();
-            var age = today.getFullYear() - birthdate.getFullYear();
-            var m = today.getMonth() - birthdate.getMonth();
-            if (m < 0 || (m === 0 && today.getDate() < birthdate.getDate())) {
-                age--;
-            }
-
-            modal.find('.modal-body #id').val(id);
-            modal.find('.modal-body #client_name').val(client_name);
-            modal.find('.modal-body #note').val(note);
-            modal.find('.modal-body #client_phone').val(client_phone);
-            modal.find('.modal-body #email').val(email);
-            modal.find('.modal-body #address').val(address);
-            modal.find('.modal-body #gender').val(gender);
-            modal.find('.modal-body #birthdate').val(birthdate.toISOString().split('T')[
-            0]); // Set birthdate in ISO format
-            modal.find('.modal-body #age').val(age);
-            modal.find('.modal-body #pid').val(pid);
-        });
-    </script>
     <script>
         $('#modaldemo9').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget)

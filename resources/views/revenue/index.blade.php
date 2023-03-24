@@ -97,6 +97,8 @@
                                     <th>التاريخ</th>
                                     <th>المبلغ</th>
                                     <th>المستلم منه</th>
+                                    <th>المحصل</th>
+
                                     <th>الخيارات</th>
                                 </tr>
                             </thead>
@@ -111,11 +113,13 @@
                                     @endphp
                                     <tr>
 
-                                        <td>{{ $i }}</td>
-                                        <td>{{ $item->incomeType->name }}</td>
-                                        <td>{{ $item->revenue_date }}</td>
-                                        <td>{{ $item->revenue_value }}</td>
-                                        <td>{{ $item->revenue_from }}</td>
+        <td>{{ $i }}</td>
+        <td>{{ $item->incomeType ? $item->incomeType->name : '' }}</td>
+        <td>{{ $item->revenue_date }}</td>
+        <td>{{ $item->revenue_value }}</td>
+        <td>{{ $item->revenue_from }}</td>
+        <td>{{ $item->user ? $item->user->name : '' }}</td>
+    </tr>
                                         <td>
                                             <button type="button" class="btn btn-sm btn-info"
                                             data-id="{{ $item->id }}"

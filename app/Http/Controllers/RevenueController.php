@@ -15,11 +15,10 @@ class RevenueController extends Controller
     }
     public function index()
     {
-        $revenues = Revenue::all();
+        $revenues = Revenue::with('user')->get();
         $incomeTypes = IncomeType::all();
-        return view('revenue.index', ['revenues' => $revenues])->with('incomeTypes',$incomeTypes);
+        return view('revenue.index', compact('revenues', 'incomeTypes'));
     }
-
     public function create()
     {
         // Return view to create a new revenue
