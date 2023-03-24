@@ -57,15 +57,15 @@ public function create()
         'phone' => 'nullable|required_if:photo,null',
         'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         'section_id' => 'required|exists:sections,id',
+        'gender' => 'required|in:male,female',
     ]);
 
     $doctor = Doctor::create($data);
 
     if ($request->hasFile('photo')) {
         $image = $request->file('photo');
-        $filename = time() . '.' . $image->getClientOriginalExtension();
-        $location = public_path('uploads/doctors/' . $filename);
-        Image::make($image)->resize(300, 300)->save($location);
+        $filename = time() . '.' . $image->getClientOriginalName();
+        $path = $image->storeAs('public/doctors', $filename);
         $doctor->update(['photo' => $filename]);
     } else {
         // set default image if no photo is uploaded
@@ -75,7 +75,6 @@ public function create()
     session()->flash('Add', 'تمت الإضافة بنجاح.');
     return redirect()->back();
 }
-
 
 
 /**
@@ -107,7 +106,8 @@ public function edit(Doctor $doctor)
  * @param  \App\doctors  $doctors
  * @return \Illuminate\Http\Response
  */
-public function update(Request $request)
+
+ public function update(Request $request)
 {
     $id = $request->input('id');
     $data = $request->validate([
@@ -132,24 +132,18 @@ public function update(Request $request)
     $doctor->specialization = $request->input('specialization');
     $doctor->phone = $request->input('phone');
     $doctor->section_id = $request->input('section_id');
+    $doctor->gender = $request->input('gender');
 
     if ($request->hasFile('photo')) {
         // delete the old photo from the server
         if ($doctor->photo !== 'logo.png') {
-            Storage::delete('uploads/doctors/' . $doctor->photo);
+            Storage::delete('doctors/' . $doctor->photo);
         }
 
         $image = $request->file('photo');
         $filename = $doctor->name . '-' . time() . '.' . $image->getClientOriginalExtension();
-        $location = public_path('uploads/doctors/' . $filename);
-        Image::make($image)->resize(300, 300)->save($location);
-        $doctor->photo = $filename;
-    } elseif ($doctor->photo === 'logo.png') {
-        // do nothing, because there's no new photo uploaded and the doctor's photo is still the default one
-    } else {
-        // delete the old photo from the server
-        Storage::delete('uploads/doctors/' . $doctor->photo);
-        $doctor->photo = 'logo.png';
+        $path = $image->storeAs('public/doctors', $filename);
+        $doctor->photo = basename($path);
     }
 
     if ($request->has('password')) {
@@ -174,14 +168,16 @@ public function destroy(Request $request)
     $id = intval($request->id);
     $doctor = Doctor::find($id);
 
-    if (Storage::exists($doctor->photo_path)) {
-        Storage::delete($doctor->photo_path);
+    if (Storage::disk('public')->exists($doctor->photo)) {
+        Storage::disk('public')->delete($doctor->photo);
     }
+
 
     $doctor->delete();
     session()->flash('delete', 'تم حذف الطبيب بنجاح');
     return redirect()->back();
 }
+
 
 
 

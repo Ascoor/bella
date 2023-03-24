@@ -123,8 +123,7 @@
                                         <td>{{ $x->section->section_name }}</td>
                                         <td>{{ $x->specialization }}</td>
                                         <td>
-                                            <img src="{{ asset('uploads/doctors/' . $x->photo) }}"
-       width="50" height="50">
+                                        <img src="{{ asset('storage/doctors/' . $x->photo) }}" width="50" height="50">
 
                                         </td>
                                         <td>{{ $x->phone }}</td>
@@ -135,7 +134,7 @@
                                                 data-username="{{ $x->username }}"
                                                 data-password="{{ $x->password }}"
                                                 data-specialization="{{ $x->specialization }}"
-                                                data-phone="{{ $x->phone }}" href="#Edit_Modal" title="تعديل">
+                                                data-phone="{{ $x->phone }}"   data-gender="{{ $x->gender }}" href="#Edit_Modal" title="تعديل">
                                                 <i class="las la-pen"></i>
                                             </a>
 
@@ -191,6 +190,14 @@
                             <label for="specialization" class="col-form-label">التخصص:</label>
                             <input type="text" class="form-control" id="specialization" name="specialization">
                         </div>
+                        <div class="form-group">
+    <label for="gender" class="col-form-label">الجنس:</label>
+    <select class="form-control" id="gender" name="gender">
+        <option value="male">ذكر</option>
+        <option value="female">أنثى</option>
+    </select>
+</div>
+
                         <div class="form-group">
                             <label for="specialization" class="col-form-label">الصورة الشخصية:</label>
                             <input type="file" class="form-control" id="photo" name="photo">
@@ -253,6 +260,15 @@
                             <label for="specialization" class="col-form-label">التخصص:</label>
                             <input type="text" class="form-control" id="specialization" name="specialization">
                         </div>
+                        <div class="form-group">
+    <label for="gender" class="col-form-label">الجنس:</label>
+    <select class="form-control" id="gender" name="gender">
+        <option value="male" >ذكر</option>
+        <option value="female">أنثى</option>
+    </select>
+</div>
+
+
                         <div class="form-group">
                             <label for="specialization" class="col-form-label">الصورة الشخصية:</label>
                             <input type="file" class="form-control" id="photo" name="photo">
@@ -377,6 +393,7 @@
             var section_id = button.data('section_id')
             var specialization = button.data('specialization')
             var phone = button.data('phone')
+            var gender = button.data('gender')
 
             var id = button.data('id')
             var username = button.data('username')
@@ -387,6 +404,7 @@
             modal.find('.modal-body #section_id').val(section_id)
             modal.find('.modal-body #specialization').val(specialization)
             modal.find('.modal-body #phone').val(phone)
+            modal.find('.modal-body #gender').val(gender)
 
             modal.find('.modal-body #id').val(id)
             modal.find('.modal-body #username').val(username)

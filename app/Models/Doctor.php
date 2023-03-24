@@ -17,6 +17,7 @@ protected $fillable = [
     'password',
     'specialization',
     'phone',
+    'gender',
     'photo',
     'section_id',
 ];

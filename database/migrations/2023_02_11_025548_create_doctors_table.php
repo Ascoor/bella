@@ -17,6 +17,7 @@ class CreateDoctorsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('section_id');
             $table->string('name');
+            $table->enum('gender', ['male', 'female'])->default('male');
             $table->text('specialization');
             $table->string('phone');
             $table->string('photo');
@@ -28,6 +29,8 @@ class CreateDoctorsTable extends Migration
                   ->references('id')->on('sections')
                   ->onDelete('cascade');
         });
+
+
 
     }
 
