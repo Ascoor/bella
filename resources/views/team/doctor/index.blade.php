@@ -26,6 +26,7 @@
 <!--- Select2 css -->
 <link href="{{ URL::asset('assets/plugins/select2/css/select2.min.css') }}"
     rel="stylesheet">
+
 @section('title')
 الأطباء
 @stop
@@ -123,7 +124,7 @@
                                         <td>{{ $x->section->section_name }}</td>
                                         <td>{{ $x->specialization }}</td>
                                         <td>
-                                        <img src="{{ asset('storage/doctors/' . $x->photo) }}" width="50" height="50">
+                                        <img src="{{ asset('storage/doctors/' . $x->photo) }}" width="50" height="50" style=" border-radius: 50%;">
 
                                         </td>
                                         <td>{{ $x->phone }}</td>

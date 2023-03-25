@@ -119,7 +119,7 @@
         <td>{{ $item->revenue_value }}</td>
         <td>{{ $item->revenue_from }}</td>
         <td>{{ $item->user ? $item->user->name : '' }}</td>
-    </tr>
+
                                         <td>
                                             <button type="button" class="btn btn-sm btn-info"
                                             data-id="{{ $item->id }}"
