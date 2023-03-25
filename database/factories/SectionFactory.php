@@ -6,16 +6,19 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class SectionFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array
-     */
-    public function definition()
-    {
-        return [
-            'section_name' => $this->faker->unique()->name('ar_section'),
-            'description' => $this->faker->realText(200, 2),
-        ];
+
+        public function definition()
+        {
+            $faker = \Faker\Factory::create('ar_SA');
+
+            $sectionNames = ['القلبية', 'طب الأسنان', 'النساء والتوليد', 'طب العيون', 'طب العظام', 'طب الأطفال', 'الطب النفسي', 'المسالك البولية'];
+
+            return [
+                'section_name' => $faker->unique()->randomElement($sectionNames),
+                'description' => $faker->sentence,
+            ];
+        }
     }
-}
+
+
+

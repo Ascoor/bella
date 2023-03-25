@@ -191,7 +191,7 @@
                         <div class="form-group">
                             <input type="hidden" name="id" id="id" value="">
                             <label for="recipient-name" class="col-form-label">اسم الخدمة:</label>
-                            <input class="form-control" name="service_name" id="service_name" type="text">
+                            <input class="form-control" name="service_name" id="service_name" type="text" readonly>
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlTextarea1">القسم</label>

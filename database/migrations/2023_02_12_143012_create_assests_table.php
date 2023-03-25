@@ -16,8 +16,10 @@ class CreateAssestsTable extends Migration
         Schema::create('assests', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('assest_name');
+            $table->enum('gender', ['male', 'female'])->default('male');
             $table->unsignedBigInteger('section_id');
             $table->string('phone');
+            $table->string('photo')->nullable();
             $table->timestamps();
 
             $table->foreign('section_id')->references('id')->on('sections')->onDelete('cascade');

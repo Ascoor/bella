@@ -10,7 +10,7 @@ class Assest extends Model
     use HasFactory;
 
     protected $fillable = [
-        'assest_name', 'section_id','phone'
+        'assest_name', 'section_id','phone','gender','photo'
     ];
 
     public function section()

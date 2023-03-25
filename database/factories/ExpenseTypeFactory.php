@@ -12,14 +12,16 @@ class ExpenseTypeFactory extends Factory
      *
      * @return array
      */
-    public function definition()
-    {
-        $faker = \Faker\Factory::create('ar_SA'); // Set locale to Saudi Arabia
 
-        return [
-            'name' => $faker->unique()->name('ar_name'),
-            'description' => $this->faker->realText(200, 2),
-        ];
-    }
+     public function definition()
+     {
+         $types = ['أدوات طبية', 'أدوية', 'مستلزمات طبية', 'معدات طبية', 'مواد استهلاكية'];
+
+         return [
+             'name' => $this->faker->randomElement($types),
+             'description' => $this->faker->sentence,
+         ];
+     }
+
 
 }

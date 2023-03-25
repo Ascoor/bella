@@ -44,11 +44,19 @@ class ServiceController extends Controller
      */
      public function store(Request $request)
     {
-         $request->validate([
-             'service_name' => 'required',
-             'section_id' => 'required',
-             'price' => 'required',
-         ]);
+        $request->validate([
+            'service_name' => [
+                'required',
+                Rule::unique('services')->where(function ($query) use ($request) {
+                    return $query->where('section_id', $request->section_id);
+                })
+            ],
+            'section_id' => 'required',
+            'price' => 'required',
+        ], [
+            'service_name.unique' => 'اسم هذه الخدمة سبق تسجيله في هذا القسم.'
+        ]);
+
 
          $service = new Service;
          $service->service_name = $request->service_name;
@@ -57,8 +65,8 @@ class ServiceController extends Controller
          $service->section_id = $request->section_id;
          $service->save();
 
-         return redirect()->route('services.index')
-             ->with('success', 'Service created successfully');
+         session()->flash('Add', 'تم التعديل بنجاح.');
+         return redirect()->route('services.index');
      }
 
     /**
@@ -92,37 +100,37 @@ class ServiceController extends Controller
      */
 
 
-
      public function update(Request $request)
      {
-         $id = $request->id;
-    $request->validate([
-        'service_name' => ['required', 'max:255', Rule::Unique('services')->ignore($id)],
+         $request->validate([
+
+            'section_id' => 'required',
+            'price' => 'required',
+            'description' => 'nullable'
+        ], [
+            'service_name.unique' => 'اسم هذه الخدمة سبق تسجيله في هذا القسم.',
+            'service_name.required' => 'يرجى إدخال اسم الخدمة.',
+            'section_id.required' => 'يرجى اختيار القسم.',
+            'price.required' => 'يرجى إدخال التكلفة.',
+            'description.nullable' => 'يرجى إدخال وصف الخدمة.'
+        ]);
+            $id = $request->id;
+
+        // Your code to update the service goes here...
 
 
+         $service = Service::findOrFail($id);
+         $service->update([
+             'service_name' => $request->service_name,
+             'section_id' => $request->section_id,
+             'description' => $request->description,
+             'price' => $request->price,
+         ]);
 
-        'section_id' => 'required',
-        'price' => 'required',
+         session()->flash('edit', 'تم التعديل بنجاح.');
+         return redirect()->back();
+     }
 
-
-    ], [
-        'service_name.required' =>'يرجي ادخال اسم الخدمة',
-        'section_id.required' =>'اسم الخدمة مسجل مسبقا',
-        'price.required' =>'يرجي ادخال التكلفة',
-
-
-    ]);
-
-    $section = Service::findOrFail($id);
-    $section->update([
-        'service_name' => $request->service_name,
-        'section_id' => $request->section_id,
-         'description' => $request->description,
-         'price' => $request->price,
-    ]);
-    session()->flash('Add', 'تم التعديل بنجاح ');
-    return redirect()->back()->with('success', 'The section has been updated successfully.');
-}
     /**
      * Remove the specified resource from storage.
      *

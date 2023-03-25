@@ -21,7 +21,7 @@ class AppointmentFactory extends Factory
             'apt_datetime' => $this->faker->datetime('m-d-Y H:i:s'),
 
 
-            'status' => $this->faker->randomElement(['pending','Completed', 'confirmed', 'cancelled']),
+            'status' => $this->faker->randomElement(['pending','processing']),
 
 
             'doctor_id' => Doctor::all()->random()->id,

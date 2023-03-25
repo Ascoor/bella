@@ -46,22 +46,27 @@ class AssestController extends Controller
      */
      public function store(Request $request)
     {
-         $request->validate([
+        $data = $request->validate([
              'assest_name' => 'required',
-             'section_id' => 'required',
-             'phone' => 'required',
+             'phone' => 'nullable|required_if:photo,null',
+        'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'section_id' => 'required|exists:sections,id',
+        'gender' => 'required|in:male,female',
 
          ]);
+         $assest = Assest::create($data);
 
-         $assest = new Assest;
-         $assest->assest_name = $request->assest_name;
-
-         $assest->section_id = $request->section_id;
-         $assest->phone = $request->phone;
-         $assest->save();
-
-         return redirect()->route('assests.index')
-             ->with('success', 'Assest created successfully');
+         if ($request->hasFile('photo')) {
+            $image = $request->file('photo');
+            $filename = time() . '.' . $image->getClientOriginalName();
+            $path = $image->storeAs('public/assests', $filename);
+            $assest->update(['photo' => $filename]);
+        } else {
+            // set default image if no photo is uploaded
+            $assest->update(['photo' => 'logo.png']);
+        }
+         session()->flash('Add', 'تم الإضافة بنجاح ');
+         return redirect()->back();
      }
 
     /**
@@ -117,14 +122,24 @@ class AssestController extends Controller
     ]);
 
     $assest = Assest::findOrFail($id);
-    $assest->update([
-        'assest_name' => $request->assest_name,
-        'section_id' => $request->section_id,
+    if ($request->hasFile('photo')) {
+        $image = $request->file('photo');
+        $filename = time() . '.' . $image->getClientOriginalName();
+        $path = $image->storeAs('public/assests', $filename);
+        $assest->update(['photo' => $filename]);
+    } else {
+        // set default image if no photo is uploaded
+        $assest->update(['photo' => 'logo.png']);
+    }
+     $assest->assest_name = $request->assest_name;
 
-         'phone' => $request->phone,
-    ]);
-    session()->flash('Add', 'تم التعديل بنجاح ');
-    return redirect()->back()->with('success', 'The section has been updated successfully.');
+     $assest->section_id = $request->section_id;
+     $assest->phone = $request->phone;
+     $assest->gender = $request->gender;
+     $assest->save();
+
+    session()->flash('edit','تم التعديل بنجاح');
+    return redirect()->back();
 }
     /**
      * Remove the specified resource from storage.
@@ -138,7 +153,7 @@ class AssestController extends Controller
 
         Assest::find($id)->delete();
 
-        session()->flash('delete','تم حذف القسم بنجاح');
+        session()->flash('delete','تم الحذف  بنجاح');
 
         return redirect()->back();
     }

@@ -20,7 +20,7 @@ class CreateDoctorsTable extends Migration
             $table->enum('gender', ['male', 'female'])->default('male');
             $table->text('specialization');
             $table->string('phone');
-            $table->string('photo');
+            $table->string('photo')->nullable();
             $table->string('username')->unique();
             $table->string('password');
             $table->timestamps();

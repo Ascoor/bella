@@ -17,6 +17,8 @@ class AssestFactory extends Factory
         return [
             'assest_name'   => $this->faker->unique()->name('ar_name'),
             'section_id' => Section::all()->random()->id,
+            'photo' => 'logo.png',
+            'gender' => $this->faker->randomElement(['male', 'female']),
             'phone'  =>$this->faker->phoneNumber(),
 
 

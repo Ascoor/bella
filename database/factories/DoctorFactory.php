@@ -13,31 +13,32 @@ class DoctorFactory extends Factory
      * @return array
      */
     public function definition()
-    {
-        $ar_doctor_name = $this->faker->unique()->name('ar_SA');
-        $specializations = [
-            'جراحة عامة',
-            'جراحة الأوعية الدموية',
-            'جراحة التجميل',
-            'أمراض النساء والولادة',
-            'أمراض القلب والشرايين',
-            'أمراض المسالك البولية',
-            'أمراض الجهاز الهضمي',
-            'أمراض الجهاز التنفسي',
-            'أمراض الجهاز العصبي',
-            'أمراض الدم والأورام',
-        ];
+{
+    $doctors = [
+        ['name' => 'د.خلود شاهين', 'specialization' => 'الجلدية والتجميل والليزر'],
+        ['name' => 'د.زينب يوسف', 'specialization' => 'العناية بالبشرة والتجميل'],
+        ['name' => 'د.فؤاد النجار', 'specialization' => 'جراحات الفك والوجه والرقبة'],
+        ['name' => 'د.ايليا بطرس', 'specialization' => 'جراحات تجميل الوجه والعنق والنحت'],
+        ['name' => 'د.انا منسوروفا', 'specialization' => 'اللياقة الجمالية'],
+        ['name' => 'د.عبدالهادى شهاب', 'specialization' => 'إستشارى تجميل الأسنان'],
+        ['name' => 'د.اندريه', 'specialization' => 'إستشارى تجميل اللثه الأسنان'],
+    ];
 
-        return [
-            'section_id' => Section::all()->random()->id,
-            'name' => $ar_doctor_name,
-            'specialization' => $this->faker->randomElement($specializations),
-            'gender' => $this->faker->randomElement(['male', 'female']),
-            'phone' => $this->faker->phoneNumber(),
-            'photo' => 'logo.png',
-            'username' => $this->faker->unique()->name(),
-            'password' => $this->faker->unique()->password(),
-        ];
-    }
+    $doctor = $this->faker->randomElement($doctors);
+
+    return [
+        'section_id' => Section::all()->random()->id,
+        'name' => $doctor['name'],
+        'specialization' => $doctor['specialization'],
+        'gender' => $this->faker->randomElement(['male', 'female']),
+        'phone' => $this->faker->phoneNumber(),
+        'photo' => 'logo.png',
+        'username' => $this->faker->unique()->name(null, 6),
+        'password' => $this->faker->unique()->password(null, 6),
+    ];
 }
+
+
+    }
+
 

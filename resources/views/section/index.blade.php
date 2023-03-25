@@ -135,7 +135,7 @@
 
                         <div class="form-group">
                             <label for="exampleInputEmail1">اسم القسم</label>
-                            <input type="text" class="form-control" id="section_name" name="section_name">
+                            <input type="text" class="form-control" id="section_name" name="section_name" required>
                         </div>
 
                         <div class="form-group">
@@ -174,7 +174,7 @@
                         <div class="form-group">
                             <input type="hidden" name="id" id="id" value="">
                             <label for="recipient-name" class="col-form-label">اسم القسم:</label>
-                            <input class="form-control" name="section_name" id="section_name" type="text">
+                            <input class="form-control" name="section_name" id="section_name" type="text" required>
                         </div>
                         <div class="form-group">
                             <label for="message-text" class="col-form-label">ملاحظات:</label>
