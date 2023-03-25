@@ -109,6 +109,7 @@ public function Invoicestore(Request $request)
         'rate_vat' => 'required',
         'value_vat' => 'required',
         'total' => 'required',
+        'fileinfo' => 'required',
 
         'note' => 'nullable|string',
 
@@ -143,6 +144,7 @@ public function Invoicestore(Request $request)
     $invoice_details->invoice_id = $invoice_id;
     $invoice_details->note = $validatedData['note'];
     $invoice_details->user_id = Auth::id();
+    $invoice->value_vat = $validatedData['value_vat'];
     $invoice_details->save();
 
 // Create a folder for the invoice
@@ -157,6 +159,9 @@ if ($request->hasFile('attached_files')) {
        $attachment = new InvoiceAttachment();
        $attachment->invoice_id = $invoice->id;
        $attachment->filename = $filename;
+       $attachment->fileinfo =  $validatedData['fileinfo'];
+       $attachment->user_id = Auth::id();
+
        $attachment->save();
    }
 }

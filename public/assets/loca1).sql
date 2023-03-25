@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: Mar 25, 2023 at 09:08 AM
--- Server version: 10.5.16-MariaDB-cll-lve
--- PHP Version: 7.2.34
+-- Host: 127.0.0.1
+-- Generation Time: Mar 25, 2023 at 10:09 AM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `u973484608_bella`
+-- Database: `clinic`
 --
 
 -- --------------------------------------------------------
@@ -38,7 +38,7 @@ CREATE TABLE `appointments` (
   `edited_by` bigint(20) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pending'
+  `status` varchar(255) NOT NULL DEFAULT 'pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -99,11 +99,11 @@ CREATE TABLE `appointment_service` (
 
 CREATE TABLE `assests` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `assest_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `gender` enum('male','female') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'male',
+  `assest_name` varchar(255) NOT NULL,
+  `gender` enum('male','female') NOT NULL DEFAULT 'male',
   `section_id` bigint(20) UNSIGNED NOT NULL,
-  `phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(255) NOT NULL,
+  `photo` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -132,14 +132,14 @@ INSERT INTO `assests` (`id`, `assest_name`, `gender`, `section_id`, `phone`, `ph
 
 CREATE TABLE `clients` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `client_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `gender` enum('male','female') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `pid` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `client_name` varchar(255) NOT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `gender` enum('male','female') DEFAULT NULL,
+  `pid` varchar(255) DEFAULT NULL,
   `birthdate` date DEFAULT NULL,
-  `client_phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `note` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `client_phone` varchar(255) NOT NULL,
+  `note` varchar(255) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -184,7 +184,7 @@ CREATE TABLE `client_history_comments` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `client_history_id` bigint(20) UNSIGNED NOT NULL,
   `doctor_id` bigint(20) UNSIGNED NOT NULL,
-  `comment` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `comment` text NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -199,7 +199,7 @@ CREATE TABLE `client_history_doctor` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `client_history_id` bigint(20) UNSIGNED NOT NULL,
   `doctor_id` bigint(20) UNSIGNED NOT NULL,
-  `comment` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `comment` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -243,13 +243,13 @@ CREATE TABLE `client_history_service` (
 CREATE TABLE `doctors` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `section_id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `gender` enum('male','female') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'male',
-  `specialization` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `gender` enum('male','female') NOT NULL DEFAULT 'male',
+  `specialization` text NOT NULL,
+  `phone` varchar(255) NOT NULL,
+  `photo` varchar(255) DEFAULT NULL,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -260,11 +260,11 @@ CREATE TABLE `doctors` (
 
 INSERT INTO `doctors` (`id`, `section_id`, `name`, `gender`, `specialization`, `phone`, `photo`, `username`, `password`, `created_at`, `updated_at`) VALUES
 (1, 8, 'د.عبدالهادى شهاب', 'female', 'إستشارى تجميل الأسنان', '(520) 201-0254', 'logo.png', 'لينا الجهني', 'pKu{', '2023-03-25 06:39:05', '2023-03-25 06:39:05'),
-(2, 8, 'د.زينب يوسف', 'female', 'العناية بالبشرة والتجميل', '719-598-1939', 'د.زينب يوسف-1679735226.png', 'شافع العسكر', '$2y$10$cs5P4XGk9DLhOwhiz8545.psOm0UV3MS6wgwjr12TBee512u2jLhW', '2023-03-25 06:39:05', '2023-03-25 09:07:06'),
+(2, 8, 'د.زينب يوسف', 'female', 'العناية بالبشرة والتجميل', '719-598-1939', 'logo.png', 'شافع العسكر', 'Z', '2023-03-25 06:39:05', '2023-03-25 06:39:05'),
 (3, 8, 'د.اندريه', 'male', 'إستشارى تجميل اللثه الأسنان', '283.456.5129', 'logo.png', 'الدكتورة دانة جواهرجي', '$2y$10$XI/9wCtsfZo9AjsZbwLE1ODeuoV1.UoeX38WpD/XP0dH1Rqaw8VrG', '2023-03-25 06:39:05', '2023-03-25 06:39:59'),
-(4, 3, 'د.ايليا بطرس', 'female', 'جراحات تجميل الوجه والعنق والنحت', '+1 (304) 824-3250', 'د.ايليا بطرس-1679735241.png', 'سيلين السماري', '$2y$10$6z2Qm17PsmJVAlmS/629feOKwFOyfa.pmEaVjyITbJRs4ZD5u2OUO', '2023-03-25 06:39:05', '2023-03-25 09:07:21'),
+(4, 3, 'د.ايليا بطرس', 'female', 'جراحات تجميل الوجه والعنق والنحت', '+1 (304) 824-3250', 'logo.png', 'سيلين السماري', '4d%hr', '2023-03-25 06:39:05', '2023-03-25 06:39:05'),
 (7, 7, 'د.انا منسوروفا', 'male', 'اللياقة الجمالية', '413-990-4851', 'logo.png', 'بدر الحنتوشي', '$2y$10$8Jn4PVZ2.mEbnfNhMhMnQeLeGt14v5hchbgmi6GW4vMtkdxyVLCLm', '2023-03-25 06:39:05', '2023-03-25 06:46:06'),
-(11, 1, 'د.فؤاد النجار', 'male', 'جراحات الفك والوجه والرقبة', '4234234', 'د.فؤاد النجار-1679735266.png', 'dr.foad', '$2y$10$U3yP.F9.Cq6hsdMUAgDiCeTMjdSv9l14h/u9jPhxiWGiPliDAsicy', '2023-03-25 06:44:31', '2023-03-25 09:07:46');
+(11, 1, 'د.فؤاد النجار', 'male', 'جراحات الفك والوجه والرقبة', 'قثصقصثقص', 'logo.png', 'dr.foad', '$2y$10$Efg7LYVH6s2dRivt50U67uE91hTD8J4FpCKQs8DBTOpRz8A1tBuO.', '2023-03-25 06:44:31', '2023-03-25 06:55:06');
 
 -- --------------------------------------------------------
 
@@ -292,7 +292,7 @@ CREATE TABLE `events` (
   `client_id` bigint(20) UNSIGNED NOT NULL,
   `start_datetime` datetime NOT NULL,
   `end_datetime` datetime DEFAULT NULL,
-  `status` enum('processing','complete','cancelled') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'processing',
+  `status` enum('processing','complete','cancelled') NOT NULL DEFAULT 'processing',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -307,8 +307,8 @@ CREATE TABLE `expenses` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `expense_date` date NOT NULL,
   `expense_value` decimal(8,2) NOT NULL,
-  `expense_to` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `expense_notes` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `expense_to` varchar(255) NOT NULL,
+  `expense_notes` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `add_id` bigint(20) UNSIGNED NOT NULL,
@@ -323,8 +323,8 @@ CREATE TABLE `expenses` (
 
 CREATE TABLE `expense_types` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -363,11 +363,11 @@ INSERT INTO `expense_types` (`id`, `name`, `description`, `created_at`, `updated
 
 CREATE TABLE `failed_jobs` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `uuid` varchar(255) NOT NULL,
+  `connection` text NOT NULL,
+  `queue` text NOT NULL,
+  `payload` longtext NOT NULL,
+  `exception` longtext NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -379,8 +379,8 @@ CREATE TABLE `failed_jobs` (
 
 CREATE TABLE `income_types` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -400,7 +400,7 @@ INSERT INTO `income_types` (`id`, `name`, `description`, `created_at`, `updated_
 
 CREATE TABLE `invoices` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `invoice_number` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `invoice_number` varchar(50) NOT NULL,
   `invoice_date` date DEFAULT NULL,
   `due_date` date DEFAULT NULL,
   `amount_collection` decimal(8,2) DEFAULT NULL,
@@ -410,9 +410,9 @@ CREATE TABLE `invoices` (
   `total` decimal(8,2) NOT NULL,
   `total_amount` decimal(8,2) DEFAULT 0.00,
   `value_status` tinyint(3) UNSIGNED NOT NULL DEFAULT 2,
-  `status` enum('تم السداد','غير مسدده','مسدده جزئياً') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'غير مسدده',
+  `status` enum('تم السداد','غير مسدده','مسدده جزئياً') NOT NULL DEFAULT 'غير مسدده',
   `section_id` bigint(20) UNSIGNED NOT NULL,
-  `note` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `note` text DEFAULT NULL,
   `client_id` bigint(20) UNSIGNED NOT NULL,
   `created_by` bigint(20) UNSIGNED NOT NULL,
   `payment_date` date DEFAULT NULL,
@@ -430,8 +430,8 @@ CREATE TABLE `invoices` (
 CREATE TABLE `invoice_attachments` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `invoice_id` bigint(20) UNSIGNED NOT NULL,
-  `filename` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `fileinfo` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `filename` varchar(255) NOT NULL,
+  `fileinfo` text NOT NULL,
   `user_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -447,11 +447,11 @@ CREATE TABLE `invoice_details` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `invoice_id` bigint(20) UNSIGNED NOT NULL,
   `value_status` tinyint(3) UNSIGNED NOT NULL DEFAULT 2,
-  `status` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'غير مدفوعة',
-  `payment_date` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(50) NOT NULL DEFAULT 'غير مدفوعة',
+  `payment_date` varchar(255) DEFAULT NULL,
   `payment_amount` decimal(8,2) DEFAULT 0.00,
-  `note` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `user_id` varchar(300) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `note` text DEFAULT NULL,
+  `user_id` varchar(300) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -479,7 +479,7 @@ CREATE TABLE `invoice_service` (
 
 CREATE TABLE `migrations` (
   `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `migration` varchar(255) NOT NULL,
   `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -526,11 +526,11 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 --
 
 CREATE TABLE `notifications` (
-  `id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `notifiable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` char(36) NOT NULL,
+  `type` varchar(255) NOT NULL,
+  `notifiable_type` varchar(255) NOT NULL,
   `notifiable_id` bigint(20) UNSIGNED NOT NULL,
-  `data` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `data` text NOT NULL,
   `read_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -543,8 +543,8 @@ CREATE TABLE `notifications` (
 --
 
 CREATE TABLE `password_resets` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `token` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -556,11 +556,11 @@ CREATE TABLE `password_resets` (
 
 CREATE TABLE `personal_access_tokens` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_type` varchar(255) NOT NULL,
   `tokenable_id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `abilities` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `token` varchar(64) NOT NULL,
+  `abilities` text DEFAULT NULL,
   `last_used_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -574,9 +574,9 @@ CREATE TABLE `personal_access_tokens` (
 
 CREATE TABLE `profile_users` (
   `id` int(10) UNSIGNED NOT NULL,
-  `nickname` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nickname` varchar(255) NOT NULL,
   `user_id` bigint(20) UNSIGNED NOT NULL,
-  `postion` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `postion` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -591,8 +591,8 @@ CREATE TABLE `revenues` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `revenue_date` date NOT NULL,
   `revenue_value` decimal(8,2) NOT NULL,
-  `revenue_from` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `revenue_notes` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `revenue_from` varchar(255) NOT NULL,
+  `revenue_notes` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `add_id` bigint(20) UNSIGNED NOT NULL,
@@ -607,8 +607,8 @@ CREATE TABLE `revenues` (
 
 CREATE TABLE `sections` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `section_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `section_name` varchar(255) NOT NULL,
+  `description` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -637,10 +637,10 @@ INSERT INTO `sections` (`id`, `section_name`, `description`, `created_at`, `upda
 
 CREATE TABLE `services` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `service_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `service_name` varchar(255) NOT NULL,
   `section_id` bigint(20) UNSIGNED NOT NULL,
   `price` int(11) NOT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -666,12 +666,12 @@ INSERT INTO `services` (`id`, `service_name`, `section_id`, `price`, `descriptio
 
 CREATE TABLE `telescope_entries` (
   `sequence` bigint(20) UNSIGNED NOT NULL,
-  `uuid` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `batch_id` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `family_hash` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `uuid` char(36) NOT NULL,
+  `batch_id` char(36) NOT NULL,
+  `family_hash` varchar(255) DEFAULT NULL,
   `should_display_on_index` tinyint(1) NOT NULL DEFAULT 1,
-  `type` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `content` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `type` varchar(20) NOT NULL,
+  `content` longtext NOT NULL,
   `created_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -2477,8 +2477,8 @@ INSERT INTO `telescope_entries` (`sequence`, `uuid`, `batch_id`, `family_hash`, 
 --
 
 CREATE TABLE `telescope_entries_tags` (
-  `entry_uuid` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tag` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+  `entry_uuid` char(36) NOT NULL,
+  `tag` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -3730,7 +3730,7 @@ INSERT INTO `telescope_entries_tags` (`entry_uuid`, `tag`) VALUES
 --
 
 CREATE TABLE `telescope_monitoring` (
-  `tag` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+  `tag` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -3741,15 +3741,15 @@ CREATE TABLE `telescope_monitoring` (
 
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `address` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `city` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `gender` enum('male','female') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `photo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'akram.jpg',
+  `name` varchar(255) NOT NULL,
+  `address` longtext DEFAULT NULL,
+  `city` varchar(255) DEFAULT NULL,
+  `gender` enum('male','female') DEFAULT NULL,
+  `email` varchar(255) NOT NULL,
+  `photo` varchar(255) NOT NULL DEFAULT 'akram.jpg',
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(255) NOT NULL,
+  `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
