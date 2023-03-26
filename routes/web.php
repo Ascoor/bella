@@ -10,7 +10,9 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AssestController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\DoctorAuthController;
+use App\Http\Controllers\AssestAuthController;
 use App\Http\Controllers\DoctorDashboardController;
+use App\Http\Controllers\AssestDashboardController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\InvoicesDetailsController;
@@ -73,6 +75,27 @@ Route::post('/submit', [ClientAppointmentController::class, 'submitForm'])->name
         Route::put('/doctor/reject_appointment/{id}', [DoctorDashboardController::class, 'rejectAppointment'])->name('doctor_dashboard.reject_appointment');
         Route::get('/doctor_dashboard/show_appointment/{id}', [DoctorDashboardController::class, 'showAppointment'])->name('doctor_dashboard.show_appointment');
         Route::post('/doctor_dashboard/update_appointment/{id}', [DoctorDashboardController::class, 'updateAppointment'])->name('doctor.appointment.update');
+    });
+});
+
+// define routes for doctor's dashboard
+    Route::prefix('assest')->group(function () {
+
+        // Doctor login routes
+        Route::get('/login', [AssestAuthController::class, 'showLoginForm'])->name('assest.login');
+        Route::post('/login', [AssestAuthController::class, 'login'])->name('assest.login.post');
+        // logout route
+        Route::post('/logout', [AssestAuthController::class, 'logout'])->name('assest.logout');
+
+
+    // dashboard route (authenticated)
+       Route::middleware(['auth:doctor'])->group(function () {
+        Route::get('/dashboard',[AssestDashboardController::class ,'index'])->name('assest.dashboard');
+
+
+
+
+
     });
 });
 
