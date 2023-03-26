@@ -971,18 +971,20 @@ remove_ama_config()})()</script>
             true, ['/detroitchicago/cmbv2.js'], true, false, true, false);
     </script>
 </head>
-
 <body>
     <div class=bg-light>
         <div class=container-fluid>
-            <div class="d-flex justify-content-between align-items-center">
-                <div class=p-2><a class=navbar-brand href=#><img
-                            src="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%22204%22%20height=%22152%22%3E%3C/svg%3E"
+
+
+           <div class="d-flex justify-content-between align-items-center">
+               <div class=p-2><a class=navbar-brand href=#><img
+               src="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%22204%22%20height=%22152%22%3E%3C/svg%3E"
                             height=90 alt ezimgfmt="rs rscb1 src ng ngcb1" class=ezlazyload
                             data-ezsrc=https://htmljstemplates.com/static_files/images/logos/logo_5.png></a></div>
                 <div class="p-2 text-end">
                     <div class="d-inline-block mx-3 compact align-middle"><span class="fs-3 fontStyle1">Call Us
                             Today</span><br><span class="fs-5 fontStyle2">1-800-324-1234</span></div>
+            @auth
                     <div class="d-inline-block mx-3 d-none d-lg-inline-block d-md-inline-block d-sm-inline-block">
                         <button class="btn btn-outline-danger pt-2 px-4 compact">
                             <span class="fontStyle1 fs-3"><i class="fas fa-pen-alt"></i>FREE</span><br>ESTIMATE</button>
@@ -1004,38 +1006,21 @@ remove_ama_config()})()</script>
                         <a href=# class="d-inline-block customNav">Partners</a>
                         <a href=# class="d-inline-block customNav">Blog</a>
                         <a href=# class="d-inline-block customNav">Contact Us</a></div>
-                    <div class=m-3><i class="fas fa-search text-white fs-6"></i></div>
+                        <div class=m-3><i class="fas fa-search text-white fs-6"></i></div>
                 </div>
             </div>
         </div>
     </div>
     <div class=container>
         <div class="row align-items-center">
-            <div class=col>
-                <div class=p-4>
+            @endauth
 
 
 
-
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-
+                @yield('content')
             </div>
         </div>
-    </div>
-    </div>
+
 
     <div class="p-4 text-center" style=background:#000>
         <h2 class="fontStyle1 my-5 text-white">Ready to monetize your website?</h2><span
