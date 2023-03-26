@@ -1,4 +1,4 @@
-@extends('layouts.master2')
+@extends('asslayouts.master2')
 @section('title')
 تسجيل الدخول للأطباء |برنامج بيلا كلينك
 @stop

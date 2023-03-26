@@ -29,7 +29,7 @@
 </head>
 <body><nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background: url('../img/bg-pattern.png?h=88366d218f2eda574d88b27e4cb4169d'), linear-gradient(to left, #7b4397, #130e2d)">
   <div class="container-fluid">
-    <a class="navbar-brand" href="{{ url('/doctor/dashboard') }}">
+    <a class="navbar-brand" href="{{ url('/assest/dashboard') }}">
       <img src="/img/logo.png" alt="" width="150" height="80" class="d-inline-block align-text-top">
     </a>
 
@@ -41,17 +41,17 @@
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         @auth
         <li class="nav-item">
-          <a class="nav-link text-bold" href="/doctor/dashboard">Home</a>
+          <a class="nav-link text-bold" href="/assest/dashboard">Home</a>
         </li>
         <li class="nav-item text-bold">
-          <a class="nav-link" href="/doctor/appointments">Appointments</a>
+          <a class="nav-link" href="/assest/appointments">Appointments</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle text-bold" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Clients
           </a>
           <div class="dropdown-menu text-center bg-gray" aria-labelledby="clientsDropdown">
-            <a class="dropdown-item" href="/doctor/clients">Your Clients</a>
+            <a class="dropdown-item" href="/assest/clients">Your Clients</a>
             <!-- <a class="dropdown-item" href="{{ route('client-history.index') }}">Bella Client</a> -->
           </div>
         </li>
@@ -77,7 +77,7 @@
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-bell"></i>
-            <span class="badge bg-danger">{{ auth()->guard('doctor')->user()->unreadNotifications()->count() }}</span>
+            <span class="badge bg-danger">{{ auth()->guard('assest')->user()->unreadNotifications()->count() }}</span>
         </a>
   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
       <div class="card" style="width: 18rem;">
@@ -85,10 +85,10 @@
             الإشعارات
       </div>
       <ul class="list-group list-group-flush text-center">
-      @foreach (auth()->guard('doctor')->user()->unreadNotifications as $notification) <a class="d-flex p-3 border-bottom notification-item" href="{{ route('doctor_dashboard.show_appointment', $notification->data['appointment_id']) }}" data-id="{{ $notification->id }}">
+      @foreach (auth()->guard('assest')->user()->unreadNotifications as $notification) <a class="d-flex p-3 border-bottom notification-item" href="{{ route('assest_dashboard.show_appointment', $notification->data['appointment_id']) }}" data-id="{{ $notification->id }}">
 
           <li class="list-group-item">
-            <a href="{{ route('doctor_dashboard.show_appointment', $notification->data['appointment_id']) }}" data-id="{{ $notification->id }}">
+            <a href="{{ route('assest_dashboard.show_appointment', $notification->data['appointment_id']) }}" data-id="{{ $notification->id }}">
               تم تأكيد حجز جديد من {{ $notification->data['client_name'] }} في يوم {{ $notification->data['appointment_date'] }}
 
             </a>
@@ -105,11 +105,11 @@
 
   @endauth
 </ul>
-      @if(auth()->guard('doctor')->check())
+      @if(auth()->guard('assest')->check())
 
 
           <li class="nav-item">
-              <a class="nav-link text-bold text-light">دكتور /{{ auth()->guard('doctor')->user()->name }}</a>
+              <a class="nav-link text-bold text-light">دكتور /{{ auth()->guard('assest')->user()->name }}</a>
             </li>
 
           @endauth
