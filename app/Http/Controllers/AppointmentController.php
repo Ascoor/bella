@@ -168,7 +168,7 @@ if ($request->has('appointment_id')) {
     $appointment->invoice_id = $invoice->id;
     $appointment->save();
 }
-return view('invoice.index')->with('success', 'Invoice created successfully!');
+return redirect()->route('invoices')->with('success', 'Invoice created successfully!');
 }
 
     /**
