@@ -187,7 +187,7 @@
                             <input type="number" class="form-control" id="revenue_value" name="revenue_value">
                         </div>
                         <div class="form-group">
-                            <label for="revenue_date" class="col-form-label">تاريخ الصرف</label>
+                            <label for="revenue_date" class="col-form-label">تاريخ السداد</label>
                             <input type="date" class="form-control" id="revenue_date" name="revenue_date">
                         </div>
                         <div class="form-group">
@@ -224,7 +224,7 @@
 
                         </div>
                         <div class="form-group">
-                            <label for="revenue_name" class="col-form-label">المنصرف له</label>
+                            <label for="revenue_name" class="col-form-label">القائم بالسداد</label>
                             <input type="text" class="form-control" readonly id="revenue_from" name="revenue_from">
                         </div>
                         <div class="form-group">
@@ -232,7 +232,7 @@
                             <input type="number" class="form-control" readonly id="revenue_value" name="revenue_value">
                         </div>
                         <div class="form-group">
-                            <label for="revenue_date" class="col-form-label">تاريخ الصرف</label>
+                            <label for="revenue_date" class="col-form-label">تاريخ السداد</label>
                             <input type="date" class="form-control" readonly id="revenue_date" name="revenue_date">
                         </div>
                         <div class="form-group">
@@ -273,7 +273,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="revenue_name" class="col-form-label">المنصرف له</label>
+                            <label for="revenue_name" class="col-form-label">القائم بالسداد</label>
                             <input type="text" class="form-control" id="revenue_from" name="revenue_from">
                         </div>
                         <div class="form-group">
@@ -281,7 +281,7 @@
                             <input type="number" class="form-control" id="revenue_value" name="revenue_value">
                         </div>
                         <div class="form-group">
-                            <label for="revenue_date" class="col-form-label">تاريخ الصرف</label>
+                            <label for="revenue_date" class="col-form-label">تاريخ السداد</label>
                             <input type="date" class="form-control" id="revenue_date" name="revenue_date">
                         </div>
                         <div class="form-group">

@@ -109,7 +109,6 @@ public function Invoicestore(Request $request)
         'rate_vat' => 'required',
         'value_vat' => 'required',
         'total' => 'required',
-        'fileinfo' => 'required',
 
         'note' => 'nullable|string',
 
