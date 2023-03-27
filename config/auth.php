@@ -45,10 +45,7 @@ return [
             'provider' => 'doctors',
         ],
 
-        'assest' => [
-            'driver' => 'session',
-            'provider' => 'assests',
-        ],
+
     ],
 
 
@@ -78,11 +75,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\Doctor::class,
         ],
-        'assests' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\Assest::class,
-        ],
-    ],
+
+
+
+],
 
 
     /*
