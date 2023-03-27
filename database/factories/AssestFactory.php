@@ -20,6 +20,8 @@ class AssestFactory extends Factory
             'photo' => 'logo.png',
             'gender' => $this->faker->randomElement(['male', 'female']),
             'phone'  =>$this->faker->phoneNumber(),
+            'username' => $this->faker->unique()->name(null, 6),
+            'password' => $this->faker->unique()->password(null, 6),
 
 
         ];

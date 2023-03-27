@@ -1,6 +1,5 @@
-
 <!doctype html>
-<html lang="ar"  dir="rtl">
+<html lang="ar" dir="rtl">
 
 <head>
     <meta charset=utf-8>
@@ -164,13 +163,11 @@
         };
         __ez.dot = {};
     </script>
-    <link rel=preconnect href=//fonts.googleapis.com crossorigin>
     <link rel=preconnect href=//fonts.gstatic.com crossorigin>
     <link rel=preconnect href=//kit.fontawesome.com crossorigin>
     <link rel=preconnect href=//cdn.jsdelivr.net crossorigin>
     <link rel=preconnect href=//code.jquery.com crossorigin>
-    <link rel=preconnect href=//www.ezoic.com crossorigin>
-    <link rel=preconnect href=//static.tapfiliate.com crossorigin>
+    <link rel=preconnect href=//fonts.googleapis.com crossorigin>
     <link rel=preconnect href=//go.ezoic.net crossorigin>
     <style class=ezcritcss>
         :root {
@@ -691,12 +688,7 @@
             }
         }
     </style>
-    <script data-ezscrex=false data-cfasync=false data-pagespeed-no-defer
-        src="//sf.ezoiccdn.com/tardisrocinante/cash.js?cb=4"></script>
-    <script type=text/ez-screx>(function(){function storageAvailable(type){var storage;try{storage=window[type];var x='__storage_test__';storage.setItem(x,x);storage.removeItem(x);return true;}
-catch(e){return e instanceof DOMException&&(e.code===22||e.code===1014||e.name==='QuotaExceededError'||e.name==='NS_ERROR_DOM_QUOTA_REACHED')&&(storage&&storage.length!==0);}}
-function remove_ama_config(){if(storageAvailable('localStorage')){localStorage.removeItem("google_ama_config");}}
-remove_ama_config()})()</script>
+
     <script data-ezscrex=false data-cfasync=false>
         __ez.ssaf = [17, 19, 16];
         __ez.sswp = 4;
@@ -723,7 +715,7 @@ remove_ama_config()})()</script>
             "display_ad_count": 0,
             "domain_id": 350378,
             "ds_adsize_opt_id": -1,
-            "engaged_time_visit": 19,
+            "engaged_time_visit": 8,
             "ezcache_level": 1,
             "ezcache_skip_code": 7,
             "form_factor_id": 1,
@@ -734,32 +726,32 @@ remove_ama_config()})()</script>
             "is_from_recommended_pages": false,
             "is_return_visitor": false,
             "is_sitespeed": 1,
-            "last_page_load": "1679789473534",
-            "last_pageview_id": "2c445886-2b92-48ad-78a0-4af14a172626",
+            "last_page_load": "1679789721182",
+            "last_pageview_id": "777ef885-5b4f-449a-496c-e1e68c7a1d7a",
             "lt_cache_level": 0,
             "max_ads": 2,
             "metro_code": 0,
             "optimization_version": 1,
             "page_ad_positions": "",
-            "page_view_count": 3,
-            "page_view_id": "f37e33d6-bd2b-4510-5f30-c7a864e625ac",
+            "page_view_count": 8,
+            "page_view_id": "715ff510-5262-4aca-4636-6083181efb64",
             "position_selection_id": 46,
             "postal_code": "",
             "pv_event_count": 0,
-            "response_size_orig": 5889,
-            "response_time_orig": 468,
-            "serverid": "i-04fefbe55b6f9f71a",
+            "response_size_orig": 3895,
+            "response_time_orig": 474,
+            "serverid": "i-0c26a38add218f1c3",
             "state": "DK",
             "sub_page_ad_positions": "",
-            "t_epoch": 1679789475,
+            "t_epoch": 1679789743,
             "template_id": 147,
-            "time_on_site_visit": 72,
-            "url": "https://htmljstemplates.com/downloads?page=customNavbarBottom.html",
+            "time_on_site_visit": 103,
+            "url": "https://htmljstemplates.com/downloads?page=imac.html",
             "user_id": 0,
             "weather_precipitation": 0,
             "weather_summary": "",
             "weather_temperature": 0,
-            "word_count": 48,
+            "word_count": 11,
             "worst_bad_word_level": 0
         };
         var _ezim_d = {};
@@ -768,9 +760,9 @@ remove_ama_config()})()</script>
             "form_factor_id": 1,
             "framework_id": 1,
             "pageview_date": "2023-03-25",
-            "pageview_id": "f37e33d6-bd2b-4510-5f30-c7a864e625ac",
+            "pageview_id": "715ff510-5262-4aca-4636-6083181efb64",
             "template_id": 147,
-            "url": "https://htmljstemplates.com/downloads?page=customNavbarBottom.html",
+            "url": "https://htmljstemplates.com/downloads?page=imac.html",
             "visit_uuid": "3f422165-88f1-4faf-454f-4783b626d44f"
         };
     </script>
@@ -829,63 +821,66 @@ remove_ama_config()})()</script>
             integrity=sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3 crossorigin=anonymous>
         </noscript>
     <style>
-        .fontStyle2 {
-            font-family: manrope, sans-serif
+        .navLink:hover {
+            transform: scale(1.2)
         }
 
-        .fontStyle1 {
-            font-family: anton, sans-serif
+        .navLink {
+            transition: all 200ms linear;
+            padding: 8px;
+            width: 72px;
+            height: 72px;
+            border-radius: 8px;
+            border: 1px solid #c1d9ee;
+            background: linear-gradient(225deg, #d3eeff, #b1c8e0);
+            box-shadow: -5px 5px 16px #a5bad1, 5px -5px 16px #ddedff
         }
 
-        .compact {
-            line-height: 1.5em
+        .navLink i {
+            font-size: 2em
         }
 
-        a.customNav {
-            color: #fff;
+        @media screen and (max-width:425px) {
+            .navLink i {
+                font-size: 1.5em
+            }
+
+            .navLink {
+                width: 48px;
+                height: 48px;
+                line-height: 32px
+            }
+
+            .navLabel {
+                display: none
+            }
+        }
+
+        .navLink a {
             text-decoration: none;
-            display: inline-block;
-            min-width: 80px;
-            text-align: center;
-            border-right: 1px solid #e55c69;
-            padding: 14px 18px
+            color: #204063
         }
 
-        a.active,
-        a.customNav:hover {
-            background: rgba(255, 255, 255, .2) !important;
-            border-color: transparent
+        .smallContainer {
+            max-width: 720px;
+            margin: 0 auto;
+            background: #c1d9ee
         }
 
-        @media screen and (min-width:797px) {
-            #bottomNavbar.collapse {
-                display: block
-            }
+        .navLabel {
+            font-size: 12px
         }
 
-        @media screen and (max-width:796px) {
-            #bottomNavbar {
-                padding: 14px
-            }
+        .navLinkActive * {
+            color: #fff !important
+        }
 
-            #bottomNavbar a.customNav {
-                display: block !important;
-                border: none;
-                background: rgba(0, 0, 0, .2);
-                margin-top: 4px;
-                margin-bottom: 4px;
-                margin-left: -5px;
-                margin-right: -5px
-            }
-
-            #removeFlex {
-                display: block !important;
-                text-align: center
-            }
+        .navLinkActive {
+            background: #3d5f80
         }
     </style>
-    <title>Navbar Bottom - Bootstrap 5</title>
-    <meta name=description content="Navbar bottom designed with bootstrap 5">
+
+
     <script src="https://htmljstemplates.com/ezossp/https/code.jquery.com/jquery-3.1.1.min.js?screx=1&amp;sxcb=1a"
         integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin=anonymous type=text/ez-screx>
     </script>
@@ -908,11 +903,11 @@ remove_ama_config()})()</script>
             display: none !important
         }
     </style>
-    <link rel=canonical href="https://htmljstemplates.com/downloads?page=customNavbarBottom.html">
+    <link rel=canonical href="https://htmljstemplates.com/downloads?page=imac.html">
     <script>
         var ezouid = "1";
     </script>
-    <base href="https://htmljstemplates.com/downloads?page=customNavbarBottom.html">
+    <base href="https://htmljstemplates.com/downloads?page=imac.html">
     <script>
         var ezoTemplate = 'pub_site_noads';
         if (typeof ezouid == 'undefined') {
@@ -954,7 +949,7 @@ remove_ama_config()})()</script>
                 }
             }
         }
-        __ez.queue.addFunc("attach_ezolpl", "attach_ezolpl", ["f37e33d6-bd2b-4510-5f30-c7a864e625ac", "false"], false, [
+        __ez.queue.addFunc("attach_ezolpl", "attach_ezolpl", ["715ff510-5262-4aca-4636-6083181efb64", "false"], false, [
             '/detroitchicago/boise.js'
         ], true, false, false, false);
     </script>
@@ -962,7 +957,7 @@ remove_ama_config()})()</script>
         var _audins_dom = "htmljstemplates_com",
             _audins_did = 350378;
         __ez.queue.addFile('/detroitchicago/cmbv2.js',
-            '/detroitchicago/cmbv2.js?gcb=195-0&cb=04-3y02-8y06-13y07-2y1d-7y0b-6y0d-23y17-4y1b-5y20-4y21-1y22-2y24-2y23-5y25-3y26-4y33-4y5f-2&cmbcb=130&sj=x04x02x06x07x1dx0bx0dx17x1bx20x21x22x24x23x25x26x33x5f&abt=ReallyShortBidderTimeout',
+            '/detroitchicago/cmbv2.js?gcb=195-0&cb=04-3y02-8y06-13y07-2y1d-7y0b-6y0d-23y17-4y1b-5y20-4y21-1y22-2y24-2y23-5y25-3y33-4y5f-2&cmbcb=130&sj=x04x02x06x07x1dx0bx0dx17x1bx20x21x22x24x23x25x33x5f&abt=ReallyShortBidderTimeout',
             true, [], true, false, true, false);
     </script>
     <script defer>
@@ -971,62 +966,96 @@ remove_ama_config()})()</script>
             true, ['/detroitchicago/cmbv2.js'], true, false, true, false);
     </script>
 </head>
+
 <body>
-    <div class=bg-light>
-        <div class=container-fluid>
+    <div class="position-fixed text-uppercase mb-2 p-2 start-0 text-center bottom-0 w-100" role=navigation>
+        <div class="smallContainer p-3 shadow-lg rounded">
+            <div class="d-flex align-items-center justify-content-around">
+                @auth
+                    @if(auth()->guard('assest')->check())
+
+                <div class="navLink navLinkActive"><a href=#>
+
+                        <div><i class="fa-solid fa-house"></i></div>
+                        <div class=navLabel>Home</div>
+                    </a></div>
+                <div class=navLink><a > {{ auth()->guard('assest')->user()->assest_name }}
+                        <div><i class="fa-brands fa-app-store-ios"></i></div>
+                        <div class=navLabel>Book</div>
+
+                    </a></div>
+                <div class=navLink><a href=#>
+                        <div><i class="fa-solid fa-circle-user"></i></div>
+                        <div class=navLabel>Account</div>
+                    </a></div>
+                <div class=navLink><a href=#>
+                        <div><i class="fa-solid fa-comment"></i></div>
+                        <div class=navLabel>Message</div>
+                    </a></div>
+                <div class=navLink><a href=#>
+                        <div><i class="fa-solid fa-headset"></i></div>
+                        <div class=navLabel>Call</div>
+                    </a></div>
+                <div class=navLink><a href=#>
+                        <div><i class="fa-solid fa-calendar"></i></div>
+                        <div class=navLabel>Book</div>
+                    </a></div>
 
 
-           <div class="d-flex justify-content-between align-items-center">
-               <div class=p-2><a class=navbar-brand href=#><img
-               src="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20width=%22204%22%20height=%22152%22%3E%3C/svg%3E"
-                            height=90 alt ezimgfmt="rs rscb1 src ng ngcb1" class=ezlazyload
-                            data-ezsrc=https://htmljstemplates.com/static_files/images/logos/logo_5.png></a></div>
-                <div class="p-2 text-end">
-                    <div class="d-inline-block mx-3 compact align-middle"><span class="fs-3 fontStyle1">Call Us
-                            Today</span><br><span class="fs-5 fontStyle2">1-800-324-1234</span></div>
-            @auth
-                    <div class="d-inline-block mx-3 d-none d-lg-inline-block d-md-inline-block d-sm-inline-block">
-                        <button class="btn btn-outline-danger pt-2 px-4 compact">
-                            <span class="fontStyle1 fs-3"><i class="fas fa-pen-alt"></i>FREE</span><br>ESTIMATE</button>
-                    </div>
-                </div>
+
+
+
+
+
+@endauth
+
+
+<!-- Authentication Links -->
+@guest
+@if(Route::has('login'))
+
+  <!-- <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a> -->
+
+@endif
+
+@if(Route::has('register'))
+
+  <!-- <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a> -->
+
+@endif
+@else
+<div class=navLink> <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();">
+                        <div><i class="fa-solid fa-calendar"></i></div>
+                        <div class=navLabel>Book</div>
+                    </a></div>
+
+
+
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+            @csrf
+        </form>
+
+
+
+
+
+
+@endguest
+
             </div>
+
         </div>
+        @endauth
     </div>
-    <div class="bg-danger fontStyle2"><button type=button data-bs-toggle=collapse data-bs-target=#bottomNavbar
-            class="btn btn-danger w-100 d-lg-none d-md-none d-sm-block d-xs-block rounded-0 p-2"><i
-                class="fas fa-bars me-2"></i> Menu</button>
-        <div class="collapse navbar-collapse px-2" id=bottomNavbar>
-            <div class=container-fluid>
-                <div class="d-flex justify-content-between align-items-center" id=removeFlex>
-                    <div class=flex-grow-1><a href=# class="active d-inline-block customNav">Home</a>
-                        <a href=# class="d-inline-block customNav">Services</a>
-                        <a href=# class="d-inline-block customNav">Pricing</a>
-                        <a href=# class="d-inline-block customNav">About Us</a>
-                        <a href=# class="d-inline-block customNav">Partners</a>
-                        <a href=# class="d-inline-block customNav">Blog</a>
-                        <a href=# class="d-inline-block customNav">Contact Us</a></div>
-                        <div class=m-3><i class="fas fa-search text-white fs-6"></i></div>
-                </div>
-            </div>
+    <div class="vh-100 d-flex align-items-center" style="background-image: url('{{ asset('img/bg-pattern.png')}}'),
+linear-gradient(to left, #7b4397, #dc2430);">
+
+
+                 @yield('content')
+
         </div>
-    </div>
-    <div class=container>
-        <div class="row align-items-center">
-            @endauth
-
-
-
-                @yield('content')
-            </div>
-        </div>
-
-
-    <div class="p-4 text-center" style=background:#000>
-        <h2 class="fontStyle1 my-5 text-white">Ready to monetize your website?</h2><span
-            class="ezoic-autoinsert-video ezoic-under_first_paragraph"></span>
-
-    </div>
     <script data-ezscrex=false data-cfasync=false data-pagespeed-no-defer>
         try {
             var __ezlcp;
@@ -1227,6 +1256,10 @@ remove_ama_config()})()</script>
         })();
     </script>
     <script style=display:none async></script>
+
+
+
+</div>
 </body>
 
 </html>

@@ -18,4 +18,26 @@ class Assest extends Authenticatable
     {
         return $this->belongsTo(Section::class);
     }
+    public function getAuthPassword()
+    {
+        return $this->password;
+    }
+
+    public function getRememberToken()
+    {
+        return $this->remember_token;
+    }
+
+
+
+
+   public function getFeaturedAttribute($photo)
+   {
+       return asset($photo);
+   }
+   public function getAuthIdentifierName()
+   {
+       return 'id';
+   }
+
 }

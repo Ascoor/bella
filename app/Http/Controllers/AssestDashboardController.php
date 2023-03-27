@@ -21,7 +21,7 @@ class AssestDashboardController extends Controller
         {
             $doctors = Doctor::all();
             $sections = Section::all();
-            return view('team.doctor.index',compact('doctors'))->with('sections', $sections);
+            return view('assest.dashboard',compact('doctors'))->with('sections', $sections);
         }
 
 }

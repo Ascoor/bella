@@ -11,6 +11,7 @@ use App\Models\Assest;
 use App\Models\Section;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AssestController extends Controller
 {
@@ -47,11 +48,16 @@ class AssestController extends Controller
      public function store(Request $request)
     {
         $data = $request->validate([
-             'assest_name' => 'required',
-             'phone' => 'nullable|required_if:photo,null',
-        'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        'section_id' => 'required|exists:sections,id',
-        'gender' => 'required|in:male,female',
+            'assest_name' => ['required', 'max:255', Rule::Unique('assests')],
+
+            'username' => ['required', Rule::unique('assests')],
+            'password' => ['required'],
+
+
+            'phone' => 'required',
+             'section_id' => 'required|exists:sections,id',
+             'gender' => 'required|in:male,female',
+
 
          ]);
          $assest = Assest::create($data);
@@ -107,7 +113,7 @@ class AssestController extends Controller
     $request->validate([
         'assest_name' => ['required', 'max:255', Rule::Unique('assests')->ignore($id)],
 
-
+        'username' => ['required', Rule::unique('assests')->ignore($id)],
 
         'section_id' => 'required',
         'phone' => 'required',
@@ -118,6 +124,7 @@ class AssestController extends Controller
         'section_id.required' =>'اسم المساعد مسجل مسبقا',
         'phone.required' =>'يرجي ادخال رقم الجوال',
 
+        'username.required' =>'يرجي ادخال اسم المستحدم',
 
     ]);
 
@@ -130,6 +137,10 @@ class AssestController extends Controller
     } else {
         // set default image if no photo is uploaded
         $assest->update(['photo' => 'logo.png']);
+    }
+
+    if ($request->has('password')) {
+        $assest->password = Hash::make($request->input('password'));
     }
      $assest->assest_name = $request->assest_name;
 

@@ -81,7 +81,7 @@ Route::post('/submit', [ClientAppointmentController::class, 'submitForm'])->name
 // define routes for doctor's dashboard
     Route::prefix('assest')->group(function () {
 
-        // Doctor login routes
+        // assest login routes
         Route::get('/login', [AssestAuthController::class, 'showLoginForm'])->name('assest.login');
         Route::post('/login', [AssestAuthController::class, 'login'])->name('assest.login.post');
         // logout route
@@ -89,7 +89,7 @@ Route::post('/submit', [ClientAppointmentController::class, 'submitForm'])->name
 
 
     // dashboard route (authenticated)
-       Route::middleware(['auth:doctor'])->group(function () {
+       Route::middleware(['auth:assest'])->group(function () {
         Route::get('/dashboard',[AssestDashboardController::class ,'index'])->name('assest.dashboard');
 
 
