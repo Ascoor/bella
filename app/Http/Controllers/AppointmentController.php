@@ -45,8 +45,6 @@ class AppointmentController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     public function inde()
-     {
     /**
      * Show the list of appointments in the backend.
      *
