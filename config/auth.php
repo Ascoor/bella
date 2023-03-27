@@ -75,11 +75,18 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\Doctor::class,
         ],
+<<<<<<< HEAD
         'assests' => [
             'driver' => 'eloquent',
             'model' => App\Models\assests::class,
         ],
     ],
+=======
+
+
+
+],
+>>>>>>> e727e2bfbd2b734ab974cd862890dad48cf08476
 
 
     /*

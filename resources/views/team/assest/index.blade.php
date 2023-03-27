@@ -131,6 +131,10 @@
                                                 data-id="{{ $x->id }}" data-section_id="{{ $x->section->id }}"
                                                 data-assest_name="{{ $x->assest_name }}"
                                                 data-phone="{{ $x->phone }}" data-gender="{{ $x->gender }}"
+<<<<<<< HEAD
+=======
+
+>>>>>>> e727e2bfbd2b734ab974cd862890dad48cf08476
                                                 data-toggle="modal" href="#edit_assest" title="تعديل"><i
                                                     class="las la-pen"></i></a>
 
@@ -365,10 +369,18 @@
             var id = button.data('id')
 
             var gender = button.data('gender')
+<<<<<<< HEAD
+=======
+
+>>>>>>> e727e2bfbd2b734ab974cd862890dad48cf08476
             var phone = button.data('phone')
             var modal = $(this)
             modal.find('.modal-body #assest_name').val(assest_name);
             modal.find('.modal-body #section_id').val(section_id);
+<<<<<<< HEAD
+=======
+
+>>>>>>> e727e2bfbd2b734ab974cd862890dad48cf08476
 
             modal.find('.modal-body #phone').val(phone);
             modal.find('.modal-body #gender').val(gender);
