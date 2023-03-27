@@ -139,5 +139,11 @@ Route::get('/events/list', [EventController::class, 'list']);
     // Ajax Routes
     Route::get('/section/services/{id}', function ($section_id) {
         $services = DB::table('services')->where('section_id', $section_id)->get();
-        return response()->json($services);
+        $doctors = DB::table('doctors')->where('section_id', $section_id)->get();
+        $data = [
+            'services' => $services,
+            'doctors' => $doctors
+        ];
+        return response()->json($data);
     });
+

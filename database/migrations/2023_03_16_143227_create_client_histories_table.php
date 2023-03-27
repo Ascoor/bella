@@ -15,12 +15,15 @@ class CreateClientHistoriesTable extends Migration
     {
         Schema::create('client_histories', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('client_id')->constrained();
-            $table->date('appointment_date');
+            $table->unsignedBigInteger('client_id');
+            $table->unsignedBigInteger('doctor_id');
+            $table->unsignedBigInteger('appointment_id');
+            $table->unsignedBigInteger('invoice_id');
+            $table->text('comments')->nullable();
+
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      *

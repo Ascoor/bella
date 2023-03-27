@@ -78,7 +78,6 @@
                         </div>
                     </div>
                     <br/>
-                    {{-- 2 --}}
                     <div class="row">
   <div class="col">
     <label for="section" class="control-label">إختيار القسم</label>
@@ -96,6 +95,14 @@
     <div id="services">
 
     </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <label for="doctors" class="control-label">حدد الأطباء</label>
+    <select id="doctors" name="doctor_id">
+      <option value="">Choose</option>
+    </select>
   </div>
 </div>
 
@@ -221,27 +228,35 @@
 
     </script>
 
-<script>
-$(document).ready(function() {
-  // On section change
-  $("#section").on("change", function() {
-    var sectionId = $(this).val();
-    if (sectionId) {
-      $.ajax({
-        url: "{{ URL::to('section/services') }}/" + sectionId,
-        type: "GET",
-        dataType: "json",
-        success: function(data) {
-          $("#services").empty();
-          $.each(data, function(key, value) {
-            $("#services").append('<div><input type="checkbox" name ="services[]" class="service-checkbox" value="' + value.id + '" data-price="' + value.price + '">' + value.service_name + ' - $' + value.price + '</div>');
+<script>$("#section").on("change", function() {
+  var sectionId = $(this).val();
+  if (sectionId) {
+    $.ajax({
+      url: "{{ URL::to('section/services') }}/" + sectionId,
+      type: "GET",
+      dataType: "json",
+      success: function(response) {
+        $("#services").empty();
+        $("#doctors").remove(); // Remove previous doctors select element
+        $.each(response.services, function(key, value) {
+          $("#services").append('<div><input type="checkbox" name ="services[]" class="service-checkbox" value="' + value.id + '" data-price="' + value.price + '">' + value.service_name + ' - $' + value.price + '</div>');
+        });
+        if (response.doctors.length > 0) {
+          // Create doctors select element if there are any doctors
+          var doctorsDiv = $('<div class="row"><div class="col"><label for="doctors" class="control-label">حدد الأطباء</label><select id="doctors" name="doctor_id"><option value="">Choose</option></select></div></div>');
+          $.each(response.doctors, function(key, value) {
+            $("#doctors", doctorsDiv).append('<option value="' + value.id + '">' + value.doctor_name + '</option>');
           });
-        },
-      });
-    } else {
-      $("#services").empty();
-    }
-  });
+          $("#section").after(doctorsDiv); // Append doctors select element after section select element
+        }
+      },
+    });
+  } else {
+    $("#services").empty();
+    $("#doctors").remove();
+  }
+});
+
 
   // On click of service checkbox
   $(document).on("click", ".service-checkbox", function() {
