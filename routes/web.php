@@ -115,10 +115,10 @@ Route::get('/events/list', [EventController::class, 'list']);
     // Invoice Routes
     Route::post('/status_update/{id}', [InvoiceController::class,'statusUpdate'])->name('status_update');
     Route::get('/invoice/{id}/attachments', [InvoiceController::class,'showAttachments'])->name('invoice. attachments');
-    Route::resource('invoices', InvoiceController::class);
+
     Route::get('/invoices',[ InvoiceController::class,'sort'])->name('invoices.sort');
     Route::delete('invoices/{invoice}', [InvoiceController::class, 'destroy'])->name('invoices.destroy');
-
+    Route::resource('invoices', InvoiceController::class);
     Route::post('invoices/add-attachments', [InvoiceController::class,'addAttachments'])->name('invoices.addAttachments');
     Route::get('/status_show/{id}', [InvoiceController::class,'show'])->name('status_show');
     Route::put('/invoices/{id}', [InvoiceController::class,'shupdateow'])->name('invoices.update');
