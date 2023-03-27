@@ -122,7 +122,7 @@ Route::get('/events/list', [EventController::class, 'list']);
 
     Route::post('invoices/add-attachments', [InvoiceController::class,'addAttachments'])->name('invoices.addAttachments');
     Route::get('/status_show/{id}', [InvoiceController::class,'show'])->name('status_show');
-    Route::put('/invoices/{id}', [InvoiceController::class,'shupdateow'])->name('invoices.update');
+
     Route::get('invoices/{invoice_number}/attachments/{filename}', 'App\Http\Controllers\InvoicesDetailsController@download')->name('download.attachment');
     Route::get('invoices/{invoice_number}/attachments/{filename}/view', 'App\Http\Controllers\InvoicesDetailsController@view')->name('view.attachment');
 
