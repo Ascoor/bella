@@ -21,7 +21,7 @@
 								<div class="pb-0 mt-0">
 									<div class="d-flex">
 										<div class="">
-											<h4 class="tx-20 font-weight-bold mb-1 text-white">$5,74.12</h4>
+											<h4 class="tx-20 font-weight-bold mb-1 text-white">{{ $appointmentsCount }} </h4>
 											<p class="mb-0 tx-12 text-white op-7">Compared to last week</p>
 										</div>
 										<span class="float-right my-auto mr-auto">
@@ -43,7 +43,7 @@
 								<div class="pb-0 mt-0">
 									<div class="d-flex">
 										<div class="">
-											<h4 class="tx-20 font-weight-bold mb-1 text-white">$1,230.17</h4>
+											<h4 class="tx-20 font-weight-bold mb-1 text-white">${{ $totalIncomeToday }}</h4>
 											<p class="mb-0 tx-12 text-white op-7">Compared to last week</p>
 										</div>
 										<span class="float-right my-auto mr-auto">
@@ -65,7 +65,7 @@
 								<div class="pb-0 mt-0">
 									<div class="d-flex">
 										<div class="">
-											<h4 class="tx-20 font-weight-bold mb-1 text-white">$7,125.70</h4>
+											<h4 class="tx-20 font-weight-bold mb-1 text-white">${{ $totalRevenue }}</h4>
 											<p class="mb-0 tx-12 text-white op-7">مدفوعات حتى نهاية الأسبوع</p>
 										</div>
 										<span class="float-right my-auto mr-auto">
@@ -87,7 +87,7 @@
 								<div class="pb-0 mt-0">
 									<div class="d-flex">
 										<div class="">
-											<h4 class="tx-20 font-weight-bold mb-1 text-white">$4,820.50</h4>
+											<h4 class="tx-20 font-weight-bold mb-1 text-white">{{ $AllappointmentsCount }}</h4>
 											<p class="mb-0 tx-12 text-white op-7">حجوزات مسدده جزئياً</p>
 										</div>
 										<span class="float-right my-auto mr-auto">

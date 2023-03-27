@@ -126,7 +126,7 @@ $services = Service::all();
         }
     }
 
-    return redirect()->route('invoice.index')->with('success', 'Invoice created successfully!');
+    return redirect()->route('invoices.index')->with('success', 'Invoice created successfully!');
 }
 
 
