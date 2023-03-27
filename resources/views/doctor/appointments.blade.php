@@ -78,6 +78,17 @@
                                         </form>
                                     @endif
                                 </td>
+                                <td>
+
+@if($item->status === 'processing')
+                                        <form method="POST"
+                                            action="{{ route('doctor_dashboard.complete_appointment', ['id' => $item->id]) }}">
+                                            @csrf
+                                            @method('PUT')
+                                            <button type="submit" class="btn btn-primary">Complete</button>
+                                        </form>
+                                    @endif
+                                </td>
                             </tr>
 
                             @endforeach

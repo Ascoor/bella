@@ -99,7 +99,7 @@ public function updateAppointment(Request $request, $id)
     }
 
     session()->flash('success', 'Appointment updated successfully.');
-    return redirect()->back();
+    return redirect()->route('doctor.appointments');
 }
 
 public function completeAppointment($id)

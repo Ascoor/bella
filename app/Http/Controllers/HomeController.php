@@ -27,6 +27,10 @@ class HomeController extends Controller
 
     public function index()
     {
+        $pendingAppointmentsCount = DB::table('appointments')
+        ->where('status', 'pending')
+        ->count();
+
         $appointmentsCount = DB::table('appointments')
                                 ->whereDate('apt_datetime', today())
                                 ->count();
@@ -44,6 +48,7 @@ class HomeController extends Controller
             'totalRevenue' => $totalRevenue,
             'totalIncomeToday' => $totalIncomeToday,
             'AllappointmentsCount' => $AllappointmentsCount,
+            'pendingAppointmentsCount' => $pendingAppointmentsCount,
         ]);
     }
 }

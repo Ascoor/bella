@@ -81,14 +81,6 @@
   </form>
 @endif
 <br/>
-@if($appointment->status === 'processing')
-                                        <form method="POST"
-                                            action="{{ route('doctor_dashboard.complete_appointment', ['id' => $appointment->id]) }}">
-                                            @csrf
-                                            @method('PUT')
-                                            <button type="submit" class="btn btn-primary">Complete</button>
-                                        </form>
-                                    @endif
 
         </div>
         <div class="modal-footer">

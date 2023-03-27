@@ -88,11 +88,11 @@
 									<div class="d-flex">
 										<div class="">
 											<h4 class="tx-20 font-weight-bold mb-1 text-white">{{ $AllappointmentsCount }}</h4>
-											<p class="mb-0 tx-12 text-white op-7">حجوزات مسدده جزئياً</p>
+											<p class="mb-0 tx-12 text-white op-7">حجوزات بقائمة بالإنتظار</p>
 										</div>
 										<span class="float-right my-auto mr-auto">
-											<i class="fas fa-arrow-circle-down text-white"></i>
-											<span class="text-white op-7"> -152.3</span>
+											<i class="fas fa-arrow-circle-up text-white"></i>
+										{{ $pendingAppointmentsCount }}
 										</span>
 									</div>
 								</div>

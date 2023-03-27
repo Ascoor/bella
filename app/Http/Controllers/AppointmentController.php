@@ -157,7 +157,7 @@ if ($request->hasFile('attached_files')) {
        $attachment = new InvoiceAttachment();
        $attachment->invoice_id = $invoice->id;
        $attachment->filename = $filename;
-       $attachment->fileinfo =  $validatedData['fileinfo'];
+       $attachment->fileinfo =  $request->fileinfo;
        $attachment->user_id = Auth::id();
 
        $attachment->save();
