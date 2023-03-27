@@ -131,7 +131,7 @@
                                                 data-id="{{ $x->id }}" data-section_id="{{ $x->section->id }}"
                                                 data-assest_name="{{ $x->assest_name }}"
                                                 data-phone="{{ $x->phone }}" data-gender="{{ $x->gender }}"
-                                                data-username="{{ $x->username }}" data-password="{{ $x->password }}"
+
                                                 data-toggle="modal" href="#edit_assest" title="تعديل"><i
                                                     class="las la-pen"></i></a>
 
@@ -198,14 +198,7 @@
                             <label for="title">رقم الجوال:</label>
                             <input class="form-control" type="tell" id="phone" name="phone">
                         </div>
-                        <div class="form-group">
-                            <label for="username" class="col-form-label">اسم المستخدم:</label>
-                            <input type="text" class="form-control" id="username" name="username">
-                        </div>
-                        <div class="form-group">
-                            <label for="password" class="col-form-label">كلمة المرور:</label>
-                            <input type="password" class="form-control" id="password" name="password">
-                        </div>
+
                     </div>
                     <div class="modal-footer">
 
@@ -269,14 +262,7 @@
                             <label for="phone" class="col-form-label">رقم الجوال:</label>
                             <input type="tell" class="form-control" id="phone" name="phone">
                         </div>
-                        <div class="form-group">
-                            <label for="username" class="col-form-label">اسم المستخدم:</label>
-                            <input type="text" class="form-control" id="username" name="username">
-                        </div>
-                        <div class="form-group">
-                            <label for="password" class="col-form-label">كلمة المرور:</label>
-                            <input type="password" class="form-control" id="password" name="password">
-                        </div>
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">اغلاق</button>
@@ -381,14 +367,11 @@
 
             var gender = button.data('gender')
 
-                        var username = button.data('username')
-                        var password = button.data('password')
             var phone = button.data('phone')
             var modal = $(this)
             modal.find('.modal-body #assest_name').val(assest_name);
             modal.find('.modal-body #section_id').val(section_id);
-            modal.find('.modal-body #username').val(username)
-            modal.find('.modal-body #password').val(password)
+
 
             modal.find('.modal-body #phone').val(phone);
             modal.find('.modal-body #gender').val(gender);
