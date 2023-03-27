@@ -78,36 +78,6 @@ Route::post('/submit', [ClientAppointmentController::class, 'submitForm'])->name
     });
 });
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-// define routes for doctor's dashboard
-    Route::prefix('assest')->group(function () {
-
-        // Doctor login routes
-        Route::get('/login', [AssestAuthController::class, 'showLoginForm'])->name('assest.login');
-        Route::post('/login', [AssestAuthController::class, 'login'])->name('assest.login.post');
-        // logout route
-        Route::post('/logout', [AssestAuthController::class, 'logout'])->name('assest.logout');
-
-
-    // dashboard route (authenticated)
-       Route::middleware(['auth:doctor'])->group(function () {
-        Route::get('/dashboard',[AssestDashboardController::class ,'index'])->name('assest.dashboard');
-
-
-
-
-
-    });
-});
-
->>>>>>> parent of e9b9eadd (assest auth)
-=======
->>>>>>> e727e2bfbd2b734ab974cd862890dad48cf08476
-=======
->>>>>>> e727e2bfbd2b734ab974cd862890dad48cf08476
 // Event For DashBoard
 Route::get('/events', [EventController::class, 'index']);
 Route::get('/events/list', [EventController::class, 'list']);
