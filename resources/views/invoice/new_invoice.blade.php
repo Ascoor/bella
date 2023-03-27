@@ -266,21 +266,28 @@
         // get the initial value of amountCollection
         var amountCollection = parseFloat($('#amount_collection').val());
 
-        // listen for changes to the discount field
-        $('#discount').on('change', function () {
-            var discount = parseFloat($(this).val());
-            var newTotal = amountCollection - discount;
-            $('#total').val(newTotal.toFixed(2));
-        });
+      // listen for changes to the discount field
+$('#discount').on('input', function () {
+    var discount = parseFloat($(this).val());
+    var newTotal = amountCollection + valueVat - discount;
+    $('#total').val(newTotal.toFixed(2));
+});
 
-        // listen for changes to the rate_vat field
-        $('#rate_vat').on('change', function () {
-            var rateVat = parseFloat($(this).val());
-            var valueVat = amountCollection * (rateVat / 100);
-            $('#value_vat').val(valueVat.toFixed(2));
-            var newTotal = amountCollection + valueVat;
-            $('#total').val(newTotal.toFixed(2));
-        });
+// listen for changes to the rate_vat field
+$('#rate_vat').on('input', function () {
+    var rateVat = parseFloat($(this).val());
+    var valueVat = amountCollection * (rateVat / 100);
+    $('#value_vat').val(valueVat.toFixed(2));
+    var newTotal = amountCollection + valueVat - parseFloat($('#discount').val());
+    $('#total').val(newTotal.toFixed(2));
+});
+
+// calculate the initial total
+var valueVat = amountCollection * ($('#rate_vat').val() / 100);
+var newTotal = amountCollection + valueVat - parseFloat($('#discount').val());
+$('#value_vat').val(valueVat.toFixed(2));
+$('#total').val(newTotal.toFixed(2));
+
     });
 </script>
 

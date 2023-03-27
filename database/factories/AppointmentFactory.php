@@ -14,24 +14,18 @@ class AppointmentFactory extends Factory
      * Define the model's default state.
      *
      * @return array
-     */
-    public function definition()
-    {
-        return [
-            'apt_datetime' => $this->faker->datetime('m-d-Y H:i:s'),
+     */public function definition()
+{
 
+    return [
+        'apt_datetime' => $this->faker->dateTimeBetween(request('apt_datetime'), '+1 year')->format('Y-m-d H:i:s'),
 
-            'status' => $this->faker->randomElement(['pending','processing']),
+        'status' => $this->faker->randomElement(['pending', 'processing']),
 
+        'doctor_id' => Doctor::all()->random()->id,
+        'client_id' => Client::all()->random()->id,
+        'section_id' => Section::all()->random()->id,
 
-            'doctor_id' => Doctor::all()->random()->id,
-            'client_id' => Client::all()->random()->id,
-            'section_id' => Section::all()->random()->id,
-            'created_at' => $this->faker->date(),
-            'updated_at' => $this->faker->date(),
-
-
-
-        ];
-    }
+    ];
+}
 }

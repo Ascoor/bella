@@ -89,7 +89,17 @@
 
                                                 <table class="table table-striped" style="text-align:center">
                                                     <tbody>
-                                                        <tr>
+
+
+                               <th >إسم العميل</th>
+
+
+                                                    <tr style="background-color: #f1fdee;">
+                                 <td style="width: 300px;">{{ $invoice->client->client_name }}</td>
+                                                    </tr>
+                                                    </tbody>
+                                                    <tbody>
+                                                            <tr>
                                                             <th scope="row">رقم الفاتورة</th>
                                                             <th scope="row">تاريخ الاصدار</th>
                                                             <th scope="row">تاريخ الاستحقاق</th>

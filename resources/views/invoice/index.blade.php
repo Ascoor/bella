@@ -127,7 +127,7 @@
 
 
                                         <td>{{ $invoice->discount }}</td>
-                                        <td>{{ $invoice->rate_vat }}</td>
+                                        <td>{{ $invoice->rate_vat }}%</td>
                                         <td>{{ $invoice->value_vat }}</td>
                                         <td>{{ $invoice->total }}</td>
                                         <td>{{ $invoice->total_amount }}</td>
