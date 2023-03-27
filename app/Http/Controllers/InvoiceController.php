@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Client;
+use App\Models\Doctor;
 use App\Models\Invoice;
 use App\Models\Invoice_details;
 use App\Models\InvoiceAttachment;
@@ -320,6 +321,25 @@ $invoice =  Invoice::find($id);
         } else {
             return redirect()->back()->with('error', 'Invoice not found!');
         }
+    }
+
+    public function sort(Request $request)
+    {
+        $value_status = $request->query('value_status');
+
+        $invoices = Invoice::query();
+
+
+        if ($value_status) {
+            $invoices->where('value_status', $value_status);
+        }
+$doctors = Doctor::all();
+$clients = Client::all();
+        $invoices = $invoices->orderBy('value_status')->get();
+
+        return view('invoice.index', [
+            'invoices' => $invoices,
+        ])->with('doctors', $doctors)->with('clients', $clients);
     }
 
 }

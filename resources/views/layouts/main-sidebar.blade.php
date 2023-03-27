@@ -79,10 +79,10 @@
 </svg>
 <span class="side-menu__label">الفواتير</span><i class="angle fe fe-chevron-down"></i></a>
       	<ul class="slide-menu">
-							<li><a class="slide-item" href="{{route('invoices.index')}}">قائمة الفواتير</a></li>
-							<li><a class="slide-item" href="{{ url('/' . $page='chart-chartjs') }}">الفواتير المسددة</a></li>
-							<li><a class="slide-item" href="{{ url('/' . $page='chart-echart') }}">الفواتير المسددة جزئيا</a></li>
-							<li><a class="slide-item" href="{{ url('/' . $page='chart-flot') }}">الفواتير الغير مسدده </a></li>
+							<li><a class="slide-item" href="/invoices">قائمة الفواتير</a></li>
+							<li><a class="slide-item"  href="{{ route('invoices.sort', ['value_status' => '1']) }}">الفواتير المسددة</a></li>
+							<li><a class="slide-item"  href="{{ route('invoices.sort', ['value_status' => '3']) }}">الفواتير المسددة جزئيا</a></li>
+							<li><a class="slide-item"  href="{{ route('invoices.sort', ['value_status' => '2']) }}">الفواتير الغير مسدده </a></li>
 
 						</ul>
 					</li>
