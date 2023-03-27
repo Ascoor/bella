@@ -45,10 +45,7 @@ return [
             'provider' => 'doctors',
         ],
 
-        'assest' => [
-            'driver' => 'session',
-            'provider' => 'assests',
-        ],
+
     ],
 
 

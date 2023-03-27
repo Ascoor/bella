@@ -20,8 +20,6 @@ class CreateAssestsTable extends Migration
             $table->unsignedBigInteger('section_id');
             $table->string('phone');
             $table->string('photo')->nullable();
-            $table->string('username')->unique();
-            $table->string('password');
             $table->timestamps();
 
             $table->foreign('section_id')->references('id')->on('sections')->onDelete('cascade');

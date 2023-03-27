@@ -79,6 +79,7 @@ Route::post('/submit', [ClientAppointmentController::class, 'submitForm'])->name
 });
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 // define routes for doctor's dashboard
     Route::prefix('assest')->group(function () {
@@ -102,6 +103,8 @@ Route::post('/submit', [ClientAppointmentController::class, 'submitForm'])->name
 });
 
 >>>>>>> parent of e9b9eadd (assest auth)
+=======
+>>>>>>> e727e2bfbd2b734ab974cd862890dad48cf08476
 // Event For DashBoard
 Route::get('/events', [EventController::class, 'index']);
 Route::get('/events/list', [EventController::class, 'list']);
