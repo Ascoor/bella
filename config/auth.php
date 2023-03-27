@@ -80,7 +80,7 @@ return [
         ],
         'assests' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Assest::class,
+            'model' => App\Models\assests::class,
         ],
     ],
 
