@@ -126,7 +126,7 @@ $services = Service::all();
         }
     }
 
-    return redirect()->route('invoices.index')->with('success', 'Invoice created successfully!');
+    return redirect()->route('invoice.index')->with('success', 'Invoice created successfully!');
 }
 
 
@@ -332,14 +332,13 @@ $invoice =  Invoice::find($id);
 
         if ($value_status) {
             $invoices->where('value_status', $value_status);
+
         }
-$doctors = Doctor::all();
-$clients = Client::all();
         $invoices = $invoices->orderBy('value_status')->get();
 
         return view('invoice.index', [
             'invoices' => $invoices,
-        ])->with('doctors', $doctors)->with('clients', $clients);
-    }
+        ]);
+        }
 
 }
