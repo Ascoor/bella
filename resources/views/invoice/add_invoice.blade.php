@@ -157,15 +157,10 @@
             </div>
         </div>
     </div>
-</div>
 
 
 
-<!-- row closed -->
-</div>
-<!-- Container closed -->
-</div>
-<!-- main-content closed -->
+
 @endsection
 @section('js')
 
@@ -240,7 +235,7 @@
     $("#services").empty();
     $("#doctors").remove();
   }
-});
+
 
 
   // On click of service checkbox
@@ -283,7 +278,7 @@
   $("#total").val(total);
 }
 
-
+});
 
 </script>
 
