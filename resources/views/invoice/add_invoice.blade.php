@@ -97,14 +97,6 @@
     </div>
   </div>
 </div>
-<div class="row">
-  <div class="col">
-    <label for="doctors" class="control-label">حدد الأطباء</label>
-    <select id="doctors" name="doctor_id">
-      <option value="">Choose</option>
-    </select>
-  </div>
-</div>
 
 <div class="row">
   <div class="col">
@@ -298,7 +290,7 @@
   $("#total").val(total);
 }
 
-});
+
 
 </script>
 
