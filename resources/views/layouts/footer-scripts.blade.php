@@ -3,7 +3,8 @@
 <!-- JQuery min js -->
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 
-<!-- Bootstrap Bundle js --><script src="{{ URL::asset('assets/plugins/select2/js/select2.min.js') }}"></script>
+<!-- Bootstrap Bundle js -->
+<script src="{{ URL::asset('assets/plugins/select2/js/select2.min.js') }}"></script>
 
 <script src="{{URL::asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- Ionicons js -->

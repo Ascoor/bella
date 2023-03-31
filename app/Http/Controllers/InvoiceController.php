@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use App\Models\ClientHistory;
-use App\Models\Doctor;
+
 use App\Models\Invoice;
 use App\Models\Invoice_details;
 use App\Models\InvoiceAttachment;
@@ -65,7 +65,7 @@ $services = Service::all();
              'invoice_date' => 'required',
              'due_date' => 'required',
              'client_id' => 'required',
-             'doctor_id' => 'required',
+
              'section_id' => 'required',
              'services' => 'array|required',
         'services.*' => 'integer',
@@ -111,7 +111,7 @@ $services = Service::all();
          $invoice_details->save();
          $clinicHistory = new ClientHistory();
          $clinicHistory->client_id = $invoice->client_id;
-         $clinicHistory->doctor_id = $invoice->appointment->doctor->id;
+
          $clinicHistory->appointment_id = $invoice->client->appointment_id;
          $clinicHistory->invoice_id = $invoice->id;
 

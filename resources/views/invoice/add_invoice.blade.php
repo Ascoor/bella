@@ -92,7 +92,7 @@
 <div class="row">
   <div class="col">
     <label for="services" class="control-label">حدد الخدمات</label>
-    <div id="services">
+    <div name="services[]" id="services">
 
     </div>
   </div>
@@ -184,7 +184,7 @@
 </script>
 
 <!-- Internal Select2 js-->
-<script src="{{ URL::asset('assets/plugins/select2/js/select2.min.js') }}"></script>
+
 <!--Internal Fileuploads js-->
 <script src="{{ URL::asset('assets/plugins/fileuploads/js/fileupload.js') }}"></script>
 <script src="{{ URL::asset('assets/plugins/fileuploads/js/file-upload.js') }}"></script>
@@ -215,7 +215,8 @@
 
     </script>
 
-<script>$("#section").on("change", function() {
+<script>
+$("#section").on("change", function() {
   var sectionId = $(this).val();
   if (sectionId) {
     $.ajax({
@@ -226,7 +227,8 @@
         $("#services").empty();
         $("#doctors").remove(); // Remove previous doctors select element
         $.each(response.services, function(key, value) {
-          $("#services").append('<div><input type="checkbox" name ="services[]" class="service-checkbox" value="' + value.id + '" data-price="' + value.price + '">' + value.service_name + ' - $' + value.price + '</div>');
+            $("#services").append('<div><input type="checkbox" name="services[]" class="service-checkbox" value="' + value.id + '" data-price="' + value.price + '">' + value.service_name + ' - $' + value.price + '</div>');
+
         });
 
       },

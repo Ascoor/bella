@@ -16,7 +16,7 @@ class CreateClientHistoriesTable extends Migration
         Schema::create('client_histories', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('client_id');
-            $table->unsignedBigInteger('doctor_id');
+
             $table->unsignedBigInteger('appointment_id');
             $table->unsignedBigInteger('invoice_id');
             $table->text('comments')->nullable();
