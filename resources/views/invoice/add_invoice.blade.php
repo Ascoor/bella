@@ -233,14 +233,7 @@
         $.each(response.services, function(key, value) {
           $("#services").append('<div><input type="checkbox" name ="services[]" class="service-checkbox" value="' + value.id + '" data-price="' + value.price + '">' + value.service_name + ' - $' + value.price + '</div>');
         });
-        if (response.doctors.length > 0) {
-          // Create doctors select element if there are any doctors
-          var doctorsDiv = $('<div class="row"><div class="col"><label for="doctors" class="control-label">حدد الأطباء</label><select id="doctors" name="doctor_id"><option value="">Choose</option></select></div></div>');
-          $.each(response.doctors, function(key, value) {
-            $("#doctors", doctorsDiv).append('<option value="' + value.id + '">' + value.doctor_name + '</option>');
-          });
-          $("#section").after(doctorsDiv); // Append doctors select element after section select element
-        }
+
       },
     });
   } else {
