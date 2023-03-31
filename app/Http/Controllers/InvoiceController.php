@@ -109,13 +109,7 @@ $services = Service::all();
          $invoice_details->note = $validatedData['note'];
          $invoice_details->user_id = Auth::id();
          $invoice_details->save();
-         $clinicHistory = new ClientHistory();
-         $clinicHistory->client_id = $invoice->client_id;
 
-         $clinicHistory->appointment_id = $invoice->client->appointment_id;
-         $clinicHistory->invoice_id = $invoice->id;
-
-         $clinicHistory->save();
     // Create a folder for the invoice
     $folderName = 'invoices/' . $invoice->invoice_number;
     Storage::makeDirectory($folderName);
