@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
 use App\Models\ClientHistory;
 use Illuminate\Http\Request;
 
@@ -28,6 +29,16 @@ class ClientHistoryController extends Controller
     {
         return view('client-history.create');
     }
+public function getClientInfo($clientId)
+{
+    $client = Client::find($clientId);
+
+    if (!$client) {
+        abort(404, 'Client not found');
+    }
+
+    return view('client.details_client', ['client' => $client]);
+}
 
     /**
      * Store a newly created resource in storage.

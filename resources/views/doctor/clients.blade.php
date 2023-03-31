@@ -35,7 +35,11 @@
                                 <?php $i++; ?>
                                 <tr>
                                     <td>{{ $i }}</td>
-                                    <td>{{ $x->client_name }}</td>
+                                    <td>
+                                    <a href="{{ route('client.info', ['client_id' => $x->id]) }}">{{ $x->client_name }}</a>
+    </td>
+
+
                                     <td>{{ $x->address }}</td>
                                     <td>{{ $x->client_phone }}</td>
                                     <td>

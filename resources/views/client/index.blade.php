@@ -106,14 +106,8 @@
                                     <tr>
                                         <td>{{ $i }}</td>
                                         <td>
-                                        <a class="modal-effect" data-effect="effect-scale"
-                                                data-id="{{ $x->id }}" data-client_name="{{ $x->client_name }}"
-                                                data-birthdate="{{ $x->birthdate }}"
-                                                data-address="{{ $x->address }}"
-                                                data-client_phone="{{ $x->client_phone }}"
-                                                data-email="{{ $x->email }}" data-note="{{ $x->note }}"
-                                                data-pid="{{ $x->pid }}" data-gender="{{ $x->gender }}"
-                                                data-toggle="modal" href="#showModal" title="مشاهدة">{{ $x->client_name }}</a>
+                                        <a href="{{ url('clients/history', ['client_id' => $x->id]) }}">{{ $x->client_name }}</a>
+
 
 
 </td>

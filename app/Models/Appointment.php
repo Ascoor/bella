@@ -29,6 +29,10 @@ use Notifiable;
     {
         return $this->belongsTo(Section::class);
     }
+    public function invoice()
+    {
+        return $this->belongsTo(Invoice::class);
+    }
 
 }
 

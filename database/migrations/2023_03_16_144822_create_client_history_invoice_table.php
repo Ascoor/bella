@@ -15,7 +15,7 @@ class CreateClientHistoryInvoiceTable extends Migration
     {
         Schema::create('client_history_invoice', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('client_history_id')->constrained();
+            $table->foreignId('client_id')->constrained();
             $table->foreignId('invoice_id')->constrained();
             $table->decimal('amount', 8, 2);
             $table->timestamps();

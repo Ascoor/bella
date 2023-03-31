@@ -21,6 +21,14 @@ class Client extends Model
     {
         return $this->hasMany(Event::class);
     }
+    public function invoices()
+    {
+        return $this->hasMany(Invoice::class);
+    }
+    public function doctors()
+    {
+        return $this->hasMany(Doctor::class);
+    }
 
     // public function routeNotificationForAppointment()
     // {

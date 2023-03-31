@@ -101,6 +101,16 @@ public function updateAppointment(Request $request, $id)
     session()->flash('success', 'Appointment updated successfully.');
     return redirect()->route('doctor.appointments');
 }
+public function getClientInfo($clientId)
+{
+    $client = Client::find($clientId);
+
+    if (!$client) {
+        abort(404, 'Client not found');
+    }
+
+    return view('doctor.client_show', ['client' => $client]);
+}
 
 public function completeAppointment($id)
 {

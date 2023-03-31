@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use App\Models\ClientHistory;
-
+use App\Models\ClientHistoryInvoice;
 use App\Models\Invoice;
 use App\Models\Invoice_details;
 use App\Models\InvoiceAttachment;
@@ -267,6 +267,18 @@ $invoice =  Invoice::find($id);
         $revenue->add_id = Auth::id();
         $revenue->income_type_id = 1; // Assuming the income type id for 'فاتورة' is 1
         $revenue->save();
+        if ($new_amount_paid == $invoice->total) {
+            $invoice->status = 'تم السداد';
+            $invoice->value_status = 1;
+
+            // Create a new client history invoice record
+            $clientHistoryInvoice = new ClientHistoryInvoice();
+            $clientHistoryInvoice->client_id = $invoice->client->id;
+            $clientHistoryInvoice->invoice_id = $invoice->id;
+            $clientHistoryInvoice->amount = $invoice->total;
+            $clientHistoryInvoice->save();
+        }
+
 
         session()->flash('status_update');
         return redirect('/invoices');

@@ -67,8 +67,10 @@ Route::post('/submit', [ClientAppointmentController::class, 'submitForm'])->name
         Route::get('/dashboard',[DoctorDashboardController::class ,'index'])->name('doctor.dashboard');
         Route::get('/appointments',[DoctorDashboardController::class ,'appointments'])->name('doctor.appointments');
         Route::get('/clients',[DoctorDashboardController::class ,'clients'])->name('doctor.clients');
-        Route::get('/clients/history',[ClientHistoryController::class ,'show'])->name('client.history');
+
         Route::resource('client-history', ClientHistoryController::class);
+    //   Client Info
+    Route::get('/clients/info/{client_id}', [DoctorDashboardController::class, 'getClientInfo'])->name('client.info');
 
         Route::put('/doctor/complete_appointment/{id}', [DoctorDashboardController::class, 'completeAppointment'])->name('doctor_dashboard.complete_appointment');
         Route::get('/doctor/mark-notifications-as-read', [DoctorDashboardController::class, 'markNotificationsAsRead'])->name('doctor.markNotificationsAsRead');
@@ -128,6 +130,9 @@ Route::get('/events/list', [EventController::class, 'list']);
 
     //   Expenses Revenues Routes
     Route::get('expenses_revenues', [ExpensesAndRevenuesController::class, 'index'])->name('expenses_revenues');
+
+    //   Client Info
+    Route::get('/clients/history/{client_id}', [ClientHistoryController::class, 'getClientInfo'])->name('client.history');
 
     // Notifications Route
     Route::post('/notifications/read', [NotificationController::class, 'read'])->name('notifications.read');
