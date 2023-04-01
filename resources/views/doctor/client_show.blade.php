@@ -221,7 +221,7 @@
         <div class="tab-pane fade" id="tabContent7" role="tabpane7" aria-labelledby="tab7">
                 <div class="row">
                     <div class="col">
-                        <h2 class="text-center">تعليقات الأطباء</h2>
+                        <h3 class="text-center">تعليقات الأطباء</h3>
                         <br>
                         <div class="table-responsive">
                         <table class="table table-hover text-center">
@@ -239,9 +239,12 @@
             <td>{{ $comment->comment_text }}</td>
             <td>
                 <ul>
-                    @foreach ($comment->replies as $reply)
-                        <li>{{ $reply->doctor->name }} - {{ $reply->comment_text }}</li>
-                    @endforeach
+                @foreach ($comment->replies as $reply)
+    <li>
+        <span style="color: blue;">{{ $reply->doctor->name }}</span> - {{ $reply->comment_text }}
+    </li>
+@endforeach
+
                 </ul>
                 <form method="POST" action="{{ route('comments.reply', $comment->id) }}">
                     @csrf

@@ -336,9 +336,12 @@
                                         <td>{{ $comment->comment_text }}</td>
                                            <td>
                                             <ul>
-                                                @foreach ($comment->replies as $reply)
-                                                    <li>{{ $reply->doctor->name }} - {{ $reply->comment_text }}</li>
-                                                @endforeach
+                                            @foreach ($comment->replies as $reply)
+    <li>
+        <span style="color: blue;">{{ $reply->doctor->name }}</span> - {{ $reply->comment_text }}
+    </li>
+@endforeach
+
                                             </ul>
                                         </td>
                                     </tr>
