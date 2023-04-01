@@ -164,6 +164,10 @@
                             <input type="text" class="form-control" id="email" name="email" disabled>
                         </div>
                         <div class="form-group">
+                            <label for="address">المدينة</label>
+                            <input type="text" class="form-control" id="city" name="city" disabled>
+                        </div>
+                        <div class="form-group">
                             <label for="address">العنوان</label>
                             <input type="text" class="form-control" id="address" name="address" disabled>
                         </div>
@@ -219,6 +223,10 @@
                                 <input type="text" class="form-control" id="email" name="email">
                             </div>
 
+                            <div class="form-group">
+                                <label for="address">العنوان</label>
+                                <input type="text" class="form-control" id="city" name="city">
+                            </div>
                             <div class="form-group">
                                 <label for="address">العنوان</label>
                                 <input type="text" class="form-control" id="address" name="address">
@@ -293,6 +301,10 @@
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">البريد الإلكتروني</label>
                                     <input type="text" class="form-control" id="email" name="email">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">العنوان</label>
+                                    <input type="text" class="form-control" id="city" name="city">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">العنوان</label>
@@ -419,6 +431,8 @@
       var client_name = $(this).data('client_name');
       var birthdate = $(this).data('birthdate');
       var address = $(this).data('address');
+      var birthdate = $(this).data('birthdate');
+      var city = $(this).data('city');
       var client_phone = $(this).data('client_phone');
       var email = $(this).data('email');
       var note = $(this).data('note');
@@ -430,6 +444,7 @@
       $('#client_name').val(client_name);
       $('#birthdate').val(birthdate);
       $('#address').val(address);
+      $('#city').val(city);
       $('#client_phone').val(client_phone);
       $('#email').val(email);
       $('#note').val(note);
@@ -450,6 +465,7 @@
             var client_name = button.data('client_name');
             var client_phone = button.data('client_phone');
             var address = button.data('address');
+            var city = button.data('city');
             var note = button.data('note');
             var email = button.data('email');
             var gender = button.data('gender');
@@ -462,6 +478,7 @@
             modal.find('.modal-body #client_phone').val(client_phone);
             modal.find('.modal-body #email').val(email);
             modal.find('.modal-body #address').val(address);
+            modal.find('.modal-body #city').val(city);
             modal.find('.modal-body #gender').val(gender);
             modal.find('.modal-body #birthdate').val(birthdate);
             modal.find('.modal-body #pid').val(pid);

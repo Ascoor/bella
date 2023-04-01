@@ -42,10 +42,7 @@ protected $fillable = [
     {
         return $this->id;
     }
-    public function clientHistories()
-    {
-        return $this->belongsToMany(ClientHistory::class, 'client_history_doctor')->withPivot('comment');
-    }
+
     public function getAuthPassword()
     {
         return $this->password;

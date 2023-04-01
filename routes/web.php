@@ -8,6 +8,7 @@ use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\ClientAppointmentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AssestController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\DoctorAuthController;
 use App\Http\Controllers\AssestAuthController;
@@ -59,10 +60,14 @@ Route::get('/events/list', [EventController::class, 'list']);
 
         // user Auth
     Auth::routes();
+
+
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::put('profile',[ProfileController::class ,'update'])->name('profile.update');
     Route::put('profile/password', [ProfileController::class ,'password'])->name('profile.password');
     Route::get('/profile',[ProfileController::class ,'edit'])->name('profile.edit');
+    // Doctors comments
+
 
     // Appointment Routes
     Route::get('/appointments', [AppointmentController::class, 'listAppointments'])->name('appointments.list');
