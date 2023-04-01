@@ -19,12 +19,10 @@
 
     <!-- CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <!-- <link href="{{URL::asset('/css/app.css')}}" rel="stylesheet"> -->
+    <link href="{{URL::asset('/css/app.css')}}" rel="stylesheet">
   <link href="{{URL::asset('/css/dash.css')}}" rel="stylesheet">
   <link href="{{URL::asset('assets/plugins/fullcalendar/fullcalendar.min.css')}}" rel="stylesheet">
 
-<!-- Maps css -->
-<link href="{{URL::asset('assets/plugins/jqvmap/jqvmap.min.css')}}" rel="stylesheet">
 
 </head>
 <body><nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background: url('../img/bg-pattern.png?h=88366d218f2eda574d88b27e4cb4169d'), linear-gradient(to left, #7b4397, #130e2d)">
