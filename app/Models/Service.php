@@ -12,10 +12,7 @@ class Service extends Model
         'service_name', 'price', 'section_id','description'
     ];
 
-    public function clientHistories()
-    {
-        return $this->belongsToMany(ClientHistory::class, 'client_history_service')->withPivot('price');
-    }
+
 
     public function section()
     {

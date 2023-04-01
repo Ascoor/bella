@@ -91,14 +91,12 @@
                                     <th class="border-bottom-0">#</th>
                                     <th class="border-bottom-0">رقم الفاتورة</th>
                                     <th class="border-bottom-0">تاريخ القاتورة</th>
-                                    <th class="border-bottom-0">تاريخ الاستحقاق</th>
-                                    <th class="border-bottom-0">الخدمة</th>
+                                    <th class="border-bottom-0">العميل</th>
+                                    <th class="border-bottom-0">رقم الجوال</th>
                                     <th class="border-bottom-0">القسم</th>
-                                    <th class="border-bottom-0">الخصم</th>
-                                    <th class="border-bottom-0">نسبة الضريبة</th>
-                                    <th class="border-bottom-0">قيمة الضريبة</th>
+
                                     <th class="border-bottom-0">الاجمالي</th>
-                                    <th class="border-bottom-0">المسدد</th>
+
                                     <th class="border-bottom-0">الحالة</th>
 
                                 </tr>
@@ -115,22 +113,17 @@
                                         <td>{{ $i }}</td>
                                         <td> <a
                                                 href="{{ route('invoicedetails.edit',$invoice->id ) }}">{{ $invoice->invoice_number }}</a></td>
-                                        <td>{{ $invoice->invoice_date }}</td>
-                                        <td>{{ $invoice->due_date }}</td>
-                                        <td>@foreach ($invoice->services as $service )
-                                            <br/>
-                                            {{$service->service_name}}
-                                            {{$service->price}}
-                                            <br/>
-                                        @endforeach</td>
+                                                <td>{{ $invoice->invoice_date }}</td>
+                                        <td>{{ $invoice->client->client_name }}</td>
+                                        <td>{{ $invoice->client->client_phone }}</td>
+
+
                                         <td>{{ $invoice->section->section_name }}</td>
 
 
-                                        <td>{{ $invoice->discount }}</td>
-                                        <td>{{ $invoice->rate_vat }}%</td>
-                                        <td>{{ $invoice->value_vat }}</td>
+
                                         <td>{{ $invoice->total }}</td>
-                                        <td>{{ $invoice->total_amount }}</td>
+
                                         <td>
                                             @if ($invoice->value_status == 1)
                                                 <span class="text-success">{{ $invoice->status }}</span>

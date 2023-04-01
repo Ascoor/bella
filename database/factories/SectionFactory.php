@@ -11,7 +11,7 @@ class SectionFactory extends Factory
         {
             $faker = \Faker\Factory::create('ar_SA');
 
-            $sectionNames = ['القلبية', 'طب الأسنان', 'النساء والتوليد', 'طب العيون', 'طب العظام', 'طب الأطفال', 'الطب النفسي', 'المسالك البولية'];
+            $sectionNames = [ 'طب العيون',  'جراحات الفم واللثة', 'جراحات الفك والأسنان', 'جراحات التجميل'];
 
             return [
                 'section_name' => $faker->unique()->randomElement($sectionNames),
