@@ -13,7 +13,7 @@
                 <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active" id="tab1" data-bs-toggle="tab" href="#tabContent1" role="tab"
-                            aria-controls="tabContent1" aria-selected="true">التفاصيل العامة</a>
+                            aria-controls="tabContent1" aria-selected="true">المعلومات الشخصية</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="tab2" data-bs-toggle="tab" href="#tabContent2" role="tab"

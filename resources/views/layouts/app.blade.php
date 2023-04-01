@@ -41,20 +41,23 @@
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         @auth
         <li class="nav-item">
-          <a class="nav-link text-bold" href="/doctor/dashboard">Home</a>
+          <a class="nav-link text-bold" href="/doctor/dashboard">الرئيسية</a>
         </li>
         <li class="nav-item text-bold">
-          <a class="nav-link" href="/doctor/appointments">Appointments</a>
+          <a class="nav-link" href="/doctor/appointments">الحجوزات</a>
         </li>
-        <li class="nav-item dropdown">
+        <li class="nav-item text-bold">
+          <a class="nav-link" href="/doctor/clients">العملاء</a>
+        </li>
+        <!-- <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle text-bold" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Clients
-          </a>
-          <div class="dropdown-menu text-center bg-gray" aria-labelledby="clientsDropdown">
+          </a> -->
+          <!-- <div class="dropdown-menu text-center bg-gray" aria-labelledby="clientsDropdown">
             <a class="dropdown-item" href="/doctor/clients">Your Clients</a>
-            <!-- <a class="dropdown-item" href="{{ route('client-history.index') }}">Bella Client</a> -->
+            <<a class="dropdown-item" href="{{ route('client-history.index') }}">Bella Client</a>
           </div>
-        </li>
+        </li> -->
 
 
         </ul>
