@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NewAppointment as EventsNewAppointment;
 use App\Models\Appointment;
 use App\Models\Client;
 use App\Models\Doctor;
 use Illuminate\Support\Facades\Notification;
 use App\Models\User;
 use App\Notifications\AppointmentCreated;
+use App\Http\Event\NewAppointment;
 use Illuminate\Http\Request;
 
 class ClientAppointmentController extends Controller
@@ -52,7 +54,7 @@ $appointment = Appointment::create([
 ]);
         // Send notification to users and doctors associated with the appointment
         $users = User::all();
-        Notification::send($users, new AppointmentCreated($appointment));
+        broadcast(new EventsNewAppointment($appointment))->toOthers();
 
         // Redirect back to the welcome page with a success message.
         return view('thanks')->with('appointment',$appointment);

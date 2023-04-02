@@ -1,5 +1,5 @@
 <?php
-
+    use Illuminate\Support\Facades\Broadcast;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\ClientController;
@@ -60,6 +60,11 @@ Route::get('/events/list', [EventController::class, 'list']);
 
         // user Auth
     Auth::routes();
+
+
+    Broadcast::channel('appointment.{id}', function ($user, $id) {
+        return $user->id === $id;
+    });
 
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
