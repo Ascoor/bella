@@ -46,9 +46,7 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/web.php'));
-                Route::middleware('web')
-                ->namespace($this->namespace)
-                ->group(base_path('routes/doctor.php'));
+                Route::middleware('web');
         });
     }
     public function map()
@@ -60,12 +58,6 @@ class RouteServiceProvider extends ServiceProvider
         //
     }
 
-    protected function mapDoctorRoutes()
-    {
-        Route::middleware('web')
-             ->namespace($this->namespace)
-             ->group(base_path('routes/doctor.php'));
-    }
 
     /**
      * Configure the rate limiters for the application.
