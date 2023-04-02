@@ -96,20 +96,20 @@ font-size:16px;">
             <!-- Add your appointment form code here --> @csrf
             <div class="form-group mt-4">
               <label for="name" class="text-uppercase">الإسم</label>
-              <input type="text" id="client_name" name="client_name" class="form-control" placeholder="الإسم">
+              <input type="text" id="client_name" name="client_name" class="form-control" placeholder="الإسم" required>
             </div>
             <div class="form-group mt-4">
               <label for="phone" class="text-uppercase">رقم الجوال</label>
-              <input type="tel" id="client_phone" name="client_phone" class="form-control" placeholder="إدخل رقم الجوال، مثال: +971 5XX XXXX">
+              <input type="tel" id="client_phone" name="client_phone" class="form-control" placeholder="إدخل رقم الجوال، مثال: +971 5XX XXXX" required>
             </div>
             <div class="form-group mt-4">
               <label for="booking-date" class="text-uppercase">الطبيب</label>
-              <select name="doctor_id" id="doctor_id" class="form-control @error('doctor_id') is-invalid @enderror">
+              <select name="doctor_id" id="doctor_id" class="form-control @error('doctor_id') is-invalid @enderror" required>
                 <option value="">إختر الطبيب</option> @foreach($doctors as $doctor) <option value="{{ $doctor->id }}">{{ $doctor->name }}</option> @endforeach
               </select>
             </div> @error('doctor_id') <div class="invalid-feedback">{{ $message }}</div> @enderror <div class="form-group mt-4">
               <label for="email" class="text-uppercase">تاريخ وموعد الحجز</label>
-              <input type="datetime-local" name="apt_datetime" id="apt_datetime" class="form-control @error('apt_datetime') is-invalid @enderror">
+              <input type="datetime-local" name="apt_datetime" id="apt_datetime" class="form-control @error('apt_datetime') is-invalid @enderror" required>
             </div>
 
             <div class="form-group mt-4">
