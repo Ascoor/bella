@@ -49,14 +49,7 @@ class RouteServiceProvider extends ServiceProvider
                 Route::middleware('web');
         });
     }
-    public function map()
-    {
-        $this->mapWebRoutes();
-        $this->mapApiRoutes();
-        $this->mapDoctorRoutes(); // Add this line to register the new routes
 
-        //
-    }
 
 
     /**

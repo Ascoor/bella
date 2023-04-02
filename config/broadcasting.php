@@ -38,7 +38,7 @@ return [
             'options' => [
                 'cluster' => env('PUSHER_APP_CLUSTER'),
                 'encrypted' => true,
-                'host' => 'bella-app.ask-ar.com/',
+                'host' => 'bella-app.ask-ar.com',
                 'port' => 6001,
                 'scheme' => 'https'
             ],
