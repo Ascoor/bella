@@ -1,18 +1,17 @@
 <?php
-    use Illuminate\Support\Facades\Broadcast;
+
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\ClientController;
-
+use App\Http\Controllers\ClientHistoryController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\ClientAppointmentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AssestController;
-use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DoctorController;
-
+use App\Http\Controllers\DoctorAuthController;
 use App\Http\Controllers\AssestAuthController;
-
+use App\Http\Controllers\DoctorDashboardController;
 use App\Http\Controllers\AssestDashboardController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\InvoiceController;
@@ -28,15 +27,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use App\Models\Doctor;
-
-use App\Http\Controllers\ClientHistoryController;
-
-use App\Http\Controllers\DoctorAuthController;
-
-use App\Http\Controllers\DoctorDashboardController;
-
-
-
 
 /*
 |--------------------------------------------------------------------------
@@ -62,37 +52,33 @@ Route::get('/', function () {
  // Client Submit
 Route::post('/submit', [ClientAppointmentController::class, 'submitForm'])->name('appointments.submitForm');
 
-
-
-
 // define routes for doctor's dashboard
-Route::prefix('doctor')->group(function () {
+    Route::prefix('doctor')->group(function () {
 
-    // Doctor login routes
-    Route::get('/', [DoctorAuthController::class, 'showLoginForm'])->name('doctor.login');
-    // Route::get('/login', [DoctorAuthController::class, 'showLoginForm'])->name('doctor.login');
-    Route::post('/login', [DoctorAuthController::class, 'login'])->name('doctor.login.post');
-    // logout route
-    Route::post('/logout', [DoctorAuthController::class, 'logout'])->name('doctor.logout');
+        // Doctor login routes
+        Route::get('/login', [DoctorAuthController::class, 'showLoginForm'])->name('doctor.login');
+        Route::post('/login', [DoctorAuthController::class, 'login'])->name('doctor.login.post');
+        // logout route
+        Route::post('/logout', [DoctorAuthController::class, 'logout'])->name('doctor.logout');
 
 
-// dashboard route (authenticated)
-   Route::middleware(['auth:doctor'])->group(function () {
-    Route::get('/dashboard',[DoctorDashboardController::class ,'index'])->name('doctor.dashboard');
-    Route::get('/appointments',[DoctorDashboardController::class ,'appointments'])->name('doctor.appointments');
-    Route::get('/clients',[DoctorDashboardController::class ,'clients'])->name('doctor.clients');
+    // dashboard route (authenticated)
+       Route::middleware(['auth:doctor'])->group(function () {
+        Route::get('/dashboard',[DoctorDashboardController::class ,'index'])->name('doctor.dashboard');
+        Route::get('/appointments',[DoctorDashboardController::class ,'appointments'])->name('doctor.appointments');
+        Route::get('/clients',[DoctorDashboardController::class ,'clients'])->name('doctor.clients');
 
-    Route::resource('client-history', ClientHistoryController::class);
-//   Client Info
-Route::get('/clients/info/{client_id}', [DoctorDashboardController::class, 'getClientInfo'])->name('client.info');
+        Route::resource('client-history', ClientHistoryController::class);
+    //   Client Info
+    Route::get('/clients/info/{client_id}', [DoctorDashboardController::class, 'getClientInfo'])->name('client.info');
 
-    Route::put('/doctor/complete_appointment/{id}', [DoctorDashboardController::class, 'completeAppointment'])->name('doctor_dashboard.complete_appointment');
-    Route::get('/doctor/mark-notifications-as-read', [DoctorDashboardController::class, 'markNotificationsAsRead'])->name('doctor.markNotificationsAsRead');
+        Route::put('/doctor/complete_appointment/{id}', [DoctorDashboardController::class, 'completeAppointment'])->name('doctor_dashboard.complete_appointment');
+        Route::get('/doctor/mark-notifications-as-read', [DoctorDashboardController::class, 'markNotificationsAsRead'])->name('doctor.markNotificationsAsRead');
 
-    Route::put('/doctor/reject_appointment/{id}', [DoctorDashboardController::class, 'rejectAppointment'])->name('doctor_dashboard.reject_appointment');
-    Route::get('/doctor_dashboard/show_appointment/{id}', [DoctorDashboardController::class, 'showAppointment'])->name('doctor_dashboard.show_appointment');
-    Route::post('/doctor_dashboard/update_appointment/{id}', [DoctorDashboardController::class, 'updateAppointment'])->name('doctor.appointment.update');
-});
+        Route::put('/doctor/reject_appointment/{id}', [DoctorDashboardController::class, 'rejectAppointment'])->name('doctor_dashboard.reject_appointment');
+        Route::get('/doctor_dashboard/show_appointment/{id}', [DoctorDashboardController::class, 'showAppointment'])->name('doctor_dashboard.show_appointment');
+        Route::post('/doctor_dashboard/update_appointment/{id}', [DoctorDashboardController::class, 'updateAppointment'])->name('doctor.appointment.update');
+    });
 });
 
 // Event For DashBoard
@@ -101,19 +87,10 @@ Route::get('/events/list', [EventController::class, 'list']);
 
         // user Auth
     Auth::routes();
-
-
-    Broadcast::channel('appointment.{id}', function ($user, $id) {
-        return $user->id === $id;
-    });
-
-
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::put('profile',[ProfileController::class ,'update'])->name('profile.update');
     Route::put('profile/password', [ProfileController::class ,'password'])->name('profile.password');
     Route::get('/profile',[ProfileController::class ,'edit'])->name('profile.edit');
-    // Doctors comments
-
 
     // Appointment Routes
     Route::get('/appointments', [AppointmentController::class, 'listAppointments'])->name('appointments.list');
