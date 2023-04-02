@@ -33,6 +33,10 @@ use Notifiable;
     {
         return $this->belongsTo(Invoice::class);
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
 }
 

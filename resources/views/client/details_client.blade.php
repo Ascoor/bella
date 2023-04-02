@@ -189,7 +189,7 @@
                                                                 {{ $service->price }}
                                                                 <br />
 @endforeach</td>
-<td>{{ $invoice->status }}</td>
+<td>{{ $x->status }}</td>
 
 
 
@@ -207,7 +207,9 @@
             <thead>
                 <tr class="text-dark text-lg-center bg-warning">
                     <th>#</th>
-                    <th class="border-bottom-0">رقم فاتورة الحجز</th>
+                    <th class="border-bottom-0">الدكتور</th>
+
+                    <th class="border-bottom-0">موعد الحجز الأولي </th>
                     <th class="border-bottom-0">تاريخ الحجز المنفذ </th>
 
 
@@ -215,7 +217,6 @@
 
 
 
-                    <th class="border-bottom-0">الدكتور</th>
 
                     <th class="border-bottom-0">الحالة</th>
 
@@ -233,12 +234,14 @@
                     @endphp
                     <tr>
                         <td>{{ $i }}</td>
-                        <td>{{ $appointment->invoice}}</td>
+                        <td>{{ $appointment->doctor->name }}</td>
+
+                        <td>{{ $appointment->apt_datetime }}</td>
                         <td>{{ $appointment->remarks }}</td>
 
                         <td>{{ $appointment->section->section_name }}</td>
 
-                        <td>{{ $appointment->doctor->name }}</td>
+
                         <td>{{ $appointment->status }}</td>
 
 
