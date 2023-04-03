@@ -1,26 +1,6 @@
 <!-- Back-to-top -->
 <a href="#top" id="back-to-top"><i class="las la-angle-double-up"></i></a>
 <!-- JQuery min js -->
-<!-- Initialize Pusher with your app key -->
-<script>
-    var pusher = new Pusher('{{ env('PUSHER_APP_KEY') }}', {
-        cluster: '{{ env('PUSHER_APP_CLUSTER') }}'
-    });
-</script>
-<!-- Listen for the NewAppointment event -->
-@auth
-    <script>
-        var channel = pusher.subscribe('appointment.{{ auth()->user()->id }}');
-        channel.bind('App\\Events\\NewAppointment', function(data) {
-            // Update the notification icon to show that there are unread notifications
-            $('.main-header-notification .pulse').removeClass('off').addClass('on');
-
-            // Display the notification message
-            var message = 'New appointment from ' + data.client_name + ' on ' + data.appointment_date;
-            toastr.info(message);
-        });
-    </script>
-@endauth
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 
 <!-- Bootstrap Bundle js -->
