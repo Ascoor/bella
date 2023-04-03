@@ -52,9 +52,11 @@ $appointment = Appointment::create([
     'client_id' => $client->id,
     'section_id' => $section_id,
 ]);
+
         // Send notification to users and doctors associated with the appointment
         $users = User::all();
-        broadcast(new EventsNewAppointment($appointment))->toOthers();
+        Notification::send($users, new AppointmentCreated($appointment));
+
 
         // Redirect back to the welcome page with a success message.
         return view('thanks')->with('appointment',$appointment);
