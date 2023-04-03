@@ -4,6 +4,7 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ClientHistoryController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\ClientAppointmentController;
 use App\Http\Controllers\ProfileController;
@@ -67,10 +68,14 @@ Route::post('/submit', [ClientAppointmentController::class, 'submitForm'])->name
         Route::get('/dashboard',[DoctorDashboardController::class ,'index'])->name('doctor.dashboard');
         Route::get('/appointments',[DoctorDashboardController::class ,'appointments'])->name('doctor.appointments');
         Route::get('/clients',[DoctorDashboardController::class ,'clients'])->name('doctor.clients');
+        //Doctor Comments
+        Route::post('/clients/{client_id}/comments', [CommentController::class, 'store'])->name('comments.store');
+        Route::post('/comments/{comment_id}/reply', [CommentController::class, 'reply'])
+        ->name('comments.reply');
 
         Route::resource('client-history', ClientHistoryController::class);
     //   Client Info
-    Route::get('/clients/info/{client_id}', [DoctorDashboardController::class, 'getClientInfo'])->name('client.info');
+    Route::get('/clients/{client_id}', [DoctorDashboardController::class, 'getClientInfo'])->name('clients.info');
 
         Route::put('/doctor/complete_appointment/{id}', [DoctorDashboardController::class, 'completeAppointment'])->name('doctor_dashboard.complete_appointment');
         Route::get('/doctor/mark-notifications-as-read', [DoctorDashboardController::class, 'markNotificationsAsRead'])->name('doctor.markNotificationsAsRead');

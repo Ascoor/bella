@@ -19,8 +19,10 @@
 
     <!-- CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link href="{{URL::asset('/css/app.css')}}" rel="stylesheet">
+
+  <link href="{{URL::asset('/css/dashboard.css')}}" rel="stylesheet">
   <link href="{{URL::asset('/css/dash.css')}}" rel="stylesheet">
+
   <link href="{{URL::asset('assets/plugins/fullcalendar/fullcalendar.min.css')}}" rel="stylesheet">
 
 
@@ -39,13 +41,13 @@
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         @auth
         <li class="nav-item">
-          <a class="nav-link text-bold" href="/doctor/dashboard">الرئيسية</a>
+            <a class="nav-link" href="/doctor/dashboard">الرئيسية</a>
         </li>
-        <li class="nav-item text-bold">
-          <a class="nav-link" href="/doctor/appointments">الحجوزات</a>
+        <li class="nav-item">
+            <a class="nav-link" href="/doctor/appointments">الحجوزات</a>
         </li>
-        <li class="nav-item text-bold">
-          <a class="nav-link" href="/doctor/clients">العملاء</a>
+        <li class="nav-item">
+            <a class="nav-link" href="/doctor/clients">العملاء</a>
         </li>
         <!-- <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle text-bold" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -161,7 +163,7 @@
      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <!-- Moment js -->
-<script src="{{URL::asset('assets/plugins/raphael/raphael.min.js')}}"></script>
+
 
 
 <!--Internal Apexchart js-->

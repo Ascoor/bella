@@ -17,5 +17,6 @@ const mix = require('laravel-mix');
     .sass('resources/sass/app.scss', 'public/css')
     .css('resources/css/app.css', 'public/css')
     .css('resources/css/dashboard.css', 'public/css')
+    .css('resources/css/dash.css', 'public/css')
     .css('resources/css/client-history.css', 'public/css')
     .sourceMaps();

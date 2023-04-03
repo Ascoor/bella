@@ -9,13 +9,12 @@
 
 
 				<div class="col-xl-12">
-        <div class="card mg-b-20">
-            <div class="card-header pb-0">
-                <div class="d-flex justify-content-between">
+    <div class="card mg-b-20">
+        <div class="card-header pb-0 text-center">
+            <h5>قائمة العملاء</h5>
+        </div>
 
-                </div>
 
-            </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table id="example1" class="table key-buttons text-md-nowrap" data-page-length='50'
@@ -26,7 +25,7 @@
                                 <th class="border-bottom-0">اسم العميل</th>
                                 <th class="border-bottom-0">العنوان</th>
                                 <th class="border-bottom-0">رقم الجوال</th>
-                                <th class="border-bottom-0">العمليات</th>
+
                             </tr>
                         </thead>
                         <tbody>
@@ -36,7 +35,7 @@
                                 <tr>
                                     <td>{{ $i }}</td>
                                     <td>
-                                    <a href="{{ route('client.info', ['client_id' => $x->id]) }}">{{ $x->client_name }}</a>
+                                    <a href="{{ route('clients.info', ['client_id' => $x->id]) }}">{{ $x->client_name }}</a>
     </td>
 
 
