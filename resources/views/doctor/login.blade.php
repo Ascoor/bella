@@ -28,7 +28,7 @@ linear-gradient(to left, #7b4397, #dc2430);">
 											<div class="main-signup-header">
 												<h2>مرحبا بك</h2>
 												<h5 class="font-weight-semibold mb-4"> تسجيل الدخول الأطباء</h5>
-                                                <form method="POST" action="{{ route('doctor.login') }}">
+                                                <form method="POST" action="{{ route('doctor.login.post') }}">
 
 
                             @csrf
