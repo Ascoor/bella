@@ -84,6 +84,8 @@
 
         </div>
         <div class="modal-footer">
+        <a href="{{ route('appointment.report.show', $appointment->id) }}" class="btn btn-primary">عرض التقرير</a>
+
           <a class="btn btn-success"
 href="/doctor/appointments">عودة للحجوزات</a>
 

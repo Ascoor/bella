@@ -5,6 +5,7 @@ use App\Http\Controllers\SectionController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ClientHistoryController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\ClientAppointmentController;
 use App\Http\Controllers\ProfileController;
@@ -76,6 +77,7 @@ Route::post('/submit', [ClientAppointmentController::class, 'submitForm'])->name
         Route::resource('client-history', ClientHistoryController::class);
     //   Client Info
     Route::get('/clients/{client_id}', [DoctorDashboardController::class, 'getClientInfo'])->name('clients.info');
+    Route::get('/appointment/{id}/report', [ReportController::class, 'showReport'])->name('appointment.report.show');
 
         Route::put('/doctor/complete_appointment/{id}', [DoctorDashboardController::class, 'completeAppointment'])->name('doctor_dashboard.complete_appointment');
         Route::get('/doctor/mark-notifications-as-read', [DoctorDashboardController::class, 'markNotificationsAsRead'])->name('doctor.markNotificationsAsRead');

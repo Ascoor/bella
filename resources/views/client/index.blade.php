@@ -331,7 +331,7 @@
 
                                 <div class="form-group">
                                     <label for="birthdate">تاريخ الميلاد</label>
-                                    <input type="date" class="form-control" id="birthdate" name="birthdate">
+                                    <input type="date-local" class="form-control" id="birthdate" name="birthdate">
                                 </div>
 
                                 <div class="form-group">

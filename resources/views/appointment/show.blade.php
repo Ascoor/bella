@@ -84,6 +84,7 @@
 href="/appointments">عودة للحجوزات</a>
 
 </span>
+
         </div>
         <!-- row closed -->
     </div>

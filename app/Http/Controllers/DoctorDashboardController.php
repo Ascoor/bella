@@ -119,7 +119,8 @@ public function completeAppointment($id)
 
     $appointment->save();
     session()->flash('complete','تم اتمام الحجز');
-    return redirect()->back();
+    return redirect()->view('doctor.report', ['appointment_id' => $appointment->id]);
+
 }
 
 public function rejectAppointment($id)
