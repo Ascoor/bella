@@ -128,12 +128,14 @@
       @endif
     @else
       <li class="nav-item">
-        <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-          {{ __('تسجيل الخروج') }}
-        </a>
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-          @csrf
-        </form>
+       <a class="nav-link" href="{{ route('doctor.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+    {{ __('تسجيل الخروج') }}
+</a>
+
+<form id="logout-form" action="{{ route('doctor.logout') }}" method="POST" class="d-none">
+    @csrf
+</form>
+
       </li>
     @endguest
   </ul>

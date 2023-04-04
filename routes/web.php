@@ -60,7 +60,7 @@ Route::post('/submit', [ClientAppointmentController::class, 'submitForm'])->name
         Route::get('/', [DoctorAuthController::class, 'showLoginForm'])->name('doctor.login');
         Route::post('/login', [DoctorAuthController::class, 'login'])->name('doctor.login.post');
         // logout route
-        Route::post('/logout', [DoctorAuthController::class, 'logout'])->name('doctor.logout');
+        Route::post('/doctor/logout', [DoctorAuthController::class, 'logout'])->name('doctor.logout');
 
 
     // dashboard route (authenticated)
