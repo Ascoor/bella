@@ -1,26 +1,44 @@
-\*\*نظام الحجز الطبي الإلكتروني
-نظام الحجز الطبي الإلكتروني هو تطبيق لارافل متعدد الواجهات يستهدف المجمعات الطبية والمراكز الطبية والعيادات والمستشفيات. يتضمن النظام مجموعة من الميزات التي تساعد على تنظيم وإدارة الحجوزات والخدمات الطبية والعاملين والمصروفات والإيرادات بكفاءة عالية.
 
-الميزات
-نظام حجز إلكتروني للمرضى لحجز المواعيد الطبية مباشرة أونلاين.
-نظام إدارة الحجوزات يتيح تنسيق المواعيد بين الأطباء والمرضى ومتابعة حالة الحجز.
-إدارة الخدمات الطبية والعاملين بالمراكز الطبية وتوزيع المهام والمواعيد.
-إدارة المصروفات والإيرادات وتتبع الأرباح والخسائر.
-نظام خاص بالفواتير وإدارة المرضى وتحديث سجلاتهم الطبية.
-إعداد التقارير الطبية وتوفير نظام مستقل لإدارة الفواتير والتقارير.
-تكنولوجيا المشروع
-HTML5
-Bootstrap 5.1.3 (Front-end)
-Bootstrap 4.1.1 (Admin Panel)
-jQuery 3.1.1
-Laravel 8
-PHP 8
-واجهات المستخدم
-واجهة خاصة بالعملاء لتلقى الحجوزات الطبية مباشرة أونلاين.
-واجهة إدارة المؤسسات الطبية من الداخل لإدارة نظام الحجز والفواتير وتنسيق المواعيد لأطباء المراكز الطبية.
-واجهة خاصة بالطبيب المعالج تمكنه من إدارة الحجوزات الخاصة به.
-التسجيل التلقائي للعملاء
-ليس هناك حاجة لإضافة عملائك يدوياً. بمجرد قيام العميل بالحجز عبر النظام، يصبح تلقائياً عميلاً مسجلًا لدى التطبيق.
+![Logo](https://bella-app.ask-ar.com/assets/img/media/login.png)
 
-البدء
-لكي تبدأ في استخدام نظام الحجز الطبي الإلكتروني، قم باتباع التعليمات الموجودة في مستودع المشروع على GitHub وقم بتنزيل المشروع وتثبيته على الخادم الخاص بك. استمتع بتجربة مميزة وسلسة في إدارة جميع جوانب المراكز الطبية والمستشفيات.\*\*
+
+# Bella Clinic management System
+
+Web application for To online Appointment manage medical centers.
+
+ِAppointment medical booking system
+The electronic medical reservation system is a multi-interface Laravel application targeting medical complexes, medical centers, clinics and hospitals. The system includes a set of features that help organize and manage reservations, medical services, personnel, expenses and revenues with high efficiency.
+
+# نظام إدارة عيادة بيلا
+تطبيق ويب للتعيين عبر الإنترنت لإدارة المراكز الطبية.
+
+نظام الحجز الطبي للمواعيد نظام الحجز الطبي الإلكتروني هو تطبيق Laravel متعدد الواجهات يستهدف المجمعات الطبية والمراكز الطبية والعيادات والمستشفيات. يشتمل النظام على مجموعة من الميزات التي تساعد في تنظيم وإدارة الحجوزات والخدمات الطبية والموظفين والمصروفات والإيرادات بكفاءة عالية.
+## Features
+
+- An online booking system for patients to book medical appointments directly online.
+- The reservation management system allows coordinating appointments between doctors and patients and following up on the status of the reservation.
+- Managing medical services and workers in medical centers and distributing tasks and appointments.
+- Manage expenses and revenues and track profits and losses.
+- A system for billing, managing patients and updating their medical records.
+- Preparing medical reports and providing an independent billing and reporting management system.
+# سمات
+- نظام حجز عبر الإنترنت للمرضى لحجز المواعيد الطبية مباشرة عبر الإنترنت.
+- يسمح نظام إدارة الحجز بتنسيق المواعيد بين الأطباء والمرضى ومتابعة حالة الحجز 
+- إدارة الخدمات الطبية والعاملين في المراكز الطبية وتوزيع المهام والمواعيد 
+-إدارة النفقات والإيرادات وتتبع الأرباح والخسائر 
+- نظام الفواتير وإدارة سجلات المرضى وتحديث سجلاتهم الطبية
+-إعداد التقارير الطبية وتوفير نظام مستقل لإدارة الفواتير والتقارير 
+
+## Support
+
+- Laravel 8
+- PHP 8
+- HTML5
+- Bootstrap 5.1.3 (front end)
+- Bootstrap 4.1.1 (Admin Panel)
+- jQuery 3.1.1
+
+## Authors
+
+- [Ask-ar T.S](https://www.Ask-ar.com)
+
