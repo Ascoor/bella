@@ -203,23 +203,18 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">تاريخ وموعد الحجز</label>
-                        <input type="datetime-local" name="apt_datetime" id="apt_datetime"
-                            class="form-control @error('apt_datetime') is-invalid @enderror"> @error('apt_datetime')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                    <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">تأكيد موعد الحجز</label>
-                        <input type="datetime-local" name="remarks" id="remarks"
-                            class="form-control @error('remarks') is-invalid @enderror"> @error('remarks')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
+    <label for="apt_datetime" class="col-form-label">تاريخ وموعد الحجز</label>
+    <input type="datetime-local" name="apt_datetime" id="apt_datetime"
+        class="form-control @error('apt_datetime') is-invalid @enderror"
+        value="{{ old('apt_datetime', Carbon\Carbon::now()->format('Y-m-d\TH:i')) }}">
+
+    @error('apt_datetime')
+        <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+    @enderror
+</div>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">إلغاء</button>
