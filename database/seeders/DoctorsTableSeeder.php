@@ -7,7 +7,7 @@ namespace Database\Seeders;
     use Illuminate\Database\Seeder;
     use App\Models\Doctor;
     
-    class DoctorsTableSeeder extends Database\Seeders\Seeder
+    class DoctorsTableSeeder extends Seeder
     {
         public function run()
         {
