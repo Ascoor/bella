@@ -163,5 +163,6 @@ font-size:16px;">
 <script src="{{ asset('assets/plugins/popper.js/umd/popper.min.js') }}"></script>
 <!-- Include Bootstrap JavaScript -->
 <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 </body>
 </html>
