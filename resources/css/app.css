@@ -6674,12 +6674,12 @@ a.close.disabled {
 .carousel.pointer-event {
   touch-action: pan-y;
 }
-
 .carousel-inner {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-}
+    position: relative;
+    width: 100%;
+    overflow: hidden; /* Add this line */
+  }
+
 
 .carousel-inner::after {
   display: block;
