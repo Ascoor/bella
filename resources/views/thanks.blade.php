@@ -59,6 +59,7 @@
             <h2 class="text-nav" style="
               font-family: cursive;
               font-size: 24px;
+              padding-top: 26px;
             ">Bella Online Appointment</h2>
             <!-- Add your appointment form code here -->
             <img src="{{ asset('img/loog.png') }}" width="200" height="100">
