@@ -1,5 +1,9 @@
 /*!
+<<<<<<< HEAD
   * Bootstrap v5.3.0 (https://getbootstrap.com/)
+=======
+  * Bootstrap v5.3.1 (https://getbootstrap.com/)
+>>>>>>> c1cd9fd6c4ccd0517c8b77cd5c58138f2226a98d
   * Copyright 2011-2023 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */

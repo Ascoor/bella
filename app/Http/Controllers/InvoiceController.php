@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use App\Models\ClientHistory;
+use App\Models\ClientHistoryComment;
 use App\Models\ClientHistoryInvoice;
 use App\Models\Invoice;
 use App\Models\Invoice_details;
@@ -272,7 +273,7 @@ $invoice =  Invoice::find($id);
             $invoice->value_status = 1;
 
             // Create a new client history invoice record
-            $clientHistoryInvoice = new ClientHistoryInvoice();
+            $clientHistoryInvoice = new ClientHistoryComment();
             $clientHistoryInvoice->client_id = $invoice->client->id;
             $clientHistoryInvoice->invoice_id = $invoice->id;
             $clientHistoryInvoice->amount = $invoice->total;
