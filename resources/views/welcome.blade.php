@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no"/>
     <title>Bella - Appointment</title>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.min') }}">
+    <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.min.css') }}">
+
     <!-- Google Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato&display=swap">
     <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
@@ -157,12 +158,9 @@ font-size:16px;">
             2023 </span>
     </p>
 </div>
+<script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.min.js.map') }}"></script>
+<script src="{{ asset('assets/plugins/popper.js/umd/popper.min.js.map') }}"></script>
+<script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js.map') }}"></script>
 
-<!-- Include jQuery library -->
-<script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/popper.js/umd/popper.min.js') }}"></script>
-<!-- Include Bootstrap JavaScript -->
-<script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 </body>
 </html>
