@@ -4,8 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
     <title>Bella - Appointment</title>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- Bootstrap CSS --><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <!-- Google Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato&display=swap">
     <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
@@ -72,11 +71,9 @@
         font-size: 1.2rem;
       }
     </style>
-  </head>
-  <body class=" h-100 text-center text-white " style="
-background: url('img/bg-pattern.png?h=88366d218f2eda574d88b27e4cb4169d'),
-linear-gradient(to left, #7b4397, #dc2430);">
+  </head><body class=" h-100 text-center text-white" style="background: url('img/bg-pattern.png?h=88366d218f2eda574d88b27e4cb4169d'), linear-gradient(to left, #7b4397, #dc2430);">
     <div class="container">
+
       <header class="mb-auto p-3" style="    font-family: monospace;
 font-size:16px;">
           <img src="{{ asset('img/loog.png') }}" width="200" height="100">
@@ -118,35 +115,36 @@ font-size:16px;">
           </form>
         </div>
         <div class="col-sm-8 col-md-6 col-lg-5">
-          <div id="carouselExampleIndicators" class="carousel slide mt-6" data-bs-ride="carousel">
-            <!-- <ol class="carousel-indicators"><li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></li><li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></li><li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></li></ol> -->
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                <img src="{{ asset('img/slid6.png') }}" class="d-block w-100" alt="...">
-              </div>
-              <div class="carousel-item">
-                <img src="{{ asset('img/slid2.jpg') }}" class="d-block w-100" alt="...">
-              </div>
-              <div class="carousel-item">
-                <img src="{{ asset('img/slid3.jpg') }}" class="d-block w-100" alt="...">
-              </div>
-              <div class="carousel-item">
-                <img src="{{ asset('img/slid4.jpg') }}" class="d-block w-100" alt="...">
-              </div>
-              <!-- <div class="carousel-item"><img src="{{ asset('img/slid5.jpg') }}" class="d-block w-100" alt="..."></div> -->
-            </div>
-            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Next</span>
-            </a>
+         
+      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="{{ asset('img/slid3.png') }}" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="{{ asset('img/slid4.png') }}" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="{{ asset('img/slid5.png') }}" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="{{ asset('img/slid6.png') }}" class="d-block w-100" alt="...">
           </div>
         </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
       </div>
-
 
 <br/>
         <p>
@@ -154,28 +152,28 @@ font-size:16px;">
         </p>
       </div>
 
+    <!-- Footer script -->
     <script src="{{ URL::asset('js/jquery-3.1.1.min.js') }}"></script>
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
-    <!--
+    <!--<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+      														<!-- Option 2: Separate Popper and Bootstrap JS -->
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-																		<!-- Option 2: Separate Popper and Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js" crossorigin="anonymous"></script>
 
     <script>
-      $(function() {
-        $('#dp').datepicker();
-      });
-      $(function() {
-        // International Telephone Input
-        var input = document.querySelector("#client_phone");
-        window.intlTelInput(input, {
-          utilsScript: "{{ URL::asset('assets/plugins/telephoneinput/utils.js') }}",
+        $(function() {
+            $('#dp').datepicker();
         });
-      });
+        $(function() {
+            // International Telephone Input
+            var input = document.querySelector("#client_phone");
+            window.intlTelInput(input, {
+                utilsScript: "{{ URL::asset('assets/plugins/telephoneinput/utils.js') }}",
+            });
+        });
     </script>
-  </body>
+</body>
 </html>

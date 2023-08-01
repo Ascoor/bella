@@ -28,7 +28,7 @@ class CreateAppointmentsTable extends Migration
             ->references('id')->on('sections')
             ->onDelete('cascade');
 
-            $table->datetime('remarks')->nullable();
+            $table->string('remarks')->nullable();
             $table->datetime('apt_datetime');
 
             $table->unsignedBigInteger('invoice_id')->nullable();
