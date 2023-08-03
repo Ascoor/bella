@@ -6,7 +6,7 @@ namespace Database\Seeders;
 
     use Illuminate\Database\Seeder;
     use App\Models\Doctor;
-    
+
     class DoctorsTableSeeder extends Seeder
     {
         public function run()
@@ -17,10 +17,10 @@ namespace Database\Seeders;
                 'section_id' => 1,
                 'specialization' => 'استشاري الطوارئ',
                 'phone' => '01011112222',
-                'username' => 'ahmed_doc',
-                'password' => bcrypt('password123'),
+                'username' => 'askar',
+                'password' => bcrypt('Ask@123456'),
             ]);
-    
+
             Doctor::create([
                 'name' => 'د. فاطمة علي',
                 'gender' => 'female',
@@ -30,7 +30,7 @@ namespace Database\Seeders;
                 'username' => 'fatma_doc',
                 'password' => bcrypt('password456'),
             ]);
-    
+
             Doctor::create([
                 'name' => 'د. محمد خالد',
                 'gender' => 'male',
@@ -40,7 +40,7 @@ namespace Database\Seeders;
                 'username' => 'khaled_doc',
                 'password' => bcrypt('password789'),
             ]);
-    
+
             Doctor::create([
                 'name' => 'د. ريم أحمد',
                 'gender' => 'female',
@@ -50,7 +50,7 @@ namespace Database\Seeders;
                 'username' => 'reem_doc',
                 'password' => bcrypt('passwordabc'),
             ]);
-    
+
             Doctor::create([
                 'name' => 'د. علي حسن',
                 'gender' => 'male',
@@ -62,4 +62,4 @@ namespace Database\Seeders;
             ]);
         }
     }
-    
+
