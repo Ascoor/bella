@@ -19,32 +19,5 @@ window.Echo = new Echo({
     forceTLS: true
 });
 
-// Function to initialize international telephone input
-function initInternationalTelephoneInput() {
-    var input = document.querySelector("#client_phone");
-    intlTelInput(input, {
-        // utilsScript: "{{ URL::asset('assets/plugins/telephoneinput/utils.js') }}",
-    });
-}
 
-// Function to handle the carousel
-function carousel() {
-    // Initialize the carousel
-    $("#carouselExampleIndicators").carousel();
 
-    // Toggle carousel visibility when carousel control buttons are clicked
-    $(".carousel-control-prev, .carousel-control-next").on("click", function () {
-        $(".carousel-container").toggle();
-    });
-}
-
-// Call the function to initialize international telephone input
-initInternationalTelephoneInput();
-
-// Call the function to handle the carousel
-carousel();
-
-// Initialize the date picker
-$(document).ready(function () {
-    $('#dp').datepicker();
-});

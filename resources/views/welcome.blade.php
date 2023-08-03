@@ -205,6 +205,16 @@
   $(document).ready(function () {
     initCarousel();
   });
+  // Function to initialize international telephone input
+function initInternationalTelephoneInput() {
+    var input = document.querySelector("#client_phone");
+    intlTelInput(input, {
+        // utilsScript: "{{ URL::asset('assets/plugins/telephoneinput/utils.js') }}",
+    });
+}
+// Call the function to initialize international telephone input
+initInternationalTelephoneInput();
+
 </script>
     </body>
   </html>

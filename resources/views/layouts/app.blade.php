@@ -17,53 +17,42 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/carousel/">
 
-    <!-- CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-  <link href="{{URL::asset('/css/dashboard.css')}}" rel="stylesheet">
+
+    <link href="{{URL::asset('/css/app.css')}}" rel="stylesheet">
   <link href="{{URL::asset('/css/dash.css')}}" rel="stylesheet">
+
 
   <link href="{{URL::asset('assets/plugins/fullcalendar/fullcalendar.min.css')}}" rel="stylesheet">
 
-
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background: url('/img/bg-pattern.png?h=88366d218f2eda574d88b27e4cb4169d'), linear-gradient(to left, #7b4397, #130e2d)">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="{{ url('/doctor/dashboard') }}">
-      <img src="/img/logo.png" alt="" width="150" height="80" class="d-inline-block align-text-top">
-    </a>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background: url('/img/bg-pattern.png?h=88366d218f2eda574d88b27e4cb4169d'), linear-gradient(to bottom, #101f3c, #422076)">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{ url('/doctor/dashboard') }}">
+                <img src="/img/logo.png" alt="" width="150" height="80" class="d-inline-block align-text-top">
+            </a>
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-    <div class="collapse navbar-collapse " id="navbarNav">
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-        @auth
-        <li class="nav-item">
-          <a class="nav-link" href="/doctor/dashboard">الرئيسية</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/doctor/appointments">الحجوزات</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/doctor/clients">العملاء</a>
-        </li>
-
-        <!-- <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle text-bold" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Clients
-          </a>
-          <div class="dropdown-menu text-center bg-gray" aria-labelledby="clientsDropdown">
-            <a class="dropdown-item" href="/doctor/clients">Your Clients</a>
-            <<a class="dropdown-item" href="{{ route('client-history.index') }}">Bella Client</a>
-          </div>
-        </li> -->
-
-        </ul>
-
-        <li class="nav-item dropdown">
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    @auth
+                    <li class="nav-item">
+                        <a class="nav-link" href="/doctor/dashboard">الرئيسية</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/doctor/appointments">الحجوزات</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/doctor/clients">العملاء</a>
+                    </li>
+                    <!-- Add more sidebar items here -->
+                    <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-bell"></i>
             <span class="badge bg-danger">{{ auth()->guard('doctor')->user()->unreadNotifications()->count() }}</span>
@@ -95,67 +84,69 @@
 
 
   @endauth
-</ul>
-@if(auth()->guard('doctor')->check())
-  <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle text-bold text-light" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-      دكتور / {{ auth()->guard('doctor')->user()->name }}
-    </a>
-    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-      <li>
-        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-          تسجيل الخروج
-        </a>
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-          @csrf
-        </form>
-      </li>
-    </ul>
-  </li>
-@else
-  <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-    <!-- Authentication Links -->
-    @guest
-      @if(Route::has('login'))
-        <li class="nav-item">
-          <a class="nav-link" href="{{ route('login') }}">{{ __('تسجيل الدخول') }}</a>
-        </li>
-      @endif
-      @if(Route::has('register'))
-        <li class="nav-item">
-          <a class="nav-link" href="{{ route('register') }}">{{ __('التسجيل') }}</a>
-        </li>
-      @endif
-    @else
-      <li class="nav-item">
-       <a class="nav-link" href="{{ route('doctor.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-    {{ __('تسجيل الخروج') }}
-</a>
-
-<form id="logout-form" action="{{ route('doctor.logout') }}" method="POST" class="d-none">
-    @csrf
-</form>
-
-      </li>
-    @endguest
-  </ul>
-@endif
-
+                </ul>
+                @if (auth()->guard('doctor')->check())
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-bold text-light" href="#" id="navbarDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            دكتور / {{ auth()->guard('doctor')->user()->name }}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li>
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    تسجيل الخروج
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                    class="d-none">
+                                    @csrf
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                @else
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <!-- Authentication Links -->
+                        @guest
+                            @if (Route::has('login'))
+                                <li class="nav-item">
+                                    <a class="nav-link"
+                                        href="{{ route('login') }}">{{ __('تسجيل الدخول') }}</a>
+                                </li>
+                            @endif
+                            @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link"
+                                        href="{{ route('register') }}">{{ __('التسجيل') }}</a>
+                                </li>
+                            @endif
+                        @else
+                            <li class="nav-item">
+                                <a class="nav-link"
+                                    href="{{ route('doctor.logout') }}"
+                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    {{ __('تسجيل الخروج') }}
+                                </a>
+                                <form id="logout-form" action="{{ route('doctor.logout') }}"
+                                    method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </li>
+                        @endguest
+                    </ul>
+                @endif
+            </div>
         </div>
-        </div>
+    </nav>
 
-        </nav>
-
-   <div class="container pt-5">
-
-
-            @yield('content')
-        </main>
+    <div class="container pt-5">
+        @yield('content')
     </div>
 
      <!-- Optional JavaScript; choose one of the two! -->
      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+     <script src="{{URL::asset('js/app.js')}}"></script>
 <!-- Moment js -->
 <script src="{{URL::asset('assets/plugins/raphael/raphael.min.js')}}"></script>
 
@@ -175,8 +166,6 @@
 <script src="{{URL::asset('assets/js/doc-calendar.js')}}"></script>
 <script src="{{URL::asset('assets/js/modal-popup.js')}}"></script>
 <!--Internal  index js -->
-
-    <script src="{{URL::asset('js/app.js')}}"></script>
     <script src="{{URL::asset('js/dash.js')}}"></script>
 
 

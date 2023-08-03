@@ -111,17 +111,17 @@ public function getClientInfo($clientId)
 
     return view('doctor.client_show', ['client' => $client]);
 }
-
 public function completeAppointment($id)
 {
     $appointment = Appointment::find($id);
     $appointment->status = 'complete';
-
     $appointment->save();
-    session()->flash('complete','تم اتمام الحجز');
-    return redirect()->view('doctor.report', ['appointment_id' => $appointment->id]);
 
+    session()->flash('complete', 'تم اتمام الحجز');
+
+    return back();
 }
+
 
 public function rejectAppointment($id)
 {

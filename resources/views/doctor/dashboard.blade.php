@@ -60,14 +60,14 @@ body {
     <div class="row">
         <div class="col-md-4 col-sm-6">
             <div class="counter green">
-                <span class="counter-value text-light"><i class="fas fa-users"></i> {{ $clientCount }}</span>
+                <span class="counter-value text-danger"><i class="fas fa-users"></i> {{ $clientCount }}</span>
                 <h3>Clients</h3>
             </div>
         </div>
 
         <div class="col-md-4 col-sm-6">
             <div class="counter blue">
-                <span class="counter-value text-light"><i class="fas fa-calendar-check"></i> {{ $completedCount }}</span>
+                <span class="counter-value text-danger"><i class="fas fa-calendar-check"></i> {{ $completedCount }}</span>
                 <h3>Completed</h3>
             </div>
         </div>

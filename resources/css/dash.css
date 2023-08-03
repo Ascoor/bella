@@ -1,30 +1,44 @@
+/* Custom CSS (custom.css) */
+body {
+    background: #f0f0f0; /* Set a light gray background color */
+    min-height: 100vh;
+}
 
-
-
-
-
-
+/* Improved navigation bar styles */
+.navbar {
+    position: relative;
+    background-color: #3a3a3a; /* Change the background color of the navigation bar */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Improved shadow effect */
+}
 
 .nav-link {
-    font-size: 20px; /* adjust the font size as desired */
+    font-size: 16px; /* Slightly reduce the font size */
     font-weight: bold;
+    color: #fff; /* Set the text color to white */
+    padding: 8px 15px; /* Add some padding to the nav links */
 }
-.counter{
-    color: #fff;
-    background: linear-gradient(to right bottom, #FFD81B, #f9b12a);
-    font-family: 'Dosis', sans-serif;
+
+.nav-link:hover {
+    color: #FFD81B; /* Change the hover color to a smart color */
+}
+
+/* Custom counter styles with Arabic font and colors */
+.counter {
+    color: #fff5f5;
+    background: linear-gradient(to right bottom, #004e7a, #5c1385);
+    font-family: 'Droid Arabic Naskh', sans-serif;
     text-align: center;
     width: 180px;
     height: 180px;
     padding: 40px 20px 20px;
-    margin: 0 auto;
-    border-radius: 10px 10px 100px 100px;
-    box-shadow: 0 0 15px -5px rgba(0,0,0,0.3);
+    margin: 20px auto;
+    border-radius: 100px;
+    box-shadow: -1px 2px 3px 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     position: relative;
-    z-index: 1;
 }
-.counter:after{
+
+.counter:after {
     content: '';
     background-color: #f9b12a;
     height: 100%;
@@ -35,26 +49,19 @@
     z-index: -1;
     clip-path: polygon(100% 0, 0% 100%, 100% 100%);
 }
-.counter .counter-value{
-    font-size: 55px;
+
+.counter .counter-value {
+    font-size: 48px; /* Slightly reduce the font size */
     font-weight: 600;
-    line-height: 40px;
-    margin: 0 0 15px;
+    line-height: 36px; /* Adjust the line height */
+    margin: 0 0 10px;
     display: block;
 }
-.counter h3{
+
+.counter h3 {
     font-size: 18px;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1px;
-    margin: 0 0 20px;
-}
-.counter.green{ background: linear-gradient(to right bottom, #a9dd23, #52C242); }
-.counter.green:after{ background: #52C242; }
-.counter.cgreen{ background: linear-gradient(to right bottom, #01AD9F, #008888); }
-.counter.cgreen:after{ background: #008888; }
-.counter.blue{ background: linear-gradient(to right bottom, #00C5EF, #0092f4); }
-.counter.blue:after{ background: #0092f4; }
-@media screen and (max-width:990px){
-    .counter{ margin-bottom: 40px; }
+    margin: 0;
 }
