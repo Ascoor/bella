@@ -4,102 +4,124 @@
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
       <title>Bella - Appointment</title>
-      
+
+      <script src="{{ URL::asset('js/welcome.js') }}"></script>
+
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato&display=swap">
       <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
       <!-- Internal CSS -->
+      <!-- Add these links inside the <head> tag -->
       <link rel="stylesheet" href="{{ URL::asset('assets/plugins/telephoneinput/telephoneinput-rtl.css') }}">
       <link rel="stylesheet" href="{{ URL::asset('css/app.css') }}">
   <style>
-        .image-container {
-          position: relative;
-          display: inline-block;
-        }
+    .image-container {
+      position: relative;
+      display: inline-block;
+    }
 
-        .image-container::before {
-          content: "";
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8));
-          z-index: 1;
-        }
+    .image-container::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8));
+      z-index: 1;
+    }
 
-        .image-container img {
-          display: block;
-          max-width: 100%;
-          height: auto;
-          z-index: 2;
-        }
+    .image-container img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      z-index: 2;
+    }
 
-        .slide-image {
-          width: 900px;
-          height: 480px;
-          object-fit: cover;
-          /* this property ensures the image is resized without distortion */
-        }
+.slide-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
-        .btn-danger-gradiant {
-          background: linear-gradient(to right, #f91b4d, #ff4b2b);
-          border-radius: 0;
-          border: none;
-          text-transform: uppercase;
-          font-weight: bold;
-        }
 
-        /* Style the form labels */
-        .text-uppercase {
-          font-family: Cairo;
-          text-transform: uppercase;
-          font-weight: bold;
-          color: white;
-          width: -webkit-fill-available;
-        }
+    .btn-danger-gradiant {
+      background: linear-gradient(to right, #f91b4d, #ff4b2b);
+      border-radius: 0;
+      border: none;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
 
-        /* Style the calendar icon */
-        .input-group-text {
-          border-radius: 0;
-        }
+    /* Style the form labels */
+    .text-uppercase {
+      font-family: Cairo;
+      text-transform: uppercase;
+      font-weight: bold;
+      color: white;
+      width: -webkit-fill-available;
+    }
 
-        .fa-calendar {
-          font-size: 1.2rem;
-        }  /* New CSS to handle responsive layout */
-          .content-container {
-              display: flex;
-              flex-wrap: wrap;
-              justify-content: space-between;
-              align-items: flex-start;
-              max-width: 1200px;
-              margin: 0 auto;
-          }
+    /* Style the calendar icon */
+    .input-group-text {
+      border-radius: 0;
+    }
 
-          .form-container {
-              flex-basis: 100%;
-              max-width: 400px;
-              margin-bottom: 20px;
-          }
+    .fa-calendar {
+      font-size: 1.2rem;
+    }
 
-          .carousel-container {
-              flex-basis: 100%;
-              max-width: 600px;
-          }
+    /* New CSS to handle responsive layout */
+    .content-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
 
-          @media (min-width: 768px) {
-              /* Arrange the form and carousel in a row for medium and large devices */
-              .form-container,
-              .carousel-container {
-                  flex-basis: 50%;
-              }
-          }
+    .form-container {
+      flex-basis: 100%;
+      max-width: 400px;
+      margin-bottom: 20px;
+    }
+
+    .carousel-container {
+      flex-basis: 100%;
+      max-width: 600px;
+    }
+
+    @media (min-width: 768px) {
+      /* Arrange the form and carousel in a row for medium and large devices */
+      .form-container,
+      .carousel-container {
+        flex-basis: 50%;
+      }
+    }
+
+    /* Additional styles for full-page welcome */
+    body,
+    html {
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .container {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container > * {
+      flex: 1;
+    }
       </style>
   </head><body class="h-100 text-center text-white" style="
   background: url('img/bg-pattern.png?h=88366d218f2eda574d88b27e4cb4169d'),
   linear-gradient(to left, #7b4397, #dc2430);">
       <div class="container">
           <header class="mb-auto p-3" style="font-family: monospace; font-size: 16px;">
-            
+
             <img src="{{ asset('img/loog.png') }}" width="200" height="100">
             <h2 class="text-nav" style="
                 font-family: cursive;
@@ -136,36 +158,34 @@
               </div>
             </form>
           </div>
-       
-          <div class="carousel-container">
-               <div id="carouselExampleIndicators" class="carousel slide mt-6" data-bs-ride="carousel" data-bs-interval="3000"> <!-- Set the interval to 3000ms (3 seconds) -->
-              <!-- <ol class="carousel-indicators"><li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></li><li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></li><li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></li></ol> -->
-              <div class="carousel-inner">
-                <div class="carouselQ-item active">
-                  <img src="{{ asset('img/slid6.png') }}" class="d-block w-100 slide-image" alt="...">
-                </div>
-                <div class="carousel-item">
-                  <img src="{{ asset('img/slid2.jpg') }}" class="d-block w-100 slide-image" alt="...">
-                </div>
-                <div class="carousel-item">
-                  <img src="{{ asset('img/slid3.jpg') }}" class="d-block w-100 slide-image" alt="...">
-                </div>
-                <div class="carousel-item">
-                  <img src="{{ asset('img/slid4.jpg') }}" class="d-block w-100 slide-image" alt="...">
-                </div>
-                <!-- <div class="carousel-item"><img src="{{ asset('img/slid5.jpg') }}" class="d-block w-100 slide-image" alt="..."></div> -->
-              </div>
-              <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-              </a>
-              <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-              </a>
-            </div>
-          </div>
-        </div>
+<!-- Add the HTML code for the carousel -->
+<div class="carousel-container">
+  <div id="carouselExampleIndicators" class="carousel slide mt-6" data-bs-ride="carousel" data-bs-interval="3000">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="{{ asset('img/slid6.png') }}" class="d-block w-100 slide-image" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="{{ asset('img/slid2.jpg') }}" class="d-block w-100 slide-image" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="{{ asset('img/slid3.jpg') }}" class="d-block w-100 slide-image" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="{{ asset('img/slid4.jpg') }}" class="d-block w-100 slide-image" alt="...">
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </a>
+  </div>
+</div>
+</div>
 
   <br/>
           <p>
@@ -173,35 +193,18 @@
           </p>
         </div>
 
-
       <!-- Footer script -->
-      <script src="{{ URL::asset('js/jquery-3.1.1.min.js') }}"></script>
-      <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-      <!-- Option 1: Bootstrap Bundle with Popper -->
-      <!--<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-                                    <!-- Option 2: Separate Popper and Bootstrap JS -->
 
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-      <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js" crossorigin="anonymous"></script>
       <script>
-        // Document ready function
-        $(document).ready(function () {
-            // Initialize the carousel
-            $("#carouselExampleIndicators").carousel();
-        });
-    </script>
-      <script>
-        $(function() {
-          $('#dp').datepicker();
-        });
-        $(function() {
-          // International Telephone Input
-          var input = document.querySelector("#client_phone");
-          window.intlTelInput(input, {
-            utilsScript: "{{ URL::asset('assets/plugins/telephoneinput/utils.js') }}",
-          });
-        });
-      </script>
+  // Function to initialize the carousel
+  function initCarousel() {
+    $("#carouselExampleIndicators").carousel();
+  }
+
+  // Call the function to initialize the carousel when the document is ready
+  $(document).ready(function () {
+    initCarousel();
+  });
+</script>
     </body>
   </html>

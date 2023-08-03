@@ -1,3 +1,27 @@
-.intro,body,html{height:100%}.gradient-custom-1{background:#cd9cf2;background:linear-gradient(0deg,#cd9cf2,#f6f3ff)}table td,table th{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}tbody td{color:#999;font-weight:500}
+html,
+body,
+.intro {
+  height: 100%;
+}
 
-/*# sourceMappingURL=client-history.css.map*/
+.gradient-custom-1 {
+  /* fallback for old browsers */
+  background: #cd9cf2;
+
+  /* Chrome 10-25, Safari 5.1-6 */
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to top, rgba(205, 156, 242, 1), rgba(246, 243, 255, 1))
+}
+
+table td,
+table th {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+tbody td {
+  font-weight: 500;
+  color: #999999;
+}
+
